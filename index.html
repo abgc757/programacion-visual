@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Práctica 1 · Interfaces gráficas con Python</title>
+<style>
+:root{
+  --bg:#f4f6fa; --panel:#ffffff; --ink:#1b2333; --muted:#5b667a; --line:#d9dfea;
+  --brand:#12355b; --brand-2:#1d5a94; --accent:#c8963e; --ok:#1d7a4a; --bad:#b3372f;
+  --okbg:#e6f4ec; --badbg:#fbeae8; --code-bg:#0f1b2d; --code-ink:#e6edf7;
+  --k:#ff9d6e; --s:#9fdc8a; --c:#7f8ea8; --n:#8ec5ff;
+  --shadow:0 1px 2px rgba(15,27,45,.06),0 4px 14px rgba(15,27,45,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0d1420; --panel:#151f30; --ink:#e7edf7; --muted:#9aa8bf; --line:#27344b;
+    --brand:#7fb3ec; --brand-2:#9cc6f3; --accent:#e0b060; --ok:#5fcf98; --bad:#f08a80;
+    --okbg:#12301f; --badbg:#3a1c1a; --code-bg:#0a111c; --shadow:none;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+a{color:var(--brand-2)}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:0;max-width:1260px;margin:0 auto}
+nav.side{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;padding:22px 16px;border-right:1px solid var(--line)}
+nav.side h2{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+nav.side a{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:.93rem}
+nav.side a:hover{background:color-mix(in srgb,var(--brand) 10%,transparent)}
+nav.side a.active{background:color-mix(in srgb,var(--brand) 14%,transparent);font-weight:600}
+nav.side .dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:11px;color:#fff}
+nav.side .dot.done{background:var(--ok);border-color:var(--ok)}
+.progress{margin:18px 0 0;font-size:.85rem;color:var(--muted)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:6px}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand-2),var(--accent));transition:width .4s}
+main{padding:28px 28px 80px;min-width:0}
+header.hero{background:linear-gradient(135deg,#12355b,#1d5a94);color:#fff;border-radius:16px;padding:30px 30px 26px;box-shadow:var(--shadow)}
+header.hero .tag{display:inline-block;background:rgba(255,255,255,.16);border-radius:99px;padding:3px 12px;font-size:.8rem;letter-spacing:.04em}
+header.hero h1{margin:12px 0 6px;font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.2}
+header.hero p{margin:0;opacity:.92;max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:16px;font-size:.9rem;opacity:.95}
+section.card{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:22px;box-shadow:var(--shadow);scroll-margin-top:16px}
+section.card>h2{margin:0 0 4px;font-size:1.35rem}
+section.card>.lead{margin:0 0 16px;color:var(--muted)}
+h3{font-size:1.02rem;margin:22px 0 8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid2>*,.grid3>*{min-width:0}
+label.f{display:block;font-size:.85rem;color:var(--muted);margin-bottom:4px}
+input[type=text],select,input[type=number]{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:inherit}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--brand-2);outline-offset:1px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--brand);color:#fff;border:0;padding:8px 16px;border-radius:8px;font-weight:600}
+@media (prefers-color-scheme: dark){.btn{color:#0d1420}}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--brand-2);border:1px solid var(--line)}
+.btn.small{padding:4px 10px;font-size:.82rem}
+.btn:disabled{opacity:.5;cursor:default}
+.note{border-left:4px solid var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0;font-size:.95rem}
+.checks{list-style:none;padding:0;margin:0}
+.checks li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line)}
+.checks input{flex:none;margin-top:5px;width:18px;height:18px;accent-color:var(--ok)}
+/* code */
+.codewrap{position:relative;margin:10px 0}
+pre.code{margin:0;background:var(--code-bg);color:var(--code-ink);padding:14px 16px;border-radius:10px;overflow:auto;font:13.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;tab-size:4}
+pre.code .k{color:var(--k)} pre.code .s{color:var(--s)} pre.code .c{color:var(--c);font-style:italic} pre.code .n{color:var(--n)}
+.copy{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.12);color:#dbe6f5;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:3px 10px;font-size:.78rem}
+.copy:hover{background:rgba(255,255,255,.22)}
+code.i{background:color-mix(in srgb,var(--brand) 12%,transparent);padding:1px 6px;border-radius:5px;font:.9em ui-monospace,Menlo,Consolas,monospace}
+/* tabs */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tab{background:transparent;border:1px solid var(--line);color:var(--ink);padding:6px 14px;border-radius:99px}
+.tab[aria-selected=true]{background:var(--brand);color:#fff;border-color:var(--brand)}
+@media (prefers-color-scheme: dark){.tab[aria-selected=true]{color:#0d1420}}
+/* table */
+.tw{overflow:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:color-mix(in srgb,var(--brand) 9%,transparent);font-weight:600;position:sticky;top:0}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+/* tk mock window */
+.win{border:1px solid #8a94a6;border-radius:8px;background:#ececec;color:#111;box-shadow:0 8px 24px rgba(0,0,0,.2);overflow:hidden;font:13px/1.3 "DejaVu Sans",Arial,sans-serif;min-height:120px}
+.win .tb{background:linear-gradient(#5b6b86,#44536b);color:#fff;padding:6px 10px;display:flex;justify-content:space-between;font-size:12.5px}
+.win .body{padding:10px;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:120px}
+.win .body.grid{display:grid;justify-items:start;align-items:center}
+.win .body.left{flex-direction:row;flex-wrap:wrap;align-items:flex-start;justify-content:flex-start}
+.tk-b{background:#e1e1e1;border:1px solid #9a9a9a;border-radius:3px;padding:3px 14px;cursor:pointer;color:#111}
+.tk-b:active{background:#cfcfcf}
+.tk-e{background:#fff;border:1px solid #7a7a7a;padding:3px 6px;width:150px;color:#111}
+.tk-c{display:flex;gap:6px;align-items:center}
+.tk-cb{background:#fff;border:1px solid #7a7a7a;padding:3px 6px;width:150px;display:flex;justify-content:space-between;color:#111}
+.wl{display:flex;gap:6px;align-items:center;padding:5px 8px;border:1px solid var(--line);border-radius:8px;margin-bottom:6px;background:var(--panel)}
+.wl b{flex:1;font-weight:500;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wl .ty{font:.75rem ui-monospace,monospace;color:var(--brand-2);min-width:88px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:#12355b;color:#fff;padding:10px 18px;border-radius:10px;opacity:0;transition:.25s;pointer-events:none;z-index:9;max-width:90vw;font-size:.9rem}
+.toast.on{opacity:1;transform:translateX(-50%)}
+/* fill blanks */
+pre.fill{white-space:pre-wrap}
+pre.fill input{width:9.5ch;background:#1b2b45;color:#fff;border:1px solid #4b6a99;border-radius:5px;padding:1px 6px;font:inherit;text-align:center}
+pre.fill input.ok{border-color:#5fcf98;background:#153726}
+pre.fill input.bad{border-color:#f08a80;background:#3d1f1c}
+.scorebox{display:inline-block;padding:6px 14px;border-radius:99px;background:color-mix(in srgb,var(--brand) 12%,transparent);font-weight:600}
+/* quiz */
+.q{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+.q p{margin:0 0 8px;font-weight:600}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:6px 8px;border-radius:8px;cursor:pointer}
+.opt:hover{background:color-mix(in srgb,var(--brand) 8%,transparent)}
+.opt.ok{background:var(--okbg)} .opt.bad{background:var(--badbg)}
+.opt input{margin-top:6px}
+.fb{margin-top:6px;font-size:.9rem;color:var(--muted)}
+/* lab */
+canvas{width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);display:block}
+.pick{background:color-mix(in srgb,var(--brand) 8%,transparent);border-radius:10px;padding:12px 14px}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.8rem;background:var(--okbg);color:var(--ok);font-weight:600}
+.rubric td:last-child,.rubric th:last-child{text-align:right;white-space:nowrap}
+.mobnav{display:none}
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  nav.side{display:none}
+  .mobnav{display:block;position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 16px;border-bottom:1px solid var(--line)}
+  .mobnav select{max-width:100%}
+  main{padding:18px 16px 80px}
+  .grid2,.grid3{grid-template-columns:minmax(0,1fr)}
+}
+@media print{nav.side,.mobnav,.copy,.btn{display:none!important}.layout{display:block}section.card{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="mobnav"><select id="mobsel" aria-label="Ir a sección"></select></div>
+<div class="layout">
+<nav class="side" aria-label="Secciones">
+  <h2>Contenido</h2>
+  <div id="navlinks"></div>
+  <div class="progress"><span id="progtxt">Progreso: 0 de 7</span><div class="bar"><i id="progbar"></i></div></div>
+</nav>
+
+<main>
+<header class="hero">
+  <span class="tag">Programación Visual · Práctica 1</span>
+  <h1>Interfaces gráficas con Python e integración con análisis de datos</h1>
+  <p>Explora Tkinter, PyQt y Kivy, construye una ventana paso a paso y conecta una interfaz con pandas y matplotlib para analizar datos.</p>
+  <div class="meta"><span>⏱ Duración sugerida: 2 horas</span><span>🧩 7 actividades</span><span>💻 Nivel: introductorio</span></div>
+</header>
+
+<section class="card" id="s0" data-title="Objetivo y datos">
+  <h2>Objetivo y datos del alumno</h2>
+  <p class="lead">Al terminar podrás elegir un framework de GUI para un proyecto, construir una ventana con widgets y mostrar en ella resultados de un análisis de datos.</p>
+  <div class="grid3">
+    <div><label class="f" for="alNombre">Nombre completo</label><input type="text" id="alNombre" autocomplete="name"></div>
+    <div><label class="f" for="alMat">Matrícula</label><input type="text" id="alMat"></div>
+    <div><label class="f" for="alGrupo">Grupo</label><input type="text" id="alGrupo"></div>
+  </div>
+  <h3>Resultados de aprendizaje</h3>
+  <ul>
+    <li>Comparar Tkinter, PyQt y Kivy según el tipo de aplicación.</li>
+    <li>Explicar el ciclo de una GUI: crear widgets, acomodarlos (layout) y entrar al bucle de eventos.</li>
+    <li>Cargar un CSV con <code class="i">pandas</code>, agrupar y resumir datos.</li>
+    <li>Incrustar una gráfica de <code class="i">matplotlib</code> dentro de una ventana Tkinter.</li>
+  </ul>
+  <div class="note"><b>Cómo se trabaja:</b> las actividades 1 a 5 y la 7 se resuelven aquí mismo, en el navegador. La actividad 6 te entrega un programa completo para ejecutar en tu computadora. Al final generas tu archivo de evidencia.</div>
+</section>
+
+<section class="card" id="s1" data-title="1 · Preparar el entorno">
+  <h2>Actividad 1 · Preparar el entorno</h2>
+  <p class="lead">Antes de programar, verifica que tu computadora tiene lo necesario. Marca cada paso al completarlo.</p>
+  <ul class="checks" data-group="env">
+    <li><input type="checkbox" id="e1"><label for="e1">Tengo Python 3.9 o superior. Verifica con: <code class="i">python --version</code></label></li>
+    <li><input type="checkbox" id="e2"><label for="e2">Tkinter funciona. Prueba: <code class="i">python -m tkinter</code> debe abrir una ventana pequeña de demostración. En Linux, si falla: <code class="i">sudo apt install python3-tk</code></label></li>
+    <li><input type="checkbox" id="e3"><label for="e3">Instalé las librerías de datos: <code class="i">pip install pandas matplotlib</code></label></li>
+    <li><input type="checkbox" id="e4"><label for="e4">Creé una carpeta <code class="i">practica1</code> y guardé en ella <code class="i">ventas.csv</code> y <code class="i">analizador_ventas.py</code> (los descargas en la Actividad 6).</label></li>
+  </ul>
+  <h3>Instalación opcional de los otros frameworks</h3>
+  <div class="codewrap"><pre class="code" data-lang="bash"># Solo si quieres probar los ejemplos de la Actividad 2
+pip install PyQt6      # o bien: pip install PySide6
+pip install kivy</pre></div>
+</section>
+
+<section class="card" id="s2" data-title="2 · Tkinter, PyQt o Kivy">
+  <h2>Actividad 2 · Tkinter, PyQt o Kivy</h2>
+  <p class="lead">Los tres crean ventanas con botones y campos de texto, pero cada uno responde a necesidades distintas.</p>
+  <div class="tw"><table>
+    <thead><tr><th></th><th>Tkinter</th><th>PyQt6 / PySide6</th><th>Kivy</th></tr></thead>
+    <tbody>
+      <tr><th>Instalación</th><td>Viene con Python (en Linux puede requerir <code class="i">python3-tk</code>)</td><td><code class="i">pip install PyQt6</code></td><td><code class="i">pip install kivy</code></td></tr>
+      <tr><th>Licencia</th><td>Licencia de Python (PSF)</td><td>PyQt6: GPL v3 o comercial. PySide6: LGPL</td><td>MIT</td></tr>
+      <tr><th>Curva de aprendizaje</th><td>Baja</td><td>Media</td><td>Media (lenguaje KV propio)</td></tr>
+      <tr><th>Aspecto</th><td>Nativo, sencillo</td><td>Profesional, muy configurable</td><td>Propio, pensado para pantallas táctiles</td></tr>
+      <tr><th>Plataformas</th><td>Windows, macOS, Linux</td><td>Windows, macOS, Linux</td><td>Escritorio, Android e iOS</td></tr>
+      <tr><th>Diseñador visual</th><td>No incluye</td><td>Qt Designer</td><td>No; se usa archivo <code class="i">.kv</code></td></tr>
+      <tr><th>Gráficas con matplotlib</th><td><code class="i">FigureCanvasTkAgg</code></td><td><code class="i">FigureCanvasQTAgg</code> (también pyqtgraph)</td><td>Paquete <code class="i">kivy_garden.matplotlib</code></td></tr>
+      <tr><th>Ideal para</th><td>Herramientas internas, prácticas, prototipos</td><td>Software de escritorio complejo</td><td>Apps móviles y multitáctiles</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>“Hola mundo” en cada framework</h3>
+  <div class="tabs" role="tablist" id="fwTabs">
+    <button class="tab" role="tab" aria-selected="true" data-fw="tk">Tkinter</button>
+    <button class="tab" role="tab" aria-selected="false" data-fw="qt">PyQt6</button>
+    <button class="tab" role="tab" aria-selected="false" data-fw="kv">Kivy</button>
+  </div>
+  <div class="codewrap"><pre class="code" id="fwCode" data-lang="python"></pre></div>
+  <p id="fwNote" class="fb"></p>
+
+  <h3>¿Cuál elegirías?</h3>
+  <p class="fb" style="margin-top:0">Responde según el proyecto y obtén una recomendación razonada.</p>
+  <div class="pick">
+    <div class="grid3">
+      <div><label class="f" for="pk1">Plataforma destino</label>
+        <select id="pk1"><option value="pc">Escritorio (PC)</option><option value="mob">Celular o tableta</option></select></div>
+      <div><label class="f" for="pk2">Complejidad de la interfaz</label>
+        <select id="pk2"><option value="low">Sencilla (formulario)</option><option value="high">Compleja (muchas ventanas)</option></select></div>
+      <div><label class="f" for="pk3">¿Debe ejecutarse sin instalar nada extra?</label>
+        <select id="pk3"><option value="yes">Sí</option><option value="no">No importa</option></select></div>
+    </div>
+    <p id="pkOut" style="margin:12px 0 0"></p>
+  </div>
+  <p class="fb"><label><input type="checkbox" id="s2done"> Revisé la comparativa, probé la recomendación con al menos dos combinaciones y entiendo cuándo conviene cada framework.</label></p>
+</section>
+
+<section class="card" id="s3" data-title="3 · Constructor de ventanas">
+  <h2>Actividad 3 · Constructor de ventanas Tkinter</h2>
+  <p class="lead">Agrega widgets, elige cómo acomodarlos y observa el código Python que genera tu diseño. Este código es real: cópialo y ejecútalo.</p>
+  <div class="grid2">
+    <div>
+      <div class="grid2" style="gap:10px">
+        <div><label class="f" for="wTitle">Título de la ventana</label><input type="text" id="wTitle" value="Mi primera ventana"></div>
+        <div><label class="f" for="wLay">Administrador de geometría</label>
+          <select id="wLay"><option value="pack">pack() · apilar</option><option value="packleft">pack(side="left") · en fila</option><option value="grid">grid() · rejilla</option></select></div>
+      </div>
+      <div id="gridcolsBox" style="display:none;margin-top:8px"><label class="f" for="wCols">Columnas de la rejilla</label><input type="number" id="wCols" min="1" max="4" value="2"></div>
+      <h3>Agregar widget</h3>
+      <div class="grid2" style="gap:10px">
+        <div><label class="f" for="wType">Tipo</label>
+          <select id="wType"><option>Label</option><option>Entry</option><option>Button</option><option>Checkbutton</option><option>Combobox</option></select></div>
+        <div><label class="f" for="wText" id="wTextLbl">Texto</label><input type="text" id="wText" value="Nombre:"></div>
+      </div>
+      <p style="margin:10px 0"><button class="btn" id="wAdd">＋ Agregar</button> <button class="btn ghost" id="wClear">Vaciar</button> <button class="btn ghost" id="wDemo">Cargar ejemplo</button></p>
+      <h3>Widgets en la ventana</h3>
+      <div id="wList"></div>
+    </div>
+    <div>
+      <label class="f">Vista previa (simulada)</label>
+      <div class="win"><div class="tb"><span id="pvTitle">Mi primera ventana</span><span>—  □  ✕</span></div><div class="body" id="pvBody"></div></div>
+    </div>
+  </div>
+  <h3>Código generado</h3>
+  <div class="codewrap"><button class="copy" data-copy="genCode">Copiar</button><pre class="code" id="genCode" data-lang="python"></pre></div>
+  <div class="note"><b>Regla importante:</b> dentro de un mismo contenedor no se pueden mezclar <code class="i">pack()</code> y <code class="i">grid()</code>; Tkinter se bloquea. Elige uno por contenedor.</div>
+  <p class="fb"><label><input type="checkbox" id="s3done"> Construí una ventana con al menos 4 widgets (incluyendo un Button), la copié y la ejecuté en mi computadora.</label></p>
+</section>
+
+<section class="card" id="s4" data-title="4 · Código por completar">
+  <h2>Actividad 4 · Completa el código</h2>
+  <p class="lead">Escribe en cada espacio la palabra que falta. Tkinter y pandas comparten el mismo programa: la interfaz muestra, pandas calcula.</p>
+  <div class="codewrap"><pre class="code fill" id="fillCode" data-lang="python"></pre></div>
+  <p><button class="btn" id="fillCheck">Comprobar</button> <button class="btn ghost" id="fillHint">Ver una pista</button> <span class="scorebox" id="fillScore">0 / 7</span></p>
+  <p class="fb" id="fillMsg"></p>
+</section>
+
+<section class="card" id="s5" data-title="5 · Laboratorio de datos">
+  <h2>Actividad 5 · Laboratorio de datos (pandas + gráfica)</h2>
+  <p class="lead">Este laboratorio reproduce en el navegador lo que hará tu aplicación de escritorio: agrupar con <code class="i">groupby</code>, aplicar una operación y graficar. Trabaja con las ventas de una tienda de cómputo de enero a junio.</p>
+  <div class="grid3">
+    <div><label class="f" for="labG">Agrupar por</label><select id="labG"></select></div>
+    <div><label class="f" for="labV">Columna a analizar</label><select id="labV"></select></div>
+    <div><label class="f" for="labO">Operación</label>
+      <select id="labO"><option value="sum">Suma (sum)</option><option value="mean">Promedio (mean)</option><option value="max">Máximo (max)</option><option value="min">Mínimo (min)</option><option value="std">Desv. estándar (std)</option><option value="count">Conteo (count)</option></select></div>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div><label class="f" for="labF">Filtrar región</label><select id="labF"><option value="">Todas</option></select></div>
+    <div><label class="f" for="labT">Tipo de gráfica</label><select id="labT"><option value="bar">Barras</option><option value="line">Líneas</option></select></div>
+  </div>
+  <div class="grid2" style="margin-top:16px;align-items:start">
+    <div>
+      <label class="f">Resultado</label>
+      <div class="tw"><table id="labTbl"></table></div>
+    </div>
+    <div>
+      <label class="f">Gráfica (equivale a <code class="i">FigureCanvasTkAgg</code>)</label>
+      <canvas id="labCv" width="640" height="400" role="img" aria-label="Gráfica del resultado"></canvas>
+    </div>
+  </div>
+  <h3>Código pandas equivalente</h3>
+  <div class="codewrap"><button class="copy" data-copy="labCode">Copiar</button><pre class="code" id="labCode" data-lang="python"></pre></div>
+  <h3>Datos originales <span style="font-weight:400;color:var(--muted);font-size:.85rem">(ingreso = unidades × precio_unitario)</span></h3>
+  <div class="tw" style="max-height:260px"><table id="rawTbl"></table></div>
+  <h3>Preguntas de análisis</h3>
+  <p class="fb" style="margin-top:0">Usa el laboratorio para responder. Tus respuestas se incluyen en el archivo de evidencia.</p>
+  <div class="grid2">
+    <div><label class="f" for="a1">1. ¿Qué producto genera el mayor ingreso total?</label><input type="text" id="a1"></div>
+    <div><label class="f" for="a2">2. ¿En qué mes el ingreso total fue el más bajo?</label><input type="text" id="a2"></div>
+    <div><label class="f" for="a3">3. ¿Cuál es el promedio de unidades por registro del Teclado?</label><input type="text" id="a3"></div>
+    <div><label class="f" for="a4">4. ¿Qué región vendió más unidades en total?</label><input type="text" id="a4"></div>
+  </div>
+  <p style="margin-top:12px"><button class="btn" id="aCheck">Verificar respuestas</button> <span id="aMsg" class="fb"></span></p>
+</section>
+
+<section class="card" id="s6" data-title="6 · Aplicación completa">
+  <h2>Actividad 6 · Ejecuta la aplicación completa</h2>
+  <p class="lead">Descarga los dos archivos, guárdalos en la misma carpeta y ejecuta el programa. La interfaz carga el CSV, muestra la tabla y grafica con matplotlib incrustado en Tkinter.</p>
+  <p><button class="btn" id="dlPy">⬇ analizador_ventas.py</button> <button class="btn" id="dlCsv">⬇ ventas.csv</button></p>
+  <div class="codewrap"><pre class="code" data-lang="bash">cd practica1
+python analizador_ventas.py</pre></div>
+  <h3>Código de la aplicación</h3>
+  <details><summary style="cursor:pointer;color:var(--brand-2)">Mostrar / ocultar código completo</summary>
+    <div class="codewrap"><button class="copy" data-copy="appCode">Copiar</button><pre class="code" id="appCode" data-lang="python" style="max-height:520px"></pre></div>
+  </details>
+  <h3>Cómo está organizado</h3>
+  <ul>
+    <li><b>Clase <code class="i">Analizador(tk.Tk)</code>:</b> la ventana principal es un objeto; sus widgets son atributos (<code class="i">self.tabla</code>, <code class="i">self.lienzo</code>).</li>
+    <li><b>Callbacks:</b> <code class="i">command=self.abrir_csv</code> conecta el botón con un método. Sin paréntesis: se pasa la función, no se ejecuta.</li>
+    <li><b>Separación:</b> la interfaz (<code class="i">_construir_interfaz</code>) y la lógica de datos (<code class="i">abrir_csv</code>, <code class="i">graficar</code>) están en métodos distintos.</li>
+    <li><b>matplotlib en Tkinter:</b> se usa <code class="i">Figure</code> + <code class="i">FigureCanvasTkAgg</code>, nunca <code class="i">plt.show()</code>.</li>
+  </ul>
+  <h3>Retos de ampliación (elige al menos dos)</h3>
+  <ul class="checks" data-group="retos">
+    <li><input type="checkbox" id="r1"><label for="r1">Agrega un <code class="i">Combobox</code> para elegir el tipo de gráfica (barras, líneas, pastel).</label></li>
+    <li><input type="checkbox" id="r2"><label for="r2">Agrega un filtro por región antes de agrupar: <code class="i">df[df["region"] == región]</code>.</label></li>
+    <li><input type="checkbox" id="r3"><label for="r3">Agrega el botón “Exportar PNG” con <code class="i">self.figura.savefig(...)</code> y <code class="i">filedialog.asksaveasfilename</code>.</label></li>
+    <li><input type="checkbox" id="r4"><label for="r4">Agrega un botón que abra un <code class="i">Toplevel</code> con <code class="i">self.df.describe()</code>.</label></li>
+    <li><input type="checkbox" id="r5"><label for="r5">Reto avanzado: reescribe la ventana con PyQt6 usando <code class="i">QTableWidget</code> y <code class="i">FigureCanvasQTAgg</code>.</label></li>
+  </ul>
+  <p class="fb"><label><input type="checkbox" id="s6done"> Ejecuté la aplicación en mi computadora y completé al menos dos retos.</label></p>
+</section>
+
+<section class="card" id="s7" data-title="7 · Evaluación y entrega">
+  <h2>Actividad 7 · Evaluación y entrega</h2>
+  <p class="lead">Responde el cuestionario, revisa tu avance y genera el archivo de evidencia.</p>
+  <div id="quiz"></div>
+  <p><span class="scorebox" id="quizScore">Aciertos: 0 / 0</span></p>
+
+  <h3>Rúbrica de evaluación</h3>
+  <div class="tw rubric"><table>
+    <thead><tr><th>Criterio</th><th>Puntos</th></tr></thead>
+    <tbody>
+      <tr><td>Constructor de ventanas (Actividad 3) y comparativa (Actividad 2)</td><td>20</td></tr>
+      <tr><td>Código completado (Actividad 4)</td><td>15</td></tr>
+      <tr><td>Análisis de datos: respuestas del laboratorio (Actividad 5)</td><td>20</td></tr>
+      <tr><td>Aplicación ejecutada y retos de ampliación (Actividad 6)</td><td>25</td></tr>
+      <tr><td>Cuestionario (Actividad 7)</td><td>20</td></tr>
+      <tr><th>Total</th><th>100</th></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Generar evidencia</h3>
+  <p>Se descargará un archivo <code class="i">.html</code> con tu nombre, resultados y respuestas. Entrégalo en la plataforma junto con una captura de pantalla de tu aplicación ejecutándose.</p>
+  <p><button class="btn" id="dlEv">⬇ Generar archivo de evidencia</button> <button class="btn ghost" onclick="window.print()">Imprimir / guardar PDF</button></p>
+  <p class="fb" id="evMsg"></p>
+</section>
+</main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+"use strict";
+/* ===== datos embebidos ===== */
+const CSV_TEXT = "mes,producto,region,unidades,precio_unitario\nEne,Laptop,Norte,9,14500\nEne,Tablet,Centro,20,6200\nEne,Monitor,Sur,17,3900\nEne,Teclado,Norte,57,750\nFeb,Laptop,Centro,18,14500\nFeb,Tablet,Sur,13,6200\nFeb,Monitor,Norte,12,3900\nFeb,Teclado,Centro,60,750\nMar,Laptop,Sur,14,14500\nMar,Tablet,Norte,25,6200\nMar,Monitor,Centro,21,3900\nMar,Teclado,Sur,53,750\nAbr,Laptop,Norte,11,14500\nAbr,Tablet,Centro,10,6200\nAbr,Monitor,Sur,18,3900\nAbr,Teclado,Norte,30,750\nMay,Laptop,Centro,9,14500\nMay,Tablet,Sur,19,6200\nMay,Monitor,Norte,22,3900\nMay,Teclado,Centro,31,750\nJun,Laptop,Sur,15,14500\nJun,Tablet,Norte,10,6200\nJun,Monitor,Centro,22,3900\nJun,Teclado,Sur,56,750\n";
+const APP_PY = "\"\"\"\nPráctica 1 · Programación Visual\nAnalizador de ventas con Tkinter + pandas + matplotlib\n\nRequisitos:  pip install pandas matplotlib\nUso:         python analizador_ventas.py\n             (después pulsa \"Abrir CSV…\" y elige ventas.csv)\n\"\"\"\nimport tkinter as tk\nfrom tkinter import ttk, filedialog, messagebox\n\nimport pandas as pd\nimport matplotlib\n\nmatplotlib.use(\"TkAgg\")  # backend que dibuja dentro de Tkinter\nfrom matplotlib.figure import Figure\nfrom matplotlib.backends.backend_tkagg import FigureCanvasTkAgg\n\nOPERACIONES = {\n    \"Suma\": \"sum\",\n    \"Promedio\": \"mean\",\n    \"Máximo\": \"max\",\n    \"Mínimo\": \"min\",\n    \"Desv. estándar\": \"std\",\n}\n\n\nclass Analizador(tk.Tk):\n    def __init__(self):\n        super().__init__()\n        self.title(\"Analizador de ventas · Programación Visual\")\n        self.geometry(\"980x620\")\n        self.minsize(820, 520)\n        self.df = None  # aquí vivirá el DataFrame de pandas\n        self._construir_interfaz()\n\n    # ------------------------------------------------------------------\n    # Interfaz\n    # ------------------------------------------------------------------\n    def _construir_interfaz(self):\n        # Barra de estado (se empaqueta primero para que siempre sea visible)\n        self.estado = tk.StringVar(value=\"Abre un archivo CSV para comenzar.\")\n        ttk.Label(\n            self, textvariable=self.estado, relief=\"sunken\", anchor=\"w\", padding=4\n        ).pack(side=\"bottom\", fill=\"x\")\n\n        # Barra de controles\n        barra = ttk.Frame(self, padding=8)\n        barra.pack(side=\"top\", fill=\"x\")\n\n        ttk.Button(barra, text=\"Abrir CSV…\", command=self.abrir_csv).pack(side=\"left\")\n\n        ttk.Label(barra, text=\"Agrupar por:\").pack(side=\"left\", padx=(16, 4))\n        self.cmb_grupo = ttk.Combobox(barra, state=\"readonly\", width=12)\n        self.cmb_grupo.pack(side=\"left\")\n\n        ttk.Label(barra, text=\"Columna:\").pack(side=\"left\", padx=(12, 4))\n        self.cmb_valor = ttk.Combobox(barra, state=\"readonly\", width=16)\n        self.cmb_valor.pack(side=\"left\")\n\n        ttk.Label(barra, text=\"Operación:\").pack(side=\"left\", padx=(12, 4))\n        self.cmb_op = ttk.Combobox(\n            barra, state=\"readonly\", width=14, values=list(OPERACIONES)\n        )\n        self.cmb_op.current(0)\n        self.cmb_op.pack(side=\"left\")\n\n        ttk.Button(barra, text=\"Graficar\", command=self.graficar).pack(\n            side=\"left\", padx=16\n        )\n\n        # Cuerpo: tabla a la izquierda, gráfica a la derecha\n        cuerpo = ttk.PanedWindow(self, orient=\"horizontal\")\n        cuerpo.pack(fill=\"both\", expand=True, padx=8, pady=(0, 8))\n\n        marco_tabla = ttk.Frame(cuerpo)\n        self.tabla = ttk.Treeview(marco_tabla, show=\"headings\")\n        barra_y = ttk.Scrollbar(marco_tabla, orient=\"vertical\", command=self.tabla.yview)\n        self.tabla.configure(yscrollcommand=barra_y.set)\n        self.tabla.pack(side=\"left\", fill=\"both\", expand=True)\n        barra_y.pack(side=\"right\", fill=\"y\")\n        cuerpo.add(marco_tabla, weight=1)\n\n        marco_grafica = ttk.Frame(cuerpo)\n        self.figura = Figure(figsize=(5, 4), dpi=100)\n        self.ejes = self.figura.add_subplot(111)\n        self.lienzo = FigureCanvasTkAgg(self.figura, master=marco_grafica)\n        self.lienzo.get_tk_widget().pack(fill=\"both\", expand=True)\n        cuerpo.add(marco_grafica, weight=2)\n\n    # ------------------------------------------------------------------\n    # Lógica de datos\n    # ------------------------------------------------------------------\n    def abrir_csv(self):\n        ruta = filedialog.askopenfilename(\n            title=\"Selecciona un archivo CSV\",\n            filetypes=[(\"Archivos CSV\", \"*.csv\"), (\"Todos los archivos\", \"*.*\")],\n        )\n        if not ruta:\n            return\n        try:\n            df = pd.read_csv(ruta)\n        except Exception as error:\n            messagebox.showerror(\"Error\", f\"No se pudo leer el archivo:\\n{error}\")\n            return\n\n        # Columna calculada con pandas\n        if {\"unidades\", \"precio_unitario\"}.issubset(df.columns):\n            df[\"ingreso\"] = df[\"unidades\"] * df[\"precio_unitario\"]\n\n        self.df = df\n        self._llenar_tabla()\n        self._llenar_selectores()\n        self.estado.set(f\"{ruta}  ·  {len(df)} filas × {df.shape[1]} columnas\")\n\n    def _llenar_tabla(self):\n        self.tabla.delete(*self.tabla.get_children())\n        self.tabla[\"columns\"] = list(self.df.columns)\n        for col in self.df.columns:\n            self.tabla.heading(col, text=col)\n            self.tabla.column(col, width=90, anchor=\"center\")\n        for fila in self.df.itertuples(index=False):\n            self.tabla.insert(\"\", \"end\", values=list(fila))\n\n    def _llenar_selectores(self):\n        numericas = [c for c in self.df.columns if pd.api.types.is_numeric_dtype(self.df[c])]\n        categoricas = [c for c in self.df.columns if c not in numericas]\n        self.cmb_grupo[\"values\"] = categoricas\n        self.cmb_grupo.current(0)\n        self.cmb_valor[\"values\"] = numericas\n        self.cmb_valor.current(numericas.index(\"ingreso\") if \"ingreso\" in numericas else 0)\n\n    def graficar(self):\n        if self.df is None:\n            messagebox.showinfo(\"Sin datos\", \"Primero abre un archivo CSV.\")\n            return\n        grupo = self.cmb_grupo.get()\n        valor = self.cmb_valor.get()\n        nombre_op = self.cmb_op.get()\n        operacion = OPERACIONES[nombre_op]\n\n        # sort=False conserva el orden original (Ene, Feb, Mar…)\n        serie = self.df.groupby(grupo, sort=False)[valor].agg(operacion)\n\n        self.ejes.clear()\n        self.ejes.bar(serie.index.astype(str), serie.values, color=\"#12355b\")\n        self.ejes.set_title(f\"{nombre_op} de {valor} por {grupo}\")\n        self.ejes.set_ylabel(valor)\n        self.ejes.tick_params(axis=\"x\", rotation=30)\n        self.figura.tight_layout()\n        self.lienzo.draw()\n        self.estado.set(f\"df.groupby('{grupo}')['{valor}'].{operacion}()\")\n\n\nif __name__ == \"__main__\":\n    Analizador().mainloop()\n";
+
+/* ===== utilidades ===== */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+let toastT;
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("on"),2600);}
+
+function highlight(src){
+  const re=/(#.*$)|("[^"\n]*"|'[^'\n]*')|\b(import|from|as|def|class|return|if|else|elif|for|in|not|and|or|with|lambda|try|except|pass|None|True|False|self)\b|\b(\d+(?:\.\d+)?)\b/gm;
+  return esc(src).replace(re,(m,c,s,k,n)=>c?`<span class="c">${c}</span>`:s?`<span class="s">${s}</span>`:k?`<span class="k">${k}</span>`:`<span class="n">${n}</span>`);
+}
+function setCode(el,src){el.dataset.raw=src;el.innerHTML=highlight(src);}
+$$("pre.code:not(.fill)").forEach(p=>{if(p.textContent.trim()&&!p.id)setCode(p,p.textContent);});
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".copy");if(!b)return;
+  const raw=document.getElementById(b.dataset.copy).dataset.raw||"";
+  const done=()=>{b.textContent="¡Copiado!";setTimeout(()=>b.textContent="Copiar",1400);};
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(raw).then(done,()=>fallbackCopy(raw,done));}else fallbackCopy(raw,done);
+});
+function fallbackCopy(t,cb){const a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();try{document.execCommand("copy");cb();}catch(e){toast("Selecciona el código y copia con Ctrl+C");}a.remove();}
+function download(name,text,type){
+  const blob=new Blob([text],{type:type||"text/plain;charset=utf-8"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
+}
+
+/* ===== navegación y progreso ===== */
+const SECS=$$("section.card");
+const doneState={};
+const navDiv=$("#navlinks"),mob=$("#mobsel");
+SECS.forEach((s,i)=>{
+  const a=document.createElement("a");a.href="#"+s.id;a.dataset.id=s.id;
+  a.innerHTML=`<span class="dot" id="dot_${s.id}"></span><span>${esc(s.dataset.title)}</span>`;navDiv.appendChild(a);
+  const o=document.createElement("option");o.value=s.id;o.textContent=s.dataset.title;mob.appendChild(o);
+});
+mob.addEventListener("change",()=>{location.hash=mob.value;});
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){$$("nav.side a").forEach(a=>a.classList.toggle("active",a.dataset.id===en.target.id));}});},{rootMargin:"-30% 0px -60% 0px"});
+SECS.forEach(s=>io.observe(s));
+function setDone(id,val){
+  doneState[id]=val;
+  const d=$("#dot_"+id);if(d){d.classList.toggle("done",!!val);d.textContent=val?"✓":"";}
+  const n=Object.values(doneState).filter(Boolean).length;
+  $("#progtxt").textContent=`Progreso: ${n} de 7`;$("#progbar").style.width=(n/7*100)+"%";
+}
+function refreshEnv(){setDone("s1",$$("[data-group=env] input").every(i=>i.checked));}
+$$("[data-group=env] input").forEach(i=>i.addEventListener("change",refreshEnv));
+["s2done","s3done"].forEach(id=>{$("#"+id).addEventListener("change",e=>setDone(id.replace("done",""),e.target.checked));});
+// La actividad 6 exige además 2 retos
+function refresh6(){const r=$$("[data-group=retos] input:checked").length;setDone("s6",$("#s6done").checked&&r>=2);}
+$("#s6done").addEventListener("change",refresh6);
+$$("[data-group=retos] input").forEach(i=>i.addEventListener("change",refresh6));
+
+/* ===== Actividad 2: frameworks ===== */
+const FW={
+ tk:{code:`import tkinter as tk
+from tkinter import ttk
+
+ventana = tk.Tk()
+ventana.title("Hola Tkinter")
+
+ttk.Label(ventana, text="¡Hola, mundo!").pack(padx=20, pady=10)
+ttk.Button(ventana, text="Salir", command=ventana.destroy).pack(pady=(0, 12))
+
+ventana.mainloop()`,note:"Tkinter: la ventana es un objeto Tk; los widgets reciben a su contenedor como primer argumento y se acomodan con pack(), grid() o place()."},
+ qt:{code:`import sys
+from PyQt6.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QWidget
+
+app = QApplication(sys.argv)
+ventana = QWidget()
+ventana.setWindowTitle("Hola PyQt6")
+
+layout = QVBoxLayout(ventana)
+layout.addWidget(QLabel("¡Hola, mundo!"))
+boton = QPushButton("Salir")
+boton.clicked.connect(ventana.close)   # señales y slots
+layout.addWidget(boton)
+
+ventana.show()
+sys.exit(app.exec())`,note:"PyQt6: se crea una QApplication, los widgets se añaden a un layout y los eventos usan el mecanismo de señales y slots."},
+ kv:{code:`from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+
+class HolaApp(App):
+    def build(self):
+        raiz = BoxLayout(orientation="vertical", padding=10, spacing=10)
+        raiz.add_widget(Label(text="¡Hola, mundo!"))
+        raiz.add_widget(Button(text="Salir", on_press=lambda *_: self.stop()))
+        return raiz
+
+HolaApp().run()`,note:"Kivy: se hereda de App y el método build() devuelve el widget raíz. Los layouts (BoxLayout, GridLayout…) organizan los widgets; la interfaz también puede describirse en un archivo .kv."}
+};
+function showFw(k){
+  $$("#fwTabs .tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.fw===k));
+  setCode($("#fwCode"),FW[k].code);$("#fwNote").textContent=FW[k].note;
+}
+$$("#fwTabs .tab").forEach(t=>t.addEventListener("click",()=>showFw(t.dataset.fw)));
+showFw("tk");
+function pick(){
+  const p=$("#pk1").value,c=$("#pk2").value,z=$("#pk3").value;let r;
+  if(p==="mob")r="<b>Kivy.</b> Es el único de los tres que llega a Android e iOS y está pensado para interacción táctil.";
+  else if(z==="yes")r="<b>Tkinter.</b> Viene incluido con Python, así que el programa corre en cualquier equipo con Python sin instalar paquetes de interfaz.";
+  else if(c==="high")r="<b>PyQt6 o PySide6.</b> Ofrecen widgets avanzados, Qt Designer y buen soporte para aplicaciones grandes. Si te preocupa la licencia, PySide6 (LGPL) es la opción más flexible.";
+  else r="<b>Tkinter.</b> Para una interfaz sencilla es la opción más rápida de aprender y de mantener; si el proyecto crece, migrar a Qt es posible.";
+  $("#pkOut").innerHTML="Recomendación: "+r;
+}
+["pk1","pk2","pk3"].forEach(id=>$("#"+id).addEventListener("change",pick));pick();
+
+/* ===== Actividad 3: constructor ===== */
+let W=[],wid=0;
+const TXT={Label:"Texto de la etiqueta",Entry:"Ancho en caracteres",Button:"Texto del botón",Checkbutton:"Texto de la casilla",Combobox:"Opciones (separadas por coma)"};
+const DEF={Label:"Nombre:",Entry:"20",Button:"Enviar",Checkbutton:"Acepto los términos",Combobox:"Ecatepec,Naucalpan,Tlalnepantla"};
+$("#wType").addEventListener("change",()=>{const t=$("#wType").value;$("#wTextLbl").textContent=TXT[t];$("#wText").value=DEF[t];});
+$("#wLay").addEventListener("change",()=>{$("#gridcolsBox").style.display=$("#wLay").value==="grid"?"block":"none";renderW();});
+["wTitle","wCols"].forEach(id=>$("#"+id).addEventListener("input",renderW));
+$("#wAdd").addEventListener("click",()=>{
+  const type=$("#wType").value;let text=$("#wText").value.trim();
+  if(type==="Entry"){const n=parseInt(text,10);text=String(Number.isFinite(n)&&n>0?Math.min(n,60):20);}
+  W.push({id:++wid,type,text:text||DEF[type]});renderW();
+});
+$("#wClear").addEventListener("click",()=>{W=[];renderW();});
+$("#wDemo").addEventListener("click",()=>{
+  W=[{id:++wid,type:"Label",text:"Nombre:"},{id:++wid,type:"Entry",text:"24"},{id:++wid,type:"Checkbutton",text:"Acepto los términos"},{id:++wid,type:"Combobox",text:"Ecatepec,Naucalpan,Tlalnepantla"},{id:++wid,type:"Button",text:"Enviar"}];
+  $("#wTitle").value="Formulario de registro";renderW();
+});
+function pyStr(s){return '"'+String(s).replace(/\\/g,"\\\\").replace(/"/g,'\\"')+'"';}
+function genCode(){
+  const lay=$("#wLay").value,cols=Math.max(1,Math.min(4,parseInt($("#wCols").value,10)||2));
+  const hasBtn=W.some(w=>w.type==="Button"),hasChk=W.some(w=>w.type==="Checkbutton");
+  let L=["import tkinter as tk","from tkinter import ttk","","ventana = tk.Tk()",`ventana.title(${pyStr($("#wTitle").value||"Ventana")})`,""];
+  if(hasBtn){L.push("def al_presionar():",'    print("Botón presionado")',"");}
+  const cnt={};
+  W.forEach((w,i)=>{
+    const base={Label:"lbl",Entry:"ent",Button:"btn",Checkbutton:"chk",Combobox:"cmb"}[w.type];
+    cnt[base]=(cnt[base]||0)+1;const n=base+"_"+cnt[base];w.varname=n;
+    if(w.type==="Label")L.push(`${n} = ttk.Label(ventana, text=${pyStr(w.text)})`);
+    if(w.type==="Entry")L.push(`${n} = ttk.Entry(ventana, width=${w.text})`);
+    if(w.type==="Button")L.push(`${n} = ttk.Button(ventana, text=${pyStr(w.text)}, command=al_presionar)`);
+    if(w.type==="Checkbutton"){L.push(`var_${n} = tk.BooleanVar()`,`${n} = ttk.Checkbutton(ventana, text=${pyStr(w.text)}, variable=var_${n})`);}
+    if(w.type==="Combobox"){const vals=w.text.split(",").map(s=>s.trim()).filter(Boolean);L.push(`${n} = ttk.Combobox(ventana, values=[${vals.map(pyStr).join(", ")}], state="readonly")`);}
+    if(lay==="pack")L.push(`${n}.pack(padx=10, pady=4)`);
+    else if(lay==="packleft")L.push(`${n}.pack(side="left", padx=6, pady=6)`);
+    else L.push(`${n}.grid(row=${Math.floor(i/cols)}, column=${i%cols}, padx=6, pady=4, sticky="w")`);
+  });
+  if(!W.length)L.push("# Aún no hay widgets: agrega uno con el botón «Agregar»");
+  L.push("","ventana.mainloop()");
+  return L.join("\n");
+}
+function renderW(){
+  const lay=$("#wLay").value,cols=Math.max(1,Math.min(4,parseInt($("#wCols").value,10)||2));
+  $("#pvTitle").textContent=$("#wTitle").value||"Ventana";
+  const list=$("#wList");list.innerHTML="";
+  if(!W.length)list.innerHTML='<p class="fb">Sin widgets todavía.</p>';
+  W.forEach((w,i)=>{
+    const d=document.createElement("div");d.className="wl";
+    d.innerHTML=`<span class="ty">${w.type}</span><b title="${esc(w.text)}">${esc(w.text)}</b>`;
+    const mk=(t,f,dis,lab)=>{const b=document.createElement("button");b.className="btn ghost small";b.textContent=t;b.setAttribute("aria-label",lab);b.disabled=dis;b.addEventListener("click",f);d.appendChild(b);};
+    mk("↑",()=>{[W[i-1],W[i]]=[W[i],W[i-1]];renderW();},i===0,"Subir");
+    mk("↓",()=>{[W[i+1],W[i]]=[W[i],W[i+1]];renderW();},i===W.length-1,"Bajar");
+    mk("✕",()=>{W.splice(i,1);renderW();},false,"Quitar");
+    list.appendChild(d);
+  });
+  const pv=$("#pvBody");pv.className="body"+(lay==="grid"?" grid":lay==="packleft"?" left":"");
+  pv.style.gridTemplateColumns=lay==="grid"?`repeat(${cols},auto)`:"";
+  pv.style.columnGap=lay==="grid"?"14px":"";pv.style.rowGap=lay==="grid"?"8px":"";
+  pv.innerHTML="";
+  W.forEach(w=>{
+    let el;
+    if(w.type==="Label"){el=document.createElement("span");el.textContent=w.text;}
+    if(w.type==="Entry"){el=document.createElement("div");el.className="tk-e";el.style.width=(parseInt(w.text,10)*7+12)+"px";el.style.maxWidth="100%";el.innerHTML="&nbsp;";}
+    if(w.type==="Button"){el=document.createElement("button");el.className="tk-b";el.textContent=w.text;el.addEventListener("click",()=>toast("command → al_presionar() se ejecutó"));}
+    if(w.type==="Checkbutton"){el=document.createElement("label");el.className="tk-c";el.innerHTML=`<input type="checkbox"> ${esc(w.text)}`;}
+    if(w.type==="Combobox"){const v=w.text.split(",")[0].trim();el=document.createElement("div");el.className="tk-cb";el.innerHTML=`<span>${esc(v)}</span><span>▾</span>`;}
+    el.style.margin=lay==="pack"?"2px 0":"2px";pv.appendChild(el);
+  });
+  setCode($("#genCode"),genCode());
+}
+$("#wDemo").click();
+
+/* ===== Actividad 4: completar ===== */
+const FILL=[
+ {t:"import ",a:["tkinter"],h:"Módulo de la biblioteca estándar para interfaces gráficas"},
+ {t:" as tk\nimport pandas as pd\n\nventana = tk.Tk()\netiqueta = tk.Label(ventana, text=\"Hola\")\netiqueta.",a:["pack","grid","place"],h:"Un administrador de geometría"},
+ {t:"()\nboton = tk.Button(ventana, text=\"Salir\", ",a:["command"],h:"Opción que enlaza el botón con una función"},
+ {t:"=ventana.destroy)\n\ndf = pd.",a:["read_csv"],h:"Función de pandas para cargar un archivo CSV"},
+ {t:"(\"ventas.csv\")\npromedio = df[\"unidades\"].",a:["mean"],h:"Calcula el promedio"},
+ {t:"()\nresumen = df.",a:["groupby"],h:"Agrupa filas por una columna"},
+ {t:"(\"mes\")[\"unidades\"].sum()\n\n# Al final, se inicia el bucle de eventos:\nventana.",a:["mainloop"],h:"Mantiene la ventana abierta esperando eventos"},
+ {t:"()",end:true}
+];
+(function(){
+  const pre=$("#fillCode");let html="";let idx=0;
+  FILL.forEach(p=>{
+    const txt=highlight(p.t).replace(/\n/g,"\n");
+    html+=txt;
+    if(!p.end){html+=`<input type="text" data-i="${idx}" aria-label="Espacio ${idx+1}" autocomplete="off" spellcheck="false">`;idx++;}
+  });
+  pre.innerHTML=html;
+})();
+$("#fillCheck").addEventListener("click",()=>{
+  let ok=0;const ins=$$("#fillCode input");
+  ins.forEach(inp=>{
+    const i=+inp.dataset.i;const v=inp.value.trim().replace(/\(\)$/,"").toLowerCase();
+    const good=FILL[i].a.includes(v);inp.classList.toggle("ok",good);inp.classList.toggle("bad",!good&&inp.value!=="");if(good)ok++;
+  });
+  $("#fillScore").textContent=`${ok} / ${ins.length}`;fillScore=ok;
+  $("#fillMsg").textContent=ok===ins.length?"¡Perfecto! El programa está completo.":"Los espacios en rojo tienen un error; los vacíos aún esperan tu respuesta.";
+  setDone("s4",ok===ins.length);
+});
+let fillScore=0,hintI=0;
+$("#fillHint").addEventListener("click",()=>{
+  const open=FILL.map((p,i)=>i).filter(i=>FILL[i].a&&!p_ok(i));
+  if(!open.length){$("#fillMsg").textContent="No quedan espacios por resolver.";return;}
+  const i=open[0];$("#fillMsg").textContent=`Pista para el espacio ${i+1}: ${FILL[i].h}.`;
+});
+function p_ok(i){const inp=$(`#fillCode input[data-i="${i}"]`);return FILL[i].a.includes(inp.value.trim().replace(/\(\)$/,"").toLowerCase());}
+
+/* ===== Actividad 5: laboratorio ===== */
+function parseCSV(t){
+  const L=t.trim().split(/\r?\n/);const h=L[0].split(",");
+  return L.slice(1).map(l=>{const c=l.split(",");const o={};h.forEach((k,i)=>{o[k]=/^-?\d+(\.\d+)?$/.test(c[i])?Number(c[i]):c[i];});return o;});
+}
+const DATA=parseCSV(CSV_TEXT);DATA.forEach(r=>r.ingreso=r.unidades*r.precio_unitario);
+const CAT=["mes","producto","region"],NUM=["unidades","precio_unitario","ingreso"];
+CAT.forEach(c=>$("#labG").add(new Option(c,c)));NUM.forEach(c=>$("#labV").add(new Option(c,c)));
+$("#labV").value="ingreso";$("#labG").value="producto";
+[...new Set(DATA.map(r=>r.region))].forEach(r=>$("#labF").add(new Option(r,r)));
+const fmt=(n,d=2)=>Number.isFinite(n)?n.toLocaleString("es-MX",{maximumFractionDigits:d}):"NaN";
+function agg(vals,op){
+  const n=vals.length;if(op==="count")return n;
+  if(op==="sum")return vals.reduce((a,b)=>a+b,0);
+  if(op==="mean")return vals.reduce((a,b)=>a+b,0)/n;
+  if(op==="max")return Math.max(...vals);if(op==="min")return Math.min(...vals);
+  if(op==="std"){if(n<2)return NaN;const m=vals.reduce((a,b)=>a+b,0)/n;return Math.sqrt(vals.reduce((a,b)=>a+(b-m)**2,0)/(n-1));}
+}
+let labUses=0;
+function lab(){
+  const g=$("#labG").value,v=$("#labV").value,o=$("#labO").value,f=$("#labF").value,t=$("#labT").value;
+  const rows=f?DATA.filter(r=>r.region===f):DATA;
+  const order=[],map={};rows.forEach(r=>{if(!(r[g] in map)){map[r[g]]=[];order.push(r[g]);}map[r[g]].push(r[v]);});
+  const res=order.map(k=>({k,v:agg(map[k],o)}));
+  $("#labTbl").innerHTML=`<thead><tr><th>${esc(g)}</th><th>${o}(${esc(v)})</th></tr></thead><tbody>${res.map(r=>`<tr><td>${esc(r.k)}</td><td class="num">${fmt(r.v)}</td></tr>`).join("")}</tbody>`;
+  draw(res,t,`${o} de ${v} por ${g}`);
+  const src=`import pandas as pd
+
+df = pd.read_csv("ventas.csv")
+df["ingreso"] = df["unidades"] * df["precio_unitario"]
+${f?`df = df[df["region"] == ${pyStr(f)}]\n`:""}
+resultado = df.groupby("${g}", sort=False)["${v}"].${o}()
+print(resultado)
+
+# Para dibujarlo dentro de Tkinter:
+# ejes.${t==="bar"?"bar":"plot"}(resultado.index.astype(str), resultado.values)
+# lienzo.draw()`;
+  setCode($("#labCode"),src);labUses++;
+}
+function draw(res,type,title){
+  const cv=$("#labCv"),ctx=cv.getContext("2d"),W_=cv.width,H_=cv.height;
+  const cs=getComputedStyle(document.documentElement);
+  const ink=cs.getPropertyValue("--ink").trim(),mut=cs.getPropertyValue("--muted").trim(),line=cs.getPropertyValue("--line").trim(),brand=cs.getPropertyValue("--brand-2").trim();
+  ctx.clearRect(0,0,W_,H_);
+  const vals=res.map(r=>r.v).filter(Number.isFinite);
+  ctx.fillStyle=ink;ctx.font="bold 21px system-ui,sans-serif";ctx.textAlign="center";ctx.fillText(title,W_/2,26);
+  if(!vals.length){ctx.font="15px system-ui";ctx.fillStyle=mut;ctx.fillText("Sin datos numéricos para graficar",W_/2,H_/2);return;}
+  const mx=Math.max(0,...vals),mn=Math.min(0,...vals);
+  const pad={l:92,r:20,t:48,b:56},pw=W_-pad.l-pad.r,ph=H_-pad.t-pad.b;
+  const nice=(x)=>{const p=10**Math.floor(Math.log10(Math.max(Math.abs(x),1)));return Math.ceil(x/p*2)/2*p||1;};
+  const top=nice(mx||1),bot=mn<0?-nice(-mn):0;
+  const Y=v=>pad.t+ph*(1-(v-bot)/(top-bot));
+  ctx.textAlign="right";ctx.font="16px system-ui";ctx.strokeStyle=line;ctx.fillStyle=mut;ctx.lineWidth=1;
+  for(let i=0;i<=5;i++){const v=bot+(top-bot)*i/5,y=Y(v);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W_-pad.r,y);ctx.stroke();ctx.fillText(fmt(v,0),pad.l-8,y+4);}
+  const step=pw/res.length;
+  ctx.textAlign="center";
+  res.forEach((r,i)=>{
+    const x=pad.l+step*(i+.5);ctx.fillStyle=mut;ctx.fillText(String(r.k),x,H_-pad.b+20);
+  });
+  ctx.fillStyle=brand;ctx.strokeStyle=brand;
+  if(type==="bar"){
+    res.forEach((r,i)=>{if(!Number.isFinite(r.v))return;const bw=Math.min(60,step*.62),x=pad.l+step*(i+.5)-bw/2;const y0=Y(0),y1=Y(r.v);ctx.fillRect(x,Math.min(y0,y1),bw,Math.abs(y0-y1));});
+  }else{
+    ctx.lineWidth=2.5;ctx.beginPath();let st=false;
+    res.forEach((r,i)=>{if(!Number.isFinite(r.v))return;const x=pad.l+step*(i+.5),y=Y(r.v);st?ctx.lineTo(x,y):ctx.moveTo(x,y);st=true;});ctx.stroke();
+    res.forEach((r,i)=>{if(!Number.isFinite(r.v))return;ctx.beginPath();ctx.arc(pad.l+step*(i+.5),Y(r.v),4.5,0,7);ctx.fill();});
+  }
+}
+["labG","labV","labO","labF","labT"].forEach(id=>$("#"+id).addEventListener("change",lab));
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",lab);
+$("#rawTbl").innerHTML=`<thead><tr>${["mes","producto","region","unidades","precio_unitario","ingreso"].map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${DATA.map(r=>`<tr><td>${r.mes}</td><td>${r.producto}</td><td>${r.region}</td><td class="num">${r.unidades}</td><td class="num">${fmt(r.precio_unitario,0)}</td><td class="num">${fmt(r.ingreso,0)}</td></tr>`).join("")}</tbody>`;
+lab();
+// respuestas correctas calculadas de los datos
+function truth(){
+  const sumBy=(k,v)=>{const m={};DATA.forEach(r=>m[r[k]]=(m[r[k]]||0)+r[v]);return m;};
+  const arg=(m,f)=>Object.entries(m).sort((a,b)=>f*(b[1]-a[1]))[0][0];
+  const tec=DATA.filter(r=>r.producto==="Teclado").map(r=>r.unidades);
+  return{p:arg(sumBy("producto","ingreso"),1),m:arg(sumBy("mes","ingreso"),-1),t:tec.reduce((a,b)=>a+b,0)/tec.length,r:arg(sumBy("region","unidades"),1)};
+}
+const norm=s=>s.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+let aScore=0;
+$("#aCheck").addEventListener("click",()=>{
+  const T=truth();let ok=0,filled=0;
+  const v=[$("#a1").value,$("#a2").value,$("#a3").value,$("#a4").value];v.forEach(x=>{if(x.trim())filled++;});
+  if(norm(v[0])===norm(T.p))ok++;
+  const mesAl={ene:"ene",enero:"ene",feb:"feb",febrero:"feb",mar:"mar",marzo:"mar",abr:"abr",abril:"abr",may:"may",mayo:"may",jun:"jun",junio:"jun"};
+  if(mesAl[norm(v[1])]===norm(T.m))ok++;
+  const n3=parseFloat(v[2].replace(",","."));if(Number.isFinite(n3)&&Math.abs(n3-T.t)<0.06)ok++;
+  if(norm(v[3])===norm(T.r))ok++;
+  aScore=ok;
+  $("#aMsg").textContent=`${ok} de 4 correctas.`+(ok<4&&filled<4?" Faltan respuestas por escribir.":ok<4?" Revisa tus consultas en el laboratorio (cambia agrupación, columna y operación).":" ¡Excelente análisis!");
+  setDone("s5",ok===4);
+});
+
+/* ===== Actividad 6: descargas ===== */
+setCode($("#appCode"),APP_PY);
+$("#dlPy").addEventListener("click",()=>download("analizador_ventas.py",APP_PY,"text/x-python;charset=utf-8"));
+$("#dlCsv").addEventListener("click",()=>download("ventas.csv",CSV_TEXT,"text/csv;charset=utf-8"));
+
+/* ===== Actividad 7: quiz ===== */
+const QZ=[
+ {q:"¿Cuál de estas bibliotecas de interfaz gráfica viene incluida con Python?",o:["PyQt6","Tkinter","Kivy","wxPython"],c:1,e:"Tkinter forma parte de la biblioteca estándar (en algunas distribuciones de Linux se instala aparte como python3-tk)."},
+ {q:"¿Qué método de una ventana Tkinter inicia el bucle de eventos?",o:["run()","start()","mainloop()","show()"],c:2,e:"mainloop() mantiene la ventana abierta y despacha los eventos (clics, teclas) hasta que se cierre."},
+ {q:"¿Qué framework usa un lenguaje de descripción propio (archivos .kv) y puede ejecutarse en Android?",o:["Tkinter","PyQt6","Kivy","Pygame"],c:2,e:"Kivy separa opcionalmente la interfaz en archivos .kv y soporta Android e iOS."},
+ {q:"¿Qué herramienta permite diseñar visualmente interfaces para PyQt?",o:["Qt Designer","IDLE","Jupyter","PyInstaller"],c:0,e:"Qt Designer genera archivos .ui que se cargan desde Python."},
+ {q:"¿Qué devuelve pd.read_csv(\"ventas.csv\")?",o:["Una lista de listas","Un diccionario","Un DataFrame","Una cadena de texto"],c:2,e:"Un DataFrame: la tabla bidimensional de pandas."},
+ {q:"¿Qué clase se usa para incrustar una figura de matplotlib dentro de una ventana Tkinter?",o:["plt.show","FigureCanvasTkAgg","Canvas.plot","tk.Chart"],c:1,e:"FigureCanvasTkAgg (matplotlib.backends.backend_tkagg) convierte una Figure en un widget de Tkinter."},
+ {q:"En command=self.abrir_csv, ¿por qué no se escriben paréntesis?",o:["Porque es opcional","Porque se pasa la función para ejecutarla al hacer clic, no se ejecuta en ese momento","Porque abrir_csv es una variable","Porque Tkinter los agrega solo"],c:1,e:"Con paréntesis la función se ejecutaría al construir el botón y se asignaría su resultado (None) al command."},
+ {q:"¿Qué ocurre si en el mismo contenedor se usan pack() y grid()?",o:["Se combinan sin problema","Tkinter se bloquea o lanza un error","Se ignora pack()","Python los convierte en place()"],c:1,e:"Cada contenedor debe usar un solo administrador de geometría; mezclarlos genera un conflicto."},
+ {q:"¿Por qué df.groupby(\"mes\", sort=False) es útil en un análisis mensual?",o:["Acelera el cálculo 10 veces","Conserva el orden original (Ene, Feb, Mar…) en lugar de ordenar alfabéticamente","Elimina valores nulos","Convierte los meses a números"],c:1,e:"Por defecto groupby ordena las claves alfabéticamente (Abr, Ene, Feb…); sort=False respeta el orden de aparición."},
+ {q:"Si necesitas distribuir una aplicación de escritorio cerrada sin abrir tu código, ¿qué licencia de los bindings de Qt conviene revisar?",o:["PyQt6 es GPL v3 o comercial; PySide6 es LGPL","Ambos son de dominio público","Tkinter exige pagar licencia","Kivy es GPL estricta"],c:0,e:"PyQt6 exige GPL v3 o licencia comercial; PySide6 (LGPL) permite más casos de uso sin abrir el código de tu aplicación."}
+];
+const qz=$("#quiz");let qAns={};
+QZ.forEach((it,i)=>{
+  const d=document.createElement("div");d.className="q";
+  d.innerHTML=`<p>${i+1}. ${esc(it.q)}</p>`+it.o.map((t,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"><span>${esc(t)}</span></label>`).join("")+`<div class="fb" id="fb${i}"></div>`;
+  qz.appendChild(d);
+  $$("input",d).forEach(r=>r.addEventListener("change",()=>{
+    if(qAns[i]!==undefined)return;
+    const j=+r.value;qAns[i]=j;
+    $$(".opt",d).forEach((op,k)=>{op.classList.toggle("ok",k===it.c);if(k===j&&k!==it.c)op.classList.add("bad");$("input",op).disabled=true;});
+    $("#fb"+i).textContent=(j===it.c?"✔ Correcto. ":"✘ Incorrecto. ")+it.e;
+    updQuiz();
+  }));
+});
+function quizOk(){return QZ.reduce((a,it,i)=>a+(qAns[i]===it.c?1:0),0);}
+function updQuiz(){
+  const a=Object.keys(qAns).length;$("#quizScore").textContent=`Aciertos: ${quizOk()} / ${QZ.length}`+(a<QZ.length?` (${a} respondidas)`:"");
+  setDone("s7",a===QZ.length);
+}
+updQuiz();
+
+/* ===== evidencia ===== */
+$("#dlEv").addEventListener("click",()=>{
+  const nombre=$("#alNombre").value.trim(),mat=$("#alMat").value.trim(),grupo=$("#alGrupo").value.trim();
+  if(!nombre||!mat){$("#evMsg").textContent="Escribe tu nombre y matrícula en la sección inicial antes de generar la evidencia.";location.hash="#s0";return;}
+  const items=[["Actividad 1 · Entorno",doneState.s1],["Actividad 2 · Frameworks",doneState.s2],["Actividad 3 · Constructor",doneState.s3],["Actividad 4 · Código completado",doneState.s4],["Actividad 5 · Laboratorio de datos",doneState.s5],["Actividad 6 · Aplicación y retos",doneState.s6],["Actividad 7 · Cuestionario contestado",doneState.s7]];
+  const retos=$$("[data-group=retos] input:checked").map(i=>$("label[for="+i.id+"]").textContent.trim());
+  const fecha=new Date().toLocaleString("es-MX");
+  const html=`<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Evidencia · ${esc(nombre)}</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:760px;margin:30px auto;padding:0 18px;color:#1b2333}h1{color:#12355b;font-size:1.5rem}table{border-collapse:collapse;width:100%}td,th{border:1px solid #d9dfea;padding:6px 10px;text-align:left}.ok{color:#1d7a4a}.no{color:#b3372f}</style></head><body>
+<h1>Evidencia · Programación Visual · Práctica 1</h1>
+<p><b>Alumno:</b> ${esc(nombre)}<br><b>Matrícula:</b> ${esc(mat)}<br><b>Grupo:</b> ${esc(grupo)||"—"}<br><b>Generado:</b> ${esc(fecha)}</p>
+<h2>Avance</h2><table>${items.map(([n,v])=>`<tr><td>${n}</td><td class="${v?"ok":"no"}">${v?"Completada":"Pendiente"}</td></tr>`).join("")}</table>
+<h2>Resultados</h2><ul><li>Código completado: ${fillScore} / 7</li><li>Análisis de datos: ${aScore} / 4 respuestas correctas</li><li>Cuestionario: ${quizOk()} / ${QZ.length} (${Object.keys(qAns).length} respondidas)</li></ul>
+<h2>Respuestas del laboratorio</h2><ol><li>${esc($("#a1").value)||"—"}</li><li>${esc($("#a2").value)||"—"}</li><li>${esc($("#a3").value)||"—"}</li><li>${esc($("#a4").value)||"—"}</li></ol>
+<h2>Retos de ampliación</h2>${retos.length?"<ul>"+retos.map(r=>"<li>"+esc(r)+"</li>").join("")+"</ul>":"<p>Ninguno registrado.</p>"}
+<p style="color:#5b667a;font-size:.85rem">Adjunta a este archivo una captura de tu aplicación ejecutándose.</p></body></html>`;
+  const slug=(mat||"alumno").replace(/[^\w-]+/g,"_");
+  download(`evidencia_practica1_${slug}.html`,html,"text/html;charset=utf-8");
+  $("#evMsg").textContent="Archivo generado. Revisa tu carpeta de descargas.";
+});
+</script>
+</body>
+</html>
