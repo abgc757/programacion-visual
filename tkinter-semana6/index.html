@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prácticas de Tkinter · Programación Visual · Semana 6</title>
+<style>
+:root{
+  --bg:#f5f7fb; --panel:#ffffff; --ink:#1b2333; --muted:#5b667a; --line:#d9dfea;
+  --brand:#12355b; --brand-2:#1d5a94; --accent:#c8963e; --ok:#1d7a4a; --bad:#b3372f;
+  --okbg:#e6f4ec; --badbg:#fbeae8; --soft:#eef3fa; --code:#0f1b2d; --codeink:#e6edf7; --shadow:0 1px 2px rgba(15,27,45,.06),0 4px 14px rgba(15,27,45,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0d1420; --panel:#151f30; --ink:#e7edf7; --muted:#9aa8bf; --line:#27344b;
+    --brand:#7fb3ec; --brand-2:#9cc6f3; --accent:#e0b060; --ok:#5fcf98; --bad:#f08a80;
+    --okbg:#12301f; --badbg:#3a1c1a; --soft:#1a2740; --code:#0a111d; --shadow:none;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 18px 90px}
+header.hero{background:linear-gradient(135deg,#12355b,#1d5a94);color:#fff;border-radius:16px;padding:28px 28px 24px;box-shadow:var(--shadow)}
+.tag{display:inline-block;background:rgba(255,255,255,.16);border-radius:99px;padding:3px 12px;font-size:.8rem;letter-spacing:.04em}
+header.hero h1{margin:12px 0 6px;font-size:clamp(1.45rem,3.4vw,2.1rem);line-height:1.2}
+header.hero p{margin:0;opacity:.94;max-width:64ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;font-size:.9rem}
+.progress{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 8px;margin-top:6px}
+.progress .row{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:5px}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand-2),var(--accent));transition:width .35s}
+nav.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+nav.tabs a{padding:6px 14px;border:1px solid var(--line);border-radius:99px;background:var(--panel);color:var(--brand-2);text-decoration:none;font-size:.9rem;font-weight:600}
+nav.tabs a:hover{background:var(--soft)}
+section.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:20px;box-shadow:var(--shadow);scroll-margin-top:60px}
+section.card>h2{margin:0 0 4px;font-size:1.3rem}
+.lead{margin:0 0 14px;color:var(--muted)}
+h3{font-size:1.02rem;margin:20px 0 8px}
+.chip{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:3px 12px;font-size:.85rem;margin:2px 4px 2px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid2>*{min-width:0}
+label.f{display:block;font-size:.85rem;color:var(--muted);margin-bottom:4px}
+input[type=text],textarea,select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:inherit}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible,summary:focus-visible{outline:2px solid var(--brand-2);outline-offset:1px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--brand);color:#fff;border:0;padding:9px 16px;border-radius:8px;font-weight:600}
+@media (prefers-color-scheme: dark){.btn{color:#0d1420}}
+.btn.ghost{background:transparent;color:var(--brand-2);border:1px solid var(--line)}
+.btn.sm{padding:4px 12px;font-size:.85rem}
+.btn:hover{filter:brightness(1.08)}
+.note{border-left:4px solid var(--accent);background:color-mix(in srgb,var(--accent) 13%,transparent);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0;font-size:.95rem}
+.sess{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sess>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--soft)}
+.sess b.d{display:block;color:var(--brand-2);font-size:.85rem;letter-spacing:.03em;text-transform:uppercase}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+ol.steps li{counter-increment:s;position:relative;padding:8px 0 8px 42px;border-bottom:1px dashed var(--line)}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:8px;width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:.85rem;font-weight:700}
+@media (prefers-color-scheme: dark){ol.steps li::before{color:#0d1420}}
+kbd{background:var(--soft);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;font:.85em ui-monospace,Consolas,monospace}
+code{overflow-wrap:anywhere;background:var(--soft);padding:1px 6px;border-radius:5px;font:.9em ui-monospace,Consolas,monospace}
+.codebox{position:relative;margin:10px 0}
+.codebox .bar2{display:flex;justify-content:space-between;align-items:center;background:#1c2b44;color:#cfe0f7;border-radius:10px 10px 0 0;padding:6px 10px;font-size:.82rem}
+.codebox pre{margin:0;background:var(--code);color:var(--codeink);padding:14px;border-radius:0 0 10px 10px;overflow-x:auto;font:.86rem/1.5 ui-monospace,Consolas,monospace;tab-size:4}
+.codebox .btn.ghost{color:#cfe0f7;border-color:#3b5073}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+.tw{overflow-x:auto}
+.checks{list-style:none;padding:0;margin:0}
+.checks li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--line)}
+.checks input{flex:none;margin-top:5px;width:18px;height:18px;accent-color:var(--ok)}
+.grp{margin:16px 0 4px;font-weight:700;color:var(--brand-2);font-size:.92rem}
+.q{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+.q p{margin:0 0 8px;font-weight:600}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:6px 8px;border-radius:8px;cursor:pointer}
+.opt:hover{background:var(--soft)}
+.opt.ok{background:var(--okbg)} .opt.bad{background:var(--badbg)}
+.opt input{margin-top:6px}
+.fb{margin-top:6px;font-size:.9rem;color:var(--muted)}
+.scorebox{display:inline-block;padding:6px 14px;border-radius:99px;background:var(--soft);font-weight:600}
+.lab{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.sample{border:1px solid var(--line);border-radius:12px;padding:18px;min-height:130px}
+.ratio{display:inline-block;font-weight:700;padding:3px 12px;border-radius:99px}
+.ratio.ok{background:var(--okbg);color:var(--ok)} .ratio.bad{background:var(--badbg);color:var(--bad)}
+input[type=color]{width:100%;height:38px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:2px}
+details{border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:10px 0;background:var(--soft)}
+summary{cursor:pointer;font-weight:600}
+@media (max-width:720px){
+  .grid2,.lab,.sess{grid-template-columns:1fr}
+  section.card{padding:16px}
+  header.hero{padding:22px 18px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">Programación Visual · Semana 6 · 12 al 16 de octubre de 2026</span>
+  <h1>Tkinter: ventanas, widgets y diseño accesible</h1>
+  <p>Tres prácticas progresivas para dominar Tkinter. Valor de la semana: <b>inclusión</b>. ¿Cómo construyo interfaces que funcionen bien y que puedan ser usadas por todas las personas?</p>
+  <div class="meta"><span>Prof. Abraham Gómez Contreras</span><span>CECUM · Grupo BT_COMP_5</span><span>Evaluación formativa</span></div>
+</header>
+
+<div class="progress" role="status" aria-live="polite">
+  <div class="row"><span>Tu avance</span><span id="pct">0 %</span></div>
+  <div class="bar"><i id="barfill"></i></div>
+</div>
+<nav class="tabs" aria-label="Secciones">
+  <a href="#s0">Inicio</a><a href="#patio">Recorrido en el patio</a><a href="#p1">Práctica 1</a><a href="#p2">Práctica 2</a><a href="#p3">Práctica 3</a><a href="#quiz">Repaso</a><a href="#cierre">Entrega</a><a href="#rubrica">Rúbrica</a>
+</nav>
+
+<section class="card" id="s0">
+  <h2>Antes de empezar</h2>
+  <p class="lead">Datos para tu evidencia y calendario de las tres sesiones.</p>
+  <div class="grid2">
+    <div><label class="f" for="alNombre">Nombre completo</label><input type="text" id="alNombre" autocomplete="off"></div>
+    <div><label class="f" for="alMat">Matrícula</label><input type="text" id="alMat" autocomplete="off"></div>
+    <div><label class="f" for="alPareja">Tu pareja de trabajo</label><input type="text" id="alPareja" autocomplete="off"></div>
+    <div><label class="f" for="alGrupo">Grupo</label><input type="text" id="alGrupo" value="BT_COMP_5"></div>
+  </div>
+  <h3>Calendario</h3>
+  <div class="sess">
+    <div><b class="d">Lun 12/10 · Sesión 1</b>Reflexión sobre inclusión, recorrido en el patio y <b>Práctica 1</b>: ventana, Label, Entry y Button.</div>
+    <div><b class="d">Jue 15/10 · Sesión 2</b>Observación de barreras y <b>Práctica 2</b>: pack, grid, place, eventos y accesibilidad.</div>
+    <div><b class="d">Vie 16/10 · Sesión 3</b>Retroalimentación y <b>Práctica 3</b>: Listbox, Combobox, Checkbutton, Radiobutton y messagebox, en parejas.</div>
+  </div>
+  <div class="note"><b>Cómo se entrega:</b> completa cada práctica, ejecuta tu programa, toma una captura de la ventana y sube tu código (.py), la captura y el archivo de evidencia que genera esta página a la actividad correspondiente en AulaEscolar.</div>
+  <h3>Requisitos</h3>
+  <p>Python 3 con Tkinter (viene con el instalador oficial de Windows y macOS; en Linux: <code>sudo apt install python3-tk</code>) y un editor de código. Para comprobar: <code>python -m tkinter</code> abre una ventana de prueba.</p>
+</section>
+
+<section class="card" id="patio">
+  <h2>Recorrido de observación en el patio</h2>
+  <p class="lead">Actividad de convivencia · 10 minutos · en parejas. Valor: inclusión.</p>
+  <p>Recorre el plantel con tu pareja y busca <b>barreras de accesibilidad</b>: rampas, señalización y mobiliario. Después relaciona cada barrera con un problema parecido en una interfaz.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Lo que observas en el plantel</th><th>¿Quién podría tener dificultad?</th><th>Su equivalente en una interfaz</th></tr></thead>
+    <tbody>
+      <tr><td>Escalones sin rampa</td><td>Personas en silla de ruedas, con carriola o muletas</td><td>Una función que solo se puede usar con el ratón (sin teclado)</td></tr>
+      <tr><td>Letreros pequeños o con poco contraste</td><td>Personas con baja visión o daltonismo</td><td>Letra pequeña o colores de bajo contraste</td></tr>
+      <tr><td>Pasillos con obstáculos</td><td>Personas ciegas o con baja visión</td><td>Orden de tabulación confuso; elementos sin etiqueta</td></tr>
+      <tr><td>Mobiliario de una sola altura</td><td>Personas zurdas, de talla baja o alta</td><td>Botones diminutos o muy juntos</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Tu registro</h3>
+  <div class="grid2">
+    <div><label class="f" for="pt1">Barrera 1 que encontraste</label><textarea id="pt1" placeholder="Qué es y dónde está"></textarea></div>
+    <div><label class="f" for="pt2">Barrera 2 que encontraste</label><textarea id="pt2" placeholder="Qué es y dónde está"></textarea></div>
+  </div>
+  <label class="f" for="pt3" style="margin-top:12px">¿A qué criterio de accesibilidad de una interfaz se parece cada una y cómo la resolverías?</label>
+  <textarea id="pt3"></textarea>
+</section>
+
+<section class="card" id="p1" data-prac="1">
+  <h2>Práctica 1 · Ventana principal y widgets básicos</h2>
+  <p class="lead">12 de octubre · <code>Label</code>, <code>Entry</code>, <code>Button</code> y eventos con <code>command</code>.</p>
+  <span class="chip">tk.Tk()</span><span class="chip">Label</span><span class="chip">Entry</span><span class="chip">Button</span><span class="chip">command</span>
+  <h3>Objetivo</h3>
+  <p>Crear una ventana que pida un nombre y, al pulsar un botón, muestre un saludo. Aprenderás la estructura de todo programa Tkinter: crear la ventana, colocar widgets y entrar al <code>mainloop()</code>.</p>
+  <h3>Código base</h3>
+  <p>Escríbelo (no lo copies a ciegas), ejecútalo y lee cada línea.</p>
+  <div id="cb1"></div>
+  <h3>Pasos</h3>
+  <ol class="steps">
+    <li>Guarda el código como <code>practica1.py</code> y ejecútalo con <code>python practica1.py</code>.</li>
+    <li>Escribe tu nombre y pulsa <b>Saludar</b>. Prueba también con el campo vacío.</li>
+    <li><b>Modifica:</b> cambia el título, el tamaño de la ventana (<code>geometry</code>) y el texto del botón.</li>
+    <li><b>Agrega</b> un segundo botón <b>Limpiar</b> que borre el campo y el mensaje (pista: <code>entrada.delete(0, tk.END)</code>).</li>
+    <li><b>Agrega</b> un tercer botón <b>Salir</b> con <code>command=ventana.destroy</code>.</li>
+    <li>Intercambia tu código con tu pareja y revísenlo: ¿se entiende? ¿hay errores? Anoten una mejora.</li>
+  </ol>
+  <details><summary>¿Qué hace cada parte? (explicación)</summary>
+    <p><code>tk.Tk()</code> crea la ventana principal. <code>Label</code> muestra texto, <code>Entry</code> recibe una línea de texto y <code>Button</code> ejecuta la función indicada en <code>command</code> cuando se hace clic. <code>pack()</code> coloca el widget en la ventana. <code>mainloop()</code> deja la ventana abierta esperando eventos. Importante: en <code>command</code> se escribe el nombre de la función <b>sin paréntesis</b>.</p>
+  </details>
+  <h3>Lista de cotejo · Práctica 1</h3>
+  <div class="note" style="margin-top:0">Marca solo lo que de verdad verificaste en tu programa.</div>
+  <ul class="checks" id="lc1"></ul>
+</section>
+
+<section class="card" id="p2" data-prac="2">
+  <h2>Práctica 2 · Administradores de diseño, eventos y accesibilidad</h2>
+  <p class="lead">15 de octubre · <code>pack</code>, <code>grid</code>, <code>place</code>, <code>bind</code> y orden de tabulación.</p>
+  <span class="chip">pack</span><span class="chip">grid</span><span class="chip">place</span><span class="chip">bind</span><span class="chip">Tab</span>
+  <h3>Objetivo</h3>
+  <p>Organizar una interfaz con los tres administradores de diseño y responder a eventos del teclado, aplicando criterios de accesibilidad: <b>tamaño de fuente</b>, <b>contraste</b> y <b>orden de tabulación</b>.</p>
+  <h3>Los tres administradores</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Método</th><th>Cómo coloca</th><th>Cuándo usarlo</th></tr></thead>
+    <tbody>
+      <tr><td><code>pack()</code></td><td>Apila los widgets uno tras otro (arriba, abajo, izquierda, derecha)</td><td>Barras, listas simples, botones en fila</td></tr>
+      <tr><td><code>grid()</code></td><td>Filas y columnas (<code>row</code>, <code>column</code>, <code>sticky</code>)</td><td>Formularios: etiqueta a la izquierda, campo a la derecha</td></tr>
+      <tr><td><code>place()</code></td><td>Posición exacta (<code>x</code>, <code>y</code> o <code>relx</code>, <code>rely</code>)</td><td>Casos especiales; evítalo para el diseño principal</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Regla:</b> dentro de un mismo contenedor no mezcles <code>pack</code> y <code>grid</code> (Tkinter marca un error). Sí puedes usar <code>place</code> o separar con <code>Frame</code>.</div>
+  <h3>Código base</h3>
+  <div id="cb2"></div>
+  <h3>Laboratorio de contraste</h3>
+  <p>Elige colores de texto y fondo: la página calcula la razón de contraste. Para texto normal, WCAG pide al menos <b>4.5 : 1</b>.</p>
+  <div class="lab">
+    <div>
+      <label class="f" for="cFg">Color del texto</label><input type="color" id="cFg" value="#1b2333">
+      <label class="f" for="cBg" style="margin-top:10px">Color de fondo</label><input type="color" id="cBg" value="#ffffff">
+      <label class="f" for="cSz" style="margin-top:10px">Tamaño de fuente: <b id="cSzV">14</b> pt</label><input type="range" id="cSz" min="8" max="28" value="14" style="width:100%">
+      <p style="margin:12px 0 0"><span class="ratio ok" id="cRatio">—</span></p>
+    </div>
+    <div class="sample" id="cSample"><b>Registro de alumnos</b><br>Escribe tu nombre y pulsa Tab para pasar al siguiente campo.</div>
+  </div>
+  <h3>Pasos</h3>
+  <ol class="steps">
+    <li>Ejecuta el código base y recorre la ventana <b>solo con la tecla <kbd>Tab</kbd></b>. Pulsa <kbd>Enter</kbd> en un campo.</li>
+    <li>Cambia el orden de los campos en el código y vuelve a comprobar el orden de tabulación (se sigue el orden en que se crean los widgets).</li>
+    <li>Sube la fuente a 16 y verifica que nada se corta al redimensionar la ventana (<code>columnconfigure</code> con <code>weight</code>).</li>
+    <li>Cambia los colores de la ventana con <code>bg</code> y <code>fg</code>, y comprueba su contraste en el laboratorio (≥ 4.5 : 1).</li>
+    <li>Agrega un tercer campo (por ejemplo, correo) con su etiqueta y su mensaje en la barra de estado.</li>
+    <li>Revisión en parejas: la pareja intenta usar tu programa <b>sin ratón</b> y anota lo que falló.</li>
+  </ol>
+  <h3>Lista de cotejo · Práctica 2</h3>
+  <ul class="checks" id="lc2"></ul>
+</section>
+
+<section class="card" id="p3" data-prac="3">
+  <h2>Práctica 3 · Formulario de registro con widgets de selección</h2>
+  <p class="lead">16 de octubre · <code>Listbox</code>, <code>Combobox</code>, <code>Checkbutton</code>, <code>Radiobutton</code> y <code>messagebox</code>. En parejas.</p>
+  <span class="chip">Listbox</span><span class="chip">Combobox</span><span class="chip">Checkbutton</span><span class="chip">Radiobutton</span><span class="chip">messagebox</span>
+  <h3>Objetivo</h3>
+  <p>Construir un formulario de registro completo, validar los datos y confirmar con cuadros de diálogo, trabajando con los roles <b>piloto</b> y <b>navegante</b>.</p>
+  <div class="note"><b>Roles:</b> el <b>piloto</b> escribe el código; el <b>navegante</b> lee la práctica, revisa, sugiere y busca en la documentación. <b>Intercambien los roles</b> al terminar cada bloque (aprox. cada 10 minutos) para que ambos programen. Ambos entregan su propio archivo.</div>
+  <h3>Código base</h3>
+  <div id="cb3"></div>
+  <h3>Pasos</h3>
+  <ol class="steps">
+    <li>Piloto: escribe el código hasta los campos de nombre y <code>Combobox</code>. Navegante: revisa y sugiere. <b>Cambio de roles.</b></li>
+    <li>Ahora el nuevo piloto agrega <code>Radiobutton</code> (turno) y <code>Listbox</code> (intereses). <b>Cambio de roles.</b></li>
+    <li>Agrega el <code>Checkbutton</code> de aceptación y la función <code>registrar</code> con <code>messagebox</code>.</li>
+    <li>Prueba los tres casos: formulario vacío (error), sin aceptar (advertencia) y completo (confirmación).</li>
+    <li><b>Reto:</b> agrega un botón <b>Limpiar</b> y un widget <code>Spinbox</code> para la edad.</li>
+    <li>Verifica la accesibilidad: fuente ≥ 12 pt, contraste, recorrido con <kbd>Tab</kbd> y mensajes que no dependan solo del color.</li>
+  </ol>
+  <h3>Lista de cotejo · Práctica 3</h3>
+  <ul class="checks" id="lc3"></ul>
+  <h3>Reflexión final</h3>
+  <label class="f" for="refl">¿Cómo ayudó el trabajo en parejas a que todos participaran?</label>
+  <textarea id="refl"></textarea>
+</section>
+
+<section class="card" id="quiz">
+  <h2>Repaso rápido</h2>
+  <p class="lead">Cinco preguntas para comprobar lo aprendido. No se pueden cambiar las respuestas.</p>
+  <div id="quizBox"></div>
+  <p><span class="scorebox" id="quizScore"></span></p>
+</section>
+
+<section class="card" id="cierre">
+  <h2>Cierre y entrega</h2>
+  <p class="lead">Genera tu evidencia y súbela con tu código a AulaEscolar.</p>
+  <ol class="steps">
+    <li>Completa tu nombre y matrícula en la sección inicial.</li>
+    <li>Marca la lista de cotejo de cada práctica.</li>
+    <li>Pulsa el botón para descargar tu archivo de evidencia.</li>
+    <li>En AulaEscolar, sube <code>practicaN.py</code>, la captura de tu ventana y la evidencia. Cada práctica se entrega en su actividad.</li>
+  </ol>
+  <p><button class="btn" id="dlEv">Descargar evidencia (.html)</button> <span id="evMsg" role="status"></span></p>
+</section>
+
+<section class="card" id="rubrica">
+  <h2>Rúbrica de práctica de Tkinter</h2>
+  <p class="lead">Se aplica a cada una de las tres prácticas. Evaluación formativa.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Criterio</th><th>Excelente (4)</th><th>Bueno (3)</th><th>En proceso (2)</th><th>Inicial (1)</th></tr></thead>
+    <tbody>
+      <tr><td><b>Funcionamiento</b></td><td>Ejecuta sin errores y cumple todo lo pedido</td><td>Ejecuta; falta un detalle menor</td><td>Ejecuta con fallos en alguna función</td><td>No ejecuta</td></tr>
+      <tr><td><b>Widgets y eventos</b></td><td>Usa correctamente todos los widgets pedidos y sus eventos</td><td>Usa los widgets; un evento incompleto</td><td>Omite varios widgets o eventos</td><td>Widgets sin respuesta</td></tr>
+      <tr><td><b>Diseño y distribución</b></td><td>Distribución ordenada y adaptable al redimensionar</td><td>Ordenada; no se adapta del todo</td><td>Desordenada o mezcla administradores</td><td>Sin organización</td></tr>
+      <tr><td><b>Accesibilidad</b></td><td>Fuente ≥ 12 pt, contraste ≥ 4.5 : 1 y tabulación lógica</td><td>Cumple dos de tres criterios</td><td>Cumple uno</td><td>No considera accesibilidad</td></tr>
+      <tr><td><b>Código y trabajo en parejas</b></td><td>Código legible y comentado; revisión por pareja con mejoras registradas</td><td>Legible; revisión parcial</td><td>Poco legible; sin revisión</td><td>Sin evidencia de revisión</td></tr>
+    </tbody>
+  </table></div>
+  <p class="lead" style="margin-top:12px">Máximo 20 puntos por práctica. La lista de cotejo se usa como evidencia de autoevaluación; la revisión del código se hace en parejas.</p>
+</section>
+
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function download(name,text,type){const b=new Blob([text],{type});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
+
+/* ===== código de las prácticas ===== */
+const CODE={
+1:`import tkinter as tk
+
+
+def saludar():
+    nombre = entrada.get().strip()
+    if nombre:
+        mensaje.config(text=f"¡Hola, {nombre}!")
+    else:
+        mensaje.config(text="Escribe tu nombre primero")
+
+
+ventana = tk.Tk()
+ventana.title("Práctica 1 · Mi primera ventana")
+ventana.geometry("380x240")
+
+tk.Label(ventana, text="Nombre:", font=("Arial", 14)).pack(pady=(16, 4))
+
+entrada = tk.Entry(ventana, font=("Arial", 14))
+entrada.pack(pady=4)
+entrada.focus()
+
+tk.Button(ventana, text="Saludar", font=("Arial", 14),
+          command=saludar).pack(pady=10)
+
+mensaje = tk.Label(ventana, text="", font=("Arial", 14))
+mensaje.pack(pady=4)
+
+ventana.mainloop()
+`,
+2:`import tkinter as tk
+
+FUENTE = ("Arial", 14)
+
+ventana = tk.Tk()
+ventana.title("Práctica 2 · Distribución y eventos")
+ventana.geometry("460x300")
+ventana.columnconfigure(1, weight=1)   # la columna de campos se estira
+
+# --- Formulario con grid (el orden de creación define el orden de Tab) ---
+tk.Label(ventana, text="Nombre:", font=FUENTE).grid(
+    row=0, column=0, padx=10, pady=8, sticky="e")
+nombre = tk.Entry(ventana, font=FUENTE)
+nombre.grid(row=0, column=1, padx=10, pady=8, sticky="ew")
+
+tk.Label(ventana, text="Edad:", font=FUENTE).grid(
+    row=1, column=0, padx=10, pady=8, sticky="e")
+edad = tk.Entry(ventana, font=FUENTE)
+edad.grid(row=1, column=1, padx=10, pady=8, sticky="ew")
+
+estado = tk.Label(ventana, text="Pulsa Tab para moverte entre campos",
+                  font=FUENTE, anchor="w")
+estado.grid(row=3, column=0, columnspan=2, padx=10, pady=8, sticky="ew")
+
+
+# --- Eventos ---
+def enviar(evento=None):
+    if not nombre.get().strip() or not edad.get().strip():
+        estado.config(text="Falta completar un campo")
+    else:
+        estado.config(text=f"Registrado: {nombre.get().strip()}")
+
+
+def al_enfocar(evento):
+    campo = "Nombre" if evento.widget is nombre else "Edad"
+    estado.config(text=f"Campo activo: {campo}")
+
+
+tk.Button(ventana, text="Enviar", font=FUENTE, command=enviar).grid(
+    row=2, column=0, columnspan=2, pady=8)
+
+nombre.bind("<FocusIn>", al_enfocar)
+edad.bind("<FocusIn>", al_enfocar)
+ventana.bind("<Return>", enviar)                   # Enter envía
+ventana.bind("<Escape>", lambda e: ventana.destroy())  # Esc cierra
+
+# --- place(): posición relativa a la ventana ---
+tk.Label(ventana, text="Enter = enviar · Esc = salir",
+         font=("Arial", 12)).place(relx=1.0, rely=1.0, anchor="se")
+
+nombre.focus()
+ventana.mainloop()
+`,
+3:`import tkinter as tk
+from tkinter import ttk, messagebox
+
+FUENTE = ("Arial", 13)
+
+ventana = tk.Tk()
+ventana.title("Práctica 3 · Registro")
+ventana.geometry("460x560")
+
+marco = tk.Frame(ventana, padx=16, pady=12)
+marco.pack(fill="both", expand=True)
+
+# Nombre
+tk.Label(marco, text="Nombre completo:", font=FUENTE).pack(anchor="w")
+nombre = tk.Entry(marco, font=FUENTE)
+nombre.pack(fill="x", pady=(0, 10))
+
+# Combobox: carrera
+tk.Label(marco, text="Carrera:", font=FUENTE).pack(anchor="w")
+carrera = ttk.Combobox(marco, font=FUENTE, state="readonly",
+                       values=["Computación", "Puericultura", "Enfermería"])
+carrera.pack(fill="x", pady=(0, 10))
+
+# Radiobutton: turno
+tk.Label(marco, text="Turno:", font=FUENTE).pack(anchor="w")
+turno = tk.StringVar(value="Matutino")
+fila = tk.Frame(marco)
+fila.pack(anchor="w", pady=(0, 10))
+for texto in ("Matutino", "Vespertino"):
+    tk.Radiobutton(fila, text=texto, value=texto, variable=turno,
+                   font=FUENTE).pack(side="left", padx=(0, 12))
+
+# Listbox: intereses (selección múltiple)
+tk.Label(marco, text="Intereses (Ctrl para varios):", font=FUENTE).pack(anchor="w")
+intereses = tk.Listbox(marco, selectmode="extended", height=4,
+                       exportselection=False, font=FUENTE)
+for tema in ("Programación", "Diseño", "Redes", "Robótica"):
+    intereses.insert(tk.END, tema)
+intereses.pack(fill="x", pady=(0, 10))
+
+# Checkbutton: aceptación
+acepto = tk.BooleanVar()
+tk.Checkbutton(marco, text="Acepto el reglamento", variable=acepto,
+               font=FUENTE).pack(anchor="w", pady=(0, 10))
+
+
+def registrar():
+    if not nombre.get().strip() or not carrera.get():
+        messagebox.showerror("Faltan datos", "Escribe tu nombre y elige una carrera.")
+        return
+    if not acepto.get():
+        messagebox.showwarning("Atención", "Debes aceptar el reglamento.")
+        return
+    temas = [intereses.get(i) for i in intereses.curselection()]
+    resumen = (f"Nombre: {nombre.get().strip()}\\nCarrera: {carrera.get()}\\n"
+               f"Turno: {turno.get()}\\nIntereses: {', '.join(temas) or 'ninguno'}")
+    if messagebox.askyesno("Confirmar registro", resumen + "\\n\\n¿Registrar?"):
+        messagebox.showinfo("Listo", "Registro guardado.")
+
+
+tk.Button(marco, text="Registrar", font=FUENTE, command=registrar).pack(pady=8)
+
+nombre.focus()
+ventana.mainloop()
+`};
+[1,2,3].forEach(n=>{
+  const box=document.createElement("div");box.className="codebox";
+  box.innerHTML=`<div class="bar2"><span>practica${n}.py</span><button class="btn ghost sm" type="button" data-n="${n}">Copiar</button></div><pre><code>${esc(CODE[n])}</code></pre>`;
+  $("#cb"+n).appendChild(box);
+});
+$$(".codebox button").forEach(b=>b.addEventListener("click",async()=>{
+  const t=CODE[b.dataset.n];
+  try{await navigator.clipboard.writeText(t);b.textContent="Copiado ✔";}
+  catch(e){const r=document.createRange();r.selectNodeContents(b.closest(".codebox").querySelector("code"));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selecciona y copia (Ctrl+C)";}
+  setTimeout(()=>b.textContent="Copiar",2500);
+}));
+
+/* ===== listas de cotejo ===== */
+const LISTA={
+1:["Crea la ventana principal con título y tamaño definidos","Incluye un Label con texto claro","Incluye un Entry y lee su contenido con get()","Incluye un Button con command (función sin paréntesis)","Muestra un mensaje distinto si el campo está vacío","Agregué los botones Limpiar y Salir","Fuente de al menos 12 pt en todos los widgets","El código está ordenado y con nombres claros","Mi pareja revisó mi código y anotamos una mejora"],
+2:["Usa grid para el formulario (etiquetas y campos alineados)","Usa pack o place de forma correcta, sin mezclar pack y grid en el mismo contenedor","La columna de campos se adapta al redimensionar (columnconfigure)","Responde al evento Enter (bind) y a Escape","Muestra en la barra de estado el campo activo (FocusIn)","El orden de tabulación con Tab es lógico","Fuente ≥ 12 pt y contraste ≥ 4.5 : 1","Se puede usar completo sin ratón","Mi pareja lo probó sin ratón y anotamos hallazgos"],
+3:["Incluye Entry, Combobox, Radiobutton, Listbox y Checkbutton","Los Radiobutton comparten una misma variable","El Listbox permite selección múltiple y la lectura es correcta","Valida el formulario antes de registrar","Usa messagebox de error, advertencia y confirmación","El resumen muestra todos los datos capturados","Cumple los criterios de accesibilidad (fuente, contraste, Tab)","Alternamos los roles de piloto y navegante","Ambos integrantes entregamos nuestro propio archivo"]};
+let doneN=0,total=0;
+const state={};
+[1,2,3].forEach(n=>{
+  $("#lc"+n).innerHTML=LISTA[n].map((t,i)=>`<li><input type="checkbox" id="c${n}_${i}" data-prac="${n}"><label for="c${n}_${i}">${esc(t)}</label></li>`).join("");
+});
+function prog(){
+  const all=$$(".checks input");const ok=all.filter(i=>i.checked).length;
+  const q=Object.keys(qAns).length;
+  const T=all.length+QZ.length, D=ok+q;
+  const p=Math.round(D*100/T);
+  $("#pct").textContent=p+" %";$("#barfill").style.width=p+"%";
+}
+document.addEventListener("change",e=>{if(e.target.matches(".checks input"))prog();});
+
+/* ===== laboratorio de contraste ===== */
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function lab(){
+  const fg=$("#cFg").value,bg=$("#cBg").value,sz=$("#cSz").value;
+  const a=lum(fg),b=lum(bg),r=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+  const s=$("#cSample");s.style.color=fg;s.style.background=bg;s.style.fontSize=sz+"px";
+  $("#cSzV").textContent=sz;
+  const el=$("#cRatio");el.textContent=r.toFixed(2)+" : 1 · "+(r>=4.5?"cumple":"no cumple");
+  el.className="ratio "+(r>=4.5?"ok":"bad");
+}
+["cFg","cBg","cSz"].forEach(id=>$("#"+id).addEventListener("input",lab));lab();
+
+/* ===== repaso ===== */
+const QZ=[
+{q:"¿Qué hace root.mainloop()?",o:["Cierra la ventana","Mantiene la ventana abierta esperando eventos","Crea todos los widgets","Compila el programa"],c:1,e:"mainloop() inicia el ciclo de eventos: sin él, la ventana aparecería y se cerraría de inmediato."},
+{q:"¿Cuál es la forma correcta de asignar una función a un botón?",o:["Button(ventana, command=saludar())","Button(ventana, command=saludar)","Button(ventana, command='saludar')","Button(ventana, saludar)"],c:1,e:"Se pasa la función sin paréntesis; con paréntesis se ejecutaría al crear el botón."},
+{q:"¿Por qué Tkinter marca error al usar pack() y grid() en el mismo contenedor?",o:["Porque están obsoletos","Porque cada administrador calcula el diseño por su cuenta y se bloquean entre sí","Porque solo grid acepta botones","No marca error"],c:1,e:"Los administradores no pueden coexistir en el mismo contenedor; usa Frame para separar zonas."},
+{q:"¿Qué determina el orden de tabulación con la tecla Tab?",o:["El color del widget","El orden en que se crean los widgets","El tamaño de la fuente","El nombre de la variable"],c:1,e:"Tab sigue el orden de creación; si es ilógico, hay que reordenar el código."},
+{q:"¿Cuál es una buena práctica de accesibilidad en una interfaz?",o:["Usar solo el color rojo para indicar errores","Letra pequeña para que quepa más","Contraste suficiente, fuente legible y poder usarla con teclado","Evitar mensajes de error"],c:2,e:"Contraste (≥ 4.5 : 1), fuente legible y operación con teclado hacen la interfaz utilizable por más personas; el color nunca debe ser la única señal."}
+];
+const qAns={};
+$("#quizBox").innerHTML=QZ.map((it,i)=>`<div class="q"><p>${i+1}. ${esc(it.q)}</p>${it.o.map((t,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"><span>${esc(t)}</span></label>`).join("")}<div class="fb" id="fb${i}"></div></div>`).join("");
+$$("#quizBox .q").forEach((d,i)=>$$("input",d).forEach(r=>r.addEventListener("change",()=>{
+  if(qAns[i]!==undefined)return;
+  const j=+r.value,it=QZ[i];qAns[i]=j;
+  $$(".opt",d).forEach((op,k)=>{if(k===it.c)op.classList.add("ok");if(k===j&&k!==it.c)op.classList.add("bad");$("input",op).disabled=true;});
+  $("#fb"+i).textContent=(j===it.c?"✔ Correcto. ":"✘ Incorrecto. ")+it.e;
+  updQuiz();prog();
+})));
+function quizOk(){return QZ.reduce((a,it,i)=>a+(qAns[i]===it.c?1:0),0);}
+function updQuiz(){const a=Object.keys(qAns).length;$("#quizScore").textContent=`Aciertos: ${quizOk()} / ${QZ.length}`+(a<QZ.length?` (${a} respondidas)`:"");}
+updQuiz();prog();
+
+/* ===== evidencia ===== */
+$("#dlEv").addEventListener("click",()=>{
+  const nombre=$("#alNombre").value.trim(),mat=$("#alMat").value.trim();
+  if(!nombre||!mat){$("#evMsg").textContent="Escribe tu nombre y matrícula en la sección inicial.";location.hash="#s0";return;}
+  const pareja=$("#alPareja").value.trim(),grupo=$("#alGrupo").value.trim(),fecha=new Date().toLocaleString("es-MX");
+  const bloques=[1,2,3].map(n=>{
+    const its=LISTA[n].map((t,i)=>[t,$("#c"+n+"_"+i).checked]);
+    const k=its.filter(x=>x[1]).length;
+    return `<h2>Práctica ${n} · Lista de cotejo (${k} / ${its.length})</h2><table>${its.map(([t,v])=>`<tr><td>${esc(t)}</td><td class="${v?"ok":"no"}">${v?"Sí":"No"}</td></tr>`).join("")}</table>`;
+  }).join("");
+  const html=`<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Evidencia · ${esc(nombre)}</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:780px;margin:30px auto;padding:0 18px;color:#1b2333}h1{color:#12355b;font-size:1.5rem}h2{font-size:1.1rem;margin-top:24px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #d9dfea;padding:6px 10px;text-align:left}.ok{color:#1d7a4a;font-weight:600}.no{color:#b3372f}</style></head><body>
+<h1>Evidencia · Programación Visual · Tkinter (semana 6)</h1>
+<p><b>Alumno:</b> ${esc(nombre)}<br><b>Matrícula:</b> ${esc(mat)}<br><b>Pareja:</b> ${esc(pareja)||"—"}<br><b>Grupo:</b> ${esc(grupo)||"—"}<br><b>Generado:</b> ${esc(fecha)}</p>
+<h2>Recorrido en el patio</h2><ol><li>${esc($("#pt1").value)||"—"}</li><li>${esc($("#pt2").value)||"—"}</li></ol><p>${esc($("#pt3").value)||"—"}</p>
+${bloques}
+<h2>Repaso</h2><p>Aciertos: ${quizOk()} / ${QZ.length} (${Object.keys(qAns).length} respondidas)</p>
+<h2>Reflexión sobre el trabajo en parejas</h2><p>${esc($("#refl").value)||"—"}</p>
+<p style="color:#5b667a;font-size:.85rem">Adjunta tu código (.py) y una captura de tu ventana en ejecución.</p></body></html>`;
+  download("evidencia_tkinter_"+(mat||"alumno").replace(/[^\w-]+/g,"_")+".html",html,"text/html;charset=utf-8");
+  $("#evMsg").textContent="Archivo generado. Revisa tu carpeta de descargas.";
+});
+</script>
+</body>
+</html>
