@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Práctica · Tríptico «Cuidados del lactante para todas las familias»</title>
+<style>
+:root{
+  --bg:#f5f7fb; --panel:#ffffff; --ink:#1b2333; --muted:#5b667a; --line:#d9dfea;
+  --brand:#12355b; --brand-2:#1d5a94; --accent:#c8963e; --ok:#1d7a4a; --bad:#b3372f;
+  --okbg:#e6f4ec; --badbg:#fbeae8; --soft:#eef3fa; --shadow:0 1px 2px rgba(15,27,45,.06),0 4px 14px rgba(15,27,45,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0d1420; --panel:#151f30; --ink:#e7edf7; --muted:#9aa8bf; --line:#27344b;
+    --brand:#7fb3ec; --brand-2:#9cc6f3; --accent:#e0b060; --ok:#5fcf98; --bad:#f08a80;
+    --okbg:#12301f; --badbg:#3a1c1a; --soft:#1a2740; --shadow:none;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 18px 90px}
+header.hero{background:linear-gradient(135deg,#12355b,#1d5a94);color:#fff;border-radius:16px;padding:28px 28px 24px;box-shadow:var(--shadow)}
+.tag{display:inline-block;background:rgba(255,255,255,.16);border-radius:99px;padding:3px 12px;font-size:.8rem;letter-spacing:.04em}
+header.hero h1{margin:12px 0 6px;font-size:clamp(1.45rem,3.4vw,2.1rem);line-height:1.2}
+header.hero p{margin:0;opacity:.94;max-width:64ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;font-size:.9rem}
+.progress{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 8px;margin-top:6px}
+.progress .row{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:5px}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand-2),var(--accent));transition:width .35s}
+section.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:20px;box-shadow:var(--shadow)}
+section.card>h2{margin:0 0 4px;font-size:1.3rem}
+.lead{margin:0 0 14px;color:var(--muted)}
+h3{font-size:1.02rem;margin:20px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.chip{background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:3px 12px;font-size:.85rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid2>*,.grid3>*{min-width:0}
+label.f{display:block;font-size:.85rem;color:var(--muted);margin-bottom:4px}
+input[type=text],textarea,select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:inherit}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--brand-2);outline-offset:1px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--brand);color:#fff;border:0;padding:9px 16px;border-radius:8px;font-weight:600}
+@media (prefers-color-scheme: dark){.btn{color:#0d1420}}
+.btn.ghost{background:transparent;color:var(--brand-2);border:1px solid var(--line)}
+.btn:hover{filter:brightness(1.08)}
+.note{border-left:4px solid var(--accent);background:color-mix(in srgb,var(--accent) 13%,transparent);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0;font-size:.95rem}
+.sess{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sess>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--soft)}
+.sess b.d{display:block;color:var(--brand-2);font-size:.85rem;letter-spacing:.03em;text-transform:uppercase}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+ol.steps li{counter-increment:s;position:relative;padding:8px 0 8px 42px;border-bottom:1px dashed var(--line)}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:8px;width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:.85rem;font-weight:700}
+@media (prefers-color-scheme: dark){ol.steps li::before{color:#0d1420}}
+kbd{background:var(--soft);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;font:.85em ui-monospace,Consolas,monospace}
+.menu{font-weight:600;color:var(--brand-2)}
+code{overflow-wrap:anywhere;background:var(--soft);padding:1px 6px;border-radius:5px;font:.9em ui-monospace,Consolas,monospace}
+/* triptico diagram */
+.sheets{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.sheet h4{margin:0 0 6px;font-size:.9rem;color:var(--muted)}
+.fold{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--brand);border-radius:8px;overflow:hidden;background:var(--panel)}
+.pn{min-height:116px;padding:8px;border:0;border-right:2px dashed var(--line);background:transparent;color:var(--ink);text-align:center;font-size:.82rem;display:flex;flex-direction:column;justify-content:center;gap:3px}
+.pn:last-child{border-right:0}
+.pn b{font-size:.92rem}
+.pn:hover{background:var(--soft)}
+.pn[aria-pressed=true]{background:color-mix(in srgb,var(--accent) 22%,transparent);outline:2px solid var(--accent);outline-offset:-2px}
+#pnInfo{margin-top:12px;min-height:3.2em}
+/* checks */
+.checks{list-style:none;padding:0;margin:0}
+.checks li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--line)}
+.checks input{flex:none;margin-top:5px;width:18px;height:18px;accent-color:var(--ok)}
+.grp{margin:16px 0 4px;font-weight:700;color:var(--brand-2);font-size:.92rem}
+/* quiz */
+.q{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+.q p{margin:0 0 8px;font-weight:600}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:6px 8px;border-radius:8px;cursor:pointer}
+.opt:hover{background:var(--soft)}
+.opt.ok{background:var(--okbg)} .opt.bad{background:var(--badbg)}
+.opt input{margin-top:6px}
+.fb{margin-top:6px;font-size:.9rem;color:var(--muted)}
+.scorebox{display:inline-block;padding:6px 14px;border-radius:99px;background:var(--soft);font-weight:600}
+/* contrast lab */
+.lab{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.sample{border:1px solid var(--line);border-radius:12px;padding:18px;min-height:150px}
+.ratio{display:inline-block;font-weight:700;padding:3px 12px;border-radius:99px}
+.ratio.ok{background:var(--okbg);color:var(--ok)} .ratio.bad{background:var(--badbg);color:var(--bad)}
+input[type=range]{width:100%}
+input[type=color]{width:100%;height:38px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:2px}
+.tw{overflow:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--soft);font-weight:600}
+.fb2{color:var(--muted);font-size:.9rem}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#12355b;color:#fff;padding:10px 18px;border-radius:10px;opacity:0;transition:.25s;pointer-events:none;z-index:9;font-size:.9rem;max-width:90vw}
+.toast.on{opacity:1}
+@media (max-width:760px){
+  .grid2,.grid3,.sess,.sheets,.lab{grid-template-columns:minmax(0,1fr)}
+  .wrap{padding:12px 12px 80px}
+  section.card{padding:16px}
+}
+@media print{.progress,.btn{display:none!important}section.card{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <span class="tag">Computación · Semana 6 · Inclusión</span>
+  <h1>Tríptico informativo: «Cuidados del lactante para todas las familias»</h1>
+  <p>Diseñarás en Word un tríptico con columnas, imágenes y tipografía legible, usando lenguaje incluyente para que lo entienda y lo use cualquier familia.</p>
+  <div class="meta"><span>📅 12 y 15 de octubre de 2026</span><span>💻 Procesador de textos (Word)</span><span>👥 Grupo 304 · Puericultura</span></div>
+</header>
+
+<div class="progress" aria-live="polite">
+  <div class="row"><span id="progTxt">Avance de tu lista de cotejo: 0 de 0</span><span id="progPct">0 %</span></div>
+  <div class="bar"><i id="progBar"></i></div>
+</div>
+
+<section class="card" id="s0">
+  <h2>¿Qué vas a lograr?</h2>
+  <p class="lead">Al terminar elaborarás un tríptico informativo con columnas, imágenes y tipografía legible, usando lenguaje incluyente.</p>
+  <div class="grid2">
+    <div>
+      <h3 style="margin-top:0">Habilidades que practicarás</h3>
+      <ul>
+        <li>Manejo de procesador de texto</li>
+        <li>Diseño de documentos</li>
+        <li>Lenguaje incluyente</li>
+        <li>Comunicación respetuosa</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Lo que ya sabes hacer</h3>
+      <ul>
+        <li>Usar mouse y teclado</li>
+        <li>Moverte en el Explorador de Windows</li>
+        <li>Trabajar en Word, como en tu bitácora del lactante</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note"><b>Pregunta para pensar:</b> ¿cómo diseño un documento informativo que pueda ser entendido y utilizado por todas las familias?</div>
+  <h3>Calendario</h3>
+  <div class="sess">
+    <div><b class="d">Sesión 1 · lunes 12 de octubre</b>
+      Círculo de diálogo en el patio (10 min) y presentación de la práctica. Después armas la estructura del tríptico en Word: orientación horizontal, tres columnas, títulos y texto informativo con lenguaje incluyente.</div>
+    <div><b class="d">Sesión 2 · jueves 15 de octubre</b>
+      Círculo de diálogo en el patio (10 min). Concluyes el tríptico: imágenes de familias diversas, tipografía accesible, revisión ortográfica y guardado en tu USB.</div>
+  </div>
+  <div class="note"><b>Valor de la semana: inclusión.</b> Tu bitácora del lactante ya está concluida. Esta es la actividad nueva para el grupo de Puericultura.</div>
+</section>
+
+<section class="card" id="s1">
+  <h2>1 · Círculo de diálogo</h2>
+  <p class="lead">«¿Cómo incluimos a todas las familias en el cuidado del lactante?» Se trabaja en el patio, en grupo y de viva voz.</p>
+  <ul>
+    <li>Escucha sin interrumpir y habla en primera persona («yo pienso…»).</li>
+    <li>Piensa en familias con una mamá, con un papá, con dos mamás o dos papás, con abuelas, abuelos, tías, tíos u otras personas cuidadoras.</li>
+    <li>Anota una idea que quieras llevar a tu tríptico.</li>
+  </ul>
+  <label class="f" for="idea">Mi idea del círculo de diálogo (1 o 2 líneas)</label>
+  <textarea id="idea" placeholder="Escribe aquí tu idea"></textarea>
+</section>
+
+<section class="card" id="s2">
+  <h2>2 · Estructura del tríptico en Word</h2>
+  <p class="lead">Un tríptico es una hoja horizontal con dos caras, cada una dividida en tres paneles. Toca un panel para ver qué va en él.</p>
+  <div class="sheets">
+    <div class="sheet"><h4>Hoja 1 · cara externa</h4>
+      <div class="fold" id="foldA">
+        <button class="pn" data-p="solapa" aria-pressed="false"><b>Solapa</b><span>se dobla hacia adentro</span></button>
+        <button class="pn" data-p="contra" aria-pressed="false"><b>Contraportada</b><span>cierre y datos</span></button>
+        <button class="pn" data-p="portada" aria-pressed="false"><b>Portada</b><span>título e imagen</span></button>
+      </div></div>
+    <div class="sheet"><h4>Hoja 2 · cara interna</h4>
+      <div class="fold" id="foldB">
+        <button class="pn" data-p="i1" aria-pressed="false"><b>Panel 1</b><span>presentación</span></button>
+        <button class="pn" data-p="i2" aria-pressed="false"><b>Panel 2</b><span>cuidados</span></button>
+        <button class="pn" data-p="i3" aria-pressed="false"><b>Panel 3</b><span>señales y apoyo</span></button>
+      </div></div>
+  </div>
+  <p id="pnInfo" class="note">Toca un panel del diagrama.</p>
+
+  <h3>Paso a paso en Word</h3>
+  <ol class="steps">
+    <li>Abre un documento en blanco y guárdalo de una vez en tu USB: <kbd>Ctrl</kbd> + <kbd>G</kbd>.</li>
+    <li><span class="menu">Diseño → Orientación → Horizontal.</span></li>
+    <li><span class="menu">Diseño → Márgenes → Estrecho</span>, para tener más espacio y que la impresora no recorte el texto.</li>
+    <li><span class="menu">Diseño → Columnas → Tres.</span> Cada columna es un panel.</li>
+    <li>Escribe el título de cada panel y su texto. Para pasar a la siguiente columna no uses <kbd>Enter</kbd> muchas veces: usa <span class="menu">Diseño → Saltos → Columna</span> (o <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>).</li>
+    <li>Cuando termines la cara externa, inserta un salto de página (<kbd>Ctrl</kbd> + <kbd>Enter</kbd>) y arma la cara interna.</li>
+  </ol>
+  <div class="note"><b>Consejo:</b> escribe primero todo el texto y después pon las imágenes. Así evitas que el contenido se desacomode.</div>
+</section>
+
+<section class="card" id="s3">
+  <h2>3 · Lenguaje incluyente</h2>
+  <p class="lead">Elige la frase que mejor incluye a todas las familias. Responde y lee la explicación.</p>
+  <div id="quiz"></div>
+  <p><span class="scorebox" id="quizScore">Aciertos: 0 / 5</span></p>
+  <h3>Ideas rápidas para tu tríptico</h3>
+  <ul>
+    <li>Usa palabras colectivas: «las familias», «las personas cuidadoras», «quien cuida al bebé».</li>
+    <li>Habla de «tu bebé» o «el bebé» en lugar de «tu hijo» o «el niño».</li>
+    <li>No supongas quién cuida: puede ser mamá, papá, abuela, abuelo, tía, tío, tutora o tutor.</li>
+    <li>Escribe con frases cortas, claras y con verbos de acción: «lava», «acuesta», «consulta».</li>
+  </ul>
+</section>
+
+<section class="card" id="s4">
+  <h2>4 · Ideas de contenido para tus paneles</h2>
+  <p class="lead">Puedes tomar estas ideas como punto de partida. Complétalas con lo visto en clase, con tu bitácora del lactante y con la Cartilla Nacional de Salud.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Panel</th><th>Qué puede llevar</th></tr></thead>
+    <tbody>
+      <tr><th>Portada</th><td>Título «Cuidados del lactante para todas las familias», una imagen de una familia y tu nombre y grupo en letra pequeña.</td></tr>
+      <tr><th>Panel 1 · presentación</th><td>Para quién es el tríptico y por qué es para todas las familias.</td></tr>
+      <tr><th>Panel 2 · cuidados</th><td>Lavado de manos antes de cargar al bebé, alimentación según indique su personal de salud, baño con agua tibia, sueño del bebé boca arriba sobre una superficie firme, contacto y juego con el bebé (hablarle, cantarle, abrazarlo).</td></tr>
+      <tr><th>Panel 3 · señales y apoyo</th><td>Señales por las que se debe consultar al personal de salud (por ejemplo: fiebre, llanto inconsolable, dificultad para respirar, rechazo del alimento) y recordatorio de llevar al bebé a sus consultas y vacunas.</td></tr>
+      <tr><th>Solapa y contraportada</th><td>Un mensaje breve de inclusión, y la fuente de la información (por ejemplo, la Cartilla Nacional de Salud o el centro de salud de tu comunidad).</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">Este tríptico es informativo. Si tienes una duda de salud concreta, la respuesta siempre es consultar al personal de salud.</div>
+</section>
+
+<section class="card" id="s5">
+  <h2>5 · Tipografía accesible</h2>
+  <p class="lead">Un tríptico que no se lee no sirve. Prueba combinaciones de color y tamaño, y mira si cumplen con el contraste mínimo recomendado (4.5 : 1 para texto normal).</p>
+  <div class="lab">
+    <div>
+      <div class="grid2" style="gap:10px">
+        <div><label class="f" for="cFg">Color de la letra</label><input type="color" id="cFg" value="#1b2333"></div>
+        <div><label class="f" for="cBg">Color del fondo</label><input type="color" id="cBg" value="#ffffff"></div>
+      </div>
+      <label class="f" for="cSz" style="margin-top:12px">Tamaño del texto: <b id="cSzV">12</b> pt</label>
+      <input type="range" id="cSz" min="8" max="24" value="12">
+      <label class="f" for="cFont" style="margin-top:12px">Fuente</label>
+      <select id="cFont">
+        <option value="Calibri, Carlito, Arial, sans-serif">Calibri (sin serifas)</option>
+        <option value="Arial, Helvetica, sans-serif">Arial (sin serifas)</option>
+        <option value="Verdana, Geneva, sans-serif">Verdana (sin serifas)</option>
+        <option value="'Times New Roman', Times, serif">Times New Roman (con serifas)</option>
+        <option value="'Brush Script MT', cursive">Script decorativa (no recomendada)</option>
+      </select>
+      <p style="margin:14px 0 6px"><span class="ratio ok" id="cRatio">—</span></p>
+      <p class="fb2" id="cMsg"></p>
+      <p><button class="btn ghost" id="cGood">Probar combinación recomendada</button> <button class="btn ghost" id="cBad">Probar combinación mala</button></p>
+    </div>
+    <div class="sample" id="cSample">
+      <div style="font-weight:700;font-size:1.5em;line-height:1.2">Lavado de manos</div>
+      <p style="margin:.6em 0 0">Lávate las manos con agua y jabón antes de cargar o alimentar al bebé. Es un cuidado sencillo que protege a toda la familia.</p>
+    </div>
+  </div>
+  <h3>Reglas para tu tríptico</h3>
+  <ul>
+    <li>Usa máximo dos fuentes, de preferencia sin serifas (Calibri, Arial o Verdana).</li>
+    <li>Texto del cuerpo de 11 pt o más; títulos más grandes que el texto.</li>
+    <li>Contraste suficiente entre letra y fondo. Evita letra clara sobre fondo claro o sobre imágenes.</li>
+    <li>No escribas párrafos completos en mayúsculas ni subrayes lo que no es un enlace.</li>
+    <li>Espaciado entre líneas de 1.15 y párrafos separados con aire.</li>
+  </ul>
+</section>
+
+<section class="card" id="s6">
+  <h2>6 · Imágenes de familias diversas</h2>
+  <p class="lead">Las imágenes también comunican inclusión. Elige fotos de uso libre en las que se vean familias distintas.</p>
+  <ul>
+    <li>Busca en bancos con licencia de uso libre, como Pexels, Unsplash, Pixabay o Wikimedia Commons. Revisa siempre la licencia de cada imagen.</li>
+    <li>Procura mostrar distintas formas de familia, edades, personas con discapacidad y diferentes tonos de piel.</li>
+    <li>Evita imágenes que repitan un solo modelo de familia.</li>
+  </ul>
+  <h3>Cómo ponerlas en Word</h3>
+  <ol class="steps">
+    <li><span class="menu">Insertar → Imágenes → Este dispositivo</span> y elige la imagen.</li>
+    <li>Con la imagen seleccionada, abre <span class="menu">Formato de imagen → Ajustar texto → Cuadrado</span> para moverla dentro del panel.</li>
+    <li>Reduce el tamaño desde una esquina, para no deformarla, hasta que quepa en la columna.</li>
+    <li><span class="menu">Clic derecho → Ver texto alternativo</span> y escribe una frase corta que describa la imagen, para que la lean los lectores de pantalla.</li>
+  </ol>
+</section>
+
+<section class="card" id="s7">
+  <h2>7 · Cierre de la sesión 2 y guardado</h2>
+  <ol class="steps">
+    <li>Revisa la ortografía con <kbd>F7</kbd> (o <span class="menu">Revisar → Ortografía y gramática</span>) y lee tu tríptico en voz alta.</li>
+    <li>Pide una revisión individual de la estructura a tu profesor.</li>
+    <li>Guarda el archivo con este nombre: <code>Triptico_Lactante_Apellido_304.docx</code>.</li>
+    <li>Guárdalo en tu USB y deja una copia en tu cuaderno de evidencias digital.</li>
+  </ol>
+</section>
+
+<section class="card" id="s8">
+  <h2>8 · Lista de cotejo del tríptico</h2>
+  <p class="lead">Marca lo que ya cumple tu tríptico. Tu profesor usará esta misma lista para revisarlo.</p>
+  <div id="lista"></div>
+  <h3>Mi registro</h3>
+  <div class="grid2">
+    <div><label class="f" for="nom">Nombre completo</label><input type="text" id="nom" autocomplete="name"></div>
+    <div><label class="f" for="grp">Grupo</label><input type="text" id="grp" value="304"></div>
+  </div>
+  <p style="margin-top:14px"><label><input type="checkbox" id="circ"> Participé en el círculo de diálogo sobre la inclusión de todas las familias.</label></p>
+  <p><button class="btn" id="dl">⬇ Descargar mi lista de cotejo</button></p>
+  <p class="fb2" id="dlMsg"></p>
+</section>
+
+<section class="card" id="s9">
+  <h2>9 · Rúbrica de diseño de tríptico</h2>
+  <p class="lead">Evaluación formativa: sirve para saber qué ya lograste y qué puedes mejorar.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Criterio</th><th>Logrado</th><th>En proceso</th><th>Por mejorar</th></tr></thead>
+    <tbody>
+      <tr><th>Estructura en Word</th><td>Hoja horizontal, tres columnas y dos caras bien distribuidas, con saltos de columna.</td><td>Tiene columnas, pero algún panel está desacomodado.</td><td>No usa columnas o el contenido se desordena.</td></tr>
+      <tr><th>Contenido y lenguaje incluyente</th><td>Mensaje claro y breve en todos los paneles; no supone quién cuida.</td><td>Mensaje claro, con algunas frases que suponen roles.</td><td>Contenido incompleto o excluyente.</td></tr>
+      <tr><th>Tipografía y legibilidad</th><td>Máximo dos fuentes, cuerpo de 11 pt o más y buen contraste.</td><td>Se lee, pero hay tamaños o colores poco cómodos.</td><td>Difícil de leer.</td></tr>
+      <tr><th>Imágenes y diversidad</th><td>Tres o más imágenes de uso libre, de familias diversas, ajustadas y con texto alternativo.</td><td>Menos imágenes o poca diversidad.</td><td>Sin imágenes o sin permiso de uso.</td></tr>
+      <tr><th>Revisión y entrega</th><td>Sin errores ortográficos y guardado con el nombre pedido.</td><td>Algunos errores o nombre distinto.</td><td>Sin revisar o sin guardar.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+let tT;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tT);tT=setTimeout(()=>t.classList.remove("on"),2600);}
+
+/* ===== diagrama del tríptico ===== */
+const PN={
+ solapa:["Solapa","Es el panel que se dobla hacia adentro. Ponle un mensaje breve de inclusión, por ejemplo: «Cuidar con cariño es cosa de todas las familias»."],
+ contra:["Contraportada","Cierra el tríptico. Pon la fuente de la información, un recordatorio de consultar al personal de salud y los datos de tu grupo."],
+ portada:["Portada","Lleva el título «Cuidados del lactante para todas las familias» en letra grande y una imagen de una familia. Es lo primero que se ve."],
+ i1:["Panel 1 · presentación","Explica para quién es el tríptico y por qué es para todas las familias. Usa lenguaje incluyente."],
+ i2:["Panel 2 · cuidados","Aquí van los cuidados diarios: lavado de manos, alimentación, baño, sueño y juego con el bebé. Usa frases cortas."],
+ i3:["Panel 3 · señales y apoyo","Escribe las señales por las que se debe consultar al personal de salud y recuerda las consultas y vacunas."]
+};
+$$(".pn").forEach(b=>b.addEventListener("click",()=>{
+  $$(".pn").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  const d=PN[b.dataset.p];$("#pnInfo").innerHTML="<b>"+esc(d[0])+".</b> "+esc(d[1]);
+}));
+
+/* ===== lenguaje incluyente ===== */
+const QZ=[
+ {q:"¿Cuál es la mejor forma de escribir esta idea? «Las madres deben bañar al bebé con agua tibia.»",
+  o:["Las mamás tienen que bañar al bebé con agua tibia.","Quien cuida al bebé puede bañarlo con agua tibia.","Las madres deben bañar a su hijo con agua tibia."],c:1,
+  e:"Se usa «quien cuida», que incluye a mamás, papás, abuelas, abuelos y otras personas. Así no se supone que solo las madres cuidan."},
+ {q:"Elige la frase más incluyente para hablar de quién cuida al lactante.",
+  o:["Papá y mamá son los responsables del lactante.","Los padres de familia son los responsables.","Las personas cuidadoras (madre, padre, abuela, abuelo, tutora, tutor u otras) acompañan al bebé."],c:2,
+  e:"No todas las familias tienen papá y mamá. Nombrar a las personas cuidadoras reconoce más formas de familia."},
+ {q:"¿Cuál frase evita suponer que hay una familia «normal»?",
+  o:["La familia normal tiene papá, mamá e hijos.","Hay familias de muchas formas: con una mamá, un papá, dos mamás, dos papás, abuelos, tíos u otras personas cuidadoras.","Las familias que no son completas necesitan más ayuda."],c:1,
+  e:"Decir «normal» excluye a quienes no encajan en un solo modelo. Es mejor describir la diversidad sin juzgar."},
+ {q:"¿Cuál es la mejor manera de invitar a consultar por llanto excesivo?",
+  o:["Si tu hijo llora mucho, llévalo con el doctor.","Si el bebé llora de forma inusual o no se calma, consulta al personal de salud.","Si el niño llora, la madre debe ir al médico."],c:1,
+  e:"«El bebé» incluye a cualquier lactante, «personal de salud» incluye a médicas, médicos, enfermeras y enfermeros, y no se asigna la tarea a una sola persona."},
+ {q:"Para dirigirte a quien lee el tríptico, ¿qué opción es mejor?",
+  o:["Estimados padres:","Estimadas familias:","Querida mamá:"],c:1,
+  e:"«Familias» es una palabra colectiva que incluye a todas las personas que cuidan al bebé."}
+];
+const ans={};
+QZ.forEach((it,i)=>{
+  const d=document.createElement("div");d.className="q";
+  const ord=it.o.map((_,j)=>j).sort(()=>Math.random()-.5);
+  d.innerHTML="<p>"+(i+1)+". "+esc(it.q)+"</p>"+ord.map(j=>'<label class="opt" data-j="'+j+'"><input type="radio" name="q'+i+'" value="'+j+'"><span>'+esc(it.o[j])+"</span></label>").join("")+'<div class="fb" id="fb'+i+'"></div>';
+  $("#quiz").appendChild(d);
+  $$("input",d).forEach(r=>r.addEventListener("change",()=>{
+    if(ans[i]!==undefined)return;
+    const j=+r.value;ans[i]=j;
+    $$(".opt",d).forEach(op=>{const k=+op.dataset.j;op.classList.toggle("ok",k===it.c);if(k===j&&k!==it.c)op.classList.add("bad");$("input",op).disabled=true;});
+    $("#fb"+i).textContent=(j===it.c?"✔ Correcto. ":"✘ Casi. ")+it.e;
+    const ok=QZ.reduce((a,x,n)=>a+(ans[n]===x.c?1:0),0);
+    $("#quizScore").textContent="Aciertos: "+ok+" / "+QZ.length;
+  }));
+});
+
+/* ===== contraste ===== */
+function lum(hex){const c=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255).map(v=>v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function ratio(a,b){const A=lum(a),B=lum(b);return (Math.max(A,B)+.05)/(Math.min(A,B)+.05);}
+function upd(){
+  const fg=$("#cFg").value,bg=$("#cBg").value,sz=+$("#cSz").value,fo=$("#cFont").value;
+  const s=$("#cSample");s.style.color=fg;s.style.background=bg;s.style.fontSize=sz+"pt";s.style.fontFamily=fo;
+  $("#cSzV").textContent=sz;
+  const r=ratio(fg,bg),need=sz>=18?3:4.5,pass=r>=need;
+  const el=$("#cRatio");el.textContent=r.toFixed(1)+" : 1 · "+(pass?"cumple":"no cumple");el.className="ratio "+(pass?"ok":"bad");
+  const tips=[];
+  if(!pass)tips.push("Aumenta la diferencia entre la letra y el fondo.");
+  if(sz<11)tips.push("Para el cuerpo del tríptico usa 11 pt o más.");
+  if(/Brush|cursive/.test(fo))tips.push("Las fuentes decorativas se leen con dificultad.");
+  $("#cMsg").textContent=tips.length?tips.join(" "):"Buena combinación para el texto de tu tríptico.";
+}
+["cFg","cBg","cSz","cFont"].forEach(id=>$("#"+id).addEventListener("input",upd));
+$("#cGood").addEventListener("click",()=>{$("#cFg").value="#1b2333";$("#cBg").value="#ffffff";$("#cSz").value=12;$("#cFont").selectedIndex=0;upd();});
+$("#cBad").addEventListener("click",()=>{$("#cFg").value="#9ad0f5";$("#cBg").value="#ffffff";$("#cSz").value=9;$("#cFont").selectedIndex=4;upd();});
+upd();
+
+/* ===== lista de cotejo ===== */
+const LISTA=[
+ ["Estructura en Word",["La hoja está en orientación horizontal.","Uso tres columnas, una por panel.","Distribuí la cara externa (solapa, contraportada y portada) y la cara interna (tres paneles).","Cambié de columna con salto de columna, sin presionar Enter muchas veces.","Los márgenes permiten imprimir sin que se recorte el texto."]],
+ ["Contenido y lenguaje incluyente",["El título es «Cuidados del lactante para todas las familias».","Cada panel tiene un título y texto informativo.","Usé lenguaje incluyente: no supuse quién cuida al bebé.","Las frases son cortas y claras.","Anoté la fuente de la información."]],
+ ["Tipografía y legibilidad",["Usé máximo dos fuentes.","El texto del cuerpo mide 11 pt o más.","Los títulos son más grandes que el texto.","Hay buen contraste entre la letra y el fondo.","No escribí párrafos completos en mayúsculas."]],
+ ["Imágenes y diversidad",["Puse al menos tres imágenes de familias diversas.","Las imágenes son de uso libre.","Ajusté cada imagen al panel con ajuste de texto.","Escribí texto alternativo en mis imágenes."]],
+ ["Revisión y entrega",["Revisé la ortografía con F7.","Guardé el archivo como Triptico_Lactante_Apellido_304.docx.","Guardé el archivo en mi USB."]]
+];
+let N=0;const box=$("#lista");
+LISTA.forEach(([g,items])=>{
+  const h=document.createElement("div");h.className="grp";h.textContent=g;box.appendChild(h);
+  const ul=document.createElement("ul");ul.className="checks";
+  items.forEach(t=>{N++;const li=document.createElement("li");const id="k"+N;li.innerHTML='<input type="checkbox" id="'+id+'"><label for="'+id+'">'+esc(t)+"</label>";ul.appendChild(li);});
+  box.appendChild(ul);
+});
+function prog(){const n=$$("#lista input:checked").length;$("#progTxt").textContent="Avance de tu lista de cotejo: "+n+" de "+N;$("#progPct").textContent=Math.round(n/N*100)+" %";$("#progBar").style.width=(n/N*100)+"%";}
+$$("#lista input").forEach(i=>i.addEventListener("change",prog));prog();
+
+$("#dl").addEventListener("click",()=>{
+  const nom=$("#nom").value.trim(),grp=$("#grp").value.trim();
+  if(!nom){$("#dlMsg").textContent="Escribe tu nombre completo antes de descargar.";$("#nom").focus();return;}
+  let rows="";
+  LISTA.forEach(([g,items])=>{
+    rows+='<tr><th colspan="2">'+esc(g)+"</th></tr>";
+    items.forEach(t=>{const id=[...$$("#lista label")].find(l=>l.textContent===t).htmlFor;const ok=$("#"+id).checked;rows+="<tr><td>"+esc(t)+'</td><td class="'+(ok?"ok":"no")+'">'+(ok?"Sí":"Pendiente")+"</td></tr>";});
+  });
+  const n=$$("#lista input:checked").length;
+  const html='<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Lista de cotejo · '+esc(nom)+'</title><style>body{font:16px/1.5 system-ui,sans-serif;max-width:760px;margin:28px auto;padding:0 16px;color:#1b2333}h1{color:#12355b;font-size:1.4rem}table{border-collapse:collapse;width:100%}td,th{border:1px solid #d9dfea;padding:6px 10px;text-align:left}th{background:#eef3fa}.ok{color:#1d7a4a;font-weight:700}.no{color:#b3372f}</style></head><body><h1>Lista de cotejo · Tríptico «Cuidados del lactante para todas las familias»</h1><p><b>Alumna o alumno:</b> '+esc(nom)+"<br><b>Grupo:</b> "+esc(grp||"—")+"<br><b>Fecha:</b> "+esc(new Date().toLocaleString("es-MX"))+"</p><p><b>Avance:</b> "+n+" de "+N+" puntos cumplidos.</p><table>"+rows+"</table><h2>Círculo de diálogo</h2><p>Participación: "+($("#circ").checked?"Sí":"Pendiente")+"</p><p>Mi idea: "+(esc($("#idea").value)||"—")+"</p><p>Lenguaje incluyente: "+QZ.reduce((a,x,i)=>a+(ans[i]===x.c?1:0),0)+" de "+QZ.length+" aciertos.</p></body></html>";
+  const blob=new Blob([html],{type:"text/html;charset=utf-8"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="lista_cotejo_triptico_"+(nom.replace(/[^\wÁÉÍÓÚáéíóúñÑ-]+/g,"_"))+".html";document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);
+  $("#dlMsg").textContent="Archivo generado. Revisa tu carpeta de descargas.";
+});
+</script>
+</body>
+</html>
