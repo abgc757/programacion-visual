@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Práctica · Folleto turístico en Word · Informática Aplicada I</title>
+<style>
+:root{
+  --bg:#f5f7fb; --panel:#ffffff; --ink:#1b2333; --muted:#5b667a; --line:#d9dfea;
+  --brand:#12355b; --brand-2:#1d5a94; --accent:#c8963e; --ok:#1d7a4a; --bad:#b3372f;
+  --okbg:#e6f4ec; --badbg:#fbeae8; --soft:#eef3fa; --code:#0f1b2d; --codeink:#e6edf7; --shadow:0 1px 2px rgba(15,27,45,.06),0 4px 14px rgba(15,27,45,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0d1420; --panel:#151f30; --ink:#e7edf7; --muted:#9aa8bf; --line:#27344b;
+    --brand:#7fb3ec; --brand-2:#9cc6f3; --accent:#e0b060; --ok:#5fcf98; --bad:#f08a80;
+    --okbg:#12301f; --badbg:#3a1c1a; --soft:#1a2740; --code:#0a111d; --shadow:none;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:18px 18px 90px}
+header.hero{background:linear-gradient(135deg,#12355b,#1d5a94);color:#fff;border-radius:16px;padding:28px 28px 24px;box-shadow:var(--shadow)}
+.tag{display:inline-block;background:rgba(255,255,255,.16);border-radius:99px;padding:3px 12px;font-size:.8rem;letter-spacing:.04em}
+header.hero h1{margin:12px 0 6px;font-size:clamp(1.45rem,3.4vw,2.1rem);line-height:1.2}
+header.hero p{margin:0;opacity:.94;max-width:64ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;font-size:.9rem}
+.progress{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 8px;margin-top:6px}
+.progress .row{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:5px}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand-2),var(--accent));transition:width .35s}
+nav.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+nav.tabs a{padding:6px 14px;border:1px solid var(--line);border-radius:99px;background:var(--panel);color:var(--brand-2);text-decoration:none;font-size:.9rem;font-weight:600}
+nav.tabs a:hover{background:var(--soft)}
+section.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:20px;box-shadow:var(--shadow);scroll-margin-top:60px}
+section.card>h2{margin:0 0 4px;font-size:1.3rem}
+.lead{margin:0 0 14px;color:var(--muted)}
+h3{font-size:1.02rem;margin:20px 0 8px}
+.chip{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:3px 12px;font-size:.85rem;margin:2px 4px 2px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid2>*{min-width:0}
+label.f{display:block;font-size:.85rem;color:var(--muted);margin-bottom:4px}
+input[type=text],textarea,select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:inherit}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible,summary:focus-visible{outline:2px solid var(--brand-2);outline-offset:1px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--brand);color:#fff;border:0;padding:9px 16px;border-radius:8px;font-weight:600}
+@media (prefers-color-scheme: dark){.btn{color:#0d1420}}
+.btn.ghost{background:transparent;color:var(--brand-2);border:1px solid var(--line)}
+.btn.sm{padding:4px 12px;font-size:.85rem}
+.btn:hover{filter:brightness(1.08)}
+.note{border-left:4px solid var(--accent);background:color-mix(in srgb,var(--accent) 13%,transparent);padding:10px 14px;border-radius:0 8px 8px 0;margin:14px 0;font-size:.95rem}
+.sess{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sess>div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--soft)}
+.sess b.d{display:block;color:var(--brand-2);font-size:.85rem;letter-spacing:.03em;text-transform:uppercase}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+ol.steps li{counter-increment:s;position:relative;padding:8px 0 8px 42px;border-bottom:1px dashed var(--line)}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:8px;width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:.85rem;font-weight:700}
+@media (prefers-color-scheme: dark){ol.steps li::before{color:#0d1420}}
+kbd{background:var(--soft);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;font:.85em ui-monospace,Consolas,monospace}
+code{overflow-wrap:anywhere;background:var(--soft);padding:1px 6px;border-radius:5px;font:.9em ui-monospace,Consolas,monospace}
+.codebox{position:relative;margin:10px 0}
+.codebox .bar2{display:flex;justify-content:space-between;align-items:center;background:#1c2b44;color:#cfe0f7;border-radius:10px 10px 0 0;padding:6px 10px;font-size:.82rem}
+.codebox pre{margin:0;background:var(--code);color:var(--codeink);padding:14px;border-radius:0 0 10px 10px;overflow-x:auto;font:.86rem/1.5 ui-monospace,Consolas,monospace;tab-size:4}
+.codebox .btn.ghost{color:#cfe0f7;border-color:#3b5073}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+.tw{overflow-x:auto}
+.checks{list-style:none;padding:0;margin:0}
+.checks li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--line)}
+.checks input{flex:none;margin-top:5px;width:18px;height:18px;accent-color:var(--ok)}
+.grp{margin:16px 0 4px;font-weight:700;color:var(--brand-2);font-size:.92rem}
+.q{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+.q p{margin:0 0 8px;font-weight:600}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:6px 8px;border-radius:8px;cursor:pointer}
+.opt:hover{background:var(--soft)}
+.opt.ok{background:var(--okbg)} .opt.bad{background:var(--badbg)}
+.opt input{margin-top:6px}
+.fb{margin-top:6px;font-size:.9rem;color:var(--muted)}
+.scorebox{display:inline-block;padding:6px 14px;border-radius:99px;background:var(--soft);font-weight:600}
+.lab{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.sample{border:1px solid var(--line);border-radius:12px;padding:18px;min-height:130px}
+.ratio{display:inline-block;font-weight:700;padding:3px 12px;border-radius:99px}
+.ratio.ok{background:var(--okbg);color:var(--ok)} .ratio.bad{background:var(--badbg);color:var(--bad)}
+input[type=color]{width:100%;height:38px;border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:2px}
+details{border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:10px 0;background:var(--soft)}
+summary{cursor:pointer;font-weight:600}
+@media (max-width:720px){
+  .grid2,.lab,.sess{grid-template-columns:1fr}
+  section.card{padding:16px}
+  header.hero{padding:22px 18px}
+}
+.panels{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--brand);border-radius:8px;overflow:hidden;background:var(--panel);margin:10px 0}
+.pn{min-height:110px;padding:8px;border:0;border-right:2px dashed var(--line);background:transparent;color:var(--ink);text-align:center;font-size:.85rem;display:flex;flex-direction:column;justify-content:center;gap:3px}
+.pn:last-child{border-right:0}.pn b{font-size:.92rem}.pn:hover{background:var(--soft)}
+.pn[aria-pressed=true]{background:color-mix(in srgb,var(--accent) 22%,transparent);outline:2px solid var(--accent);outline-offset:-2px}
+.fname{font:600 .95rem ui-monospace,Consolas,monospace;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:6px 0;overflow-wrap:anywhere}
+.fname.bad{border-color:var(--bad)}
+@media (max-width:720px){.panels{grid-template-columns:1fr}.pn{border-right:0;border-bottom:2px dashed var(--line)}}
+</style></head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">Informática Aplicada I · Técnico en Turismo · BT_TUR_3</span>
+  <h1>Práctica interactiva: diseña tu folleto turístico en Word</h1>
+  <p>Planea, diseña y entrega un folleto de un destino turístico. Tu producto final son <b>dos archivos</b>: el folleto en <b>.docx</b> y su versión en <b>PDF</b>.</p>
+  <div class="meta"><span>Prof. Abraham Gómez Contreras</span><span>CECUM · Bachillerato Tecnológico</span><span>Producto: folleto .docx + .pdf</span></div>
+</header>
+
+<div class="progress" role="status" aria-live="polite">
+  <div class="row"><span>Tu avance</span><span id="pct">0 %</span></div>
+  <div class="bar"><i id="barfill"></i></div>
+</div>
+<nav class="tabs" aria-label="Secciones">
+  <a href="#s0">Inicio</a><a href="#s1">1 · Planea</a><a href="#s2">2 · Estructura</a><a href="#s3">3 · Pasos en Word</a><a href="#s4">4 · Diseño</a><a href="#s5">5 · Guarda y exporta</a><a href="#s6">Repaso</a><a href="#s7">Lista de cotejo</a><a href="#s8">Entrega</a><a href="#s9">Rúbrica</a>
+</nav>
+
+<section class="card" id="s0">
+  <h2>Antes de empezar</h2>
+  <p class="lead">Datos para tu evidencia.</p>
+  <div class="grid2">
+    <div><label class="f" for="alNombre">Nombre completo</label><input type="text" id="alNombre" autocomplete="off"></div>
+    <div><label class="f" for="alMat">Matrícula</label><input type="text" id="alMat" autocomplete="off"></div>
+    <div><label class="f" for="alGrupo">Grupo</label><input type="text" id="alGrupo" value="BT_TUR_3"></div>
+  </div>
+  <h3>Qué vas a lograr</h3>
+  <ul>
+    <li>Planear un folleto: destino, público y mensaje.</li>
+    <li>Armar en Word un folleto de una hoja horizontal con columnas, imágenes, cuadros de texto y una tabla.</li>
+    <li>Aplicar criterios de diseño legible: jerarquía, contraste e imágenes bien colocadas.</li>
+    <li>Guardar el trabajo en <b>.docx</b> y exportarlo a <b>PDF</b> con un nombre correcto.</li>
+  </ul>
+  <div class="note"><b>Producto que entregas en AulaEscolar:</b> <code>apellido_nombre_folleto.docx</code> y <code>apellido_nombre_folleto.pdf</code>, más el archivo de evidencia que genera esta página. En la sección 5 hay un generador de nombres.</div>
+  <h3>Requisitos</h3>
+  <p>Microsoft Word (o Word en línea / LibreOffice Writer, con pequeñas diferencias en los menús) e imágenes propias o libres de derechos (por ejemplo, tus propias fotos o bancos de imágenes gratuitos).</p>
+</section>
+
+<section class="card" id="s1">
+  <h2>1 · Planea tu folleto</h2>
+  <p class="lead">Un buen folleto empieza antes de abrir Word. Responde estas preguntas.</p>
+  <div class="grid2">
+    <div><label class="f" for="pDest">Destino o atractivo (lugar, ruta, festividad, servicio)</label><input type="text" id="pDest" placeholder="Ejemplo: Teotihuacán, Estado de México"></div>
+    <div><label class="f" for="pPub">¿A quién va dirigido? (público)</label><input type="text" id="pPub" placeholder="Ejemplo: familias con niños, turistas extranjeros"></div>
+  </div>
+  <label class="f" for="pMsg" style="margin-top:12px">Mensaje principal en una frase (será tu título o lema)</label>
+  <input type="text" id="pMsg" placeholder="Ejemplo: Camina entre pirámides a una hora de la ciudad">
+  <label class="f" for="pInfo" style="margin-top:12px">Información práctica que necesita el visitante (horarios, costo, cómo llegar, contacto)</label>
+  <textarea id="pInfo"></textarea>
+  <label class="f" for="pAtr" style="margin-top:12px">Tres atractivos o razones para visitarlo</label>
+  <textarea id="pAtr"></textarea>
+  <div class="note"><b>Tip:</b> investiga en fuentes confiables (sitios oficiales de turismo, INAH, secretarías de turismo) y anota la fuente. Verifica que horarios y costos estén vigentes.</div>
+</section>
+
+<section class="card" id="s2">
+  <h2>2 · Elige la estructura</h2>
+  <p class="lead">El tríptico es el formato clásico: una hoja carta en horizontal doblada en tres partes. Toca cada panel para ver qué contiene.</p>
+  <div class="panels" role="group" aria-label="Paneles del tríptico">
+    <button class="pn" type="button" data-i="0"><b>Panel interior izquierdo</b>Atractivos</button>
+    <button class="pn" type="button" data-i="1"><b>Panel interior central</b>Información práctica</button>
+    <button class="pn" type="button" data-i="2"><b>Panel interior derecho</b>Tarifas, servicios y mapa</button>
+  </div>
+  <div class="panels" role="group" aria-label="Paneles exteriores">
+    <button class="pn" type="button" data-i="3"><b>Solapa (dobla hacia adentro)</b>Dato curioso o mensaje</button>
+    <button class="pn" type="button" data-i="4"><b>Contraportada</b>Contacto y redes</button>
+    <button class="pn" type="button" data-i="5"><b>Portada</b>Título, imagen y lema</button>
+  </div>
+  <div class="note" id="pnInfo" aria-live="polite">Toca un panel para ver su contenido y un consejo de diseño.</div>
+  <p>Cuando termines de explorarlo, marca: <label><input type="checkbox" id="exp"> Revisé los seis paneles</label></p>
+</section>
+
+<section class="card" id="s3">
+  <h2>3 · Arma el folleto en Word</h2>
+  <p class="lead">Sigue los pasos en orden. Marca cada paso cuando lo hayas hecho en tu documento.</p>
+  <ol class="steps" id="stepList"></ol>
+  <h3>¿Dónde está cada comando?</h3>
+  <p>Une el comando con la ficha de Word donde lo encuentras (menú desplegable por fila).</p>
+  <div class="tw"><table id="matchT"><thead><tr><th>Comando</th><th>Ficha</th><th></th></tr></thead><tbody></tbody></table></div>
+  <p><span class="scorebox" id="matchScore"></span></p>
+</section>
+
+<section class="card" id="s4">
+  <h2>4 · Revisa el diseño</h2>
+  <p class="lead">Un folleto bonito pero ilegible no sirve. Comprueba el contraste entre tu texto y tu fondo.</p>
+  <div class="lab">
+    <div>
+      <label class="f" for="cFg">Color del texto</label><input type="color" id="cFg" value="#1b2333">
+      <label class="f" for="cBg" style="margin-top:10px">Color de fondo</label><input type="color" id="cBg" value="#ffffff">
+      <label class="f" for="cSz" style="margin-top:10px">Tamaño de fuente: <b id="cSzV">11</b> pt</label><input type="range" id="cSz" min="8" max="24" value="11" style="width:100%">
+      <p style="margin:12px 0 0"><span class="ratio ok" id="cRatio">—</span></p>
+    </div>
+    <div class="sample" id="cSample"><b>Pirámides de Teotihuacán</b><br>Abierto todos los días de 9:00 a 17:00. Entrada general: consulta tarifa vigente.</div>
+  </div>
+  <p>Regla práctica: contraste de al menos <b>4.5 : 1</b> para texto normal. Cuerpo de texto de <b>10 a 12 pt</b>, títulos de <b>20 pt</b> o más, máximo <b>dos tipos de letra</b>.</p>
+  <h3>Verifica tu folleto</h3>
+  <p><label><input type="checkbox" id="dsg1"> Probé el contraste de mi color de texto y fondo principal</label></p>
+</section>
+
+<section class="card" id="s5">
+  <h2>5 · Guarda en .docx y exporta a PDF</h2>
+  <p class="lead">Tu producto son dos archivos con el mismo nombre y distinta extensión.</p>
+  <h3>Generador de nombres</h3>
+  <div class="grid2">
+    <div><label class="f" for="nAp">Apellido</label><input type="text" id="nAp" autocomplete="off"></div>
+    <div><label class="f" for="nNom">Nombre</label><input type="text" id="nNom" autocomplete="off"></div>
+  </div>
+  <div class="fname" id="nOut1">—</div>
+  <div class="fname" id="nOut2">—</div>
+  <p class="lead" style="margin-top:6px">Sin acentos, sin espacios (usa guion bajo) y en minúsculas.</p>
+  <h3>Pasos</h3>
+  <ol class="steps">
+    <li><b>Guarda el .docx:</b> <kbd>Archivo</kbd> → <kbd>Guardar como</kbd> → tipo «Documento de Word (*.docx)» y el nombre del generador.</li>
+    <li><b>Exporta a PDF:</b> <kbd>Archivo</kbd> → <kbd>Exportar</kbd> → <kbd>Crear documento PDF/XPS</kbd> (o <kbd>Guardar como</kbd> → tipo «PDF»).</li>
+    <li><b>Revisa el PDF:</b> ábrelo y comprueba que se vea igual que en Word (imágenes, columnas, tabla y las dos páginas).</li>
+    <li><b>Compara:</b> debe haber dos archivos: uno <code>.docx</code> y uno <code>.pdf</code>, con el mismo nombre.</li>
+    <li><b>Entrega:</b> sube los dos archivos y tu archivo de evidencia en la actividad de AulaEscolar.</li>
+  </ol>
+  <div class="note"><b>Si el PDF sale distinto:</b> revisa que las fuentes estén instaladas, que las imágenes tengan ajuste de texto y que no haya cuadros de texto fuera del margen.</div>
+</section>
+
+<section class="card" id="s6">
+  <h2>Repaso rápido</h2>
+  <p class="lead">Cinco preguntas. No se pueden cambiar las respuestas.</p>
+  <div id="quizBox"></div>
+  <p><span class="scorebox" id="quizScore"></span></p>
+</section>
+
+<section class="card" id="s7">
+  <h2>Lista de cotejo del folleto</h2>
+  <p class="lead">Marca solo lo que verificaste en tu archivo.</p>
+  <ul class="checks" id="lc"></ul>
+</section>
+
+<section class="card" id="s8">
+  <h2>Genera tu evidencia y entrega</h2>
+  <ol class="steps">
+    <li>Completa tu nombre y matrícula arriba.</li>
+    <li>Pulsa el botón y guarda el archivo de evidencia.</li>
+    <li>En AulaEscolar sube: <b>el folleto .docx</b>, <b>el folleto .pdf</b> y la evidencia.</li>
+  </ol>
+  <p><button class="btn" id="dlEv">Descargar evidencia (.html)</button> <span id="evMsg" role="status"></span></p>
+</section>
+
+<section class="card" id="s9">
+  <h2>Rúbrica</h2>
+  <p class="lead">Máximo 20 puntos. Evaluación formativa del producto.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Criterio</th><th>Excelente (4)</th><th>Bueno (3)</th><th>En proceso (2)</th><th>Inicial (1)</th></tr></thead>
+    <tbody>
+      <tr><td><b>Contenido</b></td><td>Información veraz, completa y útil para el visitante, con fuente</td><td>Completa; falta un dato o la fuente</td><td>Incompleta o poco clara</td><td>Sin información práctica</td></tr>
+      <tr><td><b>Estructura</b></td><td>Seis paneles correctos con orden de lectura claro</td><td>Estructura correcta con un panel confuso</td><td>Paneles mal ordenados</td><td>Sin estructura de folleto</td></tr>
+      <tr><td><b>Diseño y legibilidad</b></td><td>Jerarquía, contraste ≥ 4.5:1, ≤ 2 fuentes, imágenes bien ajustadas</td><td>Cumple tres de cuatro</td><td>Cumple uno o dos</td><td>Ilegible o desordenado</td></tr>
+      <tr><td><b>Herramientas de Word</b></td><td>Columnas, saltos, cuadro de texto, imagen con ajuste y tabla bien usados</td><td>Usa la mayoría</td><td>Usa pocas, acomoda con espacios</td><td>Todo escrito en un solo bloque</td></tr>
+      <tr><td><b>Entrega</b></td><td>.docx y .pdf con nombre correcto e idénticos</td><td>Ambos; nombre con falla</td><td>Falta uno de los dos o difieren</td><td>No entrega</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function download(name,text,type){const b=new Blob([text],{type});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
+
+/* paneles */
+const PN=[
+["Atractivos","Presenta 3 atractivos con un subtítulo corto y una foto cada uno. Texto breve: una o dos frases.","Usa viñetas o párrafos cortos; evita bloques largos."],
+["Información práctica","Horarios, costos, cómo llegar y recomendaciones. Es el panel que el visitante más consulta.","Pon los datos en una tabla o lista clara con negritas."],
+["Tarifas, servicios y mapa","Tabla de tarifas o paquetes, servicios (guía, estacionamiento, accesibilidad) y un mapa o croquis.","Una tabla de 2 a 3 columnas es suficiente."],
+["Solapa","Es lo primero que se ve al abrir. Un dato curioso, una frase o una invitación.","Un texto corto en cuadro de texto con color de fondo."],
+["Contraportada","Contacto: teléfono, correo, sitio web, redes, dirección y logotipo. Puedes poner la fuente de la información.","Alinea los datos y deja espacio en blanco."],
+["Portada","Título del destino, imagen principal y lema. Debe atraer en 3 segundos.","Imagen grande, título de 28 pt o más y buen contraste."]];
+const qAns={};
+const seen=new Set();
+$$(".pn").forEach(b=>b.addEventListener("click",()=>{
+  $$(".pn").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");
+  const p=PN[+b.dataset.i];$("#pnInfo").innerHTML="<b>"+esc(p[0])+":</b> "+esc(p[1])+"<br><i>Diseño:</i> "+esc(p[2]);
+  seen.add(b.dataset.i);if(seen.size===6)$("#exp").checked=true;prog();
+}));
+
+/* pasos en Word */
+const STEPS=[
+["Página horizontal y márgenes","<b>Diseño</b> → Orientación → <b>Horizontal</b>. Márgenes → <b>Estrecho</b> (1.27 cm) para aprovechar la hoja carta."],
+["Tres columnas","<b>Diseño</b> → Columnas → <b>Tres</b>. Cada columna será un panel."],
+["Saltos de columna","Coloca el cursor al final de cada panel y usa <b>Diseño</b> → Saltos → <b>Columna</b> (o <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd>)."],
+["Estilos de título y texto","En <b>Inicio</b> usa los estilos <b>Título 1</b> y <b>Normal</b>. Define fuentes: una para títulos y otra para texto."],
+["Portada con cuadro de texto","<b>Insertar</b> → Cuadro de texto: título y lema sobre una imagen o con color de fondo."],
+["Imágenes con ajuste","<b>Insertar</b> → Imágenes. En <b>Formato de imagen</b> → Ajustar texto → <b>Cuadrado</b> o <b>Estrecho</b>. Agrega texto alternativo."],
+["Tabla de tarifas o servicios","<b>Insertar</b> → Tabla. Aplica un estilo de tabla y alinea los importes."],
+["Formas y color","<b>Insertar</b> → Formas para separadores o etiquetas. Usa la paleta de tu destino."],
+["Revisión","<b>Revisar</b> → Ortografía y gramática. Lee tu folleto completo imaginando al visitante."]
+];
+$("#stepList").innerHTML=STEPS.map((s,i)=>`<li><label><input type="checkbox" class="stp" id="st${i}"> <b>${esc(s[0])}.</b></label> <span>${s[1]}</span></li>`).join("");
+
+/* emparejar */
+const MT=[["Orientación horizontal","Diseño"],["Insertar cuadro de texto","Insertar"],["Estilo Título 1","Inicio"],["Ortografía y gramática","Revisar"],["Exportar a PDF","Archivo"]];
+const FICHAS=["Archivo","Inicio","Insertar","Diseño","Revisar","Vista"];
+$("#matchT tbody").innerHTML=MT.map((m,i)=>`<tr><td>${esc(m[0])}</td><td><select id="mt${i}" aria-label="Ficha para ${esc(m[0])}"><option value="">Elige…</option>${FICHAS.map(f=>`<option>${f}</option>`).join("")}</select></td><td id="mr${i}"></td></tr>`).join("");
+MT.forEach((m,i)=>$("#mt"+i).addEventListener("change",()=>{const ok=$("#mt"+i).value===m[1];$("#mr"+i).textContent=ok?"✔":"✘ Inténtalo de nuevo";$("#mr"+i).style.color=ok?"var(--ok)":"var(--bad)";updMatch();prog();}));
+function matchOk(){return MT.filter((m,i)=>$("#mt"+i).value===m[1]).length;}
+function updMatch(){$("#matchScore").textContent="Aciertos: "+matchOk()+" / "+MT.length;}updMatch();
+
+/* contraste */
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function lab(){const fg=$("#cFg").value,bg=$("#cBg").value,sz=$("#cSz").value;const a=lum(fg),b=lum(bg),r=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+  const s=$("#cSample");s.style.color=fg;s.style.background=bg;s.style.fontSize=(sz*1.3)+"px";$("#cSzV").textContent=sz;
+  const el=$("#cRatio");el.textContent=r.toFixed(2)+" : 1 · "+(r>=4.5?"cumple":"no cumple");el.className="ratio "+(r>=4.5?"ok":"bad");}
+["cFg","cBg","cSz"].forEach(id=>$("#"+id).addEventListener("input",lab));lab();
+
+/* nombres de archivo */
+function slug(t){return t.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"");}
+function nm(){const a=slug($("#nAp").value),n=slug($("#nNom").value);const ok=a&&n;const b=ok?a+"_"+n+"_folleto":"";
+  $("#nOut1").textContent=ok?b+".docx":"escribe apellido y nombre";$("#nOut2").textContent=ok?b+".pdf":"escribe apellido y nombre";
+  $("#nOut1").classList.toggle("bad",!ok);$("#nOut2").classList.toggle("bad",!ok);prog();return b;}
+["nAp","nNom"].forEach(id=>$("#"+id).addEventListener("input",nm));
+
+/* repaso */
+const QZ=[
+{q:"¿Cómo se pasa el texto a la siguiente columna sin usar la tecla Enter muchas veces?",o:["Con espacios","Con un salto de columna","Cambiando el tamaño de fuente","Con una tabla"],c:1,e:"Un salto de columna (Diseño → Saltos → Columna) manda el texto a la columna siguiente sin espacios en blanco."},
+{q:"¿Qué ajuste de texto evita que una imagen quede «flotando» sobre el texto?",o:["En línea con el texto o ajuste cuadrado","Detrás del texto","Delante del texto","Sin ajuste"],c:0,e:"Con ajuste cuadrado o en línea, el texto rodea la imagen y nada queda tapado."},
+{q:"¿Cuál es la ventaja principal de entregar también un PDF?",o:["Pesa más","Se ve igual en cualquier dispositivo y no se desacomoda","Se puede editar fácilmente","Es obligatorio para todos los documentos"],c:1,e:"El PDF conserva el diseño, las fuentes y las imágenes tal como las exportaste."},
+{q:"¿Qué debe tener un folleto turístico para que el visitante pueda actuar?",o:["Solo fotos bonitas","Información práctica: horarios, costos, ubicación y contacto","Muchos tipos de letra","Texto en mayúsculas"],c:1,e:"El folleto debe informar y facilitar la decisión: datos prácticos claros y verificados."},
+{q:"¿Qué relación mínima de contraste se recomienda para texto normal?",o:["1.5 : 1","3 : 1","4.5 : 1","20 : 1"],c:2,e:"WCAG pide al menos 4.5 : 1 para texto normal."}];
+$("#quizBox").innerHTML=QZ.map((it,i)=>`<div class="q"><p>${i+1}. ${esc(it.q)}</p>${it.o.map((t,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"><span>${esc(t)}</span></label>`).join("")}<div class="fb" id="fb${i}"></div></div>`).join("");
+$$("#quizBox .q").forEach((d,i)=>$$("input",d).forEach(r=>r.addEventListener("change",()=>{if(qAns[i]!==undefined)return;const j=+r.value,it=QZ[i];qAns[i]=j;
+  $$(".opt",d).forEach((op,k)=>{if(k===it.c)op.classList.add("ok");if(k===j&&k!==it.c)op.classList.add("bad");$("input",op).disabled=true;});
+  $("#fb"+i).textContent=(j===it.c?"✔ Correcto. ":"✘ Incorrecto. ")+it.e;updQuiz();prog();})));
+function quizOk(){return QZ.reduce((a,it,i)=>a+(qAns[i]===it.c?1:0),0);}
+function updQuiz(){const a=Object.keys(qAns).length;$("#quizScore").textContent="Aciertos: "+quizOk()+" / "+QZ.length+(a<QZ.length?" ("+a+" respondidas)":"");}updQuiz();
+
+/* lista de cotejo */
+const LISTA=["Elegí un destino y definí público y mensaje principal","Página horizontal con márgenes estrechos","Tres columnas con saltos de columna (sin Enter de más)","Portada con título, imagen y lema","Información práctica completa: horarios, costos, cómo llegar y contacto","Al menos 3 imágenes con ajuste de texto y texto alternativo","Una tabla de tarifas o servicios","Texto de 10 a 12 pt y máximo dos tipos de letra","Contraste adecuado (≥ 4.5 : 1)","Revisé ortografía y gramática","Indiqué la fuente de la información","Guardé el .docx con el nombre correcto","Exporté el PDF y se ve igual que el Word"];
+$("#lc").innerHTML=LISTA.map((t,i)=>`<li><input type="checkbox" id="lc${i}"><label for="lc${i}">${esc(t)}</label></li>`).join("");
+
+function prog(){
+  const boxes=$$("#lc input,.stp,#exp,#dsg1");const ok=boxes.filter(i=>i.checked).length;
+  const mt=matchOk(),q=Object.keys(qAns).length,nameOk=slug($("#nAp").value)&&slug($("#nNom").value)?1:0;
+  const T=boxes.length+MT.length+QZ.length+1,D=ok+mt+q+nameOk;const p=Math.round(D*100/T);
+  $("#pct").textContent=p+" %";$("#barfill").style.width=p+"%";}
+document.addEventListener("change",e=>{if(e.target.matches("input[type=checkbox]"))prog();});nm();
+
+/* evidencia */
+$("#dlEv").addEventListener("click",()=>{
+  const nombre=$("#alNombre").value.trim(),mat=$("#alMat").value.trim();
+  if(!nombre||!mat){$("#evMsg").textContent="Escribe tu nombre y matrícula en la sección inicial.";location.hash="#s0";return;}
+  const grupo=$("#alGrupo").value.trim(),fecha=new Date().toLocaleString("es-MX"),b=nm();
+  const items=LISTA.map((t,i)=>[t,$("#lc"+i).checked]);const k=items.filter(x=>x[1]).length;
+  const pasos=STEPS.map((s,i)=>[s[0],$("#st"+i).checked]);
+  const html=`<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Evidencia · ${esc(nombre)}</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:780px;margin:30px auto;padding:0 18px;color:#1b2333}h1{color:#12355b;font-size:1.5rem}h2{font-size:1.1rem;margin-top:24px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #d9dfea;padding:6px 10px;text-align:left}.ok{color:#1d7a4a;font-weight:600}.no{color:#b3372f}</style></head><body>
+<h1>Evidencia · Informática Aplicada I · Folleto turístico</h1>
+<p><b>Alumno:</b> ${esc(nombre)}<br><b>Matrícula:</b> ${esc(mat)}<br><b>Grupo:</b> ${esc(grupo)||"—"}<br><b>Generado:</b> ${esc(fecha)}</p>
+<h2>Planeación</h2><p><b>Destino:</b> ${esc($("#pDest").value)||"—"}<br><b>Público:</b> ${esc($("#pPub").value)||"—"}<br><b>Mensaje:</b> ${esc($("#pMsg").value)||"—"}</p><p><b>Información práctica:</b> ${esc($("#pInfo").value)||"—"}</p><p><b>Atractivos:</b> ${esc($("#pAtr").value)||"—"}</p>
+<h2>Archivos del producto</h2><p>${b?esc(b)+".docx<br>"+esc(b)+".pdf":"Nombre aún no generado"}</p>
+<h2>Pasos en Word</h2><table>${pasos.map(([t,v])=>`<tr><td>${esc(t)}</td><td class="${v?"ok":"no"}">${v?"Hecho":"Pendiente"}</td></tr>`).join("")}</table>
+<h2>Lista de cotejo (${k} / ${items.length})</h2><table>${items.map(([t,v])=>`<tr><td>${esc(t)}</td><td class="${v?"ok":"no"}">${v?"Sí":"No"}</td></tr>`).join("")}</table>
+<h2>Repaso</h2><p>Quiz: ${quizOk()} / ${QZ.length} · Comandos: ${matchOk()} / ${MT.length}</p>
+<p style="color:#5b667a;font-size:.85rem">Sube junto con esta evidencia tu folleto en .docx y en .pdf.</p></body></html>`;
+  download("evidencia_folleto_"+(mat||"alumno").replace(/[^\w-]+/g,"_")+".html",html,"text/html;charset=utf-8");
+  $("#evMsg").textContent="Archivo generado. Revisa tu carpeta de descargas.";
+});
+</script>
+</body>
+</html>
