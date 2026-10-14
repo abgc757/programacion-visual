@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Práctica · Folleto turístico en Word · Informática Aplicada I</title>
+<title>Práctica · Folleto turístico accesible en Word · Informática Aplicada I</title>
 <style>
 :root{
   --bg:#f5f7fb; --panel:#ffffff; --ink:#1b2333; --muted:#5b667a; --line:#d9dfea;
@@ -103,9 +103,9 @@ summary{cursor:pointer;font-weight:600}
 
 <header class="hero">
   <span class="tag">Informática Aplicada I · Técnico en Turismo · BT_TUR_3</span>
-  <h1>Práctica interactiva: diseña tu folleto turístico en Word</h1>
-  <p>Planea, diseña y entrega un folleto de un destino turístico. Tu producto final son <b>dos archivos</b>: el folleto en <b>.docx</b> y su versión en <b>PDF</b>.</p>
-  <div class="meta"><span>Prof. Abraham Gómez Contreras</span><span>CECUM · Bachillerato Tecnológico</span><span>Producto: folleto .docx + .pdf</span></div>
+  <h1>Folleto turístico accesible e inclusivo en Word</h1>
+  <p>¿Qué necesitaría un turista con alguna discapacidad para disfrutar un destino? Investígalo, planea y diseña un folleto que todas las personas puedan leer. Tu producto final son <b>dos archivos</b>: el folleto en <b>.docx</b> y su versión en <b>PDF</b>.</p>
+  <div class="meta"><span>Prof. Abraham Gómez Contreras</span><span>CECUM · Bachillerato Tecnológico</span><span>2 sesiones: 100 min + 50 min</span><span>Producto: folleto .docx + .pdf</span></div>
 </header>
 
 <div class="progress" role="status" aria-live="polite">
@@ -113,7 +113,7 @@ summary{cursor:pointer;font-weight:600}
   <div class="bar"><i id="barfill"></i></div>
 </div>
 <nav class="tabs" aria-label="Secciones">
-  <a href="#s0">Inicio</a><a href="#s1">1 · Planea</a><a href="#s2">2 · Estructura</a><a href="#s3">3 · Pasos en Word</a><a href="#s4">4 · Diseño</a><a href="#s5">5 · Guarda y exporta</a><a href="#s6">Repaso</a><a href="#s7">Lista de cotejo</a><a href="#s8">Entrega</a><a href="#s9">Rúbrica</a>
+  <a href="#s0">Inicio</a><a href="#rec">Recorrido</a><a href="#ficha">Ficha</a><a href="#s1">Planeación</a><a href="#s2">Estructura</a><a href="#s3">Pasos en Word</a><a href="#s4">Diseño</a><a href="#s5">5 · Guarda y exporta</a><a href="#s6">Repaso</a><a href="#s7">Lista de cotejo</a><a href="#s8">Entrega</a><a href="#s9">Rúbrica</a>
 </nav>
 
 <section class="card" id="s0">
@@ -126,34 +126,96 @@ summary{cursor:pointer;font-weight:600}
   </div>
   <h3>Qué vas a lograr</h3>
   <ul>
-    <li>Planear un folleto: destino, público y mensaje.</li>
-    <li>Armar en Word un folleto de una hoja horizontal con columnas, imágenes, cuadros de texto y una tabla.</li>
-    <li>Aplicar criterios de diseño legible: jerarquía, contraste e imágenes bien colocadas.</li>
-    <li>Guardar el trabajo en <b>.docx</b> y exportarlo a <b>PDF</b> con un nombre correcto.</li>
+    <li>Identificar, en el plantel, lo que necesitaría un turista con alguna discapacidad.</li>
+    <li>Investigar un destino y sus servicios de accesibilidad (ficha de investigación).</li>
+    <li>Planear un folleto con información de accesibilidad y lenguaje incluyente.</li>
+    <li>Diseñarlo en Word con columnas, tipografía legible, imágenes con texto alternativo y buen contraste.</li>
+    <li>Entregar el folleto en <b>.docx</b> y en <b>PDF</b>.</li>
   </ul>
-  <div class="note"><b>Producto que entregas en AulaEscolar:</b> <code>apellido_nombre_folleto.docx</code> y <code>apellido_nombre_folleto.pdf</code>, más el archivo de evidencia que genera esta página. En la sección 5 hay un generador de nombres.</div>
+  <h3>Tiempos de trabajo</h3>
+  <p class="lead">Todo se trabaja en el salón. Cada bloque tiene un tiempo límite; usa el cronómetro de abajo.</p>
+  <div class="sess" style="grid-template-columns:1fr 1fr">
+    <div><b class="d">Sesión 1 · 100 min · 14/10</b>
+      <b>15 min</b> Recorrido de observación (planta baja y cooperativa), antes del receso.<br>
+      <b>10 min</b> Registro del recorrido.<br>
+      <b>10 min</b> Revisión de avances y de ejemplos de folletos (después del receso).<br>
+      <b>30 min</b> Ficha de investigación del destino y de sus servicios de accesibilidad.<br>
+      <b>30 min</b> Planeación del folleto: destino, estructura, accesibilidad y lenguaje incluyente.<br>
+      <b>5 min</b> Cierre.</div>
+    <div><b class="d">Sesión 2 · 50 min</b>
+      <b>5 min</b> Revisión de avances y ejemplos.<br>
+      <b>35 min</b> Diseño del folleto en Word.<br>
+      <b>10 min</b> Verificar accesibilidad, guardar .docx y exportar PDF.</div>
+  </div>
+  <div class="note"><b>Fuera del salón:</b> no hay tarea obligatoria. Solo si no alcanzaste a exportar o subir tus archivos, dedica como máximo 15 minutos para terminarlo.</div>
+  <h3>Cronómetro</h3>
+  <p><label class="f" for="tmMin" style="display:inline">Minutos:</label> <input type="text" id="tmMin" value="15" style="width:70px" inputmode="numeric"> <button class="btn sm" id="tmGo" type="button">Iniciar</button> <button class="btn ghost sm" id="tmStop" type="button">Detener</button> <span class="scorebox" id="tmOut" role="timer" aria-live="off">00:00</span></p>
+  <div class="note"><b>Producto que entregas en AulaEscolar:</b> <code>apellido_nombre_folleto.docx</code> y <code>apellido_nombre_folleto.pdf</code>, más el archivo de evidencia que genera esta página (incluye tu ficha de investigación). En la sección 5 hay un generador de nombres.</div>
   <h3>Requisitos</h3>
   <p>Microsoft Word (o Word en línea / LibreOffice Writer, con pequeñas diferencias en los menús) e imágenes propias o libres de derechos (por ejemplo, tus propias fotos o bancos de imágenes gratuitos).</p>
 </section>
 
-<section class="card" id="s1">
-  <h2>1 · Planea tu folleto</h2>
-  <p class="lead">Un buen folleto empieza antes de abrir Word. Responde estas preguntas.</p>
+<section class="card" id="rec">
+  <h2>Recorrido de observación de accesibilidad</h2>
+  <p class="lead">Sesión 1 · máximo 15 minutos en el exterior, en parejas: planta baja y cooperativa. Después, 10 minutos para registrar en el salón.</p>
+  <p>Observa qué encontraría una persona con alguna discapacidad (movilidad, visual, auditiva o cognitiva) y qué necesitaría. Lleva solo lo indispensable y regresa a la hora indicada.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Elemento</th><th>¿Qué observas?</th><th>¿Qué necesitaría un turista con discapacidad?</th></tr></thead>
+    <tbody>
+      <tr><td>Rampas y escalones</td><td>¿Hay rampa? ¿Tiene pasamanos?</td><td>Persona en silla de ruedas, con muletas o carriola</td></tr>
+      <tr><td>Señalización</td><td>¿Se lee a distancia? ¿Hay pictogramas?</td><td>Persona con baja visión o que no lee español</td></tr>
+      <tr><td>Mobiliario</td><td>Mesas, mostrador de la cooperativa: altura y espacio</td><td>Persona usuaria de silla de ruedas, de talla baja</td></tr>
+      <tr><td>Pasillos y pisos</td><td>Ancho, obstáculos, desniveles</td><td>Persona ciega o con bastón</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Tu registro</h3>
   <div class="grid2">
-    <div><label class="f" for="pDest">Destino o atractivo (lugar, ruta, festividad, servicio)</label><input type="text" id="pDest" placeholder="Ejemplo: Teotihuacán, Estado de México"></div>
-    <div><label class="f" for="pPub">¿A quién va dirigido? (público)</label><input type="text" id="pPub" placeholder="Ejemplo: familias con niños, turistas extranjeros"></div>
+    <div><label class="f" for="rc1">Lo que sí facilita la accesibilidad</label><textarea id="rc1"></textarea></div>
+    <div><label class="f" for="rc2">Barreras que encontraste</label><textarea id="rc2"></textarea></div>
   </div>
-  <label class="f" for="pMsg" style="margin-top:12px">Mensaje principal en una frase (será tu título o lema)</label>
-  <input type="text" id="pMsg" placeholder="Ejemplo: Camina entre pirámides a una hora de la ciudad">
-  <label class="f" for="pInfo" style="margin-top:12px">Información práctica que necesita el visitante (horarios, costo, cómo llegar, contacto)</label>
+  <label class="f" for="rc3" style="margin-top:12px">¿Qué necesitaría un turista con discapacidad en un destino turístico? (una idea por tipo de discapacidad)</label>
+  <textarea id="rc3"></textarea>
+</section>
+
+<section class="card" id="ficha">
+  <h2>Ficha de investigación del destino y sus servicios de accesibilidad</h2>
+  <p class="lead">Sesión 1 · 30 minutos. Es tu evidencia de la sesión 1.</p>
+  <div class="grid2">
+    <div><label class="f" for="fDest">Destino o atractivo</label><input type="text" id="fDest" placeholder="Ejemplo: Museo, zona arqueológica, parque, hotel"></div>
+    <div><label class="f" for="fUbi">Ubicación y cómo llegar</label><input type="text" id="fUbi"></div>
+    <div><label class="f" for="fHor">Horarios y costo (con fecha de consulta)</label><input type="text" id="fHor"></div>
+    <div><label class="f" for="fFuen">Fuente de la información (sitio oficial)</label><input type="text" id="fFuen"></div>
+  </div>
+  <h3>Servicios de accesibilidad que ofrece (marca los que encontraste)</h3>
+  <ul class="checks" id="fServ"></ul>
+  <label class="f" for="fOtro" style="margin-top:12px">Otros servicios, o lo que NO encontraste en la fuente</label>
+  <textarea id="fOtro"></textarea>
+  <div class="note">Si un dato de accesibilidad no aparece en la fuente, no lo inventes: escribe «consultar al lugar» y su contacto.</div>
+</section>
+
+<section class="card" id="s1">
+  <h2>Planeación del folleto accesible</h2>
+  <p class="lead">Sesión 1 · 30 minutos. Elige el destino, la estructura, la información de accesibilidad y el lenguaje.</p>
+  <div class="grid2">
+    <div><label class="f" for="pDest">Destino (el mismo de tu ficha)</label><input type="text" id="pDest"></div>
+    <div><label class="f" for="pPub">¿A quién va dirigido? (incluye personas con discapacidad)</label><input type="text" id="pPub" placeholder="Ejemplo: familias, adultos mayores, personas con discapacidad motriz"></div>
+  </div>
+  <label class="f" for="pMsg" style="margin-top:12px">Mensaje principal en una frase (título o lema)</label>
+  <input type="text" id="pMsg" placeholder="Ejemplo: Un museo para recorrer sin barreras">
+  <label class="f" for="pInfo" style="margin-top:12px">Información práctica (horarios, costo, cómo llegar, contacto)</label>
   <textarea id="pInfo"></textarea>
+  <label class="f" for="pAcc" style="margin-top:12px">Información de accesibilidad que pondrás (rampas, baños, guías, señalización, apoyos)</label>
+  <textarea id="pAcc"></textarea>
   <label class="f" for="pAtr" style="margin-top:12px">Tres atractivos o razones para visitarlo</label>
   <textarea id="pAtr"></textarea>
-  <div class="note"><b>Tip:</b> investiga en fuentes confiables (sitios oficiales de turismo, INAH, secretarías de turismo) y anota la fuente. Verifica que horarios y costos estén vigentes.</div>
+  <h3>Lenguaje incluyente</h3>
+  <p>Elige la expresión correcta para tu folleto:</p>
+  <div id="leng"></div>
+  <p><span class="scorebox" id="lengScore"></span></p>
 </section>
 
 <section class="card" id="s2">
-  <h2>2 · Elige la estructura</h2>
+  <h2>Estructura del folleto</h2>
   <p class="lead">El tríptico es el formato clásico: una hoja carta en horizontal doblada en tres partes. Toca cada panel para ver qué contiene.</p>
   <div class="panels" role="group" aria-label="Paneles del tríptico">
     <button class="pn" type="button" data-i="0"><b>Panel interior izquierdo</b>Atractivos</button>
@@ -170,8 +232,8 @@ summary{cursor:pointer;font-weight:600}
 </section>
 
 <section class="card" id="s3">
-  <h2>3 · Arma el folleto en Word</h2>
-  <p class="lead">Sigue los pasos en orden. Marca cada paso cuando lo hayas hecho en tu documento.</p>
+  <h2>Diseño del folleto en Word</h2>
+  <p class="lead">Sesión 2 · 35 minutos. Sigue los pasos en orden y marca cada uno cuando lo hayas hecho en tu documento.</p>
   <ol class="steps" id="stepList"></ol>
   <h3>¿Dónde está cada comando?</h3>
   <p>Une el comando con la ficha de Word donde lo encuentras (menú desplegable por fila).</p>
@@ -180,8 +242,8 @@ summary{cursor:pointer;font-weight:600}
 </section>
 
 <section class="card" id="s4">
-  <h2>4 · Revisa el diseño</h2>
-  <p class="lead">Un folleto bonito pero ilegible no sirve. Comprueba el contraste entre tu texto y tu fondo.</p>
+  <h2>Tipografía legible y contraste</h2>
+  <p class="lead">Un folleto bonito pero ilegible no es accesible. Comprueba el contraste entre tu texto y tu fondo.</p>
   <div class="lab">
     <div>
       <label class="f" for="cFg">Color del texto</label><input type="color" id="cFg" value="#1b2333">
@@ -191,14 +253,14 @@ summary{cursor:pointer;font-weight:600}
     </div>
     <div class="sample" id="cSample"><b>Pirámides de Teotihuacán</b><br>Abierto todos los días de 9:00 a 17:00. Entrada general: consulta tarifa vigente.</div>
   </div>
-  <p>Regla práctica: contraste de al menos <b>4.5 : 1</b> para texto normal. Cuerpo de texto de <b>10 a 12 pt</b>, títulos de <b>20 pt</b> o más, máximo <b>dos tipos de letra</b>.</p>
+  <p>Reglas prácticas: contraste de al menos <b>4.5 : 1</b>; cuerpo de texto de <b>12 pt o más</b> con letra sin adornos (Arial, Calibri, Verdana); títulos de <b>20 pt</b> o más; máximo <b>dos tipos de letra</b>; no uses solo el color para dar información; alinea el texto a la izquierda.</p>
   <h3>Verifica tu folleto</h3>
   <p><label><input type="checkbox" id="dsg1"> Probé el contraste de mi color de texto y fondo principal</label></p>
 </section>
 
 <section class="card" id="s5">
-  <h2>5 · Guarda en .docx y exporta a PDF</h2>
-  <p class="lead">Tu producto son dos archivos con el mismo nombre y distinta extensión.</p>
+  <h2>Guarda en .docx y exporta a PDF</h2>
+  <p class="lead">Sesión 2 · 10 minutos. Tu producto son dos archivos con el mismo nombre y distinta extensión.</p>
   <h3>Generador de nombres</h3>
   <div class="grid2">
     <div><label class="f" for="nAp">Apellido</label><input type="text" id="nAp" autocomplete="off"></div>
@@ -210,7 +272,8 @@ summary{cursor:pointer;font-weight:600}
   <h3>Pasos</h3>
   <ol class="steps">
     <li><b>Guarda el .docx:</b> <kbd>Archivo</kbd> → <kbd>Guardar como</kbd> → tipo «Documento de Word (*.docx)» y el nombre del generador.</li>
-    <li><b>Exporta a PDF:</b> <kbd>Archivo</kbd> → <kbd>Exportar</kbd> → <kbd>Crear documento PDF/XPS</kbd> (o <kbd>Guardar como</kbd> → tipo «PDF»).</li>
+    <li><b>Verifica accesibilidad:</b> <kbd>Revisar</kbd> → <kbd>Comprobar accesibilidad</kbd> y corrige los avisos (texto alternativo, contraste).</li>
+    <li><b>Exporta a PDF:</b> <kbd>Archivo</kbd> → <kbd>Exportar</kbd> → <kbd>Crear documento PDF/XPS</kbd> → <kbd>Opciones</kbd> y deja marcado «Etiquetas de estructura del documento para accesibilidad».</li>
     <li><b>Revisa el PDF:</b> ábrelo y comprueba que se vea igual que en Word (imágenes, columnas, tabla y las dos páginas).</li>
     <li><b>Compara:</b> debe haber dos archivos: uno <code>.docx</code> y uno <code>.pdf</code>, con el mismo nombre.</li>
     <li><b>Entrega:</b> sube los dos archivos y tu archivo de evidencia en la actividad de AulaEscolar.</li>
@@ -247,11 +310,11 @@ summary{cursor:pointer;font-weight:600}
   <div class="tw"><table>
     <thead><tr><th>Criterio</th><th>Excelente (4)</th><th>Bueno (3)</th><th>En proceso (2)</th><th>Inicial (1)</th></tr></thead>
     <tbody>
-      <tr><td><b>Contenido</b></td><td>Información veraz, completa y útil para el visitante, con fuente</td><td>Completa; falta un dato o la fuente</td><td>Incompleta o poco clara</td><td>Sin información práctica</td></tr>
-      <tr><td><b>Estructura</b></td><td>Seis paneles correctos con orden de lectura claro</td><td>Estructura correcta con un panel confuso</td><td>Paneles mal ordenados</td><td>Sin estructura de folleto</td></tr>
-      <tr><td><b>Diseño y legibilidad</b></td><td>Jerarquía, contraste ≥ 4.5:1, ≤ 2 fuentes, imágenes bien ajustadas</td><td>Cumple tres de cuatro</td><td>Cumple uno o dos</td><td>Ilegible o desordenado</td></tr>
-      <tr><td><b>Herramientas de Word</b></td><td>Columnas, saltos, cuadro de texto, imagen con ajuste y tabla bien usados</td><td>Usa la mayoría</td><td>Usa pocas, acomoda con espacios</td><td>Todo escrito en un solo bloque</td></tr>
-      <tr><td><b>Entrega</b></td><td>.docx y .pdf con nombre correcto e idénticos</td><td>Ambos; nombre con falla</td><td>Falta uno de los dos o difieren</td><td>No entrega</td></tr>
+      <tr><td><b>Ficha de investigación</b></td><td>Completa, con fuente oficial y servicios de accesibilidad verificados</td><td>Completa; falta fuente o un servicio</td><td>Incompleta</td><td>No entrega ficha</td></tr>
+      <tr><td><b>Contenido accesible e incluyente</b></td><td>Información práctica y de accesibilidad clara; lenguaje incluyente</td><td>Información completa con un detalle de lenguaje</td><td>Falta información de accesibilidad</td><td>Sin información práctica</td></tr>
+      <tr><td><b>Diseño y legibilidad</b></td><td>12 pt o más, letra clara, contraste ≥ 4.5:1, ≤ 2 fuentes, jerarquía</td><td>Cumple tres de cuatro</td><td>Cumple uno o dos</td><td>Ilegible o desordenado</td></tr>
+      <tr><td><b>Herramientas de Word</b></td><td>Columnas con saltos, cuadro de texto, imágenes con texto alternativo y tabla bien usados</td><td>Usa la mayoría; algunas imágenes sin texto alternativo</td><td>Usa pocas; acomoda con espacios</td><td>Todo en un solo bloque</td></tr>
+      <tr><td><b>Entrega</b></td><td>.docx y .pdf con nombre correcto e idénticos, PDF con etiquetas de accesibilidad</td><td>Ambos; nombre o etiquetas con falla</td><td>Falta uno o difieren</td><td>No entrega</td></tr>
     </tbody>
   </table></div>
 </section>
@@ -281,15 +344,15 @@ $$(".pn").forEach(b=>b.addEventListener("click",()=>{
 
 /* pasos en Word */
 const STEPS=[
-["Página horizontal y márgenes","<b>Diseño</b> → Orientación → <b>Horizontal</b>. Márgenes → <b>Estrecho</b> (1.27 cm) para aprovechar la hoja carta."],
-["Tres columnas","<b>Diseño</b> → Columnas → <b>Tres</b>. Cada columna será un panel."],
-["Saltos de columna","Coloca el cursor al final de cada panel y usa <b>Diseño</b> → Saltos → <b>Columna</b> (o <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd>)."],
-["Estilos de título y texto","En <b>Inicio</b> usa los estilos <b>Título 1</b> y <b>Normal</b>. Define fuentes: una para títulos y otra para texto."],
-["Portada con cuadro de texto","<b>Insertar</b> → Cuadro de texto: título y lema sobre una imagen o con color de fondo."],
-["Imágenes con ajuste","<b>Insertar</b> → Imágenes. En <b>Formato de imagen</b> → Ajustar texto → <b>Cuadrado</b> o <b>Estrecho</b>. Agrega texto alternativo."],
-["Tabla de tarifas o servicios","<b>Insertar</b> → Tabla. Aplica un estilo de tabla y alinea los importes."],
-["Formas y color","<b>Insertar</b> → Formas para separadores o etiquetas. Usa la paleta de tu destino."],
-["Revisión","<b>Revisar</b> → Ortografía y gramática. Lee tu folleto completo imaginando al visitante."]
+["Página horizontal y márgenes","<b>Diseño</b> → Orientación → <b>Horizontal</b>. Márgenes → <b>Estrecho</b> (1.27 cm)."],
+["Tres columnas con saltos","<b>Diseño</b> → Columnas → <b>Tres</b>. Usa <b>Saltos → Columna</b> (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd>) al terminar cada panel."],
+["Tipografía legible","Cuerpo en 12 pt o más, letra sin adornos, máximo dos fuentes. Define los estilos <b>Título 1</b>, <b>Título 2</b> y <b>Normal</b> en <b>Inicio</b>; alinea a la izquierda."],
+["Portada","Título del destino, lema y una imagen principal. Usa un cuadro de texto (<b>Insertar</b> → Cuadro de texto) con buen contraste."],
+["Imágenes con texto alternativo","<b>Insertar</b> → Imágenes. Clic derecho en la imagen → <b>Ver texto alternativo</b> y describe qué muestra (no pongas «imagen de…»). Ajusta el texto: Cuadrado."],
+["Información de accesibilidad","Un panel claro con rampas, baños, apoyos y contacto, en lista con viñetas. Usa pictogramas solo con su texto al lado."],
+["Tabla de tarifas o servicios","<b>Insertar</b> → Tabla con fila de encabezado. Alinea importes y no uses solo el color para distinguir filas."],
+["Contraste y color","Verifica contraste ≥ 4.5 : 1 entre texto y fondo con el laboratorio de esta página."],
+["Lenguaje incluyente y revisión","<b>Revisar</b> → Ortografía y gramática. Usa «persona con discapacidad», no términos peyorativos."]
 ];
 $("#stepList").innerHTML=STEPS.map((s,i)=>`<li><label><input type="checkbox" class="stp" id="st${i}"> <b>${esc(s[0])}.</b></label> <span>${s[1]}</span></li>`).join("");
 
@@ -315,13 +378,33 @@ function nm(){const a=slug($("#nAp").value),n=slug($("#nNom").value);const ok=a&
   $("#nOut1").classList.toggle("bad",!ok);$("#nOut2").classList.toggle("bad",!ok);prog();return b;}
 ["nAp","nNom"].forEach(id=>$("#"+id).addEventListener("input",nm));
 
+/* ficha: servicios */
+const SERV=["Rampas o accesos sin escalones","Baños adaptados","Estacionamiento o ascenso accesible","Señalización clara, pictogramas o braille","Guía o recorrido en Lengua de Señas Mexicana","Audioguía o descripciones para personas ciegas","Préstamo de silla de ruedas","Transporte accesible para llegar","Información en lectura fácil"];
+$("#fServ").innerHTML=SERV.map((t,i)=>`<li><input type="checkbox" id="sv${i}"><label for="sv${i}">${esc(t)}</label></li>`).join("");
+
+/* lenguaje incluyente */
+const LG=[["Elige la expresión recomendada","Persona con discapacidad","Discapacitado","Minusválido","Persona con discapacidad"],["Para dirigirte a todo el público","Las personas visitantes","Los visitantes","Los turistas normales","Las personas visitantes"],["Para indicar el acceso","Acceso para personas usuarias de silla de ruedas","Acceso para inválidos","Acceso para cojos","Acceso para personas usuarias de silla de ruedas"]];
+const lgAns={};
+$("#leng").innerHTML=LG.map((g,i)=>`<div class="q"><p>${i+1}. ${esc(g[0])}</p>${[g[1],g[2],g[3]].map((t,j,arr)=>arr[(j+i)%3]).map((t,j)=>`<label class="opt"><input type="radio" name="lg${i}" value="${esc(t)}"><span>${esc(t)}</span></label>`).join("")}<div class="fb" id="lf${i}"></div></div>`).join("");
+$$("#leng .q").forEach((d,i)=>$$("input",d).forEach(r=>r.addEventListener("change",()=>{if(lgAns[i]!==undefined)return;lgAns[i]=r.value;const ok=r.value===LG[i][4];
+  $$(".opt",d).forEach(op=>{const v=$("input",op).value;if(v===LG[i][4])op.classList.add("ok");else if($("input",op).checked)op.classList.add("bad");$("input",op).disabled=true;});
+  $("#lf"+i).textContent=ok?"✔ Correcto: pone primero a la persona.":"✘ Mejor: «"+LG[i][4]+"». Los términos peyorativos o que reducen a la persona no deben usarse.";updLg();prog();})));
+function lgOk(){return LG.filter((g,i)=>lgAns[i]===g[4]).length;}
+function updLg(){$("#lengScore").textContent="Aciertos: "+lgOk()+" / "+LG.length;}
+
+/* cronómetro */
+let tmI=null,tmEnd=0;
+function tmDraw(){const r=Math.max(0,Math.round((tmEnd-Date.now())/1000));$("#tmOut").textContent=String(Math.floor(r/60)).padStart(2,"0")+":"+String(r%60).padStart(2,"0");if(r<=0&&tmI){clearInterval(tmI);tmI=null;$("#tmOut").textContent="00:00 · ¡Tiempo!";}}
+$("#tmGo").addEventListener("click",()=>{const m=Math.max(1,Math.min(100,parseInt($("#tmMin").value)||1));tmEnd=Date.now()+m*60000;if(tmI)clearInterval(tmI);tmI=setInterval(tmDraw,500);tmDraw();});
+$("#tmStop").addEventListener("click",()=>{if(tmI){clearInterval(tmI);tmI=null;}$("#tmOut").textContent="00:00";});
+
 /* repaso */
 const QZ=[
-{q:"¿Cómo se pasa el texto a la siguiente columna sin usar la tecla Enter muchas veces?",o:["Con espacios","Con un salto de columna","Cambiando el tamaño de fuente","Con una tabla"],c:1,e:"Un salto de columna (Diseño → Saltos → Columna) manda el texto a la columna siguiente sin espacios en blanco."},
-{q:"¿Qué ajuste de texto evita que una imagen quede «flotando» sobre el texto?",o:["En línea con el texto o ajuste cuadrado","Detrás del texto","Delante del texto","Sin ajuste"],c:0,e:"Con ajuste cuadrado o en línea, el texto rodea la imagen y nada queda tapado."},
-{q:"¿Cuál es la ventaja principal de entregar también un PDF?",o:["Pesa más","Se ve igual en cualquier dispositivo y no se desacomoda","Se puede editar fácilmente","Es obligatorio para todos los documentos"],c:1,e:"El PDF conserva el diseño, las fuentes y las imágenes tal como las exportaste."},
-{q:"¿Qué debe tener un folleto turístico para que el visitante pueda actuar?",o:["Solo fotos bonitas","Información práctica: horarios, costos, ubicación y contacto","Muchos tipos de letra","Texto en mayúsculas"],c:1,e:"El folleto debe informar y facilitar la decisión: datos prácticos claros y verificados."},
-{q:"¿Qué relación mínima de contraste se recomienda para texto normal?",o:["1.5 : 1","3 : 1","4.5 : 1","20 : 1"],c:2,e:"WCAG pide al menos 4.5 : 1 para texto normal."}];
+{q:"¿Para qué sirve el texto alternativo de una imagen?",o:["Para decorar","Para que una persona que usa lector de pantalla sepa qué muestra la imagen","Para reducir el tamaño del archivo","Para cambiar su color"],c:1,e:"Un lector de pantalla lee el texto alternativo; sin él, la imagen es invisible para personas ciegas."},
+{q:"¿Cómo pasas el texto a la siguiente columna sin usar muchos Enter?",o:["Con espacios","Con un salto de columna","Con otro tipo de letra","Con una tabla"],c:1,e:"Diseño → Saltos → Columna manda el texto al panel siguiente sin espacios en blanco."},
+{q:"¿Cuál es la tipografía más recomendable para el cuerpo de un folleto accesible?",o:["Letra decorativa de 9 pt","Letra sin adornos de 12 pt o más","Todo en mayúsculas","Letra cursiva de 10 pt"],c:1,e:"Letra clara, de tamaño suficiente y sin adornos mejora la lectura para todas las personas."},
+{q:"¿Qué relación mínima de contraste se recomienda para texto normal?",o:["1.5 : 1","3 : 1","4.5 : 1","20 : 1"],c:2,e:"WCAG pide al menos 4.5 : 1 para texto normal."},
+{q:"¿Qué herramienta de Word revisa avisos como texto alternativo faltante?",o:["Revisar → Comprobar accesibilidad","Insertar → Tabla","Vista → Zoom","Diseño → Márgenes"],c:0,e:"El verificador de accesibilidad señala problemas y sugiere cómo corregirlos."}];
 $("#quizBox").innerHTML=QZ.map((it,i)=>`<div class="q"><p>${i+1}. ${esc(it.q)}</p>${it.o.map((t,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"><span>${esc(t)}</span></label>`).join("")}<div class="fb" id="fb${i}"></div></div>`).join("");
 $$("#quizBox .q").forEach((d,i)=>$$("input",d).forEach(r=>r.addEventListener("change",()=>{if(qAns[i]!==undefined)return;const j=+r.value,it=QZ[i];qAns[i]=j;
   $$(".opt",d).forEach((op,k)=>{if(k===it.c)op.classList.add("ok");if(k===j&&k!==it.c)op.classList.add("bad");$("input",op).disabled=true;});
@@ -330,15 +413,15 @@ function quizOk(){return QZ.reduce((a,it,i)=>a+(qAns[i]===it.c?1:0),0);}
 function updQuiz(){const a=Object.keys(qAns).length;$("#quizScore").textContent="Aciertos: "+quizOk()+" / "+QZ.length+(a<QZ.length?" ("+a+" respondidas)":"");}updQuiz();
 
 /* lista de cotejo */
-const LISTA=["Elegí un destino y definí público y mensaje principal","Página horizontal con márgenes estrechos","Tres columnas con saltos de columna (sin Enter de más)","Portada con título, imagen y lema","Información práctica completa: horarios, costos, cómo llegar y contacto","Al menos 3 imágenes con ajuste de texto y texto alternativo","Una tabla de tarifas o servicios","Texto de 10 a 12 pt y máximo dos tipos de letra","Contraste adecuado (≥ 4.5 : 1)","Revisé ortografía y gramática","Indiqué la fuente de la información","Guardé el .docx con el nombre correcto","Exporté el PDF y se ve igual que el Word"];
+const LISTA=["Participé en el recorrido y registré barreras y necesidades","Completé la ficha de investigación con fuente oficial","Definí destino, público (incluyendo personas con discapacidad) y mensaje","Página horizontal, tres columnas y saltos de columna (sin Enter de más)","Portada con título, imagen y lema","Incluí información práctica: horarios, costos, cómo llegar y contacto","Incluí información de accesibilidad del destino","Usé lenguaje incluyente (persona con discapacidad)","Todas las imágenes tienen texto alternativo","Cuerpo de 12 pt o más, letra sin adornos y máximo dos fuentes","Contraste adecuado (≥ 4.5 : 1) y no dependo solo del color","Una tabla de tarifas o servicios con encabezado","Corrí «Comprobar accesibilidad» y atendí los avisos","Guardé el .docx con el nombre correcto","Exporté el PDF con etiquetas de accesibilidad y se ve igual que el Word"];
 $("#lc").innerHTML=LISTA.map((t,i)=>`<li><input type="checkbox" id="lc${i}"><label for="lc${i}">${esc(t)}</label></li>`).join("");
 
 function prog(){
   const boxes=$$("#lc input,.stp,#exp,#dsg1");const ok=boxes.filter(i=>i.checked).length;
   const mt=matchOk(),q=Object.keys(qAns).length,nameOk=slug($("#nAp").value)&&slug($("#nNom").value)?1:0;
-  const T=boxes.length+MT.length+QZ.length+1,D=ok+mt+q+nameOk;const p=Math.round(D*100/T);
+  const T=boxes.length+MT.length+QZ.length+LG.length+1,D=ok+mt+q+lgOk()+nameOk;const p=Math.round(D*100/T);
   $("#pct").textContent=p+" %";$("#barfill").style.width=p+"%";}
-document.addEventListener("change",e=>{if(e.target.matches("input[type=checkbox]"))prog();});nm();
+document.addEventListener("change",e=>{if(e.target.matches("input[type=checkbox]"))prog();});nm();updLg();
 
 /* evidencia */
 $("#dlEv").addEventListener("click",()=>{
@@ -348,13 +431,15 @@ $("#dlEv").addEventListener("click",()=>{
   const items=LISTA.map((t,i)=>[t,$("#lc"+i).checked]);const k=items.filter(x=>x[1]).length;
   const pasos=STEPS.map((s,i)=>[s[0],$("#st"+i).checked]);
   const html=`<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Evidencia · ${esc(nombre)}</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:780px;margin:30px auto;padding:0 18px;color:#1b2333}h1{color:#12355b;font-size:1.5rem}h2{font-size:1.1rem;margin-top:24px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #d9dfea;padding:6px 10px;text-align:left}.ok{color:#1d7a4a;font-weight:600}.no{color:#b3372f}</style></head><body>
-<h1>Evidencia · Informática Aplicada I · Folleto turístico</h1>
+<h1>Evidencia · Informática Aplicada I · Folleto turístico accesible e inclusivo</h1>
 <p><b>Alumno:</b> ${esc(nombre)}<br><b>Matrícula:</b> ${esc(mat)}<br><b>Grupo:</b> ${esc(grupo)||"—"}<br><b>Generado:</b> ${esc(fecha)}</p>
-<h2>Planeación</h2><p><b>Destino:</b> ${esc($("#pDest").value)||"—"}<br><b>Público:</b> ${esc($("#pPub").value)||"—"}<br><b>Mensaje:</b> ${esc($("#pMsg").value)||"—"}</p><p><b>Información práctica:</b> ${esc($("#pInfo").value)||"—"}</p><p><b>Atractivos:</b> ${esc($("#pAtr").value)||"—"}</p>
+<h2>Recorrido de observación</h2><p><b>Facilita:</b> ${esc($("#rc1").value)||"—"}</p><p><b>Barreras:</b> ${esc($("#rc2").value)||"—"}</p><p><b>Necesidades del turista:</b> ${esc($("#rc3").value)||"—"}</p>
+<h2>Ficha de investigación</h2><p><b>Destino:</b> ${esc($("#fDest").value)||"—"}<br><b>Ubicación:</b> ${esc($("#fUbi").value)||"—"}<br><b>Horarios y costo:</b> ${esc($("#fHor").value)||"—"}<br><b>Fuente:</b> ${esc($("#fFuen").value)||"—"}</p><p><b>Servicios de accesibilidad:</b> ${SERV.filter((t,i)=>$("#sv"+i).checked).map(esc).join("; ")||"—"}</p><p><b>Otros / no encontrados:</b> ${esc($("#fOtro").value)||"—"}</p>
+<h2>Planeación</h2><p><b>Destino:</b> ${esc($("#pDest").value)||"—"}<br><b>Público:</b> ${esc($("#pPub").value)||"—"}<br><b>Mensaje:</b> ${esc($("#pMsg").value)||"—"}</p><p><b>Información práctica:</b> ${esc($("#pInfo").value)||"—"}</p><p><b>Accesibilidad:</b> ${esc($("#pAcc").value)||"—"}</p><p><b>Atractivos:</b> ${esc($("#pAtr").value)||"—"}</p>
 <h2>Archivos del producto</h2><p>${b?esc(b)+".docx<br>"+esc(b)+".pdf":"Nombre aún no generado"}</p>
 <h2>Pasos en Word</h2><table>${pasos.map(([t,v])=>`<tr><td>${esc(t)}</td><td class="${v?"ok":"no"}">${v?"Hecho":"Pendiente"}</td></tr>`).join("")}</table>
 <h2>Lista de cotejo (${k} / ${items.length})</h2><table>${items.map(([t,v])=>`<tr><td>${esc(t)}</td><td class="${v?"ok":"no"}">${v?"Sí":"No"}</td></tr>`).join("")}</table>
-<h2>Repaso</h2><p>Quiz: ${quizOk()} / ${QZ.length} · Comandos: ${matchOk()} / ${MT.length}</p>
+<h2>Repaso</h2><p>Quiz: ${quizOk()} / ${QZ.length} · Comandos: ${matchOk()} / ${MT.length} · Lenguaje incluyente: ${lgOk()} / ${LG.length}</p>
 <p style="color:#5b667a;font-size:.85rem">Sube junto con esta evidencia tu folleto en .docx y en .pdf.</p></body></html>`;
   download("evidencia_folleto_"+(mat||"alumno").replace(/[^\w-]+/g,"_")+".html",html,"text/html;charset=utf-8");
   $("#evMsg").textContent="Archivo generado. Revisa tu carpeta de descargas.";
