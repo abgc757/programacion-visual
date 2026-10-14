@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Práctica · Análisis y Diseño de Sistemas · Proyecto de semestre</title>
+<style>
+:root{
+  --bg:#f3f6fb; --panel:#ffffff; --ink:#1b2333; --muted:#566178; --line:#d6dde9;
+  --brand:#12355b; --brand-2:#1d5a94; --accent:#c8963e; --ok:#1d7a4a; --bad:#b3372f; --warn:#8a5a00;
+  --okbg:#e6f4ec; --badbg:#fbeae8; --warnbg:#fff4dc; --soft:#eef3fa; --shadow:0 1px 2px rgba(15,27,45,.06),0 4px 14px rgba(15,27,45,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0d1420; --panel:#151f30; --ink:#e7edf7; --muted:#9fadc4; --line:#2a374e;
+    --brand:#7fb3ec; --brand-2:#9cc6f3; --accent:#e0b060; --ok:#5fcf98; --bad:#f08a80; --warn:#f0c870;
+    --okbg:#12301f; --badbg:#3a1c1a; --warnbg:#3a2f12; --soft:#1a2740; --shadow:none;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px 80px}
+header.top{background:linear-gradient(135deg,#12355b,#1d5a94);color:#fff;padding:18px 16px 14px}
+header.top .in{max-width:1000px;margin:0 auto}
+header.top .tag{display:inline-block;background:rgba(255,255,255,.16);border-radius:99px;padding:2px 12px;font-size:.78rem}
+header.top h1{margin:8px 0 4px;font-size:clamp(1.3rem,3.2vw,1.9rem);line-height:1.2}
+header.top p{margin:0;opacity:.95;max-width:68ch;font-size:.95rem}
+.bar-wrap{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar-wrap .in{max-width:1000px;margin:0 auto;padding:8px 16px}
+.prow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.prog{flex:1;min-width:160px}
+.prog .row{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:3px}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand-2),var(--accent));transition:width .35s}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px;scrollbar-width:thin}
+nav.tabs button{flex:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:7px 14px;border-radius:99px;font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected=true]{background:var(--brand);color:#fff;border-color:var(--brand)}
+@media (prefers-color-scheme: dark){nav.tabs button[aria-selected=true]{color:#0d1420}}
+nav.tabs button .pc{font-weight:400;font-size:.78rem;opacity:.8;margin-left:4px}
+.pane{display:none}.pane.on{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:16px;box-shadow:var(--shadow)}
+.card>h2{margin:0 0 2px;font-size:1.25rem}
+.lead{margin:0 0 12px;color:var(--muted)}
+h3{font-size:1.02rem;margin:18px 0 6px}
+.mission{background:linear-gradient(135deg,var(--soft),transparent);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:12px;padding:14px 16px;margin-top:16px}
+.mission h2{margin:0 0 4px;font-size:1.15rem}
+.mission ul{margin:6px 0 0;padding-left:20px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:2px 11px;font-size:.8rem}
+.chip.t{background:var(--warnbg);color:var(--warn);border-color:transparent;font-weight:600}
+.step{display:grid;grid-template-columns:34px 1fr;gap:12px;margin-top:20px}
+.step>.n{width:32px;height:32px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.9rem}
+@media (prefers-color-scheme: dark){.step>.n{color:#0d1420}}
+.step h3{margin:0 0 2px;font-size:1.08rem}
+.step .st{min-width:0}
+.do{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0;font-size:.95rem}
+.do b.l{display:block;font-size:.76rem;letter-spacing:.05em;text-transform:uppercase;color:var(--brand-2)}
+.out{border:1px dashed var(--accent);border-radius:10px;padding:8px 14px;margin:10px 0;font-size:.92rem}
+.out b{color:var(--accent)}
+.note{border-left:4px solid var(--accent);background:var(--warnbg);padding:9px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:.93rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid2>*,.grid3>*{min-width:0}
+label.f{display:block;font-size:.84rem;color:var(--muted);margin:10px 0 3px}
+input[type=text],input[type=number],textarea,select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:inherit}
+textarea{min-height:78px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible,summary:focus-visible{outline:2px solid var(--brand-2);outline-offset:1px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--brand);color:#fff;border:0;padding:8px 15px;border-radius:8px;font-weight:600}
+@media (prefers-color-scheme: dark){.btn{color:#0d1420}}
+.btn.ghost{background:transparent;color:var(--brand-2);border:1px solid var(--line)}
+.btn.sm{padding:3px 10px;font-size:.83rem}
+.btn.danger{background:transparent;color:var(--bad);border:1px solid var(--line)}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+.tw{overflow-x:auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:8px 0}
+.cd{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--panel)}
+.cd b{display:block;color:var(--brand-2)}
+.cd small{color:var(--muted)}
+.q{border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:8px 0}
+.q p{margin:0 0 6px;font-weight:600}
+.opt{display:flex;gap:9px;align-items:flex-start;padding:5px 8px;border-radius:8px;cursor:pointer}
+.opt:hover{background:var(--soft)}
+.opt.ok{background:var(--okbg)}.opt.bad{background:var(--badbg)}
+.opt input{margin-top:6px}
+.fb{margin-top:5px;font-size:.88rem;color:var(--muted)}
+.score{display:inline-block;padding:4px 12px;border-radius:99px;background:var(--soft);font-weight:600;font-size:.88rem}
+.msg{font-size:.88rem;margin:6px 0;color:var(--muted)}
+.msg.ok{color:var(--ok)}.msg.bad{color:var(--bad)}.msg.warn{color:var(--warn)}
+.checks{list-style:none;padding:0;margin:0}
+.checks li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--line)}
+.checks input{flex:none;margin-top:5px;width:18px;height:18px;accent-color:var(--ok)}
+.lst{list-style:none;padding:0;margin:8px 0}
+.lst li{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:6px 10px;border:1px solid var(--line);border-radius:8px;margin:4px 0;background:var(--panel)}
+.lst li span{min-width:0;overflow-wrap:anywhere}
+.lst .acts{display:flex;gap:4px;flex:none}
+svg.dg{width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+.kb{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kb>div{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:8px;min-height:120px}
+.kb h4{margin:0 0 6px;font-size:.92rem}
+.kc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 9px;margin:6px 0;font-size:.86rem}
+.kc .acts{display:flex;gap:4px;margin-top:5px}
+.big{font:700 2rem/1 ui-monospace,Consolas,monospace;letter-spacing:.04em}
+.tmr{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.nav2{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.dash .m{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--soft)}
+.dash .m b{font-size:1.4rem;display:block}
+.note-prev{border:1px solid var(--line);border-radius:10px;padding:14px 18px;background:#fff;color:#1b2333;max-height:420px;overflow:auto}
+.note-prev h1{font-size:1.25rem;color:#12355b}.note-prev h2{font-size:1.05rem;color:#12355b;margin-top:18px}
+code{overflow-wrap:anywhere;background:var(--soft);padding:1px 6px;border-radius:5px;font:.9em ui-monospace,Consolas,monospace}
+kbd{background:var(--soft);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;font:.85em ui-monospace,Consolas,monospace}
+details{border:1px solid var(--line);border-radius:10px;padding:6px 12px;margin:8px 0;background:var(--soft)}
+summary{cursor:pointer;font-weight:600}
+.sr{position:absolute;left:-9999px}
+@media (max-width:720px){
+  .grid2,.grid3,.kb{grid-template-columns:1fr}
+  .card{padding:15px}
+  .step{grid-template-columns:28px 1fr;gap:9px}
+  .step>.n{width:26px;height:26px;font-size:.8rem}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <span class="tag">Análisis y Diseño de Sistemas · BT_COMP_5 · Semana 6 · 14 al 16 de octubre de 2026</span>
+  <h1>Aprende haciendo: tu proyecto de fin de semestre</h1>
+  <p>En tres sesiones vas a levantar requisitos, organizar el trabajo como un equipo ágil y modelar un proceso. Todo lo que hagas se convierte en tu <b>apunte</b> y en el avance de tu <b>proyecto</b>.</p>
+</div></header>
+
+<div class="bar-wrap"><div class="in">
+  <div class="prow">
+    <div class="prog" role="status" aria-live="polite"><div class="row"><span>Avance total</span><span id="pct">0 %</span></div><div class="bar"><i id="barfill"></i></div></div>
+    <div><button class="btn ghost sm" id="btnSave" type="button">💾 Guardar avance</button> <button class="btn ghost sm" id="btnLoad" type="button">📂 Cargar avance</button><input type="file" id="fileLoad" accept=".json,application/json" class="sr" tabindex="-1" aria-label="Archivo de avance"></div>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Secciones de la práctica"></nav>
+</div></div>
+
+<div class="wrap">
+
+<!-- ================= INICIO ================= -->
+<section class="pane" id="t-inicio">
+  <div class="mission"><h2>🚀 Empieza aquí</h2>
+    <p style="margin:0">Esta página es tu guía de trabajo de la semana. Cada sesión tiene una <b>misión</b>, pasos numerados y un <b>entregable</b>. Trabajas en equipo, pero cada quien escribe su propio apunte.</p></div>
+
+  <div class="card">
+    <h2>Cómo se trabaja</h2>
+    <div class="cards">
+      <div class="cd"><b>1 · Lee la misión</b><small>Qué vas a lograr y cuánto tiempo tienes.</small></div>
+      <div class="cd"><b>2 · Haz el ejercicio</b><small>Aprende el tema aplicándolo a tu proyecto.</small></div>
+      <div class="cd"><b>3 · Escribe tu apunte</b><small>Con tus palabras. Se arma solo al final.</small></div>
+      <div class="cd"><b>4 · Guarda tu avance</b><small>Botón <b>Guardar avance</b>: descarga un archivo. La próxima sesión lo cargas con <b>Cargar avance</b>.</small></div>
+    </div>
+    <div class="note"><b>Importante:</b> esta página no guarda sola. Antes de cerrarla pulsa <b>💾 Guardar avance</b> y conserva el archivo (súbelo a AulaEscolar o guárdalo en tu memoria USB). Un integrante del equipo puede ser quien guarde, pero todos descargan su apunte.</div>
+  </div>
+
+  <div class="card">
+    <h2>Tus datos y tu equipo</h2>
+    <div class="grid2">
+      <div><label class="f" for="al-nombre">Nombre completo</label><input type="text" id="al-nombre" data-s="al.nombre" autocomplete="off"></div>
+      <div><label class="f" for="al-mat">Matrícula</label><input type="text" id="al-mat" data-s="al.mat" autocomplete="off"></div>
+      <div><label class="f" for="al-equipo">Nombre del equipo</label><input type="text" id="al-equipo" data-s="al.equipo" autocomplete="off"></div>
+      <div><label class="f" for="al-grupo">Grupo</label><input type="text" id="al-grupo" data-s="al.grupo" value="BT_COMP_5"></div>
+    </div>
+    <label class="f" for="al-team">Integrantes del equipo (uno por renglón, incluye tu nombre)</label>
+    <textarea id="al-team" data-s="al.team" placeholder="Ana López&#10;Luis Pérez&#10;Marta Ruiz&#10;Diego Soto"></textarea>
+  </div>
+
+  <div class="card">
+    <h2>Define tu proyecto de fin de semestre</h2>
+    <p class="lead">Un buen proyecto cabe en un párrafo. Responde en equipo; podrás afinarlo en cualquier sesión.</p>
+    <label class="f" for="pj-nombre">Nombre del sistema</label>
+    <input type="text" id="pj-nombre" data-s="proj.nombre" placeholder="Ejemplo: Sistema de préstamo de equipo">
+    <label class="f" for="pj-problema">¿Qué problema resuelve?</label>
+    <textarea id="pj-problema" data-s="proj.problema" placeholder="Ejemplo: Hoy el préstamo de laptops y proyectores se anota en una libreta y se pierde el control de quién lo tiene."></textarea>
+    <div class="grid2">
+      <div><label class="f" for="pj-usuarios">¿Quiénes lo usan? (usuarios)</label><textarea id="pj-usuarios" data-s="proj.usuarios" placeholder="Alumnos, docentes, encargado de laboratorio"></textarea></div>
+      <div><label class="f" for="pj-objetivo">Objetivo (una frase con verbo)</label><textarea id="pj-objetivo" data-s="proj.objetivo" placeholder="Registrar y controlar el préstamo y la devolución del equipo del plantel."></textarea></div>
+    </div>
+    <label class="f" for="pj-alcance">Alcance: qué SÍ incluye y qué NO incluye</label>
+    <textarea id="pj-alcance" data-s="proj.alcance" placeholder="Sí: registrar préstamos, devoluciones y consultar disponibilidad. No: cobros ni compra de equipo."></textarea>
+    <details><summary>¿No se me ocurre un proyecto?</summary>
+      <p>Usa el que trabajaremos en la sesión 3: <b>préstamo de equipo del plantel</b> (laptops, proyectores, extensiones). Otras ideas: control de la cooperativa, registro de visitas al laboratorio, agenda de asesorías.</p>
+      <button class="btn ghost sm" id="btnDemoProj" type="button">Usar el ejemplo de préstamo de equipo</button></details>
+  </div>
+
+  <div class="card">
+    <h2>Roles rotativos del equipo</h2>
+    <p class="lead">Cada sesión cambian los roles para que todas las personas participen. Los roles se asignan por la lista de integrantes.</p>
+    <p><button class="btn sm" id="btnRoles" type="button">Asignar roles de hoy</button> <button class="btn ghost sm" id="btnRot" type="button">Rotar roles ↻</button></p>
+    <div class="tw"><table><thead><tr><th>Integrante</th><th>Rol de hoy</th><th>¿Qué hace?</th></tr></thead><tbody id="rolesBody"><tr><td colspan="3">Escribe tus integrantes arriba y pulsa «Asignar roles de hoy».</td></tr></tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h2>Reunión diaria (stand-up) de 5 minutos</h2>
+    <p class="lead">Actividad del patio. De pie, todas las personas con voz equitativa: el tiempo se reparte en partes iguales.</p>
+    <div class="do"><b class="l">Cada persona responde</b>1) ¿Qué avancé desde la última vez? · 2) ¿Qué voy a hacer hoy? · 3) ¿Qué me está estorbando?</div>
+    <div class="tmr">
+      <button class="btn sm" id="suGo" type="button">▶ Iniciar</button>
+      <button class="btn ghost sm" id="suNext" type="button">Siguiente turno ⏭</button>
+      <button class="btn ghost sm" id="suReset" type="button">Reiniciar</button>
+      <div><span class="big" id="suClock" role="timer">00:00</span><br><span class="msg" id="suWho">Se necesita la lista de integrantes.</span></div>
+    </div>
+  </div>
+  <div class="nav2"><span></span><button class="btn" data-go="s1" type="button">Ir a la Sesión 1 →</button></div>
+</section>
+
+<!-- ================= SESION 1 ================= -->
+<section class="pane" id="t-s1">
+  <div class="mission"><h2>🎯 Sesión 1 · Miércoles 14/10 · Requisitos y diagrama de flujo de datos</h2>
+    <p style="margin:0">Tema 2.1 · Técnicas tradicionales (Waterfall y Análisis Estructurado)</p>
+    <ul><li>Entender cómo se construye un sistema por fases y cómo se levantan requisitos.</li><li>Redactar los requisitos de <b>tu proyecto</b> y dibujar su diagrama de flujo de datos (nivel 0).</li></ul>
+    <div class="chips"><span class="chip t">Stand-up 5 min</span><span class="chip">Entregable: requisitos + DFD + apunte</span><span class="chip">Tarea: terminar la lista de requisitos</span></div></div>
+
+  <div class="card">
+    <div class="step"><div class="n">1</div><div class="st"><h3>Descubre el modelo en cascada (Waterfall)</h3>
+      <p>En Waterfall se avanza por fases, una tras otra; no se pasa a la siguiente hasta terminar la anterior. Ordena las 5 fases con las flechas.</p>
+      <ol class="lst" id="wfList" style="list-style:none"></ol>
+      <button class="btn sm" id="wfCheck" type="button">Comprobar orden</button> <span class="msg" id="wfMsg" aria-live="polite"></span>
+      <details><summary>¿Cuándo conviene Waterfall?</summary><p>Cuando los requisitos están claros y casi no van a cambiar (por ejemplo, un sistema que debe cumplir una norma). Su debilidad: si algo cambia tarde, corregirlo es caro.</p></details>
+    </div></div>
+
+    <div class="step"><div class="n">2</div><div class="st"><h3>Técnicas para levantar requisitos</h3>
+      <div class="cards">
+        <div class="cd"><b>Entrevista</b><small>Preguntas directas a usuarios clave. Buena para detalles y motivos.</small></div>
+        <div class="cd"><b>Observación</b><small>Ver cómo se hace el trabajo hoy. Descubre lo que la gente no dice.</small></div>
+        <div class="cd"><b>Cuestionario</b><small>Mismas preguntas a muchas personas. Rápido y barato.</small></div>
+        <div class="cd"><b>Revisión de documentos</b><small>Formatos, reglamentos, libretas. Muestra datos y reglas reales.</small></div>
+      </div>
+      <p><b>Practica:</b> ¿qué técnica usarías?</p>
+      <div id="qTech"></div><span class="score" id="qTechS"></span>
+    </div></div>
+
+    <div class="step"><div class="n">3</div><div class="st"><h3>Requisitos funcionales y no funcionales</h3>
+      <div class="do"><b class="l">Idea clave</b><b>Funcional</b> = lo que el sistema <i>hace</i> (registrar, calcular, avisar). <b>No funcional</b> = <i>cómo</i> lo hace (rapidez, seguridad, facilidad de uso, disponibilidad).</div>
+      <div id="qReq"></div><span class="score" id="qReqS"></span>
+    </div></div>
+
+    <div class="step"><div class="n">4</div><div class="st"><h3>Redacta los requisitos de tu proyecto</h3>
+      <div class="do"><b class="l">Qué hacer</b>Agrega mínimo <b>8 requisitos</b>: al menos 5 funcionales y 3 no funcionales. Un buen requisito es claro, medible y empieza con «El sistema debe…».</div>
+      <div class="grid2">
+        <div><label class="f" for="rq-tipo">Tipo</label><select id="rq-tipo"><option value="F">Funcional</option><option value="NF">No funcional</option></select></div>
+        <div><label class="f" for="rq-pri">Prioridad</label><select id="rq-pri"><option>Debe</option><option>Debería</option><option>Podría</option></select></div>
+      </div>
+      <label class="f" for="rq-txt">Requisito</label>
+      <input type="text" id="rq-txt" placeholder="El sistema debe registrar la fecha y hora de cada préstamo">
+      <label class="f" for="rq-fuente">¿De dónde sale? (técnica)</label>
+      <select id="rq-fuente"><option>Entrevista</option><option>Observación</option><option>Cuestionario</option><option>Revisión de documentos</option></select>
+      <p><button class="btn sm" id="rqAdd" type="button">+ Agregar requisito</button> <span class="msg" id="rqMsg" aria-live="polite"></span></p>
+      <ul class="lst" id="rqList"></ul>
+      <p><span class="score" id="rqS"></span></p>
+    </div></div>
+
+    <div class="step"><div class="n">5</div><div class="st"><h3>Dibuja el diagrama de flujo de datos (nivel 0)</h3>
+      <div class="do"><b class="l">Idea clave</b>El DFD de contexto muestra tu sistema como <b>un solo proceso</b> en el centro y las <b>entidades externas</b> (quienes dan o reciben datos) alrededor. Las flechas son <b>datos</b> con nombre, no acciones.</div>
+      <div class="grid2">
+        <div><label class="f" for="en-name">Agrega una entidad externa</label><input type="text" id="en-name" placeholder="Alumno"><p><button class="btn sm" id="enAdd" type="button">+ Entidad</button></p></div>
+        <div><ul class="lst" id="enList"></ul></div>
+      </div>
+      <div class="grid3">
+        <div><label class="f" for="fl-from">De</label><select id="fl-from"></select></div>
+        <div><label class="f" for="fl-to">Hacia</label><select id="fl-to"></select></div>
+        <div><label class="f" for="fl-dato">Dato que viaja</label><input type="text" id="fl-dato" placeholder="Solicitud de préstamo"></div>
+      </div>
+      <p><button class="btn sm" id="flAdd" type="button">+ Agregar flujo</button> <span class="msg" id="flMsg" aria-live="polite"></span></p>
+      <ul class="lst" id="flList"></ul>
+      <div id="dfdBox"></div>
+      <p class="msg" id="dfdChk" aria-live="polite"></p>
+      <details><summary>Nivel 1: los subprocesos y almacenes (opcional hoy, útil mañana)</summary>
+        <label class="f" for="pr-list">Subprocesos (1.0, 2.0…) uno por renglón</label><textarea id="pr-list" data-s="procs" placeholder="1.0 Registrar solicitud&#10;2.0 Entregar equipo&#10;3.0 Registrar devolución"></textarea>
+        <label class="f" for="st-list">Almacenes de datos (D1, D2…) uno por renglón</label><textarea id="st-list" data-s="stores" placeholder="D1 Inventario de equipo&#10;D2 Préstamos"></textarea></details>
+    </div></div>
+
+    <div class="step"><div class="n">6</div><div class="st"><h3>Escribe tu apunte de la sesión (con tus palabras)</h3>
+      <label class="f" for="n-s1a">¿Qué es el modelo Waterfall y cuándo conviene? <span class="msg" id="wc-s1a"></span></label><textarea id="n-s1a" data-s="n.s1a"></textarea>
+      <label class="f" for="n-s1b">¿Qué es un diagrama de flujo de datos y para qué sirve? <span class="msg" id="wc-s1b"></span></label><textarea id="n-s1b" data-s="n.s1b"></textarea>
+      <label class="f" for="n-s1c">Da un ejemplo de requisito funcional y uno no funcional de tu proyecto y explica la diferencia. <span class="msg" id="wc-s1c"></span></label><textarea id="n-s1c" data-s="n.s1c"></textarea>
+      <div class="out"><b>Meta:</b> al menos 15 palabras en cada respuesta.</div>
+    </div></div>
+
+    <div class="step"><div class="n">7</div><div class="st"><h3>Retroalimentación: revisión grupal</h3>
+      <p>Intercambien su lista de requisitos con otro equipo y revisen juntos:</p>
+      <ul class="checks"><li><input type="checkbox" id="c-r1" data-s="chk.r1"><label for="c-r1">Cada requisito dice <b>una</b> sola cosa.</label></li><li><input type="checkbox" id="c-r2" data-s="chk.r2"><label for="c-r2">Ninguno usa palabras vagas («rápido», «fácil», «bonito»).</label></li><li><input type="checkbox" id="c-r3" data-s="chk.r3"><label for="c-r3">Los no funcionales se pueden medir (segundos, número de usuarios, etc.).</label></li><li><input type="checkbox" id="c-r4" data-s="chk.r4"><label for="c-r4">Cada entidad externa del DFD tiene al menos un flujo.</label></li></ul>
+    </div></div>
+    <div class="out"><b>Tarea:</b> terminar la lista de requisitos del sistema (paso 4).</div>
+  </div>
+  <div class="nav2"><button class="btn ghost" data-go="inicio" type="button">← Inicio</button><button class="btn" data-go="s2" type="button">Sesión 2 →</button></div>
+</section>
+
+<!-- ================= SESION 2 ================= -->
+<section class="pane" id="t-s2">
+  <div class="mission"><h2>🎯 Sesión 2 · Jueves 15/10 · Metodologías ágiles: historias, backlog y Kanban</h2>
+    <p style="margin:0">Tema 2.2 · Scrum, XP y Kanban</p>
+    <ul><li>Entender cómo trabaja un equipo ágil.</li><li>Convertir tus requisitos en <b>historias de usuario</b>, ordenarlas en un <b>backlog</b> y organizar el trabajo en un <b>tablero Kanban</b>.</li></ul>
+    <div class="chips"><span class="chip t">Stand-up 5 min en el patio</span><span class="chip">Entregable: backlog + tablero Kanban + apunte</span><span class="chip">Tarea: completar el backlog</span></div></div>
+
+  <div class="card">
+    <div class="step"><div class="n">1</div><div class="st"><h3>Reunión diaria de 5 minutos</h3>
+      <p>Hagan el stand-up con roles distintos a los de ayer. Usen el cronómetro de la pestaña <b>Inicio</b> y pulsen <b>Rotar roles</b>.</p>
+      <p><button class="btn ghost sm" data-go="inicio" type="button">Abrir cronómetro y roles</button></p>
+    </div></div>
+
+    <div class="step"><div class="n">2</div><div class="st"><h3>Conoce los tres enfoques</h3>
+      <div class="cards">
+        <div class="cd"><b>Scrum</b><small><b>Roles:</b> responsable del producto, facilitador (Scrum Master), equipo. <b>Eventos:</b> sprint, planeación, reunión diaria, revisión, retrospectiva. <b>Artefactos:</b> backlog del producto, backlog del sprint, incremento.</small></div>
+        <div class="cd"><b>XP (Programación Extrema)</b><small>Prácticas técnicas: programación en parejas, pruebas primero (TDD), integración continua, refactorización, entregas pequeñas.</small></div>
+        <div class="cd"><b>Kanban</b><small>Visualiza el trabajo en un tablero, <b>limita el trabajo en curso (WIP)</b> y mejora el flujo continuo. Sin sprints obligatorios.</small></div>
+      </div>
+      <p><b>Practica:</b> ¿a qué enfoque pertenece cada idea?</p>
+      <div id="qAgil"></div><span class="score" id="qAgilS"></span>
+    </div></div>
+
+    <div class="step"><div class="n">3</div><div class="st"><h3>Escribe historias de usuario</h3>
+      <div class="do"><b class="l">Fórmula</b><b>Como</b> [tipo de usuario] <b>quiero</b> [una acción] <b>para</b> [el beneficio]. Ejemplo: «Como <i>alumno</i> quiero <i>consultar qué equipos hay disponibles</i> para <i>no ir al laboratorio en vano</i>».</div>
+      <p><button class="btn ghost sm" id="stSug" type="button">💡 Tomar el siguiente requisito funcional como punto de partida</button></p>
+      <div class="grid3">
+        <div><label class="f" for="st-rol">Como… (usuario)</label><input type="text" id="st-rol" placeholder="alumno"></div>
+        <div><label class="f" for="st-quiero">Quiero…</label><input type="text" id="st-quiero" placeholder="consultar los equipos disponibles"></div>
+        <div><label class="f" for="st-para">Para…</label><input type="text" id="st-para" placeholder="no ir al laboratorio en vano"></div>
+      </div>
+      <label class="f" for="st-crit">Criterio de aceptación (¿cómo sabremos que está terminada?)</label>
+      <input type="text" id="st-crit" placeholder="Muestra la lista con el estado de cada equipo en menos de 3 segundos">
+      <div class="grid2">
+        <div><label class="f" for="st-pri">Prioridad</label><select id="st-pri"><option>Alta</option><option>Media</option><option>Baja</option></select></div>
+        <div><label class="f" for="st-pts">Tamaño en puntos (esfuerzo)</label><select id="st-pts"><option>1</option><option>2</option><option>3</option><option>5</option><option>8</option></select></div>
+      </div>
+      <p><button class="btn sm" id="stAdd" type="button">+ Agregar al backlog</button> <span class="msg" id="stMsg" aria-live="polite"></span></p>
+    </div></div>
+
+    <div class="step"><div class="n">4</div><div class="st"><h3>Ordena tu backlog</h3>
+      <div class="do"><b class="l">Qué hacer</b>Reúne al menos <b>6 historias</b>. Sube las más importantes (flechas ▲▼). Una historia de más de 5 puntos conviene dividirla.</div>
+      <div class="tw"><table><thead><tr><th>#</th><th>Historia</th><th>Prior.</th><th>Pts</th><th>INVEST</th><th></th></tr></thead><tbody id="blBody"><tr><td colspan="6">Aún no hay historias.</td></tr></tbody></table></div>
+      <p><span class="score" id="blS"></span></p>
+    </div></div>
+
+    <div class="step"><div class="n">5</div><div class="st"><h3>Arma tu tablero Kanban</h3>
+      <div class="do"><b class="l">Qué hacer</b>Define la <b>meta de tu primer sprint</b> y mueve las historias que comenzarán. En «En curso» puede haber <b>máximo 3</b> tarjetas (límite WIP): terminar antes de empezar más.</div>
+      <label class="f" for="sp-goal">Meta del sprint (una frase)</label>
+      <input type="text" id="sp-goal" data-s="sprint" placeholder="Que un alumno pueda consultar y solicitar un equipo">
+      <div class="kb" id="kanban" style="margin-top:10px"></div>
+      <p class="msg" id="kbMsg" aria-live="polite"></p>
+    </div></div>
+
+    <div class="step"><div class="n">6</div><div class="st"><h3>Escribe tu apunte de la sesión</h3>
+      <label class="f" for="n-s2a">¿En qué se diferencian Scrum y Kanban? <span class="msg" id="wc-s2a"></span></label><textarea id="n-s2a" data-s="n.s2a"></textarea>
+      <label class="f" for="n-s2b">¿Qué es una historia de usuario y por qué se escribe así? <span class="msg" id="wc-s2b"></span></label><textarea id="n-s2b" data-s="n.s2b"></textarea>
+      <label class="f" for="n-s2c">¿Para qué sirve limitar el trabajo en curso (WIP)? <span class="msg" id="wc-s2c"></span></label><textarea id="n-s2c" data-s="n.s2c"></textarea>
+      <div class="out"><b>Meta:</b> al menos 15 palabras en cada respuesta.</div>
+    </div></div>
+
+    <div class="step"><div class="n">7</div><div class="st"><h3>Cierre: revisión grupal de los requisitos</h3>
+      <ul class="checks"><li><input type="checkbox" id="c-b1" data-s="chk.b1"><label for="c-b1">Cada historia viene de un requisito de la lista (o lo mejora).</label></li><li><input type="checkbox" id="c-b2" data-s="chk.b2"><label for="c-b2">Todas tienen criterio de aceptación.</label></li><li><input type="checkbox" id="c-b3" data-s="chk.b3"><label for="c-b3">El backlog está ordenado por prioridad.</label></li><li><input type="checkbox" id="c-b4" data-s="chk.b4"><label for="c-b4">No hay más de 3 tarjetas «En curso».</label></li></ul>
+    </div></div>
+    <div class="out"><b>Tarea:</b> completar el backlog del proyecto (paso 4).</div>
+  </div>
+  <div class="nav2"><button class="btn ghost" data-go="s1" type="button">← Sesión 1</button><button class="btn" data-go="s3" type="button">Sesión 3 →</button></div>
+</section>
+
+<!-- ================= SESION 3 ================= -->
+<section class="pane" id="t-s3">
+  <div class="mission"><h2>🎯 Sesión 3 · Viernes 16/10 · Modelado de procesos (BPMN) y herramientas CASE</h2>
+    <p style="margin:0">Temas 2.3 y 2.4</p>
+    <ul><li>Leer y construir un diagrama BPMN.</li><li>Modelar el <b>proceso de préstamo de equipo</b> y reproducirlo en una herramienta CASE.</li></ul>
+    <div class="chips"><span class="chip t">Revisa tu backlog 5 min</span><span class="chip">Entregable: diagrama BPMN en herramienta CASE + apunte</span><span class="chip">Cierre: presentación breve</span></div></div>
+
+  <div class="card">
+    <div class="step"><div class="n">1</div><div class="st"><h3>Revisión del backlog y del avance</h3>
+      <p>Cada equipo revisa su backlog y el tablero Kanban: ¿qué se completó? ¿qué sigue?</p>
+      <p><span class="score" id="s3Dash"></span></p></div></div>
+
+    <div class="step"><div class="n">2</div><div class="st"><h3>Aprende los símbolos de BPMN</h3>
+      <div class="cards">
+        <div class="cd"><b>◯ Evento de inicio</b><small>Círculo de línea delgada. Donde comienza el proceso.</small></div>
+        <div class="cd"><b>▭ Tarea</b><small>Rectángulo redondeado. Una acción con verbo: «Revisar solicitud».</small></div>
+        <div class="cd"><b>◇ Compuerta (decisión)</b><small>Rombo. El camino se divide: «¿Hay equipo disponible?» Sí / No.</small></div>
+        <div class="cd"><b>◉ Evento de fin</b><small>Círculo de línea gruesa. Donde termina el proceso.</small></div>
+        <div class="cd"><b>▤ Carriles (pools/lanes)</b><small>Franjas horizontales: quién hace cada cosa (Alumno, Encargado, Sistema).</small></div>
+        <div class="cd"><b>→ Flujo de secuencia</b><small>Flecha que indica el orden.</small></div>
+      </div>
+      <p><b>Practica:</b></p>
+      <div id="qBpmn"></div><span class="score" id="qBpmnS"></span>
+    </div></div>
+
+    <div class="step"><div class="n">3</div><div class="st"><h3>Modela el proceso de préstamo de equipo</h3>
+      <div class="do"><b class="l">Qué hacer</b>Agrega los pasos <b>en orden</b>. Debe haber <b>un inicio</b>, al menos <b>un fin</b> y las decisiones deben indicar a qué paso va el camino «No». Puedes cargar un ejemplo y modificarlo con tus reglas.</div>
+      <p><button class="btn ghost sm" id="bpDemo" type="button">Cargar ejemplo para empezar</button> <button class="btn danger sm" id="bpClear" type="button">Vaciar</button></p>
+      <div class="grid3">
+        <div><label class="f" for="bp-t">Tipo de elemento</label><select id="bp-t"><option value="inicio">◯ Inicio</option><option value="tarea" selected>▭ Tarea</option><option value="decision">◇ Decisión</option><option value="fin">◉ Fin</option></select></div>
+        <div><label class="f" for="bp-lane">Carril (quién)</label><select id="bp-lane"><option>Alumno</option><option>Encargado(a)</option><option>Sistema</option></select></div>
+        <div><label class="f" for="bp-no">Si es decisión: si «No», ir al paso #</label><input type="number" id="bp-no" min="1" placeholder="1"></div>
+      </div>
+      <label class="f" for="bp-txt">Texto (tarea con verbo; decisión como pregunta)</label>
+      <input type="text" id="bp-txt" placeholder="Solicitar equipo">
+      <p><button class="btn sm" id="bpAdd" type="button">+ Agregar paso</button> <span class="msg" id="bpMsg" aria-live="polite"></span></p>
+      <ol class="lst" id="bpList" style="list-style:none"></ol>
+      <div class="tw" id="bpBox"></div>
+      <p class="msg" id="bpChk" aria-live="polite"></p>
+    </div></div>
+
+    <div class="step"><div class="n">4</div><div class="st"><h3>Reprodúcelo en una herramienta CASE</h3>
+      <div class="do"><b class="l">¿Qué es una herramienta CASE?</b>Software que ayuda a analizar, diseñar y documentar sistemas con diagramas (BPMN, DFD, UML). Ejemplos: <b>bpmn.io</b> (modelador BPMN en el navegador), <b>draw.io / diagrams.net</b>, <b>Bizagi Modeler</b>.</div>
+      <ul class="checks">
+        <li><input type="checkbox" id="c-c1" data-s="chk.c1"><label for="c-c1">Abrí una herramienta CASE (bpmn.io, draw.io o Bizagi) en mi computadora.</label></li>
+        <li><input type="checkbox" id="c-c2" data-s="chk.c2"><label for="c-c2">Dibujé los carriles y todos los pasos de mi diagrama de arriba.</label></li>
+        <li><input type="checkbox" id="c-c3" data-s="chk.c3"><label for="c-c3">Conecté todo con flechas y puse «Sí / No» en las decisiones.</label></li>
+        <li><input type="checkbox" id="c-c4" data-s="chk.c4"><label for="c-c4">Guardé el archivo del diagrama (.bpmn, .drawio o .vsdx) y exporté una imagen PNG.</label></li>
+        <li><input type="checkbox" id="c-c5" data-s="chk.c5"><label for="c-c5">Escribí en mi apunte qué herramienta usé y por qué.</label></li>
+      </ul>
+      <label class="f" for="n-s3case">¿Qué herramienta CASE usaste y qué ventajas viste frente a dibujar a mano? <span class="msg" id="wc-s3case"></span></label><textarea id="n-s3case" data-s="n.s3case"></textarea>
+    </div></div>
+
+    <div class="step"><div class="n">5</div><div class="st"><h3>Escribe tu apunte de la sesión</h3>
+      <label class="f" for="n-s3a">¿Qué es BPMN y para qué sirve en el análisis de sistemas? <span class="msg" id="wc-s3a"></span></label><textarea id="n-s3a" data-s="n.s3a"></textarea>
+      <label class="f" for="n-s3b">Explica con tus palabras tu proceso de préstamo: quién hace qué y dónde hay decisiones. <span class="msg" id="wc-s3b"></span></label><textarea id="n-s3b" data-s="n.s3b"></textarea>
+      <div class="out"><b>Meta:</b> al menos 15 palabras en cada respuesta.</div>
+    </div></div>
+
+    <div class="step"><div class="n">6</div><div class="st"><h3>Cierre: presentación breve de tu diagrama (2 min)</h3>
+      <label class="f" for="n-pres">Guion en 3 frases: qué proceso modelaste, qué decisión importante tiene y qué mejorarías. <span class="msg" id="wc-pres"></span></label><textarea id="n-pres" data-s="n.pres"></textarea>
+    </div></div>
+    <div class="out"><b>Tarea:</b> concluir el diagrama BPMN del proyecto en la herramienta CASE y entregarlo.</div>
+  </div>
+  <div class="nav2"><button class="btn ghost" data-go="s2" type="button">← Sesión 2</button><button class="btn" data-go="proyecto" type="button">Seguimiento →</button></div>
+</section>
+
+<!-- ================= PROYECTO ================= -->
+<section class="pane" id="t-proyecto">
+  <div class="mission"><h2>📌 Seguimiento del proyecto de fin de semestre</h2>
+    <p style="margin:0">Aquí ves cómo va tu proyecto y registras la bitácora del equipo. Se actualiza con lo que hagas en las sesiones.</p></div>
+  <div class="card">
+    <h2 id="pjTitle">Tu proyecto</h2>
+    <p class="lead" id="pjObj"></p>
+    <div class="dash" id="dash"></div>
+    <h3>Siguiente paso sugerido</h3>
+    <div class="note" id="nextStep" aria-live="polite"></div>
+  </div>
+  <div class="card">
+    <h2>Bitácora del equipo</h2>
+    <p class="lead">Una entrada por sesión, escrita entre todas las personas del equipo.</p>
+    <div class="grid2">
+      <div><label class="f" for="lg-d">Fecha</label><select id="lg-d"><option>14/10/2026</option><option>15/10/2026</option><option>16/10/2026</option><option>Otra</option></select></div>
+      <div><label class="f" for="lg-obst">Obstáculos</label><input type="text" id="lg-obst"></div>
+    </div>
+    <label class="f" for="lg-logro">Qué logramos</label><input type="text" id="lg-logro">
+    <label class="f" for="lg-sig">Siguiente paso (quién y para cuándo)</label><input type="text" id="lg-sig">
+    <p><button class="btn sm" id="lgAdd" type="button">+ Agregar a la bitácora</button></p>
+    <div class="tw"><table><thead><tr><th>Fecha</th><th>Logramos</th><th>Obstáculos</th><th>Siguiente paso</th><th></th></tr></thead><tbody id="lgBody"><tr><td colspan="5">Aún no hay entradas.</td></tr></tbody></table></div>
+  </div>
+  <div class="nav2"><button class="btn ghost" data-go="s3" type="button">← Sesión 3</button><button class="btn" data-go="apunte" type="button">Mi apunte →</button></div>
+</section>
+
+<!-- ================= APUNTE ================= -->
+<section class="pane" id="t-apunte">
+  <div class="mission"><h2>📒 Mi apunte y mi entrega</h2>
+    <p style="margin:0">Tu apunte se arma solo con lo que escribiste. Revísalo, descárgalo y entrégalo en AulaEscolar.</p></div>
+  <div class="card">
+    <h2>Lista de cotejo antes de entregar</h2>
+    <ul class="checks" id="lcApunte"></ul>
+    <p class="msg">Esta lista marca automáticamente lo que ya cumpliste.</p>
+  </div>
+  <div class="card">
+    <h2>Vista previa del apunte</h2>
+    <div class="note-prev" id="notePrev" tabindex="0" aria-label="Vista previa del apunte"></div>
+    <p><button class="btn" id="dlHtml" type="button">⬇ Descargar apunte (.html)</button> <button class="btn ghost" id="dlMd" type="button">⬇ Descargar apunte (.md)</button> <button class="btn ghost" id="dlJson" type="button">💾 Guardar avance (.json)</button> <span class="msg" id="dlMsg" role="status"></span></p>
+    <div class="note"><b>Para entregar:</b> descarga el apunte (.html) y abre el archivo; con <kbd>Ctrl</kbd>+<kbd>P</kbd> puedes guardarlo como PDF. Sube a AulaEscolar el apunte, tu archivo de avance (.json), la imagen y el archivo de tu diagrama BPMN hecho en la herramienta CASE.</div>
+  </div>
+  <div class="card">
+    <h2>Rúbrica</h2>
+    <div class="tw"><table><thead><tr><th>Criterio</th><th>Excelente (4)</th><th>Bueno (3)</th><th>En proceso (2)</th><th>Inicial (1)</th></tr></thead><tbody>
+      <tr><td><b>Requisitos</b></td><td>≥ 8 claros y medibles, F y NF</td><td>≥ 8 con alguna vaguedad</td><td>Pocos o confusos</td><td>Sin lista</td></tr>
+      <tr><td><b>DFD / BPMN</b></td><td>Diagramas completos y coherentes con los requisitos</td><td>Completos con errores menores</td><td>Incompletos</td><td>No entrega</td></tr>
+      <tr><td><b>Backlog y Kanban</b></td><td>≥ 6 historias con criterio, priorizadas, WIP respetado</td><td>Historias sin algún criterio</td><td>Pocas historias</td><td>Sin backlog</td></tr>
+      <tr><td><b>Apunte</b></td><td>Con sus propias palabras, correcto y completo</td><td>Correcto, algo breve</td><td>Copiado o incompleto</td><td>Sin apunte</td></tr>
+      <tr><td><b>Trabajo en equipo</b></td><td>Roles rotados, bitácora completa</td><td>Bitácora parcial</td><td>Roles sin rotar</td><td>Sin evidencia</td></tr>
+    </tbody></table></div>
+  </div>
+  <div class="nav2"><button class="btn ghost" data-go="proyecto" type="button">← Seguimiento</button><span></span></div>
+</section>
+
+</div>
+<script>
+"use strict";
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const words=t=>String(t||"").trim().split(/\s+/).filter(Boolean).length;
+const lines=t=>String(t||"").split(/\n/).map(x=>x.trim()).filter(Boolean);
+
+/* ================= ESTADO ================= */
+const DEF=()=>({al:{grupo:"BT_COMP_5"},proj:{},reqs:[],ents:[],flows:[],procs:"",stores:"",stories:[],stSeq:0,sugIdx:0,sprint:"",bp:[],log:[],n:{},chk:{},q:{},wfOrder:[2,0,4,1,3],wf:false,rot:0,roles:false});
+let S=DEF();
+function gp(p){return p.split(".").reduce((o,k)=>o==null?o:o[k],S);}
+function sp(p,v){const a=p.split(".");let o=S;for(let i=0;i<a.length-1;i++){if(typeof o[a[i]]!=="object"||o[a[i]]===null)o[a[i]]={};o=o[a[i]];}o[a[a.length-1]]=v;}
+let saveT=null;
+function persist(){try{clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem("ads_avance",JSON.stringify(S));}catch(e){}},400);}catch(e){}}
+
+/* ================= PESTAÑAS ================= */
+const TABS=[["inicio","Inicio"],["s1","Sesión 1 · 14/10"],["s2","Sesión 2 · 15/10"],["s3","Sesión 3 · 16/10"],["proyecto","Proyecto"],["apunte","Mi apunte"]];
+let cur="inicio";
+$("#tabs").innerHTML=TABS.map(t=>`<button type="button" role="tab" id="tb-${t[0]}" data-tab="${t[0]}" aria-selected="false">${t[1]}<span class="pc" id="pc-${t[0]}"></span></button>`).join("");
+function show(id){
+  if(!TABS.some(t=>t[0]===id))id="inicio";cur=id;
+  $$(".pane").forEach(p=>p.classList.toggle("on",p.id==="t-"+id));
+  $$("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===id?"true":"false"));
+  try{history.replaceState(null,"","#"+id);}catch(e){}
+  window.scrollTo({top:0});refresh();
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-tab]");if(t){show(t.dataset.tab);return;}
+  const g=e.target.closest("[data-go]");if(g){show(g.dataset.go);}
+});
+
+/* ================= BINDING DE CAMPOS ================= */
+function syncInputs(){
+  $$("[data-s]").forEach(el=>{const v=gp(el.dataset.s);if(el.type==="checkbox")el.checked=!!v;else el.value=v==null?(el.defaultValue||""):v;});
+}
+function initBind(){
+  $$("[data-s]").forEach(el=>{
+    const v=gp(el.dataset.s);
+    if(v==null&&el.value&&el.type!=="checkbox")sp(el.dataset.s,el.value);
+    el.addEventListener("input",()=>{sp(el.dataset.s,el.type==="checkbox"?el.checked:el.value);refresh();});
+    el.addEventListener("change",()=>{if(el.type==="checkbox"){sp(el.dataset.s,el.checked);refresh();}});
+  });
+}
+
+/* ================= QUIZ GENÉRICO ================= */
+const QZ={
+ tech:{box:"qTech",sc:"qTechS",items:[
+  {q:"Quieres ver cómo se anotan hoy los préstamos en la libreta del laboratorio.",o:["Cuestionario","Revisión de documentos","Entrevista"],c:1,e:"La libreta es un documento real: muestra qué datos se registran y con qué reglas."},
+  {q:"Necesitas la opinión de 120 alumnos en poco tiempo.",o:["Cuestionario","Observación","Entrevista"],c:0,e:"Un cuestionario llega a muchas personas rápido y con el mismo formato."},
+  {q:"Quieres que el encargado te explique qué hace cuando alguien no devuelve el equipo.",o:["Revisión de documentos","Cuestionario","Entrevista"],c:2,e:"La entrevista permite preguntar los motivos y reglas que no están escritas."},
+  {q:"Quieres descubrir por qué tarda tanto un registro de devolución.",o:["Observación","Cuestionario","Revisión de documentos"],c:0,e:"Observar el trabajo real muestra pasos y demoras que la gente no menciona."}]},
+ req:{box:"qReq",sc:"qReqS",items:[
+  {q:"«El sistema debe registrar la fecha y hora de cada préstamo.»",o:["Funcional","No funcional"],c:0,e:"Describe lo que el sistema hace: registrar datos."},
+  {q:"«La consulta de disponibilidad debe responder en menos de 3 segundos.»",o:["Funcional","No funcional"],c:1,e:"Habla de rendimiento (cómo de rápido lo hace): es no funcional y medible."},
+  {q:"«El sistema debe enviar un aviso cuando un préstamo esté vencido.»",o:["Funcional","No funcional"],c:0,e:"Es una función: avisar."},
+  {q:"«Solo el encargado puede modificar el inventario.»",o:["Funcional","No funcional"],c:1,e:"Es seguridad/control de acceso: una cualidad que restringe el sistema."},
+  {q:"«El sistema debe estar disponible el 99 % del horario escolar.»",o:["Funcional","No funcional"],c:1,e:"Disponibilidad es una cualidad del sistema."},
+  {q:"«El sistema debe permitir buscar un equipo por su número de inventario.»",o:["Funcional","No funcional"],c:0,e:"Buscar es una función."}]},
+ agil:{box:"qAgil",sc:"qAgilS",items:[
+  {q:"Un tablero con columnas y un límite de trabajo en curso.",o:["Scrum","XP","Kanban"],c:2,e:"Kanban visualiza el flujo y limita el WIP."},
+  {q:"Programar en parejas y escribir las pruebas antes del código.",o:["Scrum","XP","Kanban"],c:1,e:"Son prácticas técnicas de la Programación Extrema (XP)."},
+  {q:"Sprints de dos semanas con planeación, revisión y retrospectiva.",o:["Scrum","XP","Kanban"],c:0,e:"Los sprints y sus eventos son de Scrum."},
+  {q:"El responsable del producto ordena el backlog por valor.",o:["Scrum","XP","Kanban"],c:0,e:"El Product Owner es un rol de Scrum."},
+  {q:"Integración continua y refactorización frecuente.",o:["Scrum","XP","Kanban"],c:1,e:"Son prácticas de XP."},
+  {q:"Flujo continuo, sin iteraciones de duración fija.",o:["Scrum","XP","Kanban"],c:2,e:"Kanban trabaja con flujo continuo."}]},
+ bpmn:{box:"qBpmn",sc:"qBpmnS",items:[
+  {q:"¿Qué símbolo representa una decisión en BPMN?",o:["Un círculo","Un rombo","Un rectángulo"],c:1,e:"La compuerta es un rombo; de ella salen caminos distintos."},
+  {q:"¿Cómo distingues un evento de fin de uno de inicio?",o:["Por su línea gruesa","Por su color rojo","Por estar en el centro"],c:0,e:"El inicio tiene línea delgada; el fin, línea gruesa."},
+  {q:"¿Cómo debe escribirse el nombre de una tarea?",o:["Con un sustantivo: «Solicitud»","Con un verbo: «Revisar solicitud»","En mayúsculas"],c:1,e:"Una tarea es una acción, por eso empieza con verbo."},
+  {q:"Los carriles (lanes) indican…",o:["El orden de las tareas","Quién realiza cada actividad","La duración de cada paso"],c:1,e:"Cada carril es un participante o rol."}]}
+};
+function renderQuiz(key){
+  const Q=QZ[key];S.q[key]=S.q[key]||{};
+  $("#"+Q.box).innerHTML=Q.items.map((it,i)=>{
+    const a=S.q[key][i];
+    return `<div class="q"><p>${i+1}. ${esc(it.q)}</p>${it.o.map((t,j)=>`<label class="opt${a!==undefined?(j===it.c?" ok":(j===a?" bad":"")):""}"><input type="radio" name="${key}${i}" value="${j}"${a===j?" checked":""}${a!==undefined?" disabled":""}><span>${esc(t)}</span></label>`).join("")}<div class="fb" aria-live="polite">${a!==undefined?(a===it.c?"✔ Correcto. ":"✘ Mejor respuesta: «"+esc(it.o[it.c])+"». ")+esc(it.e):""}</div></div>`;
+  }).join("");
+  $$("input",$("#"+Q.box)).forEach(r=>r.addEventListener("change",()=>{
+    const i=+r.name.slice(key.length);if(S.q[key][i]!==undefined)return;S.q[key][i]=+r.value;renderQuiz(key);refresh();
+  }));
+  updQuiz(key);
+}
+function qDone(k){return Object.keys(S.q[k]||{}).length===QZ[k].items.length;}
+function qScore(k){return QZ[k].items.reduce((a,it,i)=>a+((S.q[k]||{})[i]===it.c?1:0),0);}
+function updQuiz(k){const n=Object.keys(S.q[k]||{}).length;$("#"+QZ[k].sc).textContent="Aciertos: "+qScore(k)+" / "+QZ[k].items.length+(n<QZ[k].items.length?" ("+n+" respondidas)":"");}
+
+/* ================= ROLES Y STAND-UP ================= */
+const ROL=[["Facilitador/a","Modera, cuida el tiempo y que todas las personas hablen."],["Responsable del producto","Decide qué es más importante para el usuario."],["Desarrollo","Construye el entregable de la sesión."],["Secretaría","Anota acuerdos y llena la bitácora."],["Comunicación","Presenta al grupo lo que lograron."]];
+function renderRoles(){
+  const m=lines(gp("al.team"));
+  if(!S.roles||!m.length){$("#rolesBody").innerHTML='<tr><td colspan="3">Escribe tus integrantes arriba y pulsa «Asignar roles de hoy».</td></tr>';return;}
+  $("#rolesBody").innerHTML=m.map((p,i)=>{const r=ROL[(i+S.rot)%ROL.length];return `<tr><td>${esc(p)}</td><td><b>${r[0]}</b></td><td>${r[1]}</td></tr>`;}).join("");
+}
+$("#btnRoles").addEventListener("click",()=>{S.roles=true;refresh();});
+$("#btnRot").addEventListener("click",()=>{S.roles=true;S.rot=(S.rot+1)%ROL.length;refresh();});
+const SU={i:0,left:0,run:false,t:null};
+function suDraw(){
+  const m=lines(gp("al.team"));
+  const mm=String(Math.floor(SU.left/60)).padStart(2,"0"),ss=String(SU.left%60).padStart(2,"0");
+  $("#suClock").textContent=mm+":"+ss;
+  $("#suWho").textContent=!m.length?"Se necesita la lista de integrantes.":(SU.run?"Turno de "+m[SU.i]+" ("+(SU.i+1)+" de "+m.length+")":(SU.done?"¡Reunión terminada! Todas las personas hablaron.":"Listo: cada persona tendrá "+Math.floor(300/m.length)+" segundos."));
+}
+function suStop(){clearInterval(SU.t);SU.t=null;SU.run=false;}
+function suTurn(){const m=lines(gp("al.team"));SU.left=Math.floor(300/m.length);suDraw();}
+function suNext(){const m=lines(gp("al.team"));if(SU.i+1>=m.length){suStop();SU.done=true;SU.left=0;suDraw();return;}SU.i++;suTurn();}
+$("#suGo").addEventListener("click",()=>{const m=lines(gp("al.team"));if(!m.length){suDraw();return;}suStop();SU.done=false;SU.i=0;SU.run=true;suTurn();SU.t=setInterval(()=>{SU.left--;if(SU.left<=0)suNext();else suDraw();},1000);});
+$("#suNext").addEventListener("click",()=>{if(SU.run)suNext();});
+$("#suReset").addEventListener("click",()=>{suStop();SU.done=false;SU.i=0;SU.left=0;suDraw();});
+
+/* ================= DEMO PROYECTO ================= */
+$("#btnDemoProj").addEventListener("click",()=>{
+  S.proj={nombre:"Sistema de préstamo de equipo",problema:"Hoy el préstamo de laptops, proyectores y extensiones se anota en una libreta; se pierde el control de quién tiene cada equipo y cuándo debe devolverlo.",usuarios:"Alumnos, docentes y encargado(a) del laboratorio.",objetivo:"Registrar y controlar el préstamo y la devolución del equipo del plantel.",alcance:"Sí incluye: registrar préstamos y devoluciones, consultar disponibilidad y avisar vencimientos. No incluye: cobros ni compra de equipo."};
+  syncInputs();refresh();
+});
+
+/* ================= WATERFALL ================= */
+const PH=["Requisitos","Diseño","Implementación","Pruebas","Mantenimiento"];
+function renderWf(){
+  $("#wfList").innerHTML=S.wfOrder.map((p,i)=>`<li><span><b>${i+1}.</b> ${PH[p]}</span><span class="acts"><button class="btn ghost sm" type="button" data-wf="${i}:-1" aria-label="Subir ${PH[p]}"${i===0?" disabled":""}>▲</button><button class="btn ghost sm" type="button" data-wf="${i}:1" aria-label="Bajar ${PH[p]}"${i===4?" disabled":""}>▼</button></span></li>`).join("");
+  $$("[data-wf]",$("#wfList")).forEach(b=>b.addEventListener("click",()=>{const[i,d]=b.dataset.wf.split(":").map(Number),j=i+d,a=S.wfOrder;[a[i],a[j]]=[a[j],a[i]];S.wf=false;$("#wfMsg").textContent="";refresh();}));
+}
+$("#wfCheck").addEventListener("click",()=>{
+  const ok=S.wfOrder.every((p,i)=>p===i);S.wf=ok;
+  const m=$("#wfMsg");m.className="msg "+(ok?"ok":"bad");
+  m.textContent=ok?"✔ Correcto: Requisitos → Diseño → Implementación → Pruebas → Mantenimiento.":"✘ Todavía no. Piensa: ¿se puede probar algo que aún no se construyó?";
+  refresh();
+});
+
+/* ================= REQUISITOS ================= */
+const VAGUE=/\b(r[aá]pido|f[aá]cil|amigable|bueno|buena|mejor|etc|adecuad[oa]|eficiente|bonito|intuitivo|moderno)\b/i;
+function reqWarn(t){const w=[];if(VAGUE.test(t))w.push("palabra vaga: hazlo medible");if(!/\b(debe|deber[aá]|permitir[aá]?)\b/i.test(t))w.push("empieza con «El sistema debe…»");return w;}
+const cnt=()=>({F:S.reqs.filter(r=>r.t==="F").length,NF:S.reqs.filter(r=>r.t==="NF").length});
+const reqsOk=()=>{const c=cnt();return S.reqs.length>=8&&c.F>=5&&c.NF>=3;};
+$("#rqAdd").addEventListener("click",()=>{
+  const t=$("#rq-txt").value.trim(),m=$("#rqMsg");
+  if(t.length<15){m.className="msg bad";m.textContent="Escribe el requisito completo (mínimo una frase).";return;}
+  S.reqs.push({t:$("#rq-tipo").value,p:$("#rq-pri").value,x:t,f:$("#rq-fuente").value});
+  $("#rq-txt").value="";const w=reqWarn(t);m.className="msg "+(w.length?"warn":"ok");m.textContent=w.length?"Agregado, pero revisa: "+w.join("; ")+".":"✔ Agregado.";refresh();
+});
+function renderReqs(){
+  $("#rqList").innerHTML=S.reqs.map((r,i)=>{const w=reqWarn(r.x);return `<li><span><b>R${i+1}</b> · ${r.t==="F"?"Funcional":"No funcional"} · ${esc(r.p)} — ${esc(r.x)} <small>(${esc(r.f)})</small>${w.length?` <span class="msg warn">⚠ ${esc(w.join("; "))}</span>`:""}</span><span class="acts"><button class="btn danger sm" type="button" data-rd="${i}" aria-label="Eliminar requisito ${i+1}">✕</button></span></li>`;}).join("")||'<li><span class="msg">Aún no hay requisitos.</span></li>';
+  $$("[data-rd]",$("#rqList")).forEach(b=>b.addEventListener("click",()=>{S.reqs.splice(+b.dataset.rd,1);refresh();}));
+  const c=cnt();$("#rqS").textContent="Total "+S.reqs.length+"/8 · Funcionales "+c.F+"/5 · No funcionales "+c.NF+"/3"+(reqsOk()?" ✔":"");
+}
+
+/* ================= DFD ================= */
+function wrap(t,n,max){const w=String(t).split(/\s+/),o=[];let l="";w.forEach(x=>{if((l+" "+x).trim().length>n&&l){o.push(l);l=x;}else l=(l+" "+x).trim();});if(l)o.push(l);if(o.length>max){o.length=max;o[max-1]=o[max-1].replace(/.{0,2}$/,"…");}return o;}
+function tspans(lines_,x,y0,lh){return lines_.map((l,i)=>`<tspan x="${x}" y="${y0+i*lh}">${esc(l)}</tspan>`).join("");}
+function dfdSvg(){
+  const W=760,H=480,cx=W/2,cy=H/2,R=78,n=S.ents.length,central=S.proj.nombre||"Sistema";
+  const pos=S.ents.map((e,i)=>{const a=(-90+i*360/Math.max(n,1))*Math.PI/180;return{x:cx+300*Math.cos(a),y:cy+180*Math.sin(a)};});
+  function edge(c,shape,to){const dx=to.x-c.x,dy=to.y-c.y,d=Math.hypot(dx,dy)||1;if(shape==="c")return{x:c.x+dx/d*R,y:c.y+dy/d*R};const hw=68,hh=24,t=Math.min(hw/Math.abs(dx||1e-6),hh/Math.abs(dy||1e-6));return{x:c.x+dx*t,y:c.y+dy*t};}
+  const ctr={x:cx,y:cy};
+  const grp={};S.flows.forEach((f,i)=>{const k=[f.a,f.b].sort().join("|");(grp[k]=grp[k]||[]).push(i);});
+  let s=`<svg class="dg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Diagrama de flujo de datos nivel 0 de ${esc(central)}" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#12355b"/></marker></defs><rect width="${W}" height="${H}" fill="#fff"/>`;
+  S.flows.forEach((f,i)=>{
+    const ei=f.a==="P"?+f.b:+f.a;if(!pos[ei])return;
+    const e=pos[ei],k=[f.a,f.b].sort().join("|"),g=grp[k],idx=g.indexOf(i),off=(idx-(g.length-1)/2)*26;
+    const dx=ctr.x-e.x,dy=ctr.y-e.y,d=Math.hypot(dx,dy)||1,nx=-dy/d,ny=dx/d;
+    const src=f.a==="P"?ctr:e,dst=f.b==="P"?ctr:e;
+    const p1=edge(src,f.a==="P"?"c":"r",dst),p2=edge(dst,f.b==="P"?"c":"r",src);
+    const ox=nx*(off+(f.a==="P"?-9:9)),oy=ny*(off+(f.a==="P"?-9:9));
+    const x1=p1.x+ox,y1=p1.y+oy,x2=p2.x+ox,y2=p2.y+oy,mx=(x1+x2)/2,my=(y1+y2)/2;
+    s+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#12355b" stroke-width="1.8" marker-end="url(#ah)"/>`;
+    s+=`<text x="${mx.toFixed(1)}" y="${(my-4).toFixed(1)}" font-size="11.5" text-anchor="middle" fill="#1b2333" stroke="#fff" stroke-width="4" paint-order="stroke" font-family="sans-serif">${esc(f.d.length>26?f.d.slice(0,25)+"…":f.d)}</text>`;
+  });
+  s+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="#eef3fa" stroke="#12355b" stroke-width="2.5"/><text font-size="13" font-weight="700" text-anchor="middle" fill="#12355b" font-family="sans-serif">${tspans(wrap(central,14,4),cx,cy-(Math.min(wrap(central,14,4).length,4)-1)*8,16)}</text>`;
+  pos.forEach((p,i)=>{const l=wrap(S.ents[i],17,2);s+=`<rect x="${(p.x-68).toFixed(1)}" y="${(p.y-24).toFixed(1)}" width="136" height="48" rx="4" fill="#fff" stroke="#c8963e" stroke-width="2.5"/><text font-size="12.5" text-anchor="middle" fill="#1b2333" font-family="sans-serif">${tspans(l,p.x.toFixed(1),(p.y-(l.length-1)*7+4).toFixed(1),14)}</text>`;});
+  if(!n)s+=`<text x="${cx}" y="${H-14}" font-size="13" text-anchor="middle" fill="#566178" font-family="sans-serif">Agrega entidades externas y flujos para ver tu diagrama</text>`;
+  return s+"</svg>";
+}
+const dfdOk=()=>S.ents.length>=2&&S.flows.length>=3&&S.ents.every((e,i)=>S.flows.some(f=>(f.a==="P"?f.b:f.a)==String(i)));
+$("#enAdd").addEventListener("click",()=>{const v=$("#en-name").value.trim();if(!v||S.ents.length>=8)return;S.ents.push(v);$("#en-name").value="";refresh();});
+$("#flAdd").addEventListener("click",()=>{
+  const a=$("#fl-from").value,b=$("#fl-to").value,d=$("#fl-dato").value.trim(),m=$("#flMsg");m.className="msg bad";
+  if(!S.ents.length){m.textContent="Primero agrega al menos una entidad externa.";return;}
+  if(a===b||(a!=="P"&&b!=="P")){m.textContent="Cada flujo debe ir entre una entidad y el proceso central (en un DFD de contexto no se conectan dos entidades).";return;}
+  if(d.length<3){m.textContent="Escribe el nombre del dato que viaja (un sustantivo, por ejemplo «Solicitud de préstamo»).";return;}
+  if(/^(registrar|enviar|solicitar|consultar|entregar|revisar)\b/i.test(d)){m.textContent="Una flecha es un dato, no una acción: usa «Solicitud…» en vez de «Solicitar…».";return;}
+  S.flows.push({a,b,d});$("#fl-dato").value="";m.className="msg ok";m.textContent="✔ Flujo agregado.";refresh();
+});
+function renderDfd(){
+  $("#enList").innerHTML=S.ents.map((e,i)=>`<li><span>${esc(e)}</span><span class="acts"><button class="btn danger sm" type="button" data-ed="${i}" aria-label="Eliminar ${esc(e)}">✕</button></span></li>`).join("")||'<li><span class="msg">Sin entidades.</span></li>';
+  $$("[data-ed]",$("#enList")).forEach(b=>b.addEventListener("click",()=>{const k=+b.dataset.ed;S.ents.splice(k,1);S.flows=S.flows.filter(f=>(f.a==="P"?+f.b:+f.a)!==k).map(f=>{const fix=v=>v==="P"?v:String(+v>k?+v-1:+v);return{a:fix(f.a),b:fix(f.b),d:f.d};});refresh();}));
+  const opts='<option value="P">⚙ Proceso: '+esc(S.proj.nombre||"Sistema")+"</option>"+S.ents.map((e,i)=>`<option value="${i}">▭ ${esc(e)}</option>`).join("");
+  ["fl-from","fl-to"].forEach((id,k)=>{const el=$("#"+id),v=el.value;el.innerHTML=opts;el.value=v&&el.querySelector(`option[value="${v}"]`)?v:(k===0?(S.ents.length?"0":"P"):"P");});
+  const nm=v=>v==="P"?"Sistema":S.ents[+v];
+  $("#flList").innerHTML=S.flows.map((f,i)=>`<li><span>${esc(nm(f.a))} → ${esc(nm(f.b))}: <b>${esc(f.d)}</b></span><span class="acts"><button class="btn danger sm" type="button" data-fd="${i}" aria-label="Eliminar flujo ${i+1}">✕</button></span></li>`).join("")||'<li><span class="msg">Sin flujos.</span></li>';
+  $$("[data-fd]",$("#flList")).forEach(b=>b.addEventListener("click",()=>{S.flows.splice(+b.dataset.fd,1);refresh();}));
+  $("#dfdBox").innerHTML=dfdSvg();
+  const miss=S.ents.filter((e,i)=>!S.flows.some(f=>(f.a==="P"?f.b:f.a)==String(i)));
+  const c=$("#dfdChk");c.className="msg "+(dfdOk()?"ok":"warn");
+  c.textContent=dfdOk()?"✔ DFD de contexto completo: todas las entidades tienen flujos.":"Meta: al menos 2 entidades y 3 flujos"+(miss.length?"; sin flujo: "+miss.join(", "):"")+".";
+}
+
+/* ================= HISTORIAS / BACKLOG / KANBAN ================= */
+const PRI={Alta:0,Media:1,Baja:2};
+$("#stSug").addEventListener("click",()=>{
+  const f=S.reqs.filter(r=>r.t==="F"),m=$("#stMsg");
+  if(!f.length){m.className="msg warn";m.textContent="Primero escribe requisitos funcionales en la Sesión 1.";return;}
+  const r=f[S.sugIdx%f.length];S.sugIdx++;
+  $("#st-quiero").value=r.x.replace(/^el sistema (debe|deber[aá]|permitir[aá]?)\s*/i,"").replace(/\.$/,"");
+  $("#st-quiero").focus();m.className="msg";m.textContent="Punto de partida: «"+r.x+"». Completa «Como…» y «Para…».";
+});
+$("#stAdd").addEventListener("click",()=>{
+  const rol=$("#st-rol").value.trim(),q=$("#st-quiero").value.trim(),pa=$("#st-para").value.trim(),cr=$("#st-crit").value.trim(),m=$("#stMsg");m.className="msg bad";
+  if(!rol||!q||!pa){m.textContent="Completa «Como…», «Quiero…» y «Para…».";return;}
+  S.stSeq++;S.stories.push({id:"HU"+S.stSeq,rol,q,pa,cr,pri:$("#st-pri").value,pts:+$("#st-pts").value,est:"todo"});
+  ["st-rol","st-quiero","st-para","st-crit"].forEach(i=>$("#"+i).value="");
+  m.className="msg ok";m.textContent="✔ Historia agregada."+(cr?"":" Recuerda agregar el criterio de aceptación.");refresh();
+});
+function invest(h){return `<span class="chip" title="Valiosa: dice para qué">${h.pa.length>3?"✔":"✘"} V</span> <span class="chip" title="Pequeña: 5 puntos o menos">${h.pts<=5?"✔":"✘"} S</span> <span class="chip" title="Testable: tiene criterio de aceptación">${h.cr?"✔":"✘"} T</span>`;}
+function renderBacklog(){
+  $("#blBody").innerHTML=S.stories.length?S.stories.map((h,i)=>`<tr><td>${h.id}</td><td>Como <b>${esc(h.rol)}</b> quiero ${esc(h.q)} para ${esc(h.pa)}.<br><small>${h.cr?"Criterio: "+esc(h.cr):"⚠ Sin criterio de aceptación"}</small></td><td>${h.pri}</td><td>${h.pts}</td><td>${invest(h)}</td><td><span class="acts"><button class="btn ghost sm" type="button" data-bm="${i}:-1" aria-label="Subir ${h.id}"${i===0?" disabled":""}>▲</button><button class="btn ghost sm" type="button" data-bm="${i}:1" aria-label="Bajar ${h.id}"${i===S.stories.length-1?" disabled":""}>▼</button><button class="btn danger sm" type="button" data-bd="${i}" aria-label="Eliminar ${h.id}">✕</button></span></td></tr>`).join(""):'<tr><td colspan="6">Aún no hay historias.</td></tr>';
+  $$("[data-bm]",$("#blBody")).forEach(b=>b.addEventListener("click",()=>{const[i,d]=b.dataset.bm.split(":").map(Number),a=S.stories,j=i+d;[a[i],a[j]]=[a[j],a[i]];refresh();}));
+  $$("[data-bd]",$("#blBody")).forEach(b=>b.addEventListener("click",()=>{S.stories.splice(+b.dataset.bd,1);refresh();}));
+  const pts=S.stories.reduce((a,h)=>a+h.pts,0);
+  const ordered=S.stories.every((h,i,a)=>i===0||PRI[a[i-1].pri]<=PRI[h.pri]);
+  $("#blS").textContent="Historias "+S.stories.length+"/6 · Puntos totales "+pts+(S.stories.length>1?(ordered?" · ✔ ordenado por prioridad":" · ⚠ las de prioridad Alta deben ir arriba"):"");
+}
+const COLS=[["todo","Por hacer"],["doing","En curso"],["done","Hecho"]];
+function renderKanban(){
+  const doing=S.stories.filter(h=>h.est==="doing").length;
+  $("#kanban").innerHTML=COLS.map((c,ci)=>`<div><h4>${c[1]} <span class="chip">${S.stories.filter(h=>h.est===c[0]).length}${c[0]==="doing"?" / 3":""}</span></h4>${S.stories.filter(h=>h.est===c[0]).map(h=>`<div class="kc"><b>${h.id}</b> · ${esc(h.q)} <small>(${h.pts} pts)</small><div class="acts">${ci>0?`<button class="btn ghost sm" type="button" data-km="${h.id}:-1" aria-label="Mover ${h.id} a ${COLS[ci-1][1]}">◀</button>`:""}${ci<2?`<button class="btn ghost sm" type="button" data-km="${h.id}:1" aria-label="Mover ${h.id} a ${COLS[ci+1][1]}">▶</button>`:""}</div></div>`).join("")||'<small class="msg">Vacío</small>'}</div>`).join("");
+  $$("[data-km]",$("#kanban")).forEach(b=>b.addEventListener("click",()=>{
+    const[id,d]=b.dataset.km.split(":"),h=S.stories.find(x=>x.id===id),ci=COLS.findIndex(c=>c[0]===h.est)+ +d,tgt=COLS[ci][0],m=$("#kbMsg");
+    if(tgt==="doing"&&S.stories.filter(x=>x.est==="doing").length>=3){m.className="msg bad";m.textContent="⛔ Límite WIP: ya hay 3 tarjetas en curso. Termina una antes de empezar otra.";return;}
+    h.est=tgt;m.className="msg";m.textContent="";refresh();
+  }));
+  if(!S.stories.length)$("#kbMsg").textContent="Agrega historias al backlog para verlas aquí.";
+}
+
+/* ================= BPMN ================= */
+const DEMO_BP=[
+ {t:"inicio",lane:"Alumno",txt:"Necesita un equipo",no:""},
+ {t:"tarea",lane:"Alumno",txt:"Solicitar equipo",no:""},
+ {t:"tarea",lane:"Encargado(a)",txt:"Revisar solicitud",no:""},
+ {t:"decision",lane:"Encargado(a)",txt:"¿Hay equipo disponible?",no:"7"},
+ {t:"tarea",lane:"Encargado(a)",txt:"Entregar equipo",no:""},
+ {t:"tarea",lane:"Sistema",txt:"Registrar préstamo",no:""},
+ {t:"fin",lane:"Alumno",txt:"Equipo recibido",no:""},
+ {t:"fin",lane:"Alumno",txt:"Solicitud rechazada",no:""}];
+function bpLanes(){const base=["Alumno","Encargado(a)","Sistema"],used=[...new Set(S.bp.map(b=>b.lane))];return base.filter(l=>used.includes(l)).concat(used.filter(l=>!base.includes(l)));}
+function bpIssues(){
+  const is=[],b=S.bp;if(!b.length)return["Agrega los pasos de tu proceso."];
+  if(b.filter(x=>x.t==="inicio").length!==1)is.push("Debe haber exactamente 1 evento de inicio.");
+  else if(b[0].t!=="inicio")is.push("El inicio debe ser el primer paso.");
+  if(!b.some(x=>x.t==="fin"))is.push("Falta al menos un evento de fin.");
+  if(b.length&&b[b.length-1].t!=="fin")is.push("El último paso debe ser un fin.");
+  b.forEach((x,i)=>{
+    if(x.t==="tarea"&&!/^\p{L}+(ar|er|ir|ár|ér|ír)\b/iu.test(x.txt.trim()))is.push("Paso "+(i+1)+": la tarea debe empezar con un verbo («Revisar…»).");
+    if(x.t==="decision"){const n=+x.no;if(!n||n<1||n>b.length||n===i+2||n===i+1)is.push("Paso "+(i+1)+": indica a qué paso va el camino «No» (distinto del siguiente).");if(!/[?¿]/.test(x.txt))is.push("Paso "+(i+1)+": escribe la decisión como pregunta.");}
+  });
+  return is;
+}
+const bpOk=()=>S.bp.length>=5&&bpIssues().length===0;
+function bpSvg(){
+  const b=S.bp,lanes=bpLanes(),n=b.length;if(!n)return"";
+  const left=96,colW=132,laneH=130,W=left+n*colW+30,H=lanes.length*laneH+8;
+  const P=b.map((x,i)=>({x:left+i*colW+colW/2,y:lanes.indexOf(x.lane)*laneH+laneH/2+4}));
+  let s=`<svg class="dg" style="min-width:${W}px" viewBox="0 0 ${W} ${H}" role="img" aria-label="Diagrama BPMN del proceso" xmlns="http://www.w3.org/2000/svg"><defs><marker id="bh" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#12355b"/></marker></defs><rect width="${W}" height="${H}" fill="#fff"/>`;
+  lanes.forEach((l,i)=>{s+=`<rect x="1" y="${i*laneH+4}" width="${W-2}" height="${laneH}" fill="none" stroke="#9fb0c8"/><rect x="1" y="${i*laneH+4}" width="${left-30}" height="${laneH}" fill="#eef3fa" stroke="#9fb0c8"/><text font-size="11" font-weight="700" text-anchor="middle" fill="#12355b" font-family="sans-serif">${tspans(wrap(l,9,3),(left-30)/2+1,i*laneH+laneH/2+2,15)}</text>`;});
+  const E=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#12355b" stroke-width="1.6" marker-end="url(#bh)"/>`;
+  const PL=(pts,lab,lx,ly)=>`<polyline points="${pts.map(p=>p.join(",")).join(" ")}" fill="none" stroke="#12355b" stroke-width="1.6" marker-end="url(#bh)"/>`+(lab?`<text x="${lx}" y="${ly}" font-size="11.5" font-weight="700" fill="#b3372f" font-family="sans-serif" stroke="#fff" stroke-width="3" paint-order="stroke">${lab}</text>`:"");
+  const hw=t=>t==="tarea"?52:(t==="decision"?24:17),hh=t=>t==="tarea"?28:(t==="decision"?24:17);
+  b.forEach((x,i)=>{
+    if(x.t==="fin")return;
+    if(i<n-1){
+      const a=P[i],c=P[i+1],x1=a.x+hw(x.t),x2=c.x-hw(b[i+1].t);
+      const lab=x.t==="decision"?"Sí":"";
+      if(Math.abs(a.y-c.y)<2)s+=E(x1,a.y,x2,c.y)+(lab?`<text x="${x1+4}" y="${a.y-5}" font-size="11.5" font-weight="700" fill="#1d7a4a" font-family="sans-serif">${lab}</text>`:"");
+      else{const xm=(x1+x2)/2;s+=PL([[x1,a.y],[xm,a.y],[xm,c.y],[x2,c.y]],"",0,0)+(lab?`<text x="${x1+4}" y="${a.y-5}" font-size="11.5" font-weight="700" fill="#1d7a4a" font-family="sans-serif">${lab}</text>`:"");}
+    }
+    if(x.t==="decision"){
+      const j=+x.no-1;if(b[j]&&j!==i+1){
+        const a=P[i],c=P[j],yb=Math.max(a.y,c.y)+Math.min(46,laneH/2-8);
+        s+=PL([[a.x,a.y+24],[a.x,yb],[c.x,yb],[c.x,c.y+hh(b[j].t)+1]],"No",a.x+6,a.y+44);
+      }
+    }
+  });
+  b.forEach((x,i)=>{
+    const p=P[i];
+    if(x.t==="tarea")s+=`<rect x="${p.x-52}" y="${p.y-28}" width="104" height="56" rx="9" fill="#fff" stroke="#12355b" stroke-width="2"/><text font-size="11.5" text-anchor="middle" fill="#1b2333" font-family="sans-serif">${tspans(wrap(x.txt,15,3),p.x,p.y-(Math.min(wrap(x.txt,15,3).length,3)-1)*7+4,14)}</text>`;
+    else{
+      s+=x.t==="decision"?`<polygon points="${p.x},${p.y-24} ${p.x+24},${p.y} ${p.x},${p.y+24} ${p.x-24},${p.y}" fill="#fff" stroke="#c8963e" stroke-width="2.5"/><text x="${p.x}" y="${p.y+4}" font-size="15" font-weight="700" text-anchor="middle" fill="#c8963e" font-family="sans-serif">×</text>`
+        :`<circle cx="${p.x}" cy="${p.y}" r="17" fill="#fff" stroke="${x.t==="fin"?"#b3372f":"#1d7a4a"}" stroke-width="${x.t==="fin"?5:2}"/>`;
+      const l=wrap(x.txt,18,2);s+=`<text font-size="11.5" text-anchor="middle" fill="#1b2333" font-family="sans-serif">${tspans(l,p.x,p.y-30-(l.length-1)*13,13)}</text>`;
+    }
+    s+=`<text x="${p.x-(hw(x.t))}" y="${p.y-hh(x.t)-(x.t==="tarea"?4:0)+(x.t==="tarea"?0:0)}" font-size="9.5" fill="#566178" font-family="sans-serif" ${x.t==="tarea"?"":'opacity="0"'}>${i+1}</text>`;
+  });
+  return s+"</svg>";
+}
+$("#bp-t").addEventListener("change",()=>{const d=$("#bp-t").value==="decision";$("#bp-no").disabled=!d;if(!d)$("#bp-no").value="";});
+$("#bp-no").disabled=$("#bp-t").value!=="decision";
+$("#bpAdd").addEventListener("click",()=>{
+  const t=$("#bp-t").value,txt=$("#bp-txt").value.trim(),m=$("#bpMsg");m.className="msg bad";
+  if(!txt){m.textContent="Escribe el texto del paso.";return;}
+  if(S.bp.length>=14){m.textContent="Máximo 14 pasos en este modelador.";return;}
+  S.bp.push({t,lane:$("#bp-lane").value,txt,no:t==="decision"?$("#bp-no").value:""});
+  $("#bp-txt").value="";m.className="msg ok";m.textContent="✔ Paso agregado.";refresh();
+});
+$("#bpDemo").addEventListener("click",()=>{S.bp=DEMO_BP.map(x=>({...x}));refresh();});
+$("#bpClear").addEventListener("click",()=>{S.bp=[];refresh();});
+function renderBp(){
+  const ICON={inicio:"◯",tarea:"▭",decision:"◇",fin:"◉"};
+  $("#bpList").innerHTML=S.bp.map((x,i)=>`<li><span><b>${i+1}.</b> ${ICON[x.t]} ${esc(x.txt)} <small>· ${esc(x.lane)}${x.t==="decision"?" · No → "+esc(x.no||"?"):""}</small></span><span class="acts"><button class="btn ghost sm" type="button" data-pm="${i}:-1" aria-label="Subir paso ${i+1}"${i===0?" disabled":""}>▲</button><button class="btn ghost sm" type="button" data-pm="${i}:1" aria-label="Bajar paso ${i+1}"${i===S.bp.length-1?" disabled":""}>▼</button><button class="btn danger sm" type="button" data-pd="${i}" aria-label="Eliminar paso ${i+1}">✕</button></span></li>`).join("");
+  $$("[data-pm]",$("#bpList")).forEach(b=>b.addEventListener("click",()=>{const[i,d]=b.dataset.pm.split(":").map(Number),a=S.bp,j=i+d;[a[i],a[j]]=[a[j],a[i]];refresh();}));
+  $$("[data-pd]",$("#bpList")).forEach(b=>b.addEventListener("click",()=>{S.bp.splice(+b.dataset.pd,1);refresh();}));
+  $("#bpBox").innerHTML=bpSvg();
+  const is=bpIssues(),c=$("#bpChk");c.className="msg "+(bpOk()?"ok":"warn");
+  c.innerHTML=bpOk()?"✔ Diagrama válido: inicio, fin, tareas con verbo y decisiones con camino «No».":(S.bp.length<5&&!is.length?"Meta: al menos 5 pasos.":"Por corregir: "+is.map(esc).join(" · "));
+}
+
+/* ================= BITÁCORA ================= */
+$("#lgAdd").addEventListener("click",()=>{
+  const l=$("#lg-logro").value.trim();if(!l)return;
+  S.log.push({d:$("#lg-d").value,l,o:$("#lg-obst").value.trim(),s:$("#lg-sig").value.trim()});
+  ["lg-logro","lg-obst","lg-sig"].forEach(i=>$("#"+i).value="");refresh();
+});
+function renderLog(){
+  $("#lgBody").innerHTML=S.log.map((x,i)=>`<tr><td>${esc(x.d)}</td><td>${esc(x.l)}</td><td>${esc(x.o)||"—"}</td><td>${esc(x.s)||"—"}</td><td><button class="btn danger sm" type="button" data-ld="${i}" aria-label="Eliminar entrada ${i+1}">✕</button></td></tr>`).join("")||'<tr><td colspan="5">Aún no hay entradas.</td></tr>';
+  $$("[data-ld]",$("#lgBody")).forEach(b=>b.addEventListener("click",()=>{S.log.splice(+b.dataset.ld,1);refresh();}));
+}
+
+/* ================= PROGRESO ================= */
+const NOTES={s1:["s1a","s1b","s1c"],s2:["s2a","s2b","s2c"],s3:["s3a","s3b","s3case","pres"]};
+const noteOk=k=>words(S.n[k])>=15;
+const caseChecks=()=>["c1","c2","c3","c4","c5"].filter(k=>S.chk[k]).length;
+function items(){
+  const A=S.al||{},P=S.proj||{};
+  return{
+   inicio:[A.nombre,A.mat,lines(A.team).length>=2,P.nombre,P.problema,P.usuarios,P.objetivo,P.alcance].map(Boolean),
+   s1:[S.wf,qDone("tech"),qDone("req"),reqsOk(),dfdOk(),...NOTES.s1.map(noteOk)],
+   s2:[qDone("agil"),S.stories.length>=6,!!(S.sprint||"").trim(),S.stories.some(h=>h.est!=="todo"),...NOTES.s2.map(noteOk)],
+   s3:[qDone("bpmn"),bpOk(),caseChecks()>=4,...NOTES.s3.map(noteOk)],
+   proyecto:[S.log.length>=1,S.log.length>=3]
+  };
+}
+function progress(){
+  const it=items(),pc={};let tot=0,n=0;
+  Object.keys(it).forEach(k=>{const a=it[k];pc[k]=Math.round(a.filter(Boolean).length*100/a.length);tot+=pc[k];n++;});
+  return{pc,all:Math.round(tot/n)};
+}
+function renderProg(){
+  const p=progress();
+  $("#pct").textContent=p.all+" %";$("#barfill").style.width=p.all+"%";
+  TABS.forEach(t=>{const v=p.pc[t[0]];$("#pc-"+t[0]).textContent=v==null?"":(v===100?" ✓":" "+v+"%");});
+  Object.keys(NOTES).forEach(s=>NOTES[s].forEach(k=>{const w=words(S.n[k]),el=$("#wc-"+k);if(el){el.textContent="("+w+"/15 palabras)";el.className="msg "+(w>=15?"ok":"");}}));
+}
+
+/* ================= SEGUIMIENTO ================= */
+function renderDash(){
+  const c=cnt(),done=S.stories.filter(h=>h.est==="done").length,pts=S.stories.reduce((a,h)=>a+h.pts,0),donePts=S.stories.filter(h=>h.est==="done").reduce((a,h)=>a+h.pts,0);
+  $("#pjTitle").textContent=S.proj.nombre||"Tu proyecto (aún sin nombre)";
+  $("#pjObj").textContent=S.proj.objetivo||"Define el objetivo en la pestaña Inicio.";
+  const M=(t,v,s)=>`<div class="m"><small>${t}</small><b>${v}</b><small>${s}</small></div>`;
+  $("#dash").innerHTML=M("Requisitos",S.reqs.length,"F "+c.F+" · NF "+c.NF+(reqsOk()?" ✔":" (meta 8)"))+M("DFD nivel 0",S.flows.length+" flujos",S.ents.length+" entidades"+(dfdOk()?" ✔":""))+M("Historias",S.stories.length,"meta 6 · "+pts+" puntos")+M("Kanban",done+"/"+S.stories.length,"hechas · "+donePts+" pts entregados")+M("BPMN",S.bp.length+" pasos",bpOk()?"válido ✔":"por revisar")+M("Bitácora",S.log.length,"entradas");
+  let nx="¡Excelente! Revisa tu apunte y entrégalo.";
+  if(!S.proj.nombre||!S.proj.problema)nx="Define tu proyecto en la pestaña Inicio.";
+  else if(!reqsOk())nx="Completa la lista de requisitos (8 con 5 funcionales y 3 no funcionales).";
+  else if(!dfdOk())nx="Termina el DFD de contexto: toda entidad debe tener al menos un flujo.";
+  else if(S.stories.length<6)nx="Escribe historias de usuario hasta tener 6 en el backlog.";
+  else if(!S.stories.some(h=>h.est!=="todo"))nx="Mueve las primeras historias al tablero Kanban y define la meta del sprint.";
+  else if(!bpOk())nx="Modela el proceso de préstamo en BPMN (mínimo 5 pasos, válido).";
+  else if(caseChecks()<4)nx="Reproduce tu diagrama en una herramienta CASE y marca la lista.";
+  else if(!S.log.length)nx="Registra la bitácora del equipo.";
+  $("#nextStep").textContent=nx;
+  $("#s3Dash").textContent="Backlog: "+S.stories.length+" historias · Hechas: "+done+" · En curso: "+S.stories.filter(h=>h.est==="doing").length+" · Requisitos: "+S.reqs.length;
+}
+
+/* ================= APUNTE ================= */
+const SEC=[
+ ["Sesión 1 · Técnicas tradicionales: Waterfall y Análisis Estructurado",[["¿Qué es el modelo Waterfall y cuándo conviene?","s1a"],["¿Qué es un diagrama de flujo de datos y para qué sirve?","s1b"],["Requisito funcional vs. no funcional (con ejemplos de mi proyecto)","s1c"]]],
+ ["Sesión 2 · Metodologías ágiles: Scrum, XP y Kanban",[["¿En qué se diferencian Scrum y Kanban?","s2a"],["¿Qué es una historia de usuario y por qué se escribe así?","s2b"],["¿Para qué sirve limitar el trabajo en curso (WIP)?","s2c"]]],
+ ["Sesión 3 · BPMN y herramientas CASE",[["¿Qué es BPMN y para qué sirve?","s3a"],["Mi proceso de préstamo explicado","s3b"],["Herramienta CASE que usé y sus ventajas","s3case"],["Guion de mi presentación","pres"]]]
+];
+function buildNote(){
+  const A=S.al||{},P=S.proj||{},ne=v=>v&&String(v).trim()?v:"(sin completar)";
+  const nm=v=>v==="P"?"Sistema":S.ents[+v];
+  const kb=c=>S.stories.filter(h=>h.est===c).map(h=>h.id+" "+h.q).join("; ")||"—";
+  const html=[],md=[];
+  const H1=t=>{html.push("<h1>"+esc(t)+"</h1>");md.push("# "+t+"\n");},H2=t=>{html.push("<h2>"+esc(t)+"</h2>");md.push("\n## "+t+"\n");},H3=t=>{html.push("<h3>"+esc(t)+"</h3>");md.push("\n### "+t+"\n");},Pp=t=>{html.push("<p>"+esc(t).replace(/\n/g,"<br>")+"</p>");md.push(t+"\n");};
+  const UL=a=>{html.push("<ul>"+a.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>");md.push(a.map(x=>"- "+x).join("\n")+"\n");};
+  H1("Apunte · Análisis y Diseño de Sistemas");
+  Pp("Alumno: "+ne(A.nombre)+" · Matrícula: "+ne(A.mat)+" · Grupo: "+ne(A.grupo)+"\nEquipo: "+ne(A.equipo)+" · Integrantes: "+(lines(A.team).join(", ")||"(sin completar)")+"\nGenerado: "+new Date().toLocaleString("es-MX"));
+  H2("Mi proyecto de fin de semestre");
+  UL(["Sistema: "+ne(P.nombre),"Problema: "+ne(P.problema),"Usuarios: "+ne(P.usuarios),"Objetivo: "+ne(P.objetivo),"Alcance: "+ne(P.alcance)]);
+  SEC.forEach((sec,si)=>{
+    H2(sec[0]);
+    sec[1].forEach(q=>{H3(q[0]);Pp(ne(S.n[q[1]]));});
+    if(si===0){
+      H3("Requisitos del sistema");
+      if(S.reqs.length)UL(S.reqs.map((r,i)=>"R"+(i+1)+" ["+(r.t==="F"?"Funcional":"No funcional")+" · "+r.p+" · "+r.f+"] "+r.x));else Pp("(sin completar)");
+      H3("Diagrama de flujo de datos (nivel 0)");
+      html.push(dfdSvg());md.push("_(El diagrama se incluye en la versión .html)_\n");
+      if(S.flows.length)UL(S.flows.map(f=>nm(f.a)+" → "+nm(f.b)+": "+f.d));
+      if(lines(S.procs).length){H3("Subprocesos (nivel 1)");UL(lines(S.procs));}
+      if(lines(S.stores).length){H3("Almacenes de datos");UL(lines(S.stores));}
+    }
+    if(si===1){
+      H3("Backlog del producto");
+      if(S.stories.length)UL(S.stories.map(h=>h.id+" ["+h.pri+" · "+h.pts+" pts] Como "+h.rol+" quiero "+h.q+" para "+h.pa+". Criterio: "+(h.cr||"(falta)")));else Pp("(sin completar)");
+      H3("Meta del sprint");Pp(ne(S.sprint));
+      H3("Tablero Kanban");UL(["Por hacer: "+kb("todo"),"En curso: "+kb("doing"),"Hecho: "+kb("done")]);
+    }
+    if(si===2){
+      H3("Proceso de préstamo de equipo (BPMN)");
+      if(S.bp.length){html.push('<div style="overflow-x:auto">'+bpSvg()+"</div>");md.push("_(El diagrama se incluye en la versión .html)_\n");UL(S.bp.map((x,i)=>(i+1)+". ["+x.t+" · "+x.lane+"] "+x.txt+(x.t==="decision"?" (No → paso "+x.no+")":"")));}else Pp("(sin completar)");
+    }
+  });
+  H2("Bitácora del equipo");
+  if(S.log.length)UL(S.log.map(x=>x.d+": logramos "+x.l+(x.o?" · obstáculos: "+x.o:"")+(x.s?" · siguiente: "+x.s:"")));else Pp("(sin completar)");
+  H2("Autoevaluación");
+  UL(["Cuestionarios: técnicas "+qScore("tech")+"/"+QZ.tech.items.length+" · requisitos "+qScore("req")+"/"+QZ.req.items.length+" · ágil "+qScore("agil")+"/"+QZ.agil.items.length+" · BPMN "+qScore("bpmn")+"/"+QZ.bpmn.items.length,"Avance total de la práctica: "+progress().all+" %"]);
+  return{html:html.join("\n"),md:md.join("\n")};
+}
+function renderApunte(){
+  $("#notePrev").innerHTML=buildNote().html;
+  const it=items(),c=cnt();
+  const L=[["Datos y proyecto definidos",it.inicio.every(Boolean)],["Lista de requisitos (8: 5 F y 3 NF)",reqsOk()],["DFD de contexto completo",dfdOk()],["Apunte de la Sesión 1 completo",NOTES.s1.every(noteOk)],["Backlog con 6 historias",S.stories.length>=6],["Tablero Kanban con meta de sprint",!!(S.sprint||"").trim()&&S.stories.some(h=>h.est!=="todo")],["Apunte de la Sesión 2 completo",NOTES.s2.every(noteOk)],["Diagrama BPMN válido",bpOk()],["Diagrama reproducido en herramienta CASE",caseChecks()>=4],["Apunte de la Sesión 3 completo",NOTES.s3.every(noteOk)],["Bitácora del equipo con al menos una entrada",S.log.length>=1]];
+  $("#lcApunte").innerHTML=L.map(l=>`<li><input type="checkbox" disabled${l[1]?" checked":""} aria-label="${esc(l[0])}"><span>${esc(l[0])}${l[1]?"":' <small class="msg warn">(pendiente)</small>'}</span></li>`).join("");
+}
+function dl(name,text,type){const b=new Blob([text],{type});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},600);}
+const slug=()=>((S.al.mat||S.al.nombre||"alumno")+"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^\w-]+/g,"_");
+$("#dlHtml").addEventListener("click",()=>{
+  if(!(S.al.nombre||"").trim()){$("#dlMsg").className="msg bad";$("#dlMsg").textContent="Escribe tu nombre en la pestaña Inicio antes de descargar.";return;}
+  const css="body{font:16px/1.6 system-ui,sans-serif;max-width:860px;margin:30px auto;padding:0 18px;color:#1b2333}h1{color:#12355b;font-size:1.6rem}h2{color:#12355b;border-bottom:2px solid #c8963e;padding-bottom:3px;margin-top:28px}h3{font-size:1rem;margin:16px 0 4px}svg{max-width:100%;height:auto}@media print{h2{break-after:avoid}}";
+  dl("apunte_analisis_diseno_"+slug()+".html",'<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Apunte · Análisis y Diseño de Sistemas · '+esc(S.al.nombre)+"</title><style>"+css+"</style></head><body>"+buildNote().html+"</body></html>","text/html;charset=utf-8");
+  $("#dlMsg").className="msg ok";$("#dlMsg").textContent="Apunte generado. Revisa tu carpeta de descargas.";
+});
+$("#dlMd").addEventListener("click",()=>{if(!(S.al.nombre||"").trim()){$("#dlMsg").className="msg bad";$("#dlMsg").textContent="Escribe tu nombre en la pestaña Inicio antes de descargar.";return;}dl("apunte_analisis_diseno_"+slug()+".md",buildNote().md,"text/markdown;charset=utf-8");$("#dlMsg").className="msg ok";$("#dlMsg").textContent="Apunte generado.";});
+
+/* ================= GUARDAR / CARGAR AVANCE ================= */
+function saveJson(){dl("avance_analisis_diseno_"+slug()+".json",JSON.stringify(S),"application/json");}
+$("#btnSave").addEventListener("click",saveJson);$("#dlJson").addEventListener("click",()=>{saveJson();$("#dlMsg").className="msg ok";$("#dlMsg").textContent="Avance guardado.";});
+$("#btnLoad").addEventListener("click",()=>$("#fileLoad").click());
+function loadObj(o){
+  if(!o||typeof o!=="object"||Array.isArray(o))throw new Error("formato");
+  const d=DEF();
+  Object.keys(d).forEach(k=>{if(!(k in o))return;const a=d[k],b=o[k];
+    if(Array.isArray(a)){if(Array.isArray(b))d[k]=b;}
+    else if(a&&typeof a==="object"){if(b&&typeof b==="object"&&!Array.isArray(b))d[k]=b;}
+    else if(typeof a===typeof b)d[k]=b;});
+  S=d;
+}
+$("#fileLoad").addEventListener("change",()=>{
+  const f=$("#fileLoad").files[0];if(!f)return;
+  const r=new FileReader();r.onload=()=>{try{loadObj(JSON.parse(r.result));syncInputs();Object.keys(QZ).forEach(renderQuiz);refresh();alert("Avance cargado.");}catch(e){alert("El archivo no es un avance válido de esta práctica.");}};r.readAsText(f);$("#fileLoad").value="";
+});
+
+/* ================= REFRESCO ================= */
+function refresh(){
+  renderWf();renderRoles();renderReqs();renderDfd();renderBacklog();renderKanban();renderBp();renderLog();renderDash();renderProg();
+  if(cur==="apunte")renderApunte();
+  persist();
+}
+
+/* ================= ARRANQUE ================= */
+try{const raw=localStorage.getItem("ads_avance");if(raw)loadObj(JSON.parse(raw));}catch(e){}
+initBind();syncInputs();Object.keys(QZ).forEach(renderQuiz);suDraw();
+show((location.hash||"#inicio").slice(1));
+</script>
+</body>
+</html>
