@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Práctica guiada de Word: Mi ficha personal</title>
+<style>
+:root{
+  --azul:#1f4e79; --azul2:#2e75b6; --claro:#eaf2fb; --verde:#2e7d32; --verdeb:#e8f5e9;
+  --naranja:#e65100; --naranjab:#fff3e0; --gris:#555; --borde:#cfd8e3; --rojo:#e53935;
+}
+*{box-sizing:border-box}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.65;color:#222;margin:0;background:#f4f7fb}
+header{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;padding:28px 20px;text-align:center}
+header h1{margin:0 0 6px;font-size:1.7em}
+header p{margin:0;opacity:.95}
+main{max-width:900px;margin:0 auto;padding:18px}
+.card{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.card h2{margin-top:0;color:var(--azul);font-size:1.3em}
+.card h3{color:var(--azul2);margin-bottom:6px}
+.objetivo{background:var(--verdeb);border-left:6px solid var(--verde)}
+.aviso{background:var(--naranjab);border-left:6px solid var(--naranja)}
+.parte{background:var(--azul);color:#fff;border-radius:10px;padding:10px 18px;margin:30px 0 8px;font-size:1.15em;font-weight:700}
+.progreso{position:sticky;top:0;background:#fff;border-bottom:3px solid var(--azul2);padding:10px 18px;z-index:10}
+.barra{height:16px;background:#dde6f0;border-radius:10px;overflow:hidden}
+.barra div{height:100%;width:0;background:var(--verde);transition:width .3s}
+.progreso small{display:block;margin-bottom:4px;color:var(--gris);font-weight:600}
+.num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--rojo);color:#fff;font-weight:700;font-size:.9em;margin-right:8px;flex:none}
+.paso h2{display:flex;align-items:center}
+.paso ol{padding-left:0;list-style:none;counter-reset:s}
+.paso ol>li{counter-increment:s;position:relative;padding:8px 10px 8px 48px;margin:8px 0;background:#fafcff;border:1px solid var(--borde);border-radius:8px}
+.paso ol>li::before{content:counter(s);position:absolute;left:10px;top:8px;width:28px;height:28px;border-radius:50%;background:var(--azul2);color:#fff;text-align:center;line-height:28px;font-weight:700;font-size:.85em}
+.ok{background:var(--verdeb);border:1px solid var(--verde);border-radius:10px;padding:10px 14px;margin:12px 0}
+.ok b.t{color:var(--verde)}
+.check{display:flex;gap:12px;align-items:flex-start;padding:12px;border:2px solid var(--borde);border-radius:10px;margin:12px 0;background:#fff}
+.check input{width:28px;height:28px;margin-top:3px;flex:none;cursor:pointer}
+.check label{cursor:pointer;flex:1;font-weight:600}
+.check.hecho{background:var(--verdeb);border-color:var(--verde)}
+kbd{background:#eee;border:1px solid #bbb;border-bottom-width:3px;border-radius:5px;padding:1px 7px;font-family:monospace;font-size:.9em;white-space:nowrap}
+.btnw{background:#e8eefc;border:1px solid #9bb0e0;border-radius:6px;padding:0 8px;font-weight:700;white-space:nowrap}
+.tag{font-weight:700;color:var(--azul)}
+table{border-collapse:collapse;width:100%;font-size:.95em}
+th,td{border:1px solid var(--borde);padding:8px;text-align:left;vertical-align:top}
+th{background:var(--claro);color:var(--azul)}
+.qb p.q{font-weight:700;margin:14px 0 6px}
+.opt{display:block;width:100%;text-align:left;padding:10px 14px;margin:6px 0;border:2px solid var(--borde);background:#fff;border-radius:8px;font-size:.95em;cursor:pointer;font-family:inherit}
+.opt:hover{border-color:var(--azul2)}
+.opt.ok2{background:var(--verdeb);border-color:var(--verde)}
+.opt.mal{background:#fdecea;border-color:#c62828}
+.fb{font-size:.9em;margin:4px 0 0;min-height:1.2em;font-weight:600}
+input[type=text],textarea{width:100%;padding:10px;font-size:1em;border:2px solid var(--borde);border-radius:8px;font-family:inherit;background:#fff}
+textarea{min-height:80px}
+.btn{background:var(--azul);color:#fff;border:none;padding:12px 20px;border-radius:10px;font-size:1em;font-weight:700;cursor:pointer;margin:4px}
+.btn:hover{background:var(--azul2)}
+.btn.sec{background:#fff;color:var(--azul);border:2px solid var(--azul)}
+details{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:10px 14px;margin:8px 0}
+summary{cursor:pointer;font-weight:700;color:var(--azul)}
+.sv{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--borde);border-radius:10px;margin:12px 0}
+.sv text{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;fill:#222}
+.sv .s{font-size:12px}.sv .b{font-weight:700}.sv .w{fill:#fff}.sv .g{fill:#777}.sv .r{fill:#c62828;font-weight:700}.sv .m{text-anchor:middle}
+.sv .bd circle{fill:#e53935}.sv .bd text{fill:#fff;font-weight:700;font-size:14px;text-anchor:middle}
+.sv .p{font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:15px}
+.blink{animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.leyenda{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px;margin:8px 0}
+.leyenda div{background:#fafcff;border:1px solid var(--borde);border-radius:8px;padding:8px 10px;font-size:.95em}
+.final{text-align:center;display:none}
+.final.on{display:block}
+.final h2{font-size:1.5em}
+footer{text-align:center;color:var(--gris);font-size:.85em;padding:20px}
+@media print{.progreso,.btn{display:none}body{background:#fff}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#e53935"/></marker>
+</defs></svg>
+
+<header>
+  <h1>📝 Práctica guiada de Word</h1>
+  <p>«Mi ficha personal» · Sin experiencia previa · Bachillerato</p>
+</header>
+
+<div class="progreso">
+  <small id="textoProg">Tu avance: 0 de 0 pasos</small>
+  <div class="barra"><div id="barra"></div></div>
+</div>
+
+<main>
+
+<!-- ============ ANTES DE EMPEZAR ============ -->
+<div class="card objetivo">
+  <h2>🎯 ¿Qué vas a hacer?</h2>
+  <p>Vas a crear en <b>Microsoft Word</b> tu propia <b>ficha personal</b>. Se hace paso a paso: <b>lee un paso, hazlo en tu computadora y marca la casilla ✅</b>.</p>
+  <p><b>Al final entregarás</b> un archivo de Word (<span class="tag">.docx</span>) en <b>cecum.aulaescolar.net</b>.</p>
+  <p>Así se verá tu documento terminado:</p>
+
+  <svg class="sv" viewBox="0 0 780 400" role="img" aria-label="Documento terminado: título centrado, subtítulos en negrita, párrafo justificado y lista con viñetas">
+    <rect x="20" y="10" width="430" height="380" fill="#fff" stroke="#999"/>
+    <text x="235" y="52" class="m" style="font:700 22px Arial;fill:#000">Mi ficha personal</text>
+    <text x="235" y="82" class="m" style="font:14px Arial">Ana López Ramírez</text>
+    <text x="235" y="104" class="m" style="font:14px Arial">Grupo 1A · Mi especialidad</text>
+    <text x="45" y="145" style="font:700 16px Arial">Sobre mí</text>
+    <text x="45" y="170" textLength="380" lengthAdjust="spacing" style="font:14px Arial">Me llamo Ana. Me gusta la música y quiero aprender</text>
+    <text x="45" y="190" style="font:14px Arial">a usar bien la computadora.</text>
+    <text x="45" y="235" style="font:700 16px Arial">Mis tres metas del semestre</text>
+    <text x="60" y="260" style="font:14px Arial">•   Entregar mis tareas a tiempo</text>
+    <text x="60" y="282" style="font:14px Arial">•   Aprender a usar Word</text>
+    <text x="60" y="304" style="font:14px Arial">•   Hacer nuevos amigos</text>
+    <g stroke="#e53935" stroke-width="2" marker-end="url(#ar)">
+      <line x1="500" y1="48" x2="370" y2="48"/><line x1="500" y1="93" x2="400" y2="93"/>
+      <line x1="500" y1="141" x2="130" y2="141"/><line x1="500" y1="180" x2="440" y2="180"/>
+      <line x1="500" y1="231" x2="260" y2="231"/><line x1="500" y1="282" x2="290" y2="282"/>
+    </g>
+    <text x="508" y="52" class="s">Título: Arial 20, negrita, centrado</text>
+    <text x="508" y="97" class="s">Nombre y grupo: centrados</text>
+    <text x="508" y="145" class="s">Subtítulo: Arial 14, negrita</text>
+    <text x="508" y="184" class="s">Párrafo: justificado</text>
+    <text x="508" y="235" class="s">Subtítulo: Arial 14, negrita</text>
+    <text x="508" y="286" class="s">Metas: lista con viñetas</text>
+    <text x="508" y="340" class="s g">Todo el texto restante: Arial 12</text>
+  </svg>
+  <p><b>Producto final:</b> <span class="tag">Mi_ficha_personal_TuNombre.docx</span></p>
+</div>
+
+<div class="card">
+  <h2>📖 Palabras que vas a usar</h2>
+  <div class="leyenda">
+    <div><b>Clic:</b> presionar una vez el botón izquierdo del mouse.</div>
+    <div><b>Doble clic:</b> dos clics rápidos seguidos.</div>
+    <div><b>Triple clic:</b> tres clics rápidos seguidos.</div>
+    <div><b>Arrastrar:</b> mantener presionado el botón izquierdo y mover el mouse.</div>
+    <div><b>Seleccionar:</b> marcar texto con color para poder cambiarlo.</div>
+    <div><b>Cursor:</b> la rayita que parpadea y te muestra dónde se escribe.</div>
+    <div><b>Cinta de opciones:</b> la franja de botones en la parte de arriba.</div>
+    <div><b>Ficha:</b> cada nombre sobre la cinta (Inicio, Insertar…).</div>
+    <div><b>Párrafo:</b> todo el texto que escribes hasta presionar <kbd>Enter</kbd>.</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>⌨️ Atajos que te ayudarán</h2>
+  <p>Un atajo es presionar dos teclas juntas. Mantén la primera y toca la segunda.</p>
+  <table>
+    <tr><th>Atajo</th><th>Para qué sirve</th></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>G</kbd></td><td>Guardar tu documento</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Z</kbd></td><td><b>Deshacer</b> el último cambio (tu mejor amigo si te equivocas)</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>E</kbd></td><td>Seleccionar todo el documento</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>C</kbd> y <kbd>Ctrl</kbd> + <kbd>V</kbd></td><td>Copiar y pegar</td></tr>
+  </table>
+  <p class="s" style="font-size:.85em;color:var(--gris)">Estos atajos son para Word en español. Si tu Word está en inglés, usa <kbd>Ctrl</kbd> + <kbd>S</kbd> para guardar y <kbd>Ctrl</kbd> + <kbd>A</kbd> para seleccionar todo.</p>
+</div>
+
+<div class="card aviso">
+  <b>🆘 Si algo sale mal:</b> presiona <kbd>Ctrl</kbd> + <kbd>Z</kbd> para deshacer. Si sigues atorado, levanta la mano o pregunta a un compañero. Al final de la página hay una sección de ayuda.
+</div>
+
+<!-- ============ PARTE 1 ============ -->
+<div class="parte">PARTE 1 · Abre Word y conoce la pantalla</div>
+
+<section class="card paso">
+  <h2><span class="num">1</span>Abre un documento en blanco</h2>
+  <ol>
+    <li>Mira la franja de abajo de tu pantalla. Haz <b>clic</b> en el botón de <b>Inicio de Windows</b> (cuatro cuadritos ⊞) o en la <b>lupa</b> de búsqueda.</li>
+    <li>Escribe con el teclado: <b>Word</b></li>
+    <li>Haz <b>clic</b> en el ícono azul con la letra <b>W</b>. Espera unos segundos.</li>
+    <li>Cuando se abra, haz <b>clic</b> en <b>«Documento en blanco»</b>.</li>
+  </ol>
+  <svg class="sv" viewBox="0 0 700 300" role="img" aria-label="Pantalla de inicio de Word con el recuadro Documento en blanco señalado">
+    <rect width="700" height="300" fill="#f3f3f3"/><rect width="150" height="300" fill="#e6e6e6"/>
+    <text x="20" y="42" class="b" style="font-size:20px">Word</text>
+    <text x="20" y="90">🏠 Inicio</text><text x="20" y="122" class="g">📂 Abrir</text>
+    <text x="180" y="40" class="b">Nuevo</text>
+    <rect x="180" y="60" width="150" height="190" fill="#fff" stroke="#e53935" stroke-width="5" rx="4"/>
+    <rect x="220" y="85" width="70" height="95" fill="#fff" stroke="#999"/>
+    <g stroke="#ccc"><line x1="230" y1="102" x2="280" y2="102"/><line x1="230" y1="117" x2="280" y2="117"/><line x1="230" y1="132" x2="280" y2="132"/></g>
+    <text x="255" y="212" class="m b s">Documento en</text><text x="255" y="230" class="m b s">blanco</text>
+    <rect x="350" y="60" width="150" height="190" fill="#fff" stroke="#ccc"/><text x="425" y="160" class="m g s">Plantillas</text>
+    <rect x="520" y="60" width="150" height="190" fill="#fff" stroke="#ccc"/><text x="595" y="160" class="m g s">Otras opciones</text>
+    <g class="bd" transform="translate(330,60)"><circle r="14"/><text y="5">4</text></g>
+    <text x="255" y="278" class="m r">¡Haz clic aquí!</text>
+  </svg>
+  <div class="ok"><b class="t">✅ ¿Cómo sé que lo hice bien?</b><br>Ves una <b>hoja blanca grande</b> y una <b>rayita que parpadea</b>. Arriba dice <b>«Documento1»</b>.</div>
+  <div class="check"><input type="checkbox" class="pp" id="p1"><label for="p1">Ya tengo abierto un documento en blanco.</label></div>
+</section>
+
+<section class="card paso">
+  <h2><span class="num">2</span>Conoce las partes de la pantalla</h2>
+  <p>Solo <b>observa</b> tu pantalla y busca cada parte numerada. No necesitas hacer nada más.</p>
+  <svg class="sv" viewBox="0 0 760 440" role="img" aria-label="Pantalla de Word con cinco partes numeradas">
+    <rect width="760" height="440" fill="#fff" stroke="#888"/>
+    <rect y="140" width="760" height="270" fill="#cfd4db"/>
+    <rect width="760" height="30" fill="#2b579a"/>
+    <rect x="10" y="8" width="14" height="14" fill="#fff" rx="2"/>
+    <text x="380" y="20" class="m w s" style="font-size:13px">Documento1 - Word</text>
+    <rect y="30" width="760" height="28" fill="#e9eef7"/>
+    <rect x="6" y="32" width="66" height="24" fill="#2b579a"/><text x="39" y="49" class="m w s">Archivo</text>
+    <text x="106" y="49" class="m b s" style="fill:#2b579a">Inicio</text><rect x="84" y="55" width="44" height="3" fill="#2b579a"/>
+    <text x="174" y="49" class="m s">Insertar</text><text x="238" y="49" class="m s">Diseño</text>
+    <text x="318" y="49" class="m s">Disposición</text><text x="408" y="49" class="m s">Referencias</text>
+    <text x="490" y="49" class="m s">Revisar</text><text x="550" y="49" class="m s">Vista</text>
+    <rect y="58" width="760" height="82" fill="#f6f8fc" stroke="#d0d7e3"/>
+    <g stroke="#ccc"><line x1="115" y1="64" x2="115" y2="134"/><line x1="335" y1="64" x2="335" y2="134"/><line x1="565" y1="64" x2="565" y2="134"/></g>
+    <rect x="30" y="66" width="44" height="40" fill="#fff" stroke="#aaa" rx="3"/><text x="52" y="90" class="m s">Pegar</text>
+    <rect x="125" y="66" width="130" height="22" fill="#fff" stroke="#aaa"/><text x="131" y="82" class="s">Calibri (Cuerpo)</text>
+    <rect x="262" y="66" width="44" height="22" fill="#fff" stroke="#aaa"/><text x="270" y="82" class="s">11</text>
+    <rect x="125" y="96" width="26" height="24" fill="#fff" stroke="#aaa"/><text x="138" y="113" class="m b s">N</text>
+    <rect x="156" y="96" width="26" height="24" fill="#fff" stroke="#aaa"/><text x="169" y="113" class="m s" style="font-style:italic">K</text>
+    <rect x="187" y="96" width="26" height="24" fill="#fff" stroke="#aaa"/><text x="200" y="113" class="m s" style="text-decoration:underline">S</text>
+    <rect x="345" y="66" width="200" height="22" fill="#fff" stroke="#aaa"/><text x="355" y="82" class="s g">Viñetas · Numeración · Alineación…</text>
+    <rect x="575" y="66" width="70" height="40" fill="#fff" stroke="#aaa"/><text x="610" y="90" class="m s">AaBbCc</text>
+    <rect x="652" y="66" width="70" height="40" fill="#fff" stroke="#aaa"/><text x="687" y="90" class="m s">AaBbCc</text>
+    <text x="60" y="133" class="m s g">Portapapeles</text><text x="190" y="133" class="m s g">Fuente</text>
+    <text x="440" y="133" class="m s g">Párrafo</text><text x="660" y="133" class="m s g">Estilos</text>
+    <rect x="150" y="150" width="460" height="250" fill="#fff" stroke="#bbb"/>
+    <line class="blink" x1="180" y1="172" x2="180" y2="194" stroke="#000" stroke-width="2"/>
+    <text x="196" y="188" class="s g" style="font-style:italic">Aquí escribes tu texto (la rayita es el cursor)</text>
+    <rect y="410" width="760" height="30" fill="#f0f0f0" stroke="#ddd"/>
+    <text x="12" y="430" class="s">Página 1 de 1      0 palabras      Español (México)</text>
+    <g class="bd"><g transform="translate(560,15)"><circle r="12"/><text y="5">1</text></g>
+      <g transform="translate(740,44)"><circle r="12"/><text y="5">2</text></g>
+      <g transform="translate(740,100)"><circle r="12"/><text y="5">3</text></g>
+      <g transform="translate(590,175)"><circle r="12"/><text y="5">4</text></g>
+      <g transform="translate(740,425)"><circle r="12"/><text y="5">5</text></g></g>
+  </svg>
+  <div class="leyenda">
+    <div><span class="num">1</span><b>Barra de título.</b> Muestra el nombre de tu archivo.</div>
+    <div><span class="num">2</span><b>Fichas.</b> Archivo, Inicio, Insertar… Hoy usarás <b>Inicio</b>.</div>
+    <div><span class="num">3</span><b>Cinta de opciones.</b> Los botones: letra, tamaño, alineación.</div>
+    <div><span class="num">4</span><b>Hoja en blanco.</b> Aquí escribes tu texto.</div>
+    <div><span class="num">5</span><b>Barra de estado.</b> Muestra páginas y número de palabras.</div>
+  </div>
+  <div class="qb">
+    <p class="q">¿En qué parte de la pantalla escribes tu texto?</p>
+    <button class="opt">En la barra de título (1)</button>
+    <button class="opt">En la cinta de opciones (3)</button>
+    <button class="opt" data-ok="1">En la hoja en blanco (4)</button>
+    <p class="fb"></p>
+  </div>
+  <div class="check"><input type="checkbox" class="pp" id="p2"><label for="p2">Encontré las 5 partes en mi pantalla.</label></div>
+</section>
+
+<!-- ============ PARTE 2 ============ -->
+<div class="parte">PARTE 2 · Escribe tu texto y guárdalo</div>
+
+<section class="card paso">
+  <h2><span class="num">3</span>Escribe tu texto (sin formato todavía)</h2>
+  <p>Primero escribes <b>todo el contenido</b>. El formato (letra, tamaño, centrado) lo harás después. Por ahora el texto se verá sencillo y parejo. Eso es normal.</p>
+  <h3>Reglas para escribir</h3>
+  <ul>
+    <li>Para <b>bajar de renglón</b>, presiona <kbd>Enter</kbd>.</li>
+    <li>Para <b>borrar</b> la letra anterior, presiona <kbd>Retroceso</kbd> (⌫).</li>
+    <li>Para escribir <b>MAYÚSCULA</b> una letra, mantén <kbd>Shift</kbd> y toca la letra.</li>
+    <li>Para dejar una <b>línea vacía</b>, presiona <kbd>Enter</kbd> dos veces.</li>
+  </ul>
+  <p>Debe quedar con este orden. <b>Usa tus propios datos</b> (el ejemplo es de «Ana»):</p>
+  <svg class="sv" viewBox="0 0 780 340" role="img" aria-label="Orden del texto: título, nombre, grupo, subtítulo, párrafo, subtítulo y tres metas">
+    <rect x="20" y="10" width="420" height="320" fill="#fff" stroke="#999"/>
+    <g class="p">
+      <text x="40" y="42">Mi ficha personal</text>
+      <text x="40" y="66">Ana López Ramírez</text>
+      <text x="40" y="90">Grupo 1A · Mi especialidad</text>
+      <text x="280" y="114" class="s g">(línea vacía)</text>
+      <text x="40" y="138">Sobre mí</text>
+      <text x="40" y="162">Me llamo Ana. Me gusta la música y quiero aprender</text>
+      <text x="40" y="182">a usar bien la computadora.</text>
+      <text x="280" y="206" class="s g">(línea vacía)</text>
+      <text x="40" y="230">Mis tres metas del semestre</text>
+      <text x="40" y="254">Entregar mis tareas a tiempo</text>
+      <text x="40" y="274">Aprender a usar Word</text>
+      <text x="40" y="294">Hacer nuevos amigos</text>
+    </g>
+    <g stroke="#e53935" stroke-width="2" stroke-dasharray="4 3">
+      <line x1="445" y1="37" x2="480" y2="37"/><line x1="445" y1="61" x2="480" y2="61"/><line x1="445" y1="85" x2="480" y2="85"/>
+      <line x1="445" y1="133" x2="480" y2="133"/><line x1="445" y1="172" x2="480" y2="172"/>
+      <line x1="445" y1="225" x2="480" y2="225"/><line x1="445" y1="274" x2="480" y2="274"/>
+    </g>
+    <g class="bd">
+      <g transform="translate(492,37)"><circle r="12"/><text y="5">1</text></g><g transform="translate(492,61)"><circle r="12"/><text y="5">2</text></g>
+      <g transform="translate(492,85)"><circle r="12"/><text y="5">3</text></g><g transform="translate(492,133)"><circle r="12"/><text y="5">4</text></g>
+      <g transform="translate(492,172)"><circle r="12"/><text y="5">5</text></g><g transform="translate(492,225)"><circle r="12"/><text y="5">6</text></g>
+      <g transform="translate(492,274)"><circle r="12"/><text y="5">7</text></g>
+    </g>
+    <text x="514" y="42" class="s">Título: «Mi ficha personal»</text>
+    <text x="514" y="66" class="s">Tu nombre completo</text>
+    <text x="514" y="90" class="s">Tu grupo y tu especialidad</text>
+    <text x="514" y="138" class="s">Subtítulo: «Sobre mí»</text>
+    <text x="514" y="177" class="s">Un párrafo de 2 o 3 oraciones</text>
+    <text x="514" y="230" class="s">Subtítulo: «Mis tres metas…»</text>
+    <text x="514" y="279" class="s">3 metas, una por renglón</text>
+  </svg>
+
+  <h3>Elige cómo hacerlo</h3>
+  <details>
+    <summary>Opción A · Escribirlo directamente en Word</summary>
+    <p>Haz clic en la hoja y escribe cada renglón en orden, con <kbd>Enter</kbd> al terminar cada uno.</p>
+  </details>
+  <details>
+    <summary>Opción B · Armar mi texto aquí y pegarlo en Word</summary>
+    <p>Llena los cuadros. Después pulsa <b>«Armar mi texto»</b>, luego <b>«Copiar»</b>. En Word, haz clic en la hoja y presiona <kbd>Ctrl</kbd> + <kbd>V</kbd> para pegar.</p>
+    <p><label for="fNom"><b>Tu nombre completo</b></label><input type="text" id="fNom" placeholder="Ana López Ramírez"></p>
+    <p><label for="fGru"><b>Tu grupo y tu especialidad</b></label><input type="text" id="fGru" placeholder="Grupo 1A · Mi especialidad"></p>
+    <p><label for="fSob"><b>Sobre mí</b> (2 o 3 oraciones)</label><textarea id="fSob" placeholder="Me llamo… Me gusta… Quiero aprender…"></textarea></p>
+    <p><label for="fM1"><b>Meta 1</b></label><input type="text" id="fM1"></p>
+    <p><label for="fM2"><b>Meta 2</b></label><input type="text" id="fM2"></p>
+    <p><label for="fM3"><b>Meta 3</b></label><input type="text" id="fM3"></p>
+    <button class="btn" type="button" onclick="armar()">1. Armar mi texto</button>
+    <button class="btn sec" type="button" onclick="copiar()">2. Copiar</button>
+    <textarea id="salida" readonly style="min-height:200px;margin-top:8px" placeholder="Aquí aparecerá tu texto armado."></textarea>
+    <p class="fb" id="fbCopia"></p>
+  </details>
+
+  <div class="ok"><b class="t">✅ ¿Cómo sé que lo hice bien?</b><br>Tu documento tiene el mismo orden que el dibujo: <b>título, nombre, grupo, «Sobre mí», un párrafo, «Mis tres metas del semestre» y 3 metas</b>.</div>
+  <div class="check"><input type="checkbox" class="pp" id="p3"><label for="p3">Ya escribí todo mi texto en Word.</label></div>
+</section>
+
+<section class="card paso">
+  <h2><span class="num">4</span>Guarda tu documento por primera vez</h2>
+  <p>Guardar es <b>muy importante</b>: si la computadora se apaga y no guardaste, pierdes tu trabajo.</p>
+  <ol>
+    <li>Presiona <kbd>Ctrl</kbd> + <kbd>G</kbd>. (También puedes hacer clic en el ícono 💾 de arriba a la izquierda.)</li>
+    <li>Si Word te muestra opciones de lugares, elige <b>«Este equipo»</b> y luego <b>«Examinar»</b> (o «Más opciones…»).</li>
+    <li>Se abre la ventana <b>«Guardar como»</b>. Hazlo en este orden (mira el dibujo):
+      <br><b>① Elige tu carpeta personal</b> en la lista de la izquierda.
+      <br><b>② Escribe el nombre del archivo:</b> <span class="tag">Mi_ficha_personal_TuNombre</span> (usa guion bajo <kbd>_</kbd> en vez de espacios, y sin acentos).
+      <br><b>③ Revisa</b> que el tipo diga <b>Documento de Word (*.docx)</b>.
+      <br><b>④ Haz clic en «Guardar».</b></li>
+  </ol>
+  <svg class="sv" viewBox="0 0 720 380" role="img" aria-label="Ventana Guardar como con carpeta personal, nombre de archivo, tipo y botón Guardar">
+    <rect width="720" height="380" fill="#fff" stroke="#666"/>
+    <rect width="720" height="32" fill="#f0f0f0"/><text x="14" y="21" class="b">Guardar como</text>
+    <rect y="32" width="180" height="250" fill="#f7f7f7"/>
+    <text x="20" y="64">🖥️ Escritorio</text>
+    <rect x="8" y="78" width="164" height="28" fill="#cce4f7" stroke="#e53935" stroke-width="3"/><text x="20" y="98" class="b">📁 Mi carpeta personal</text>
+    <text x="20" y="128">📥 Descargas</text><text x="20" y="160">💻 Este equipo</text>
+    <text x="450" y="150" class="m g">Esta carpeta está vacía</text>
+    <text x="200" y="314">Nombre de archivo:</text>
+    <rect x="360" y="296" width="230" height="26" fill="#fff" stroke="#e53935" stroke-width="3"/><text x="368" y="314" class="s">Mi_ficha_personal_AnaLopez</text>
+    <text x="200" y="352">Tipo:</text>
+    <rect x="360" y="334" width="230" height="26" fill="#fff" stroke="#e53935" stroke-width="3"/><text x="368" y="352" class="s">Documento de Word (*.docx)</text>
+    <rect x="610" y="296" width="90" height="30" fill="#2b579a" stroke="#e53935" stroke-width="3"/><text x="655" y="316" class="m w b">Guardar</text>
+    <rect x="610" y="334" width="90" height="30" fill="#eee" stroke="#aaa"/><text x="655" y="354" class="m">Cancelar</text>
+    <g class="bd">
+      <g transform="translate(192,92)"><circle r="12"/><text y="5">1</text></g>
+      <g transform="translate(340,309)"><circle r="12"/><text y="5">2</text></g>
+      <g transform="translate(340,347)"><circle r="12"/><text y="5">3</text></g>
+      <g transform="translate(598,311)"><circle r="12"/><text y="5">4</text></g>
+    </g>
+  </svg>
+  <div class="ok"><b class="t">✅ ¿Cómo sé que lo hice bien?</b><br>Arriba, en la barra de título, ya no dice «Documento1». Ahora dice <b>el nombre que tú le pusiste</b>.</div>
+  <div class="aviso card" style="margin:12px 0"><b>💡 Regla de oro:</b> desde ahora, cada vez que hagas varios cambios, presiona <kbd>Ctrl</kbd> + <kbd>G</kbd>. Ya no tendrás que repetir la ventana: se guarda en el mismo lugar.</div>
+  <div class="check"><input type="checkbox" class="pp" id="p4"><label for="p4">Guardé mi archivo con mi nombre en mi carpeta personal.</label></div>
+</section>
+
+<!-- ============ PARTE 3 ============ -->
+<div class="parte">PARTE 3 · Dale formato a tu documento</div>
+
+<section class="card paso">
+  <h2><span class="num">5</span>Aprende a seleccionar texto</h2>
+  <p><b>Seleccionar</b> es marcar el texto con color. Word solo cambia lo que está seleccionado. <b>Primero seleccionas, después eliges el botón.</b></p>
+  <svg class="sv" viewBox="0 0 780 340" role="img" aria-label="Cuatro formas de seleccionar texto: arrastrar, doble clic, triple clic y Ctrl+E">
+    <rect x="10" y="10" width="370" height="150" fill="#fafafa" stroke="#ccc" rx="8"/>
+    <rect x="400" y="10" width="370" height="150" fill="#fafafa" stroke="#ccc" rx="8"/>
+    <rect x="10" y="180" width="370" height="150" fill="#fafafa" stroke="#ccc" rx="8"/>
+    <rect x="400" y="180" width="370" height="150" fill="#fafafa" stroke="#ccc" rx="8"/>
+    <text x="30" y="36" class="b">1. Arrastrar (una o varias líneas)</text>
+    <rect x="28" y="60" width="160" height="28" fill="#9ec5ff" opacity=".7"/>
+    <text x="30" y="82" style="font-size:18px">Mi ficha personal</text>
+    <line x1="30" y1="105" x2="186" y2="105" stroke="#e53935" stroke-width="3" marker-end="url(#ar)"/>
+    <text x="30" y="135" class="s">Clic al inicio, mantén presionado y arrastra hasta el final.</text>
+    <text x="420" y="36" class="b">2. Doble clic (una palabra)</text>
+    <rect x="496" y="60" width="62" height="28" fill="#9ec5ff" opacity=".7"/>
+    <text x="420" y="82" style="font-size:18px">Me gusta</text><text x="498" y="82" style="font-size:18px">mucho</text><text x="568" y="82" style="font-size:18px">la música</text>
+    <text x="420" y="135" class="s">Haz doble clic encima de la palabra.</text>
+    <text x="30" y="206" class="b">3. Triple clic (un párrafo completo)</text>
+    <rect x="28" y="218" width="340" height="46" fill="#9ec5ff" opacity=".7"/>
+    <text x="32" y="238" style="font-size:14px">Me llamo Ana. Me gusta la música y quiero</text>
+    <text x="32" y="258" style="font-size:14px">aprender a usar bien la computadora.</text>
+    <text x="30" y="305" class="s">Tres clics seguidos dentro del párrafo.</text>
+    <text x="420" y="206" class="b">4. Ctrl + E (todo el documento)</text>
+    <rect x="430" y="218" width="110" height="90" fill="#9ec5ff" opacity=".7" stroke="#999"/>
+    <g stroke="#555"><line x1="440" y1="236" x2="530" y2="236"/><line x1="440" y1="252" x2="520" y2="252"/><line x1="440" y1="268" x2="530" y2="268"/><line x1="440" y1="284" x2="500" y2="284"/></g>
+    <rect x="570" y="236" width="64" height="38" fill="#eee" stroke="#777" rx="6"/><text x="602" y="260" class="m b">Ctrl</text>
+    <text x="650" y="260" class="m b" style="font-size:20px">+</text>
+    <rect x="666" y="236" width="40" height="38" fill="#eee" stroke="#777" rx="6"/><text x="686" y="260" class="m b">E</text>
+    <text x="420" y="320" class="s">Selecciona todo el texto de una vez.</text>
+  </svg>
+  <h3>Practica ahora</h3>
+  <ol>
+    <li>Haz <b>triple clic</b> sobre el renglón <b>«Mi ficha personal»</b>.</li>
+    <li>Verás que se pinta de color (azul o gris). ¡Eso es estar seleccionado!</li>
+    <li>Para <b>quitar la selección</b>, haz un clic en cualquier parte vacía del texto.</li>
+  </ol>
+  <div class="check"><input type="checkbox" class="pp" id="p5"><label for="p5">Seleccioné un renglón y luego le quité la selección.</label></div>
+</section>
+
+<section class="card paso">
+  <h2><span class="num">6</span>Encuentra los botones de la ficha «Inicio»</h2>
+  <p>Haz <b>clic en la ficha «Inicio»</b> (arriba, junto a «Archivo»). En esa cinta están todos los botones que vamos a usar. Búscalos con las letras:</p>
+  <svg class="sv" viewBox="0 0 760 200" role="img" aria-label="Cinta Inicio con botones: fuente, tamaño, negrita, cursiva, alineación y viñetas">
+    <rect width="760" height="200" fill="#f6f8fc" stroke="#cfd8e3"/>
+    <line x1="300" y1="10" x2="300" y2="170" stroke="#ccc"/>
+    <rect x="20" y="30" width="170" height="30" fill="#fff" stroke="#888"/><text x="28" y="50">Calibri (Cuerpo)</text><text x="172" y="50" class="s">▼</text>
+    <rect x="200" y="30" width="60" height="30" fill="#fff" stroke="#888"/><text x="212" y="50">11</text><text x="244" y="50" class="s">▼</text>
+    <rect x="20" y="80" width="36" height="32" fill="#fff" stroke="#888"/><text x="38" y="102" class="m b" style="font-size:16px">N</text>
+    <rect x="62" y="80" width="36" height="32" fill="#fff" stroke="#888"/><text x="80" y="102" class="m" style="font-size:16px;font-style:italic">K</text>
+    <rect x="104" y="80" width="36" height="32" fill="#fff" stroke="#888"/><text x="122" y="102" class="m" style="font-size:16px;text-decoration:underline">S</text>
+    <text x="150" y="190" class="m b g">FUENTE (la letra)</text>
+    <rect x="330" y="30" width="44" height="32" fill="#fff" stroke="#888"/><text x="352" y="52" class="m">• ≡</text>
+    <rect x="380" y="30" width="44" height="32" fill="#fff" stroke="#888"/><text x="402" y="52" class="m">1 ≡</text>
+    <g fill="#fff" stroke="#888"><rect x="330" y="80" width="44" height="32"/><rect x="380" y="80" width="44" height="32"/><rect x="430" y="80" width="44" height="32"/><rect x="480" y="80" width="44" height="32"/></g>
+    <g stroke="#333" stroke-width="2">
+      <path d="M338 88h28M338 96h18M338 104h28"/>
+      <path d="M388 88h28M393 96h18M388 104h28"/>
+      <path d="M438 88h28M448 96h18M438 104h28"/>
+      <path d="M488 88h28M488 96h28M488 104h28"/>
+    </g>
+    <text x="352" y="130" class="m s">Izquierda</text><text x="402" y="130" class="m s">Centrar</text><text x="452" y="130" class="m s">Derecha</text><text x="502" y="130" class="m s">Justificar</text>
+    <text x="440" y="190" class="m b g">PÁRRAFO</text>
+    <g class="bd">
+      <g transform="translate(22,28)"><circle r="12"/><text y="5">A</text></g>
+      <g transform="translate(262,28)"><circle r="12"/><text y="5">B</text></g>
+      <g transform="translate(22,80)"><circle r="12"/><text y="5">C</text></g>
+      <g transform="translate(98,80)"><circle r="12"/><text y="5">D</text></g>
+      <g transform="translate(540,96)"><circle r="12"/><text y="5">E</text></g>
+      <g transform="translate(374,30)"><circle r="12"/><text y="5">F</text></g>
+    </g>
+  </svg>
+  <div class="leyenda">
+    <div><span class="num">A</span><b>Fuente:</b> el tipo de letra (Arial, Calibri…).</div>
+    <div><span class="num">B</span><b>Tamaño:</b> qué tan grande es la letra.</div>
+    <div><span class="num">C</span><b>N = Negrita:</b> letra gruesa.</div>
+    <div><span class="num">D</span><b>K = Cursiva:</b> letra inclinada.</div>
+    <div><span class="num">E</span><b>Alineación:</b> izquierda, centrar, derecha o justificar.</div>
+    <div><span class="num">F</span><b>Viñetas:</b> puntos para hacer una lista.</div>
+  </div>
+  <div class="qb">
+    <p class="q">¿Qué botón pones para que el texto sea más grueso (negrita)?</p>
+    <button class="opt" data-ok="1">N</button>
+    <button class="opt">K</button>
+    <button class="opt">S</button>
+    <p class="fb"></p>
+    <p class="q">¿Qué botón usas para que un título quede en el centro de la hoja?</p>
+    <button class="opt">Izquierda</button>
+    <button class="opt" data-ok="1">Centrar</button>
+    <button class="opt">Derecha</button>
+    <p class="fb"></p>
+  </div>
+  <div class="check"><input type="checkbox" class="pp" id="p6"><label for="p6">Encontré en mi pantalla los botones A, B, C, E y F.</label></div>
+</section>
+
+<section class="card paso">
+  <h2><span class="num">7</span>Pon la misma letra a todo el documento</h2>
+  <ol>
+    <li>Presiona <kbd>Ctrl</kbd> + <kbd>E</kbd>. Todo el texto se pinta de color.</li>
+    <li>Haz <b>clic</b> en el cuadro <b>Fuente (A)</b>. Borra lo que dice, escribe <b>Arial</b> y presiona <kbd>Enter</kbd>.</li>
+    <li>Haz <b>clic</b> en el cuadro <b>Tamaño (B)</b>. Borra el número, escribe <b>12</b> y presiona <kbd>Enter</kbd>.</li>
+    <li>Haz un clic en cualquier parte del texto para quitar la selección.</li>
+  </ol>
+  <div class="ok"><b class="t">✅ ¿Cómo sé que lo hice bien?</b><br>Si haces clic en cualquier renglón, el cuadro de Fuente dice <b>Arial</b> y el de Tamaño dice <b>12</b>.</div>
+  <div class="check"><input type="checkbox" class="pp" id="p7"><label for="p7">Todo mi documento está en Arial 12.</label></div>
+</section>
+
+<section class="card paso">
+  <h2><span class="num">8</span>Da formato al título y a tus datos</h2>
+  <p><b>El título</b></p>
+  <ol>
+    <li>Haz <b>triple clic</b> en <b>«Mi ficha personal»</b>.</li>
+    <li>En el cuadro <b>Tamaño (B)</b>, escribe <b>20</b> y presiona <kbd>Enter</kbd>.</li>
+    <li>Haz clic en el botón <b>N</b> (Negrita, C).</li>
+    <li>Haz clic en el botón <b>Centrar</b> (E).</li>
+  </ol>
+  <p><b>Tu nombre y tu grupo</b></p>
+  <ol>
+    <li>Haz clic <b>al inicio</b> de tu nombre. Mantén presionado el botón del mouse y <b>arrastra</b> hasta el final del renglón del grupo. Deben quedar pintados los dos renglones.</li>
+    <li>Haz clic en el botón <b>Centrar</b> (E).</li>
+  </ol>
+  <div class="ok"><b class="t">✅ ¿Cómo sé que lo hice bien?</b><br>El título se ve <b>grande, grueso y en el centro</b>. Tu nombre y tu grupo también están al centro.</div>
+  <div class="check"><input type="checkbox" class="pp" id="p8"><label for="p8">Mi título y mis datos están centrados, y el título es grande y en negrita.</label></div>
+</section>
+
+<section class="card paso">
+  <h2><span class="num">9</span>Da formato a los dos subtítulos</h2>
+  <p>Los subtítulos son <b>«Sobre mí»</b> y <b>«Mis tres metas del semestre»</b>. Haz esto con <b>cada uno</b>:</p>
+  <ol>
+    <li>Haz <b>triple clic</b> en el subtítulo.</li>
+    <li>En el cuadro <b>Tamaño (B)</b>, escribe <b>14</b> y presiona <kbd>Enter</kbd>.</li>
+    <li>Haz clic en el botón <b>N</b> (Negrita, C).</li>
+    <li>Repite los pasos 1 a 3 con el otro subtítulo.</li>
+  </ol>
+  <div class="ok"><b class="t">✅ ¿Cómo sé que lo hice bien?</b><br>Los dos subtítulos se ven <b>más grandes y gruesos</b> que el resto del texto, y siguen pegados a la <b>izquierda</b>.</div>
+  <div class="check"><input type="checkbox" class="pp" id="p9"><label for="p9">Mis dos subtítulos están en tamaño 14 y negrita.</label></div>
+</section>
+
+<section class="card paso">
+  <h2><span class="num">10</span>Justifica tu párrafo</h2>
+  <p><b>Justificar</b> hace que el párrafo quede parejo de los dos lados, como en un libro.</p>
+  <ol>
+    <li>Haz <b>triple clic</b> en tu párrafo «Sobre mí» (las 2 o 3 oraciones).</li>
+    <li>Haz clic en el botón <b>Justificar</b> (E, el cuarto botón).</li>
+  </ol>
+  <div class="ok"><b class="t">✅ ¿Cómo sé que lo hice bien?</b><br>Los renglones del párrafo terminan <b>parejos en el lado derecho</b> (menos el último renglón). Si tu párrafo cabe en un solo renglón, casi no se nota; no pasa nada.</div>
+  <div class="check"><input type="checkbox" class="pp" id="p10"><label for="p10">Justifiqué mi párrafo.</label></div>
+</section>
+
+<section class="card paso">
+  <h2><span class="num">11</span>Convierte tus metas en una lista con viñetas</h2>
+  <ol>
+    <li>Haz clic <b>al inicio</b> de tu primera meta. Mantén presionado y <b>arrastra</b> hasta el final de la tercera meta. Deben quedar pintadas las 3.</li>
+    <li>Haz clic en el botón <b>Viñetas (F)</b> (el que tiene un punto y tres rayitas).</li>
+  </ol>
+  <svg class="sv" viewBox="0 0 640 170" role="img" aria-label="Antes: tres líneas sueltas. Después: tres líneas con viñetas">
+    <rect x="10" y="10" width="250" height="120" fill="#fff" stroke="#999"/>
+    <text x="30" y="55" style="font:14px Arial">Entregar mis tareas a tiempo</text>
+    <text x="30" y="80" style="font:14px Arial">Aprender a usar Word</text>
+    <text x="30" y="105" style="font:14px Arial">Hacer nuevos amigos</text>
+    <text x="135" y="155" class="m b g">ANTES</text>
+    <line x1="280" y1="70" x2="360" y2="70" stroke="#e53935" stroke-width="4" marker-end="url(#ar)"/>
+    <text x="320" y="55" class="m s r">Botón F</text>
+    <rect x="380" y="10" width="250" height="120" fill="#fff" stroke="#999"/>
+    <text x="400" y="55" style="font:14px Arial">•   Entregar mis tareas a tiempo</text>
+    <text x="400" y="80" style="font:14px Arial">•   Aprender a usar Word</text>
+    <text x="400" y="105" style="font:14px Arial">•   Hacer nuevos amigos</text>
+    <text x="505" y="155" class="m b g">DESPUÉS</text>
+  </svg>
+  <div class="ok"><b class="t">✅ ¿Cómo sé que lo hice bien?</b><br>Cada meta empieza con un <b>puntito</b> (•).</div>
+  <div class="check"><input type="checkbox" class="pp" id="p11"><label for="p11">Mis 3 metas tienen viñetas.</label></div>
+</section>
+
+<!-- ============ PARTE 4 ============ -->
+<div class="parte">PARTE 4 · Revisa y entrega</div>
+
+<section class="card paso">
+  <h2><span class="num">12</span>Guarda los cambios y revisa tu trabajo</h2>
+  <ol>
+    <li>Presiona <kbd>Ctrl</kbd> + <kbd>G</kbd> para guardar tus cambios.</li>
+    <li>Compara tu documento con el dibujo del inicio de esta página.</li>
+    <li>Marca lo que ya cumpliste:</li>
+  </ol>
+  <div class="check"><input type="checkbox" class="pp" id="r1"><label for="r1">El título está centrado, grande (20) y en negrita.</label></div>
+  <div class="check"><input type="checkbox" class="pp" id="r2"><label for="r2">Mi nombre y mi grupo están centrados.</label></div>
+  <div class="check"><input type="checkbox" class="pp" id="r3"><label for="r3">Los dos subtítulos están en tamaño 14 y negrita.</label></div>
+  <div class="check"><input type="checkbox" class="pp" id="r4"><label for="r4">Mi párrafo está justificado.</label></div>
+  <div class="check"><input type="checkbox" class="pp" id="r5"><label for="r5">Mis 3 metas tienen viñetas.</label></div>
+  <div class="check"><input type="checkbox" class="pp" id="r6"><label for="r6">Todo el demás texto es Arial 12.</label></div>
+  <div class="check"><input type="checkbox" class="pp" id="r7"><label for="r7">Revisé mi ortografía (palabras con rayita roja debajo).</label></div>
+  <div class="check"><input type="checkbox" class="pp" id="r8"><label for="r8">Guardé con <kbd>Ctrl</kbd> + <kbd>G</kbd> y el nombre del archivo es <b>Mi_ficha_personal_TuNombre</b>.</label></div>
+  <details>
+    <summary>⭐ Reto extra (opcional): ponle color al título</summary>
+    <p>Selecciona el título. En la cinta Inicio, junto al botón <b>A</b> (con una barrita de color debajo), abre la flechita ▼ y elige un color. No olvides guardar con <kbd>Ctrl</kbd> + <kbd>G</kbd>.</p>
+  </details>
+</section>
+
+<section class="card paso">
+  <h2><span class="num">13</span>Entrega tu archivo en cecum.aulaescolar.net</h2>
+  <svg class="sv" viewBox="0 0 780 170" role="img" aria-label="Cuatro pasos de entrega: guardar, entrar a la plataforma, adjuntar, enviar">
+    <g fill="#eaf2fb" stroke="#2e75b6" stroke-width="2">
+      <rect x="10" y="20" width="175" height="110" rx="10"/><rect x="205" y="20" width="175" height="110" rx="10"/>
+      <rect x="400" y="20" width="175" height="110" rx="10"/><rect x="595" y="20" width="175" height="110" rx="10"/>
+    </g>
+    <g stroke="#e53935" stroke-width="3" marker-end="url(#ar)">
+      <line x1="187" y1="75" x2="203" y2="75"/><line x1="382" y1="75" x2="398" y2="75"/><line x1="577" y1="75" x2="593" y2="75"/>
+    </g>
+    <g class="bd">
+      <g transform="translate(22,24)"><circle r="14"/><text y="5">1</text></g><g transform="translate(217,24)"><circle r="14"/><text y="5">2</text></g>
+      <g transform="translate(412,24)"><circle r="14"/><text y="5">3</text></g><g transform="translate(607,24)"><circle r="14"/><text y="5">4</text></g>
+    </g>
+    <text x="97" y="70" class="m b">Guarda tu archivo</text><text x="97" y="92" class="m s">.docx en tu carpeta</text>
+    <text x="292" y="70" class="m b">Entra a</text><text x="292" y="92" class="m s">cecum.aulaescolar.net</text>
+    <text x="487" y="70" class="m b">Abre la actividad</text><text x="487" y="92" class="m s">y adjunta tu archivo</text>
+    <text x="682" y="70" class="m b">Envía y revisa</text><text x="682" y="92" class="m s">que se haya enviado</text>
+  </svg>
+  <ol>
+    <li>Abre tu navegador de internet (Edge, Chrome u otro).</li>
+    <li>En la barra de direcciones de arriba escribe <b>cecum.aulaescolar.net</b> y presiona <kbd>Enter</kbd>.</li>
+    <li>Inicia sesión con <b>tu usuario y tu contraseña</b> de la escuela. <b>No compartas tu contraseña con nadie.</b></li>
+    <li>Entra a tu clase y abre la <b>actividad</b> que tu profesor indicó para esta práctica.</li>
+    <li>Busca el botón para <b>adjuntar o subir un archivo</b> (puede decir «Adjuntar», «Subir archivo» o «Examinar») y haz clic.</li>
+    <li>Se abre una ventana de tus archivos. Entra a <b>tu carpeta personal</b>, haz clic en <b>Mi_ficha_personal_TuNombre.docx</b> y luego en <b>«Abrir»</b>.</li>
+    <li>Revisa que aparezca el <b>nombre de tu archivo</b> en la actividad y haz clic en el botón para <b>enviar o guardar</b> la entrega.</li>
+  </ol>
+  <div class="ok"><b class="t">✅ ¿Cómo sé que lo hice bien?</b><br>En la actividad se ve el <b>nombre de tu archivo</b> y la plataforma muestra que tu entrega se <b>envió</b>. Si no ves el botón o algo no funciona, avisa a tu profesor <b>antes de salir del salón</b>.</div>
+  <div class="check"><input type="checkbox" class="pp" id="p13"><label for="p13">Subí mi archivo .docx y la plataforma muestra mi entrega.</label></div>
+</section>
+
+<div class="card final" id="final">
+  <h2>🎉 ¡Lo lograste!</h2>
+  <p>Creaste tu primer documento de Word con formato y lo entregaste. ¡Excelente trabajo!</p>
+</div>
+
+<div class="card">
+  <h2>🆘 Ayuda: si algo sale mal</h2>
+  <details><summary>Cambié algo sin querer o se me borró texto</summary>
+    <p>Presiona <kbd>Ctrl</kbd> + <kbd>Z</kbd>. Puedes presionarlo varias veces para regresar más pasos.</p></details>
+  <details><summary>Cambié todo el documento y solo quería cambiar un renglón</summary>
+    <p>Presiona <kbd>Ctrl</kbd> + <kbd>Z</kbd> hasta que regrese. Luego selecciona <b>solo</b> el renglón con triple clic y vuelve a elegir el botón.</p></details>
+  <details><summary>No veo los botones de la cinta</summary>
+    <p>Haz clic en la ficha <b>Inicio</b>. Si sigue sin verse, haz doble clic en el nombre de esa ficha.</p></details>
+  <details><summary>No sé dónde guardé mi archivo</summary>
+    <p>En Word, haz clic en <b>Archivo → Abrir → Recientes</b>. Ahí aparece la lista de tus últimos archivos y puedes ver su carpeta.</p></details>
+  <details><summary>El botón de Negrita o Centrar no hace nada</summary>
+    <p>Seguramente no está seleccionado el texto. Haz triple clic en el renglón y vuelve a intentarlo.</p></details>
+  <details><summary>El título de la ventana sigue diciendo «Documento1»</summary>
+    <p>Todavía no se guardó. Haz el paso 4 otra vez con <kbd>Ctrl</kbd> + <kbd>G</kbd>.</p></details>
+</div>
+
+<div class="card" style="text-align:center">
+  <button class="btn sec" onclick="window.print()">🖨️ Imprimir esta guía</button>
+</div>
+
+</main>
+
+<footer>Práctica guiada de Microsoft Word · Corporativo CECUM</footer>
+
+<script>
+function actualizar(){
+  var cajas=document.querySelectorAll('input.pp');
+  var hechas=0;
+  cajas.forEach(function(c){
+    var p=c.closest(".check");
+    if(p){p.classList.toggle("hecho",c.checked);}
+    if(c.checked)hechas++;
+  });
+  var total=cajas.length;
+  var pct=total?Math.round(hechas*100/total):0;
+  document.getElementById("barra").style.width=pct+"%";
+  document.getElementById("textoProg").textContent="Tu avance: "+hechas+" de "+total+" pasos ("+pct+" %)";
+  document.getElementById("final").classList.toggle("on",total>0&&hechas===total);
+}
+document.addEventListener("change",function(e){if(e.target.type==="checkbox")actualizar();});
+
+document.addEventListener("click",function(e){
+  var b=e.target.closest(".opt"); if(!b)return;
+  var qb=b.closest(".qb"); if(!qb)return;
+  var q=b.previousElementSibling;
+  while(q&&!q.classList.contains("q"))q=q.previousElementSibling;
+  var grupo=[];var n=q.nextElementSibling;
+  while(n&&!n.classList.contains("fb")){if(n.classList.contains("opt"))grupo.push(n);n=n.nextElementSibling;}
+  grupo.forEach(function(x){x.classList.remove("ok2","mal");});
+  if(b.dataset.ok){b.classList.add("ok2");n.textContent="✅ ¡Correcto!";n.style.color="#2e7d32";}
+  else{b.classList.add("mal");n.textContent="❌ Casi. Inténtalo otra vez.";n.style.color="#c62828";}
+});
+
+function v(id){return document.getElementById(id).value.trim();}
+function armar(){
+  var sobre=v("fSob").replace(/\s*\n\s*/g," ");
+  var t=["Mi ficha personal",v("fNom"),v("fGru"),"","Sobre mí",sobre,"","Mis tres metas del semestre",v("fM1"),v("fM2"),v("fM3")].join("\n");
+  var s=document.getElementById("salida");s.value=t;
+  document.getElementById("fbCopia").textContent="";
+}
+function copiar(){
+  var s=document.getElementById("salida"),fb=document.getElementById("fbCopia");
+  if(!s.value){fb.textContent="Primero pulsa «Armar mi texto».";fb.style.color="#c62828";return;}
+  s.focus();s.select();
+  var ok=false;
+  try{ok=document.execCommand("copy");}catch(e){}
+  if(ok){fb.textContent="✅ Copiado. Ahora ve a Word y presiona Ctrl + V.";fb.style.color="#2e7d32";}
+  else{fb.textContent="El texto quedó seleccionado: presiona Ctrl + C para copiarlo.";fb.style.color="#e65100";}
+}
+actualizar();
+</script>
+</body>
+</html>
