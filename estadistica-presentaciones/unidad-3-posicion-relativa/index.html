@@ -1,0 +1,1014 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Unidad 3: Medidas de Posición Relativa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap">
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#0d1b24;font-family:'DM Sans',Arial,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+#app{position:fixed;inset:0;display:flex;flex-direction:column}
+#view{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:0}
+#stage{position:absolute;left:0;top:0;width:960px;height:540px;transform-origin:0 0;background:#000;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.slide{position:absolute;inset:0;display:none}.slide.on{display:block}
+.slide>section{width:960px;height:540px;overflow:hidden;position:relative}
+.slide *{margin:0}.slide aside{display:none}.slide table{border-collapse:collapse}
+.slide ul,.slide ol{padding-left:0}
+#bar{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#122a35;color:#fff}
+#bar button{border:0;background:#1c7293;color:#fff;font:700 16px 'DM Sans',Arial,sans-serif;border-radius:10px;min-width:44px;height:44px;padding:0 14px;cursor:pointer}
+#bar button:disabled{opacity:.35}#bar button.alt{background:#2b4a58}
+#bar .mid{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+#cnt{font-size:14px;text-align:center;color:#cfe8e4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#prog{height:6px;border-radius:3px;background:#2b4a58;overflow:hidden}#prog i{display:block;height:100%;width:0;background:#3fbf9f;transition:width .2s}
+#menu{position:fixed;left:0;top:0;bottom:0;width:min(340px,88vw);background:#fff;color:#1b2430;transform:translateX(-105%);transition:transform .22s;z-index:5;overflow:auto;padding:16px;box-shadow:4px 0 24px rgba(0,0,0,.4)}
+#menu.open{transform:none}#menu h2{margin:0 0 4px;font-size:18px;color:#094649}#menu p{margin:0 0 12px;font-size:13px;color:#5c7e7b}
+#menu h3{margin:14px 0 4px;font-size:13px;color:#1c7293;text-transform:uppercase;letter-spacing:.04em}
+#menu a{display:block;padding:9px 10px;border-radius:8px;color:#1b2430;text-decoration:none;font-size:15px}#menu a:hover,#menu a.cur{background:#dff0ed;font-weight:700}
+#shade{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;z-index:4}#shade.open{display:block}
+#hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;font-size:14px;padding:6px 14px;border-radius:20px;pointer-events:none;transition:opacity .6s}
+@media print{html,body{overflow:visible;height:auto;background:#fff}#app{position:static;display:block}#bar,#menu,#shade,#hint{display:none!important}#view{display:block;overflow:visible}#stage{position:static;transform:none!important;box-shadow:none;height:auto;width:960px}.slide{display:block!important;position:relative;height:540px;page-break-after:always;break-after:page}@page{size:960px 540px;margin:0}}
+</style></head><body>
+<div id="app"><div id="view"><div id="stage"><div class="slide" data-id="cover"><section id="cover" style="background:linear-gradient(145deg,#094649 0%,#1B2430 55%,#1C7293 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;padding:60px;box-sizing:border-box;text-align:center;font-family:'Nunito Sans',sans-serif;">
+  <div style="max-width:780px;width:100%;">
+    <div style="display:flex;justify-content:center;gap:8px;margin-bottom:28px;">
+      <span style="background:#3FBF9F;color:#094649;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 16px;border-radius:20px;">CEUM · Estadística</span>
+    </div>
+    <div style="font-family:'Rubik',sans-serif;font-size:14px;color:rgba(255,255,255,0.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Unidad 3</div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:52px;font-weight:800;color:#fff;margin:0 0 10px 0;line-height:1.1;">Medidas de<br>Posición Relativa</h1>
+    <div style="width:60px;height:4px;background:#F4623A;border-radius:2px;margin:18px auto;"></div>
+    <p style="font-size:16px;color:rgba(255,255,255,0.65);margin:0 0 36px 0;line-height:1.6;">Cuartiles · Deciles · Percentiles · RIC · Boxplot · Puntuación Z</p>
+    <div style="display:flex;justify-content:center;gap:18px;flex-wrap:wrap;">
+      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:14px 24px;">
+        <div style="font-size:22px;font-weight:800;color:#3FBF9F;font-family:'Rubik',sans-serif;">7</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;">Temas</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:14px 24px;">
+        <div style="font-size:22px;font-weight:800;color:#3FBF9F;font-family:'Rubik',sans-serif;">8</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;">Sesiones</div>
+      </div>
+    </div>
+    <div style="margin-top:44px;border-top:1px solid rgba(255,255,255,0.12);padding-top:22px;display:flex;justify-content:space-between;align-items:center;">
+      <div style="text-align:left;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Docente</div>
+        <div style="font-size:14px;font-weight:600;color:#fff;">M. en C. Abraham Gómez Contreras</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Ciclo</div>
+        <div style="font-size:14px;font-weight:600;color:#fff;">2026</div>
+      </div>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="agenda"><section id="agenda" style="background:#EDF4F3;display:flex;flex-direction:column;justify-content:center;height:100%;padding:44px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+    <div style="width:5px;height:36px;background:#094649;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#094649;margin:0;">Contenido de la Unidad 3</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="background:#fff;border-radius:12px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 1px 6px rgba(9,70,73,0.07);">
+        <span style="background:#3FBF9F;color:#fff;font-size:13px;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>
+        <div><div style="font-size:14px;font-weight:700;color:#094649;margin-bottom:2px;">Cuartiles Q1, Q2 y Q3</div><div style="font-size:12px;color:#5C7E7B;">Cálculo e interpretación</div></div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 1px 6px rgba(9,70,73,0.07);">
+        <span style="background:#3FBF9F;color:#fff;font-size:13px;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>
+        <div><div style="font-size:14px;font-weight:700;color:#094649;margin-bottom:2px;">Deciles D1 a D9</div><div style="font-size:12px;color:#5C7E7B;">Cálculo e interpretación</div></div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 1px 6px rgba(9,70,73,0.07);">
+        <span style="background:#3FBF9F;color:#fff;font-size:13px;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</span>
+        <div><div style="font-size:14px;font-weight:700;color:#094649;margin-bottom:2px;">Percentiles P1 a P99</div><div style="font-size:12px;color:#5C7E7B;">Cálculo e interpretación</div></div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 1px 6px rgba(9,70,73,0.07);">
+        <span style="background:#1C7293;color:#fff;font-size:13px;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</span>
+        <div><div style="font-size:14px;font-weight:700;color:#094649;margin-bottom:2px;">Rango Intercuartílico (RIC)</div><div style="font-size:12px;color:#5C7E7B;">Detección de valores atípicos</div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="background:#fff;border-radius:12px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 1px 6px rgba(9,70,73,0.07);">
+        <span style="background:#1C7293;color:#fff;font-size:13px;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</span>
+        <div><div style="font-size:14px;font-weight:700;color:#094649;margin-bottom:2px;">Diagrama de Caja y Bigotes</div><div style="font-size:12px;color:#5C7E7B;">Construcción e interpretación</div></div>
+      </div>
+      <div style="background:#1B2430;border-radius:12px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;">
+        <span style="background:#F4623A;color:#fff;font-size:13px;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">6</span>
+        <div><div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:2px;">Puntuación Z</div><div style="font-size:12px;color:rgba(255,255,255,0.55);">Significado y aplicaciones</div></div>
+      </div>
+      <div style="background:#1B2430;border-radius:12px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;">
+        <span style="background:#F4623A;color:#fff;font-size:13px;font-weight:800;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">7</span>
+        <div><div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:2px;">Comparación entre Escalas</div><div style="font-size:12px;color:rgba(255,255,255,0.55);">Posiciones relativas en distintas distribuciones</div></div>
+      </div>
+      <div style="background:#EDF4F3;border:2px solid #3FBF9F;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+        <span style="font-size:20px;">📅</span>
+        <div style="font-size:13px;color:#094649;font-weight:600;line-height:1.5;"><b>8 sesiones</b> · Evaluación al final de la unidad con tarea y examen parcial</div>
+      </div>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="intro"><section id="intro" style="background:#fff;display:flex;flex-direction:column;justify-content:center;height:100%;padding:44px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+    <div style="width:5px;height:36px;background:#3FBF9F;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#094649;margin:0;">¿Qué son las Medidas de Posición Relativa?</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:24px;align-items:start;">
+    <div>
+      <div style="background:#EDF4F3;border-radius:14px;padding:22px 26px;margin-bottom:16px;border-left:5px solid #094649;">
+        <p style="font-size:15px;color:#1B2430;line-height:1.7;margin:0;">Las medidas de posición relativa <b>ubican un valor dentro de un conjunto de datos</b>, indicando qué porcentaje de los demás datos está por debajo o por encima de él.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;align-items:flex-start;gap:12px;background:#F8FDFC;border-radius:10px;padding:12px 16px;">
+          <span style="color:#3FBF9F;font-size:18px;margin-top:1px;">◆</span>
+          <div><b style="color:#094649;font-size:13px;">Responden a la pregunta:</b><br><span style="font-size:13px;color:#5C7E7B;">"¿Dónde se ubica este valor respecto al grupo?"</span></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;background:#F8FDFC;border-radius:10px;padding:12px 16px;">
+          <span style="color:#1C7293;font-size:18px;margin-top:1px;">◆</span>
+          <div><b style="color:#094649;font-size:13px;">Son útiles para:</b><br><span style="font-size:13px;color:#5C7E7B;">comparar individuos, detectar anomalías y resumir distribuciones.</span></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;background:#F8FDFC;border-radius:10px;padding:12px 16px;">
+          <span style="color:#F4623A;font-size:18px;margin-top:1px;">◆</span>
+          <div><b style="color:#094649;font-size:13px;">Complementan a las medidas de dispersión:</b><br><span style="font-size:13px;color:#5C7E7B;">mientras la desviación mide variabilidad, la posición mide ubicación.</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="background:#1B2430;border-radius:14px;padding:20px 22px;">
+        <div style="font-size:11px;font-weight:700;color:#3FBF9F;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;">Familia de Cuantiles</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:rgba(63,191,159,0.15);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:#3FBF9F;font-weight:700;font-size:14px;">Cuartiles</span>
+            <span style="color:rgba(255,255,255,0.6);font-size:12px;">4 partes · Q1, Q2, Q3</span>
+          </div>
+          <div style="background:rgba(28,114,147,0.2);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:#1C7293;font-weight:700;font-size:14px;">Deciles</span>
+            <span style="color:rgba(255,255,255,0.6);font-size:12px;">10 partes · D1 a D9</span>
+          </div>
+          <div style="background:rgba(244,98,58,0.15);border-radius:8px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:#F4623A;font-weight:700;font-size:14px;">Percentiles</span>
+            <span style="color:rgba(255,255,255,0.6);font-size:12px;">100 partes · P1 a P99</span>
+          </div>
+        </div>
+        <div style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.1);padding-top:12px;font-size:12px;color:rgba(255,255,255,0.45);text-align:center;">Todos se calculan sobre datos <b style="color:rgba(255,255,255,0.7);">ordenados de menor a mayor</b></div>
+      </div>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="cuartiles_def"><section id="cuartiles_def" style="background:#EDF4F3;display:flex;flex-direction:column;justify-content:center;height:100%;padding:44px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">
+    <div style="width:5px;height:36px;background:#094649;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#094649;margin:0;">Cuartiles: Q1, Q2 y Q3</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:18px;">
+    <div style="background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+      <div style="font-size:13px;font-weight:700;color:#3FBF9F;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">¿Qué son?</div>
+      <p style="font-size:14px;color:#1B2430;line-height:1.7;margin:0;">Los cuartiles son tres valores que <b>dividen un conjunto de datos ordenados en cuatro partes iguales</b>, cada una con el 25% de las observaciones.</p>
+    </div>
+    <div style="background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+      <div style="font-size:13px;font-weight:700;color:#1C7293;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Condición previa</div>
+      <p style="font-size:14px;color:#1B2430;line-height:1.7;margin:0;">Los datos <b>deben estar ordenados de menor a mayor</b> antes de calcular cualquier cuartil.</p>
+    </div>
+  </div>
+  <div style="background:#1B2430;border-radius:14px;padding:20px 28px;margin-bottom:16px;">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:space-between;position:relative;">
+      <div style="position:absolute;top:50%;left:0;right:0;height:3px;background:rgba(255,255,255,0.15);transform:translateY(-50%);"></div>
+      <div style="background:#3FBF9F;height:12px;width:12px;border-radius:50%;position:relative;"></div>
+      <div style="background:rgba(255,255,255,0.2);flex:1;height:3px;"></div>
+      <div style="text-align:center;position:relative;">
+        <div style="background:#3FBF9F;color:#094649;font-size:13px;font-weight:800;padding:6px 16px;border-radius:20px;white-space:nowrap;">Q1 — 25%</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:5px;">1er cuartil</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.2);flex:1;height:3px;"></div>
+      <div style="text-align:center;position:relative;">
+        <div style="background:#1C7293;color:#fff;font-size:13px;font-weight:800;padding:6px 16px;border-radius:20px;white-space:nowrap;">Q2 — 50%</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:5px;">Mediana</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.2);flex:1;height:3px;"></div>
+      <div style="text-align:center;position:relative;">
+        <div style="background:#094649;color:#fff;font-size:13px;font-weight:800;padding:6px 16px;border-radius:20px;white-space:nowrap;">Q3 — 75%</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:5px;">3er cuartil</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.2);flex:1;height:3px;"></div>
+      <div style="background:#F4623A;height:12px;width:12px;border-radius:50%;position:relative;"></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+    <div style="background:#fff;border-radius:10px;padding:14px 18px;border-left:4px solid #3FBF9F;">
+      <div style="font-size:22px;font-weight:800;color:#3FBF9F;font-family:'Rubik',sans-serif;">Q1</div>
+      <div style="font-size:13px;color:#1B2430;line-height:1.5;margin-top:4px;">El 25% de los datos es <b>menor o igual</b> a Q1</div>
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:14px 18px;border-left:4px solid #1C7293;">
+      <div style="font-size:22px;font-weight:800;color:#1C7293;font-family:'Rubik',sans-serif;">Q2</div>
+      <div style="font-size:13px;color:#1B2430;line-height:1.5;margin-top:4px;">El 50% de los datos es menor o igual a Q2 <i>(Mediana)</i></div>
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:14px 18px;border-left:4px solid #094649;">
+      <div style="font-size:22px;font-weight:800;color:#094649;font-family:'Rubik',sans-serif;">Q3</div>
+      <div style="font-size:13px;color:#1B2430;line-height:1.5;margin-top:4px;">El 75% de los datos es <b>menor o igual</b> a Q3</div>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="cuartiles_calc"><section id="cuartiles_calc" style="background:#fff;display:flex;flex-direction:column;justify-content:center;height:100%;padding:40px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+    <div style="width:5px;height:36px;background:#3FBF9F;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:28px;font-weight:700;color:#094649;margin:0;">Fórmula para Calcular Cuartiles</h1>
+  </div>
+  <div style="background:#1B2430;border-radius:16px;padding:22px 30px;margin-bottom:18px;text-align:center;">
+    <div style="font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Posición del k-ésimo cuartil</div>
+    <div style="font-family:'Rubik',sans-serif;font-size:32px;font-weight:700;color:#fff;">L = (k / 4) × n</div>
+    <div style="display:flex;justify-content:center;gap:28px;margin-top:14px;flex-wrap:wrap;">
+      <div style="text-align:center;"><span style="color:#F4623A;font-weight:700;font-size:16px;">k</span><span style="color:rgba(255,255,255,0.5);font-size:12px;"> = número de cuartil (1, 2 o 3)</span></div>
+      <div style="text-align:center;"><span style="color:#3FBF9F;font-weight:700;font-size:16px;">n</span><span style="color:rgba(255,255,255,0.5);font-size:12px;"> = total de datos</span></div>
+      <div style="text-align:center;"><span style="color:#1C7293;font-weight:700;font-size:16px;">L</span><span style="color:rgba(255,255,255,0.5);font-size:12px;"> = posición en la serie ordenada</span></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
+    <div style="background:#EDF4F3;border-radius:12px;padding:18px 22px;border-left:5px solid #3FBF9F;">
+      <div style="font-size:13px;font-weight:700;color:#3FBF9F;margin-bottom:10px;">Caso 1: L es un número entero</div>
+      <p style="font-size:13px;color:#1B2430;line-height:1.6;margin:0;">El cuartil es el <b>promedio entre el valor en la posición L y el siguiente</b>:<br><br><b>Qk = (x[L] + x[L+1]) / 2</b></p>
+    </div>
+    <div style="background:#EDF4F3;border-radius:12px;padding:18px 22px;border-left:5px solid #1C7293;">
+      <div style="font-size:13px;font-weight:700;color:#1C7293;margin-bottom:10px;">Caso 2: L NO es un número entero</div>
+      <p style="font-size:13px;color:#1B2430;line-height:1.6;margin:0;">Se redondea al <b>siguiente entero superior</b> y se toma el valor en esa posición:<br><br><b>Qk = x[⌈L⌉]</b></p>
+    </div>
+  </div>
+  <div style="background:#FFF5F2;border-radius:12px;padding:14px 20px;border-left:4px solid #F4623A;">
+    <div style="font-size:13px;color:#1B2430;line-height:1.6;"><b style="color:#F4623A;">Ejemplo rápido:</b> Si n = 10 y queremos Q1:<br>L = (1/4) × 10 = <b>2.5</b> → No es entero → tomamos la posición ⌈2.5⌉ = <b>3</b> → Q1 = x[3]</div>
+  </div>
+</section></div>
+<div class="slide" data-id="cuartiles_ej"><section id="cuartiles_ej" style="background:#EDF4F3;display:flex;flex-direction:column;justify-content:center;height:100%;padding:38px 52px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+    <div style="width:5px;height:36px;background:#F4623A;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:27px;font-weight:700;color:#094649;margin:0;">Ejemplo: Datos No Agrupados</h1>
+  </div>
+  <div style="background:#1B2430;border-radius:12px;padding:14px 20px;margin-bottom:14px;">
+    <div style="font-size:11px;color:#3FBF9F;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Calificaciones ordenadas de n = 12 estudiantes</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">52</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">60</span>
+      <span style="background:rgba(63,191,159,0.35);color:#3FBF9F;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">65</span>
+      <span style="background:rgba(63,191,159,0.35);color:#3FBF9F;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">68</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">70</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">72</span>
+      <span style="background:rgba(28,114,147,0.5);color:#3FBF9F;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">75</span>
+      <span style="background:rgba(28,114,147,0.5);color:#3FBF9F;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">78</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">80</span>
+      <span style="background:rgba(9,70,73,0.9);color:#fff;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">85</span>
+      <span style="background:rgba(9,70,73,0.9);color:#fff;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">88</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 11px;border-radius:6px;font-size:15px;font-weight:700;">95</span>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+    <div style="background:#fff;border-radius:10px;padding:14px 16px;border-top:3px solid #3FBF9F;">
+      <div style="font-size:11px;font-weight:700;color:#3FBF9F;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Q1 — Primer cuartil</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-bottom:4px;">L = (1/4) × 12 = <b>3</b> (entero)</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-bottom:8px;">Q1 = (x[3] + x[4]) / 2</div>
+      <div style="font-size:20px;font-weight:800;color:#3FBF9F;font-family:'Rubik',sans-serif;">Q1 = 66.5</div>
+      <div style="font-size:11px;color:#5C7E7B;margin-top:4px;">(65 + 68) / 2 = 66.5</div>
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:14px 16px;border-top:3px solid #1C7293;">
+      <div style="font-size:11px;font-weight:700;color:#1C7293;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Q2 — Mediana</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-bottom:4px;">L = (2/4) × 12 = <b>6</b> (entero)</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-bottom:8px;">Q2 = (x[6] + x[7]) / 2</div>
+      <div style="font-size:20px;font-weight:800;color:#1C7293;font-family:'Rubik',sans-serif;">Q2 = 73.5</div>
+      <div style="font-size:11px;color:#5C7E7B;margin-top:4px;">(72 + 75) / 2 = 73.5</div>
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:14px 16px;border-top:3px solid #094649;">
+      <div style="font-size:11px;font-weight:700;color:#094649;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Q3 — Tercer cuartil</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-bottom:4px;">L = (3/4) × 12 = <b>9</b> (entero)</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-bottom:8px;">Q3 = (x[9] + x[10]) / 2</div>
+      <div style="font-size:20px;font-weight:800;color:#094649;font-family:'Rubik',sans-serif;">Q3 = 82.5</div>
+      <div style="font-size:11px;color:#5C7E7B;margin-top:4px;">(80 + 85) / 2 = 82.5</div>
+    </div>
+  </div>
+  <div style="background:#fff;border-radius:10px;padding:12px 18px;border-left:4px solid #F4623A;">
+    <span style="font-size:13px;color:#1B2430;line-height:1.6;"><b style="color:#F4623A;">Interpretación:</b> El 25% de los estudiantes obtuvo ≤ 66.5, la mitad obtuvo ≤ 73.5 (mediana) y el 75% obtuvo ≤ 82.5.</span>
+  </div>
+</section></div>
+<div class="slide" data-id="cuartiles_agrup"><section id="cuartiles_agrup" style="background:#fff;display:flex;flex-direction:column;justify-content:center;height:100%;padding:36px 50px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+    <div style="width:5px;height:36px;background:#1C7293;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:27px;font-weight:700;color:#094649;margin:0;">Cuartiles en Datos Agrupados</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:20px;align-items:start;">
+    <div>
+      <div style="background:#1B2430;border-radius:12px;padding:16px;margin-bottom:14px;">
+        <div style="font-size:11px;color:#3FBF9F;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Fórmula de interpolación</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;text-align:center;margin-bottom:8px;">Qk = Li + [ (kn/4 − Fa) / fi ] × c</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;color:rgba(255,255,255,0.65);">
+          <div><b style="color:#F4623A;">Li</b> = límite inferior de la clase que contiene Qk</div>
+          <div><b style="color:#3FBF9F;">kn/4</b> = posición buscada (k = 1, 2 o 3)</div>
+          <div><b style="color:#1C7293;">Fa</b> = frecuencia acumulada ANTES de la clase</div>
+          <div><b style="color:#fff;">fi</b> = frecuencia de la clase que contiene Qk</div>
+          <div><b style="color:#fff;">c</b> = amplitud del intervalo</div>
+        </div>
+      </div>
+      <div style="background:#FFF5F2;border-radius:10px;padding:12px 16px;border-left:4px solid #F4623A;">
+        <div style="font-size:12px;color:#1B2430;line-height:1.6;"><b style="color:#F4623A;">Clase que contiene Qk:</b> Aquella en cuya frecuencia acumulada se alcanza o supera la posición <b>kn/4</b></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:700;color:#094649;margin-bottom:8px;">Calificaciones de 30 alumnos</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <thead>
+          <tr style="background:#094649;">
+            <th style="color:#fff;padding:8px 10px;text-align:left;border-radius:6px 0 0 0;">Intervalo</th>
+            <th style="color:#fff;padding:8px 10px;text-align:center;">fi</th>
+            <th style="color:#3FBF9F;padding:8px 10px;text-align:center;">Fa</th>
+            <th style="color:#fff;padding:8px 10px;text-align:center;border-radius:0 6px 0 0;">Li</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#EDF4F3;">
+            <td style="padding:7px 10px;color:#1B2430;">[50 – 60)</td>
+            <td style="padding:7px 10px;text-align:center;color:#1B2430;">4</td>
+            <td style="padding:7px 10px;text-align:center;color:#5C7E7B;">4</td>
+            <td style="padding:7px 10px;text-align:center;color:#1B2430;">50</td>
+          </tr>
+          <tr style="background:#DFF0ED;">
+            <td style="padding:7px 10px;color:#1B2430;">[60 – 70)</td>
+            <td style="padding:7px 10px;text-align:center;color:#1B2430;">8</td>
+            <td style="padding:7px 10px;text-align:center;color:#5C7E7B;">12</td>
+            <td style="padding:7px 10px;text-align:center;color:#1B2430;">60</td>
+          </tr>
+          <tr style="background:#EDF4F3;border:2px solid #3FBF9F;">
+            <td style="padding:7px 10px;color:#094649;font-weight:700;">[70 – 80) ← Q1</td>
+            <td style="padding:7px 10px;text-align:center;color:#094649;font-weight:700;">10</td>
+            <td style="padding:7px 10px;text-align:center;color:#3FBF9F;font-weight:700;">22</td>
+            <td style="padding:7px 10px;text-align:center;color:#094649;font-weight:700;">70</td>
+          </tr>
+          <tr style="background:#DFF0ED;">
+            <td style="padding:7px 10px;color:#1B2430;">[80 – 90)</td>
+            <td style="padding:7px 10px;text-align:center;color:#1B2430;">6</td>
+            <td style="padding:7px 10px;text-align:center;color:#5C7E7B;">28</td>
+            <td style="padding:7px 10px;text-align:center;color:#1B2430;">80</td>
+          </tr>
+          <tr style="background:#EDF4F3;">
+            <td style="padding:7px 10px;color:#1B2430;">[90 – 100]</td>
+            <td style="padding:7px 10px;text-align:center;color:#1B2430;">2</td>
+            <td style="padding:7px 10px;text-align:center;color:#5C7E7B;">30</td>
+            <td style="padding:7px 10px;text-align:center;color:#1B2430;">90</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="background:#EDF4F3;border-radius:10px;padding:12px 16px;margin-top:10px;font-size:12px;color:#1B2430;line-height:1.7;">
+        <b style="color:#3FBF9F;">Q1:</b> kn/4 = (1×30)/4 = 7.5 → clase [70–80)<br>
+        Q1 = 70 + [(7.5 − 12) / 10] × 10 → No alcanza → clase [60–70)<br>
+        Q1 = 60 + [(7.5 − 4) / 8] × 10 = 60 + <b>4.375 = 64.4</b>
+      </div>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="deciles_def"><section id="deciles_def" style="background:#EDF4F3;display:flex;flex-direction:column;justify-content:center;height:100%;padding:42px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">
+    <div style="width:5px;height:36px;background:#1C7293;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#094649;margin:0;">Deciles: D1 a D9</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;">
+    <div style="background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+      <div style="font-size:13px;font-weight:700;color:#1C7293;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Definición</div>
+      <p style="font-size:14px;color:#1B2430;line-height:1.7;margin:0;">Los deciles son nueve valores que <b>dividen los datos ordenados en diez partes iguales</b>, cada una con el 10% de las observaciones.</p>
+    </div>
+    <div style="background:#1B2430;border-radius:14px;padding:20px 24px;">
+      <div style="font-size:13px;font-weight:700;color:#3FBF9F;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Fórmula</div>
+      <div style="font-size:28px;font-weight:700;color:#fff;font-family:'Rubik',sans-serif;text-align:center;margin:8px 0;">L = (k / 10) × n</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.55);text-align:center;margin-top:6px;">k = 1, 2, 3, … , 9 &nbsp;|&nbsp; n = total de datos</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);text-align:center;margin-top:4px;">Misma regla: entero → promedio; no entero → posición ⌈L⌉</div>
+    </div>
+  </div>
+  <div style="background:#fff;border-radius:14px;padding:18px 22px;box-shadow:0 1px 8px rgba(9,70,73,0.07);margin-bottom:14px;">
+    <div style="font-size:12px;font-weight:700;color:#094649;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;">Los 9 deciles en la distribución</div>
+    <div style="display:flex;align-items:center;gap:0;position:relative;">
+      <div style="width:24px;height:24px;background:#DFF0ED;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#094649;font-weight:700;flex-shrink:0;">0%</div>
+      <div style="flex:1;height:6px;background:linear-gradient(90deg,#DFF0ED,#3FBF9F,#1C7293,#094649);"></div>
+      <div style="width:24px;height:24px;background:#094649;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700;flex-shrink:0;">100%</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:6px;padding:0 12px;">
+      <span style="font-size:11px;font-weight:700;color:#3FBF9F;">D1<br>10%</span>
+      <span style="font-size:11px;font-weight:700;color:#3FBF9F;">D2<br>20%</span>
+      <span style="font-size:11px;font-weight:700;color:#1C7293;">D3<br>30%</span>
+      <span style="font-size:11px;font-weight:700;color:#1C7293;">D4<br>40%</span>
+      <span style="font-size:11px;font-weight:700;color:#094649;">D5<br>50%</span>
+      <span style="font-size:11px;font-weight:700;color:#094649;">D6<br>60%</span>
+      <span style="font-size:11px;font-weight:700;color:#094649;">D7<br>70%</span>
+      <span style="font-size:11px;font-weight:700;color:#094649;">D8<br>80%</span>
+      <span style="font-size:11px;font-weight:700;color:#094649;">D9<br>90%</span>
+    </div>
+  </div>
+  <div style="background:#DFF0ED;border-radius:10px;padding:12px 18px;border-left:4px solid #1C7293;">
+    <span style="font-size:13px;color:#094649;line-height:1.6;"><b>Equivalencia importante:</b> D5 = Q2 = Mediana (el 50% central). D1=P10, D2=P20, … , D9=P90.</span>
+  </div>
+</section></div>
+<div class="slide" data-id="deciles_ej"><section id="deciles_ej" style="background:#fff;display:flex;flex-direction:column;justify-content:center;height:100%;padding:38px 52px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+    <div style="width:5px;height:36px;background:#1C7293;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:27px;font-weight:700;color:#094649;margin:0;">Ejemplo: Cálculo de D3 y D7</h1>
+  </div>
+  <div style="background:#1B2430;border-radius:12px;padding:14px 20px;margin-bottom:14px;">
+    <div style="font-size:11px;color:#3FBF9F;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Tiempo de respuesta en minutos — n = 20 datos ordenados</div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;">
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">2</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">3</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">4</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">4</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">5</span>
+      <span style="background:rgba(28,114,147,0.45);color:#3FBF9F;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">6</span>
+      <span style="background:rgba(28,114,147,0.45);color:#3FBF9F;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">7</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">7</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">8</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">9</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">10</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">11</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">12</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">13</span>
+      <span style="background:rgba(9,70,73,0.7);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">14</span>
+      <span style="background:rgba(9,70,73,0.7);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">15</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">16</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">18</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">20</span>
+      <span style="background:rgba(255,255,255,0.1);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">25</span>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px;">
+    <div style="background:#EDF4F3;border-radius:12px;padding:18px 22px;border-top:3px solid #1C7293;">
+      <div style="font-size:12px;font-weight:700;color:#1C7293;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">D3 — Tercer decil</div>
+      <div style="font-size:13px;color:#5C7E7B;line-height:1.7;">L = (3/10) × 20 = <b>6</b> (entero)<br>D3 = (x[6] + x[7]) / 2 = (6 + 7) / 2</div>
+      <div style="font-size:24px;font-weight:800;color:#1C7293;font-family:'Rubik',sans-serif;margin-top:6px;">D3 = 6.5 min</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-top:4px;"><i>El 30% de los tiempos es ≤ 6.5 min</i></div>
+    </div>
+    <div style="background:#EDF4F3;border-radius:12px;padding:18px 22px;border-top:3px solid #094649;">
+      <div style="font-size:12px;font-weight:700;color:#094649;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">D7 — Séptimo decil</div>
+      <div style="font-size:13px;color:#5C7E7B;line-height:1.7;">L = (7/10) × 20 = <b>14</b> (entero)<br>D7 = (x[14] + x[15]) / 2 = (13 + 14) / 2</div>
+      <div style="font-size:24px;font-weight:800;color:#094649;font-family:'Rubik',sans-serif;margin-top:6px;">D7 = 13.5 min</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-top:4px;"><i>El 70% de los tiempos es ≤ 13.5 min</i></div>
+    </div>
+  </div>
+  <div style="background:#1B2430;border-radius:10px;padding:12px 18px;">
+    <span style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.6;"><b style="color:#3FBF9F;">¿Qué nos dice D3 = 6.5?</b> El 30% de los servicios se atiende en 6.5 minutos o menos. <b style="color:#F4623A;">¿Y D7 = 13.5?</b> El 70% de los servicios tarda 13.5 minutos o menos.</span>
+  </div>
+</section></div>
+<div class="slide" data-id="percentiles_def"><section id="percentiles_def" style="background:#EDF4F3;display:flex;flex-direction:column;justify-content:center;height:100%;padding:42px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">
+    <div style="width:5px;height:36px;background:#F4623A;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#094649;margin:0;">Percentiles: P1 a P99</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px;">
+    <div style="background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+      <div style="font-size:13px;font-weight:700;color:#F4623A;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Definición</div>
+      <p style="font-size:14px;color:#1B2430;line-height:1.7;margin:0;">Los percentiles son 99 valores que <b>dividen los datos ordenados en 100 partes iguales</b>. El percentil k indica que el <b>k% de los datos es menor o igual</b> a ese valor.</p>
+    </div>
+    <div style="background:#1B2430;border-radius:14px;padding:20px 24px;">
+      <div style="font-size:13px;font-weight:700;color:#3FBF9F;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Fórmula</div>
+      <div style="font-size:28px;font-weight:700;color:#fff;font-family:'Rubik',sans-serif;text-align:center;margin:8px 0;">L = (k / 100) × n</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.55);text-align:center;margin-top:6px;">k = 1, 2, 3, … , 99 &nbsp;|&nbsp; n = total de datos</div>
+    </div>
+  </div>
+  <div style="background:#fff;border-radius:14px;padding:18px 24px;box-shadow:0 1px 8px rgba(9,70,73,0.07);margin-bottom:14px;">
+    <div style="font-size:13px;font-weight:700;color:#094649;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px;">Equivalencias entre cuantiles</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+      <div style="background:#EDF4F3;border-radius:10px;padding:12px 16px;text-align:center;">
+        <div style="font-size:20px;font-weight:800;color:#3FBF9F;font-family:'Rubik',sans-serif;">Q1</div>
+        <div style="font-size:13px;color:#5C7E7B;margin-top:4px;">= D2.5 = <b>P25</b></div>
+      </div>
+      <div style="background:#EDF4F3;border-radius:10px;padding:12px 16px;text-align:center;">
+        <div style="font-size:20px;font-weight:800;color:#1C7293;font-family:'Rubik',sans-serif;">Q2</div>
+        <div style="font-size:13px;color:#5C7E7B;margin-top:4px;">= D5 = <b>P50</b></div>
+      </div>
+      <div style="background:#EDF4F3;border-radius:10px;padding:12px 16px;text-align:center;">
+        <div style="font-size:20px;font-weight:800;color:#094649;font-family:'Rubik',sans-serif;">Q3</div>
+        <div style="font-size:13px;color:#5C7E7B;margin-top:4px;">= D7.5 = <b>P75</b></div>
+      </div>
+    </div>
+  </div>
+  <div style="background:#FFF5F2;border-radius:10px;padding:12px 18px;border-left:4px solid #F4623A;">
+    <span style="font-size:13px;color:#1B2430;line-height:1.6;"><b style="color:#F4623A;">Aplicación típica:</b> En medicina, educación y recursos humanos se usa P90 o P95 para definir umbrales de desempeño elevado. "Tu peso está en el percentil 85" → el 85% de la población pesa igual o menos que tú.</span>
+  </div>
+</section></div>
+<div class="slide" data-id="percentiles_ej"><section id="percentiles_ej" style="background:#fff;display:flex;flex-direction:column;justify-content:center;height:100%;padding:38px 52px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+    <div style="width:5px;height:36px;background:#F4623A;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:27px;font-weight:700;color:#094649;margin:0;">Ejemplo: Cálculo de P30 y P85</h1>
+  </div>
+  <div style="background:#1B2430;border-radius:12px;padding:14px 20px;margin-bottom:14px;">
+    <div style="font-size:11px;color:#3FBF9F;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Puntuaciones de un examen — n = 25 datos ordenados</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">42</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">48</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">53</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">55</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">58</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">60</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">62</span>
+      <span style="background:rgba(244,98,58,0.4);color:#F4623A;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">65</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">67</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">70</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">72</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">74</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">76</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">78</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">80</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">81</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">83</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">85</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">86</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">88</span>
+      <span style="background:rgba(9,70,73,0.7);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">90</span>
+      <span style="background:rgba(9,70,73,0.7);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">92</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">94</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">96</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:4px 9px;border-radius:5px;font-size:13px;font-weight:700;">99</span>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px;">
+    <div style="background:#EDF4F3;border-radius:12px;padding:16px 20px;border-top:3px solid #F4623A;">
+      <div style="font-size:12px;font-weight:700;color:#F4623A;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">P30 — Percentil 30</div>
+      <div style="font-size:13px;color:#5C7E7B;line-height:1.7;">L = (30/100) × 25 = <b>7.5</b> (no entero)<br>Posición ⌈7.5⌉ = <b>8</b> → x[8] = 65</div>
+      <div style="font-size:24px;font-weight:800;color:#F4623A;font-family:'Rubik',sans-serif;margin-top:6px;">P30 = 65</div>
+      <div style="font-size:11px;color:#5C7E7B;margin-top:4px;"><i>El 30% de los alumnos obtuvo ≤ 65 puntos</i></div>
+    </div>
+    <div style="background:#EDF4F3;border-radius:12px;padding:16px 20px;border-top:3px solid #094649;">
+      <div style="font-size:12px;font-weight:700;color:#094649;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">P85 — Percentil 85</div>
+      <div style="font-size:13px;color:#5C7E7B;line-height:1.7;">L = (85/100) × 25 = <b>21.25</b> (no entero)<br>Posición ⌈21.25⌉ = <b>22</b> → x[22] = 92</div>
+      <div style="font-size:24px;font-weight:800;color:#094649;font-family:'Rubik',sans-serif;margin-top:6px;">P85 = 92</div>
+      <div style="font-size:11px;color:#5C7E7B;margin-top:4px;"><i>El 85% de los alumnos obtuvo ≤ 92 puntos</i></div>
+    </div>
+  </div>
+  <div style="background:#1B2430;border-radius:10px;padding:12px 18px;">
+    <span style="font-size:13px;color:rgba(255,255,255,0.8);"><b style="color:#F4623A;">Interpretación:</b> Un alumno con 92 supera al 85% del grupo. Usar percentiles es clave para comparar sin importar la escala de calificación.</span>
+  </div>
+</section></div>
+<div class="slide" data-id="ric_def"><section id="ric_def" style="background:#EDF4F3;display:flex;flex-direction:column;justify-content:center;height:100%;padding:44px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">
+    <div style="width:5px;height:36px;background:#094649;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#094649;margin:0;">Rango Intercuartílico (RIC)</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:20px;margin-bottom:16px;">
+    <div>
+      <div style="background:#1B2430;border-radius:14px;padding:22px 28px;margin-bottom:14px;text-align:center;">
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Definición</div>
+        <div style="font-family:'Rubik',sans-serif;font-size:36px;font-weight:800;color:#fff;">RIC = Q3 − Q1</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.55);margin-top:10px;">Mide la <b style="color:#3FBF9F;">dispersión del 50% central</b> de los datos</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+        <div style="font-size:13px;font-weight:700;color:#094649;margin-bottom:8px;">¿Por qué es útil?</div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;color:#1B2430;line-height:1.5;">
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="color:#3FBF9F;font-weight:700;flex-shrink:0;">✓</span> Es <b>robusto</b>: no se ve afectado por valores extremos (outliers)</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="color:#3FBF9F;font-weight:700;flex-shrink:0;">✓</span> Describe la <b>variabilidad del núcleo central</b> de la distribución</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;"><span style="color:#3FBF9F;font-weight:700;flex-shrink:0;">✓</span> Es la base para la <b>regla de Tukey</b> y el boxplot</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+      <div style="font-size:13px;font-weight:700;color:#1C7293;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">RIC vs Rango</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="background:#EDF4F3;border-radius:10px;padding:12px 16px;">
+          <div style="font-size:12px;font-weight:700;color:#094649;margin-bottom:6px;">Rango = Máx − Mín</div>
+          <div style="font-size:12px;color:#5C7E7B;line-height:1.6;">Considera <b>todos</b> los datos incluidos los extremos. Un solo outlier lo distorsiona completamente.</div>
+          <div style="display:flex;gap:4px;margin-top:8px;align-items:center;">
+            <div style="width:4px;height:4px;background:#F4623A;border-radius:50%;"></div>
+            <div style="flex:1;height:3px;background:#EDF4F3;"></div>
+            <div style="width:12px;height:12px;background:#F4623A;border-radius:50%;"></div>
+            <div style="flex:3;height:3px;background:#DFF0ED;"></div>
+            <div style="width:4px;height:4px;background:#094649;border-radius:50%;"></div>
+          </div>
+          <div style="font-size:11px;color:#F4623A;margin-top:3px;text-align:center;">Sensible a outliers</div>
+        </div>
+        <div style="background:#EDF4F3;border-radius:10px;padding:12px 16px;">
+          <div style="font-size:12px;font-weight:700;color:#094649;margin-bottom:6px;">RIC = Q3 − Q1</div>
+          <div style="font-size:12px;color:#5C7E7B;line-height:1.6;">Considera solo el <b>50% central</b>. Ignora los extremos; es estable ante outliers.</div>
+          <div style="display:flex;gap:4px;margin-top:8px;align-items:center;justify-content:center;">
+            <div style="flex:1;height:3px;background:#EDF4F3;"></div>
+            <div style="background:#3FBF9F;height:10px;width:60%;border-radius:4px;"></div>
+            <div style="flex:1;height:3px;background:#EDF4F3;"></div>
+          </div>
+          <div style="font-size:11px;color:#3FBF9F;margin-top:3px;text-align:center;">Robusto ante outliers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="outliers_def"><section id="outliers_def" style="background:#fff;display:flex;flex-direction:column;justify-content:center;height:100%;padding:44px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">
+    <div style="width:5px;height:36px;background:#F4623A;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#094649;margin:0;">Valores Atípicos (Outliers)</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;">
+    <div>
+      <div style="background:#FFF5F2;border-radius:14px;padding:20px 24px;border-left:5px solid #F4623A;margin-bottom:14px;">
+        <div style="font-size:13px;font-weight:700;color:#F4623A;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">¿Qué es un outlier?</div>
+        <p style="font-size:14px;color:#1B2430;line-height:1.7;margin:0;">Un <b>valor atípico</b> es una observación que se encuentra <b>notablemente alejada del resto</b> de los datos de un conjunto.</p>
+      </div>
+      <div style="background:#EDF4F3;border-radius:12px;padding:16px 20px;">
+        <div style="font-size:13px;font-weight:700;color:#094649;margin-bottom:10px;">¿Cómo afectan?</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#1B2430;">
+            <span style="color:#F4623A;font-size:16px;flex-shrink:0;">⚠</span> <div>Distorsionan la <b>media aritmética</b> haciéndola no representativa</div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#1B2430;">
+            <span style="color:#F4623A;font-size:16px;flex-shrink:0;">⚠</span> <div>Inflan el <b>rango total</b> de la distribución</div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#1B2430;">
+            <span style="color:#3FBF9F;font-size:16px;flex-shrink:0;">✓</span> <div>La <b>mediana y el RIC</b> son robustos: NO se ven afectados</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="background:#1B2430;border-radius:14px;padding:20px 22px;margin-bottom:14px;">
+        <div style="font-size:12px;color:#3FBF9F;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">Causas comunes</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="background:#F4623A;color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;flex-shrink:0;white-space:nowrap;">Error</span>
+            <span style="font-size:13px;color:rgba(255,255,255,0.7);">Error de medición o captura de datos</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="background:#1C7293;color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;flex-shrink:0;white-space:nowrap;">Evento</span>
+            <span style="font-size:13px;color:rgba(255,255,255,0.7);">Evento excepcional o caso especial legítimo</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="background:#3FBF9F;color:#094649;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;flex-shrink:0;white-space:nowrap;">Natural</span>
+            <span style="font-size:13px;color:rgba(255,255,255,0.7);">Variabilidad natural de la población</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:#EDF4F3;border-radius:12px;padding:14px 18px;border-left:4px solid #094649;">
+        <div style="font-size:13px;color:#1B2430;line-height:1.6;"><b>¿Eliminarlos siempre?</b> No. Primero identificar la causa: si es un error, se corrige; si es real, se reporta y se analiza con cuidado.</div>
+      </div>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="tukey"><section id="tukey" style="background:#EDF4F3;display:flex;flex-direction:column;justify-content:center;height:100%;padding:42px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+    <div style="width:5px;height:36px;background:#F4623A;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#094649;margin:0;">Regla de Tukey para Detectar Outliers</h1>
+  </div>
+  <div style="background:#1B2430;border-radius:16px;padding:22px 32px;margin-bottom:18px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+      <div style="text-align:center;">
+        <div style="font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Límite Inferior</div>
+        <div style="font-family:'Rubik',sans-serif;font-size:24px;font-weight:700;color:#3FBF9F;">LI = Q1 − 1.5 × RIC</div>
+      </div>
+      <div style="text-align:center;border-left:1px solid rgba(255,255,255,0.1);padding-left:28px;">
+        <div style="font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Límite Superior</div>
+        <div style="font-family:'Rubik',sans-serif;font-size:24px;font-weight:700;color:#F4623A;">LS = Q3 + 1.5 × RIC</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;border-top:1px solid rgba(255,255,255,0.1);padding-top:14px;text-align:center;font-size:13px;color:rgba(255,255,255,0.6);">Un dato es <b style="color:#F4623A;">outlier</b> si cae <b>fuera del intervalo [LI, LS]</b></div>
+  </div>
+  <div style="background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 1px 8px rgba(9,70,73,0.07);margin-bottom:14px;">
+    <div style="font-size:13px;font-weight:700;color:#094649;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px;">Ejemplo aplicado: Q1 = 5, Q3 = 12, RIC = 7</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div style="background:#EDF4F3;border-radius:10px;padding:14px 18px;border-left:4px solid #3FBF9F;">
+        <div style="font-size:12px;font-weight:700;color:#3FBF9F;margin-bottom:6px;">Límite Inferior</div>
+        <div style="font-size:14px;color:#1B2430;line-height:1.7;">LI = 5 − 1.5 × 7<br>LI = 5 − 10.5 = <b>−5.5</b></div>
+      </div>
+      <div style="background:#FFF5F2;border-radius:10px;padding:14px 18px;border-left:4px solid #F4623A;">
+        <div style="font-size:12px;font-weight:700;color:#F4623A;margin-bottom:6px;">Límite Superior</div>
+        <div style="font-size:14px;color:#1B2430;line-height:1.7;">LS = 12 + 1.5 × 7<br>LS = 12 + 10.5 = <b>22.5</b></div>
+      </div>
+    </div>
+  </div>
+  <div style="background:#F4623A;border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:14px;">
+    <span style="font-size:28px;">🎯</span>
+    <div style="font-size:13px;color:#fff;line-height:1.6;">Cualquier valor <b>&lt; −5.5</b> o <b>&gt; 22.5</b> es un outlier. El valor <b>32</b> excede 22.5 → <b>outlier detectado.</b> Los bigotes del boxplot llegan solo hasta LI y LS.</div>
+  </div>
+</section></div>
+<div class="slide" data-id="boxplot"><section id="boxplot" style="background:#EDF4F3;display:flex;flex-direction:column;justify-content:center;height:100%;padding:42px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+    <div style="width:5px;height:36px;background:#1C7293;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#094649;margin:0;">Diagrama de Caja y Bigotes (Boxplot)</h1>
+  </div>
+  <div style="background:#fff;border-radius:16px;padding:28px 36px;margin-bottom:18px;box-shadow:0 2px 12px rgba(9,70,73,0.09);">
+    <div style="position:relative;height:90px;margin:0 60px;">
+      <div style="position:absolute;top:50%;left:0;right:0;height:2px;background:rgba(28,114,147,0.3);transform:translateY(-50%);"></div>
+      <div style="display:flex;align-items:center;height:100%;gap:0;">
+        <div style="position:relative;flex:1;display:flex;align-items:center;justify-content:flex-end;"><div style="position:absolute;right:0;width:2px;height:28px;background:#1C7293;"></div></div>
+        <div style="position:relative;flex:2;height:56px;background:#DFF0ED;border:2.5px solid #3FBF9F;border-right:none;border-radius:4px 0 0 4px;">
+          <div style="position:absolute;bottom:-24px;left:0;font-size:11px;color:#3FBF9F;font-weight:700;white-space:nowrap;">Q1</div>
+        </div>
+        <div style="position:relative;width:3px;height:56px;background:#1B2430;">
+          <div style="position:absolute;bottom:-24px;left:-12px;font-size:11px;color:#1B2430;font-weight:700;white-space:nowrap;">Q2</div>
+        </div>
+        <div style="position:relative;flex:2;height:56px;background:#DFF0ED;border:2.5px solid #094649;border-left:none;border-radius:0 4px 4px 0;">
+          <div style="position:absolute;bottom:-24px;right:0;font-size:11px;color:#094649;font-weight:700;white-space:nowrap;">Q3</div>
+        </div>
+        <div style="position:relative;flex:1;display:flex;align-items:center;"><div style="position:absolute;left:0;width:2px;height:28px;background:#1C7293;"></div></div>
+        <div style="flex:0.5;display:flex;align-items:center;justify-content:center;">
+          <div style="width:12px;height:12px;background:#F4623A;border-radius:50;border:2px solid #F4623A;border-radius:50%;"></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:40px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:20px;height:12px;background:#DFF0ED;border:2px solid #3FBF9F;border-radius:2px;"></div><span style="font-size:12px;color:#5C7E7B;">Caja = 50% central (IQR)</span></div>
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:20px;height:2px;background:#1C7293;"></div><span style="font-size:12px;color:#5C7E7B;">Bigotes (hasta LI y LS de Tukey)</span></div>
+      <div style="display:flex;align-items:center;gap:8px;"><div style="width:12px;height:12px;background:#F4623A;border-radius:50%;"></div><span style="font-size:12px;color:#5C7E7B;">Outliers (puntos fuera)</span></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+    <div style="background:#fff;border-radius:12px;padding:16px 20px;border-left:4px solid #3FBF9F;box-shadow:0 1px 6px rgba(9,70,73,0.06);">
+      <div style="font-size:13px;font-weight:700;color:#094649;margin-bottom:8px;">Simetría → posición de Q2</div>
+      <div style="font-size:13px;color:#1B2430;line-height:1.6;">Si Q2 está <b>al centro</b> de la caja → distribución simétrica. Si se desplaza hacia un lado → asimétrica (sesgada).</div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:16px 20px;border-left:4px solid #1C7293;box-shadow:0 1px 6px rgba(9,70,73,0.06);">
+      <div style="font-size:13px;font-weight:700;color:#094649;margin-bottom:8px;">Cinco números resumen</div>
+      <div style="font-size:13px;color:#1B2430;line-height:1.6;">El boxplot muestra: <b>Mín · Q1 · Q2 · Q3 · Máx</b> (sin contar outliers). Son los 5 números que describen la distribución.</div>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="boxplot_ej"><section id="boxplot_ej" style="background:#fff;display:flex;flex-direction:column;justify-content:center;height:100%;padding:38px 52px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+    <div style="width:5px;height:36px;background:#1C7293;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:27px;font-weight:700;color:#094649;margin:0;">Ejemplo: Boxplot con Outlier Detectado</h1>
+  </div>
+  <div style="background:#1B2430;border-radius:12px;padding:14px 20px;margin-bottom:14px;">
+    <div style="font-size:11px;color:#3FBF9F;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">n = 15 tiempos de entrega (días) ordenados</div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;">
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">2</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">3</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">4</span>
+      <span style="background:rgba(63,191,159,0.3);color:#3FBF9F;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">5</span>
+      <span style="background:rgba(63,191,159,0.3);color:#3FBF9F;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">5</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">6</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">7</span>
+      <span style="background:rgba(28,114,147,0.4);color:#3FBF9F;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">8</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">9</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">10</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">11</span>
+      <span style="background:rgba(9,70,73,0.7);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">12</span>
+      <span style="background:rgba(9,70,73,0.7);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">13</span>
+      <span style="background:rgba(255,255,255,0.08);color:#fff;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">15</span>
+      <span style="background:rgba(244,98,58,0.5);color:#F4623A;padding:5px 10px;border-radius:6px;font-size:14px;font-weight:700;">32</span>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px;">
+    <div style="background:#EDF4F3;border-radius:12px;padding:14px 18px;">
+      <div style="font-size:12px;font-weight:700;color:#094649;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Cálculos</div>
+      <div style="font-size:13px;color:#1B2430;line-height:1.8;">Q1 = 5 &nbsp;(pos 4) · Q2 = 8 · Q3 = 12 (pos 12)<br><b>RIC = Q3 − Q1 = 12 − 5 = 7</b><br>LI = 5 − 10.5 = <b style="color:#3FBF9F;">−5.5</b><br>LS = 12 + 10.5 = <b style="color:#F4623A;">22.5</b></div>
+    </div>
+    <div style="background:#F4623A;border-radius:12px;padding:14px 18px;">
+      <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">Outlier detectado</div>
+      <div style="font-size:18px;font-weight:800;color:#fff;font-family:'Rubik',sans-serif;margin-bottom:4px;">32 &gt; 22.5 ← ¡Outlier!</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.8);">El bigote derecho llega solo hasta 15 (el máximo no outlier)</div>
+    </div>
+  </div>
+  <div style="background:#1B2430;border-radius:12px;padding:16px 20px;">
+    <div style="font-size:11px;color:#3FBF9F;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Estructura del boxplot resultante</div>
+    <div style="position:relative;height:50px;margin:0 40px;">
+      <div style="position:absolute;top:50%;left:0;right:0;height:2px;background:rgba(255,255,255,0.2);transform:translateY(-50%);"></div>
+      <div style="display:flex;align-items:center;height:100%;gap:0;">
+        <div style="position:relative;"><div style="width:2px;height:28px;background:#3FBF9F;"></div></div>
+        <div style="flex:0.3;"></div>
+        <div style="flex:1;height:34px;background:rgba(63,191,159,0.2);border:2px solid #3FBF9F;border-right:none;border-radius:3px 0 0 3px;"></div>
+        <div style="width:3px;height:34px;background:#fff;"></div>
+        <div style="flex:1;height:34px;background:rgba(63,191,159,0.2);border:2px solid #094649;border-left:none;border-radius:0 3px 3px 0;"></div>
+        <div style="flex:0.7;"></div>
+        <div style="width:2px;height:28px;background:#3FBF9F;"></div>
+        <div style="flex:0.8;"></div>
+        <div style="width:12px;height:12px;background:#F4623A;border-radius:50%;flex-shrink:0;"></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,0.5);margin-top:4px;padding:0 38px;">
+      <span>Mín=2</span><span style="color:#3FBF9F;">Q1=5</span><span style="color:#fff;">Q2=8</span><span style="color:#094649;color:#5C7E7B;">Q3=12</span><span>Máx=15</span><span style="color:#F4623A;">32 (outlier)</span>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="z_def"><section id="z_def" style="background:#1B2430;display:flex;flex-direction:column;justify-content:center;height:100%;padding:44px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:26px;">
+    <div style="width:5px;height:36px;background:#F4623A;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#fff;margin:0;">Puntuación Z (Puntaje Estándar)</h1>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px 36px;margin-bottom:20px;text-align:center;">
+    <div style="font-size:13px;color:rgba(255,255,255,0.45);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Fórmula</div>
+    <div style="font-family:'Rubik',sans-serif;font-size:44px;font-weight:800;color:#fff;letter-spacing:2px;">Z = (x − μ) / σ</div>
+    <div style="display:flex;justify-content:center;gap:36px;margin-top:16px;flex-wrap:wrap;">
+      <div style="text-align:center;"><span style="color:#F4623A;font-weight:800;font-size:18px;">x</span><br><span style="color:rgba(255,255,255,0.5);font-size:12px;">valor individual</span></div>
+      <div style="text-align:center;"><span style="color:#3FBF9F;font-weight:800;font-size:18px;">μ</span><br><span style="color:rgba(255,255,255,0.5);font-size:12px;">media de la distribución</span></div>
+      <div style="text-align:center;"><span style="color:#1C7293;font-weight:800;font-size:18px;">σ</span><br><span style="color:rgba(255,255,255,0.5);font-size:12px;">desviación estándar</span></div>
+      <div style="text-align:center;"><span style="color:#fff;font-weight:800;font-size:18px;">Z</span><br><span style="color:rgba(255,255,255,0.5);font-size:12px;">puntaje estandarizado</span></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:12px;padding:18px 22px;border-left:4px solid #3FBF9F;">
+      <div style="font-size:13px;font-weight:700;color:#3FBF9F;margin-bottom:10px;">¿Qué mide Z?</div>
+      <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.7;margin:0;">Indica a <b style="color:#fff;">cuántas desviaciones estándar</b> se encuentra el valor x respecto a la media μ de su distribución.</p>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-radius:12px;padding:18px 22px;border-left:4px solid #F4623A;">
+      <div style="font-size:13px;font-weight:700;color:#F4623A;margin-bottom:10px;">¿Para qué sirve?</div>
+      <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.7;margin:0;">Estandariza valores de <b style="color:#fff;">distintas escalas</b> a una escala común, permitiendo comparaciones entre distribuciones diferentes.</p>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="z_interp"><section id="z_interp" style="background:#EDF4F3;display:flex;flex-direction:column;justify-content:center;height:100%;padding:42px 56px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">
+    <div style="width:5px;height:36px;background:#F4623A;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;color:#094649;margin:0;">Interpretación de la Puntuación Z</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px;">
+    <div style="background:#fff;border-radius:14px;padding:20px;text-align:center;box-shadow:0 1px 8px rgba(9,70,73,0.07);border-top:4px solid #3FBF9F;">
+      <div style="font-family:'Rubik',sans-serif;font-size:36px;font-weight:800;color:#3FBF9F;">Z &gt; 0</div>
+      <div style="font-size:13px;font-weight:700;color:#094649;margin:10px 0 6px 0;">Por encima de la media</div>
+      <div style="font-size:12px;color:#5C7E7B;line-height:1.6;">El valor está a la <b>derecha</b> de μ. Cuanto mayor sea Z, más alejado está hacia arriba.</div>
+    </div>
+    <div style="background:#1B2430;border-radius:14px;padding:20px;text-align:center;border-top:4px solid #fff;">
+      <div style="font-family:'Rubik',sans-serif;font-size:36px;font-weight:800;color:#fff;">Z = 0</div>
+      <div style="font-size:13px;font-weight:700;color:#3FBF9F;margin:10px 0 6px 0;">Igual a la media</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6;">El valor coincide exactamente con μ. Está en el centro de la distribución.</div>
+    </div>
+    <div style="background:#fff;border-radius:14px;padding:20px;text-align:center;box-shadow:0 1px 8px rgba(9,70,73,0.07);border-top:4px solid #F4623A;">
+      <div style="font-family:'Rubik',sans-serif;font-size:36px;font-weight:800;color:#F4623A;">Z &lt; 0</div>
+      <div style="font-size:13px;font-weight:700;color:#094649;margin:10px 0 6px 0;">Por debajo de la media</div>
+      <div style="font-size:12px;color:#5C7E7B;line-height:1.6;">El valor está a la <b>izquierda</b> de μ. Cuanto más negativo, más alejado hacia abajo.</div>
+    </div>
+  </div>
+  <div style="background:#fff;border-radius:14px;padding:20px 26px;box-shadow:0 1px 8px rgba(9,70,73,0.07);margin-bottom:14px;">
+    <div style="font-size:13px;font-weight:700;color:#094649;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;">Magnitud del Z</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="background:#3FBF9F;color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;">|Z| &lt; 1</div>
+        <div style="font-size:13px;color:#1B2430;">El valor está a menos de 1 desviación estándar de la media → <b>zona central</b></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="background:#1C7293;color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;">1 ≤ |Z| ≤ 2</div>
+        <div style="font-size:13px;color:#1B2430;">Entre 1 y 2 desviaciones → poco alejado, aún frecuente</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="background:#F4623A;color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;">|Z| &gt; 3</div>
+        <div style="font-size:13px;color:#1B2430;">Más de 3 desviaciones → valor <b>muy atípico</b> (señal de outlier)</div>
+      </div>
+    </div>
+  </div>
+  <div style="background:#094649;border-radius:10px;padding:12px 20px;">
+    <span style="font-size:13px;color:#fff;line-height:1.6;"><b style="color:#3FBF9F;">La unidad de Z:</b> Z no tiene unidades. El Z-score "traduce" cualquier valor a un número universal que mide posición en términos de desviaciones estándar.</span>
+  </div>
+</section></div>
+<div class="slide" data-id="z_ej"><section id="z_ej" style="background:#fff;display:flex;flex-direction:column;justify-content:center;height:100%;padding:38px 52px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+    <div style="width:5px;height:36px;background:#F4623A;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:27px;font-weight:700;color:#094649;margin:0;">Ejemplo: Cálculo de Puntuación Z</h1>
+  </div>
+  <div style="background:#EDF4F3;border-radius:12px;padding:16px 22px;margin-bottom:16px;border-left:5px solid #1C7293;">
+    <div style="font-size:14px;color:#1B2430;line-height:1.7;"><b>Contexto:</b> En un examen de ingeniería, la calificación media del grupo es μ = 72 con desviación estándar σ = 8. Tres estudiantes obtuvieron: Ana = 88, Luis = 64, María = 72.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;">
+    <div style="background:#fff;border-radius:12px;padding:16px 18px;border:2px solid #3FBF9F;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+      <div style="font-size:13px;font-weight:700;color:#3FBF9F;margin-bottom:8px;">Ana — 88 pts</div>
+      <div style="font-size:12px;color:#5C7E7B;line-height:1.8;margin-bottom:10px;">Z = (88 − 72) / 8<br>Z = 16 / 8</div>
+      <div style="font-size:26px;font-weight:800;color:#3FBF9F;font-family:'Rubik',sans-serif;">Z = +2.0</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-top:6px;line-height:1.5;"><i>2 desv. estándar por <b>encima</b> de la media. Desempeño muy alto.</i></div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:16px 18px;border:2px solid #F4623A;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+      <div style="font-size:13px;font-weight:700;color:#F4623A;margin-bottom:8px;">Luis — 64 pts</div>
+      <div style="font-size:12px;color:#5C7E7B;line-height:1.8;margin-bottom:10px;">Z = (64 − 72) / 8<br>Z = −8 / 8</div>
+      <div style="font-size:26px;font-weight:800;color:#F4623A;font-family:'Rubik',sans-serif;">Z = −1.0</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-top:6px;line-height:1.5;"><i>1 desv. estándar por <b>debajo</b> de la media. Desempeño bajo.</i></div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:16px 18px;border:2px solid #1C7293;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+      <div style="font-size:13px;font-weight:700;color:#1C7293;margin-bottom:8px;">María — 72 pts</div>
+      <div style="font-size:12px;color:#5C7E7B;line-height:1.8;margin-bottom:10px;">Z = (72 − 72) / 8<br>Z = 0 / 8</div>
+      <div style="font-size:26px;font-weight:800;color:#1C7293;font-family:'Rubik',sans-serif;">Z = 0.0</div>
+      <div style="font-size:12px;color:#5C7E7B;margin-top:6px;line-height:1.5;"><i>En la <b>media</b> del grupo. Desempeño promedio.</i></div>
+    </div>
+  </div>
+  <div style="background:#1B2430;border-radius:12px;padding:14px 20px;">
+    <div style="display:flex;align-items:center;gap:30px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:10px;flex:1;">
+        <div style="font-size:22px;font-weight:800;color:#F4623A;font-family:'Rubik',sans-serif;white-space:nowrap;">Z = −1</div>
+        <div style="width:80px;height:4px;background:linear-gradient(90deg,#F4623A,#fff);border-radius:2px;"></div>
+        <div style="font-size:22px;font-weight:800;color:#1C7293;font-family:'Rubik',sans-serif;white-space:nowrap;">Z = 0</div>
+        <div style="width:80px;height:4px;background:linear-gradient(90deg,#1C7293,#3FBF9F);border-radius:2px;"></div>
+        <div style="font-size:22px;font-weight:800;color:#3FBF9F;font-family:'Rubik',sans-serif;white-space:nowrap;">Z = +2</div>
+      </div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.7);flex:1;">Luis · · · · · · · · · · María · · · · · · · · · · · · · · · · · · · Ana</div>
+    </div>
+  </div>
+</section></div>
+<div class="slide" data-id="comparacion"><section id="comparacion" style="background:#EDF4F3;display:flex;flex-direction:column;justify-content:center;height:100%;padding:36px 52px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+    <div style="width:5px;height:36px;background:#1C7293;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:27px;font-weight:700;color:#094649;margin:0;">Comparación entre Diferentes Escalas con Z</h1>
+  </div>
+  <div style="background:#1B2430;border-radius:12px;padding:14px 22px;margin-bottom:14px;">
+    <div style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;"><b style="color:#3FBF9F;">Problema:</b> Un estudiante saca 75 en Matemáticas y 68 en Física. ¿En cuál materia tuvo mejor desempeño <i>relativo</i>?</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+    <div style="background:#fff;border-radius:12px;padding:18px 22px;border-top:4px solid #1C7293;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+      <div style="font-size:13px;font-weight:700;color:#1C7293;margin-bottom:10px;">Matemáticas</div>
+      <div style="display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap;">
+        <div style="background:#EDF4F3;border-radius:8px;padding:6px 12px;font-size:12px;color:#094649;"><b>x = 75</b></div>
+        <div style="background:#EDF4F3;border-radius:8px;padding:6px 12px;font-size:12px;color:#094649;"><b>μ = 68</b></div>
+        <div style="background:#EDF4F3;border-radius:8px;padding:6px 12px;font-size:12px;color:#094649;"><b>σ = 10</b></div>
+      </div>
+      <div style="font-size:13px;color:#5C7E7B;line-height:1.8;">Z = (75 − 68) / 10<br>Z = 7 / 10</div>
+      <div style="font-size:28px;font-weight:800;color:#1C7293;font-family:'Rubik',sans-serif;margin-top:6px;">Z = <b>0.70</b></div>
+      <div style="font-size:12px;color:#5C7E7B;margin-top:4px;">0.70 desv. est. por encima de la media</div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:18px 22px;border-top:4px solid #F4623A;box-shadow:0 1px 8px rgba(9,70,73,0.07);">
+      <div style="font-size:13px;font-weight:700;color:#F4623A;margin-bottom:10px;">Física</div>
+      <div style="display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap;">
+        <div style="background:#EDF4F3;border-radius:8px;padding:6px 12px;font-size:12px;color:#094649;"><b>x = 68</b></div>
+        <div style="background:#EDF4F3;border-radius:8px;padding:6px 12px;font-size:12px;color:#094649;"><b>μ = 60</b></div>
+        <div style="background:#EDF4F3;border-radius:8px;padding:6px 12px;font-size:12px;color:#094649;"><b>σ = 6</b></div>
+      </div>
+      <div style="font-size:13px;color:#5C7E7B;line-height:1.8;">Z = (68 − 60) / 6<br>Z = 8 / 6</div>
+      <div style="font-size:28px;font-weight:800;color:#F4623A;font-family:'Rubik',sans-serif;margin-top:6px;">Z = <b>1.33</b></div>
+      <div style="font-size:12px;color:#5C7E7B;margin-top:4px;">1.33 desv. est. por encima de la media</div>
+    </div>
+  </div>
+  <div style="background:#094649;border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:16px;margin-bottom:12px;">
+    <div style="font-size:32px;font-weight:800;color:#F4623A;font-family:'Rubik',sans-serif;flex-shrink:0;">1.33 &gt; 0.70</div>
+    <div style="font-size:14px;color:#fff;line-height:1.6;">Aunque la calificación de Física (68) es numéricamente <i>menor</i>, el Z-score revela que el desempeño fue <b>relativamente superior</b> al de Matemáticas. El estudiante se ubicó más arriba dentro de su grupo en Física.</div>
+  </div>
+  <div style="background:#fff;border-radius:10px;padding:12px 18px;border-left:4px solid #3FBF9F;box-shadow:0 1px 6px rgba(9,70,73,0.05);">
+    <div style="font-size:13px;color:#1B2430;line-height:1.5;"><b style="color:#094649;">Conclusión:</b> El Z-score permite comparaciones justas entre distribuciones con medias y desviaciones estándar distintas — <b>estandariza el "terreno de juego"</b> para cualquier escala.</div>
+  </div>
+</section></div>
+<div class="slide" data-id="resumen"><section id="resumen" style="background:#1B2430;display:flex;flex-direction:column;justify-content:center;height:100%;padding:36px 52px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+    <div style="width:5px;height:36px;background:#3FBF9F;border-radius:3px;"></div>
+    <h1 style="font-family:'Rubik',sans-serif;font-size:27px;font-weight:700;color:#fff;margin:0;">Resumen: Medidas de Posición Relativa</h1>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:13px 16px;border-left:4px solid #3FBF9F;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <div style="background:#3FBF9F;color:#1B2430;font-size:11px;font-weight:800;padding:2px 8px;border-radius:10px;flex-shrink:0;">Tema 1</div>
+        <div style="font-size:13px;font-weight:700;color:#fff;">Cuartiles Q1, Q2, Q3</div>
+      </div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;">Dividen los datos en 4 partes iguales. L = (k/4)×n. Q2 = Mediana. Aplicables a datos simples y agrupados.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:13px 16px;border-left:4px solid #1C7293;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <div style="background:#1C7293;color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:10px;flex-shrink:0;">Tema 2</div>
+        <div style="font-size:13px;font-weight:700;color:#fff;">Deciles D1–D9</div>
+      </div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;">Dividen en 10 partes iguales. L = (k/10)×n. D5 = Q2 = Mediana. Mayor resolución que los cuartiles.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:13px 16px;border-left:4px solid #094649;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <div style="background:#094649;color:#3FBF9F;font-size:11px;font-weight:800;padding:2px 8px;border-radius:10px;flex-shrink:0;">Tema 3</div>
+        <div style="font-size:13px;font-weight:700;color:#fff;">Percentiles P1–P99</div>
+      </div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;">Dividen en 100 partes. L = (k/100)×n. P25=Q1, P50=Q2, P75=Q3. Máxima granularidad posicional.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:13px 16px;border-left:4px solid #F4623A;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <div style="background:#F4623A;color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:10px;flex-shrink:0;">Tema 4</div>
+        <div style="font-size:13px;font-weight:700;color:#fff;">Rango Intercuartílico (RIC)</div>
+      </div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;">RIC = Q3 − Q1. Robusto ante outliers. LI = Q1 − 1.5 RIC · LS = Q3 + 1.5 RIC (Tukey).</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:13px 16px;border-left:4px solid #5C7E7B;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <div style="background:#5C7E7B;color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:10px;flex-shrink:0;">Tema 5</div>
+        <div style="font-size:13px;font-weight:700;color:#fff;">Boxplot</div>
+      </div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;">Resumen gráfico: caja (IQR), bigotes (LI a LS), outliers (puntos). Revela simetría y dispersión.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:13px 16px;border-left:4px solid #fff;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <div style="background:rgba(255,255,255,0.15);color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:10px;flex-shrink:0;">Tema 6</div>
+        <div style="font-size:13px;font-weight:700;color:#fff;">Puntuación Z</div>
+      </div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5;">Z = (x−μ)/σ. Sin unidades. Indica cuántas desviaciones estándar separa un valor de su media.</div>
+    </div>
+  </div>
+  <div style="background:#3FBF9F;border-radius:10px;padding:11px 18px;margin-top:12px;">
+    <div style="font-size:13px;color:#1B2430;font-weight:700;line-height:1.5;"><b>Tema 7 — Comparación entre escalas:</b> Al calcular Z en distribuciones distintas, podemos comparar posiciones relativas aunque las escalas sean completamente diferentes.</div>
+  </div>
+</section></div>
+<div class="slide" data-id="cierre"><section id="cierre" style="background:linear-gradient(145deg,#094649 0%,#1B2430 55%,#0a2535 100%);display:flex;flex-direction:column;justify-content:center;height:100%;padding:52px 64px;box-sizing:border-box;font-family:'Nunito Sans',sans-serif;text-align:center;">
+  <div style="font-family:'Rubik',sans-serif;font-size:13px;font-weight:600;color:#3FBF9F;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;">CEUM · Estadística</div>
+  <h1 style="font-family:'Rubik',sans-serif;font-size:38px;font-weight:800;color:#fff;margin:0 0 8px 0;line-height:1.2;">Unidad 3 Completada</h1>
+  <div style="font-size:17px;color:rgba(255,255,255,0.55);margin-bottom:32px;">Medidas de Posición Relativa</div>
+  <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:36px;">
+    <div style="background:rgba(63,191,159,0.15);border:1px solid rgba(63,191,159,0.4);border-radius:20px;padding:8px 18px;font-size:13px;color:#3FBF9F;font-weight:600;">✓ Cuartiles</div>
+    <div style="background:rgba(63,191,159,0.15);border:1px solid rgba(63,191,159,0.4);border-radius:20px;padding:8px 18px;font-size:13px;color:#3FBF9F;font-weight:600;">✓ Deciles</div>
+    <div style="background:rgba(63,191,159,0.15);border:1px solid rgba(63,191,159,0.4);border-radius:20px;padding:8px 18px;font-size:13px;color:#3FBF9F;font-weight:600;">✓ Percentiles</div>
+    <div style="background:rgba(63,191,159,0.15);border:1px solid rgba(63,191,159,0.4);border-radius:20px;padding:8px 18px;font-size:13px;color:#3FBF9F;font-weight:600;">✓ RIC y Outliers</div>
+    <div style="background:rgba(63,191,159,0.15);border:1px solid rgba(63,191,159,0.4);border-radius:20px;padding:8px 18px;font-size:13px;color:#3FBF9F;font-weight:600;">✓ Boxplot</div>
+    <div style="background:rgba(63,191,159,0.15);border:1px solid rgba(63,191,159,0.4);border-radius:20px;padding:8px 18px;font-size:13px;color:#3FBF9F;font-weight:600;">✓ Puntuación Z</div>
+    <div style="background:rgba(63,191,159,0.15);border:1px solid rgba(63,191,159,0.4);border-radius:20px;padding:8px 18px;font-size:13px;color:#3FBF9F;font-weight:600;">✓ Comparación de escalas</div>
+  </div>
+  <div style="width:60px;height:2px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 32px auto;"></div>
+  <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:20px 32px;display:inline-block;max-width:520px;margin:0 auto;">
+    <div style="font-size:12px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Próxima sesión</div>
+    <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;">Unidad 4: Distribuciones de Probabilidad</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.45);">Distribución normal · Teorema central del límite</div>
+  </div>
+  <div style="margin-top:32px;font-size:12px;color:rgba(255,255,255,0.25);">8 sesiones · 7 temas</div>
+</section></div></div><div id="hint">Usa las flechas del teclado o desliza el dedo</div></div>
+<div id="bar"><button id="bm" class="alt" aria-label="Índice">☰</button><button id="bp" aria-label="Anterior">◀</button><div class="mid"><div id="cnt"></div><div id="prog"><i></i></div></div><button id="bn" aria-label="Siguiente">▶</button><button id="bf" class="alt" aria-label="Pantalla completa">⛶</button><button id="bh" class="alt" aria-label="Volver" title="Volver a las presentaciones">⌂</button></div></div>
+<div id="shade"></div><div id="menu"><h2>Unidad 3: Medidas de Posición Relativa</h2><p>Toca un tema para ir directo a él</p><h3>Introducción y cuartiles Q1, Q2, Q3</h3><a href="#1" data-n="0">1. Portada</a><a href="#2" data-n="1">2. Contenido de la Unidad 3</a><a href="#3" data-n="2">3. ¿Qué son las Medidas de Posición Relativa?</a><a href="#4" data-n="3">4. Cuartiles: Q1, Q2 y Q3</a><a href="#5" data-n="4">5. Fórmula para Calcular Cuartiles</a><a href="#6" data-n="5">6. Ejemplo: Datos No Agrupados</a><a href="#7" data-n="6">7. Cuartiles en Datos Agrupados</a><h3>Deciles D1–D9 y Percentiles P1–P99</h3><a href="#8" data-n="7">8. Deciles: D1 a D9</a><a href="#9" data-n="8">9. Ejemplo: Cálculo de D3 y D7</a><a href="#10" data-n="9">10. Percentiles: P1 a P99</a><a href="#11" data-n="10">11. Ejemplo: Cálculo de P30 y P85</a><h3>Rango intercuartílico, outliers y diagrama de caja</h3><a href="#12" data-n="11">12. Rango Intercuartílico (RIC)</a><a href="#13" data-n="12">13. Valores Atípicos (Outliers)</a><a href="#14" data-n="13">14. Regla de Tukey para Detectar Outliers</a><a href="#15" data-n="14">15. Diagrama de Caja y Bigotes (Boxplot)</a><a href="#16" data-n="15">16. Ejemplo: Boxplot con Outlier Detectado</a><h3>Puntuación Z y comparación entre escalas</h3><a href="#17" data-n="16">17. Puntuación Z (Puntaje Estándar)</a><a href="#18" data-n="17">18. Interpretación de la Puntuación Z</a><a href="#19" data-n="18">19. Ejemplo: Cálculo de Puntuación Z</a><a href="#20" data-n="19">20. Comparación entre Diferentes Escalas con Z</a><a href="#21" data-n="20">21. Resumen: Medidas de Posición Relativa</a><a href="#22" data-n="21">22. Cierre</a></div>
+<script>
+(function(){var S=[].slice.call(document.querySelectorAll('.slide')),N=S.length,i=0,st=document.getElementById('stage'),vw=document.getElementById('view');
+var TIT=["Portada", "Contenido de la Unidad 3", "¿Qué son las Medidas de Posición Relativa?", "Cuartiles: Q1, Q2 y Q3", "Fórmula para Calcular Cuartiles", "Ejemplo: Datos No Agrupados", "Cuartiles en Datos Agrupados", "Deciles: D1 a D9", "Ejemplo: Cálculo de D3 y D7", "Percentiles: P1 a P99", "Ejemplo: Cálculo de P30 y P85", "Rango Intercuartílico (RIC)", "Valores Atípicos (Outliers)", "Regla de Tukey para Detectar Outliers", "Diagrama de Caja y Bigotes (Boxplot)", "Ejemplo: Boxplot con Outlier Detectado", "Puntuación Z (Puntaje Estándar)", "Interpretación de la Puntuación Z", "Ejemplo: Cálculo de Puntuación Z", "Comparación entre Diferentes Escalas con Z", "Resumen: Medidas de Posición Relativa", "Cierre"];
+function fit(){var w=vw.clientWidth,h=vw.clientHeight,k=Math.min(w/960,h/540);st.style.transform='scale('+k+')';st.style.left=((w-960*k)/2)+'px';st.style.top=((h-540*k)/2)+'px'}
+function go(n,noh){n=Math.max(0,Math.min(N-1,n));S[i].classList.remove('on');i=n;S[i].classList.add('on');
+ document.getElementById('cnt').textContent=(i+1)+' / '+N+' · '+TIT[i];document.querySelector('#prog i').style.width=((i+1)/N*100)+'%';
+ document.getElementById('bp').disabled=i===0;document.getElementById('bn').disabled=i===N-1;
+ [].forEach.call(document.querySelectorAll('#menu a'),function(a){a.classList.toggle('cur',+a.dataset.n===i)});
+ if(!noh){try{history.replaceState(null,'','#'+(i+1))}catch(e){}}}
+function menu(o){document.getElementById('menu').classList.toggle('open',o);document.getElementById('shade').classList.toggle('open',o)}
+document.getElementById('bp').onclick=function(){go(i-1)};document.getElementById('bn').onclick=function(){go(i+1)};
+document.getElementById('bm').onclick=function(){menu(true)};document.getElementById('shade').onclick=function(){menu(false)};
+[].forEach.call(document.querySelectorAll('#menu a'),function(a){a.onclick=function(e){e.preventDefault();go(+a.dataset.n);menu(false)}});
+document.getElementById('bh').onclick=function(){location.href='../'};
+document.getElementById('bf').onclick=function(){var d=document.documentElement;try{if(document.fullscreenElement){document.exitFullscreen()}else if(d.requestFullscreen){d.requestFullscreen()}}catch(e){}};
+document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();go(i+1)}else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){e.preventDefault();go(i-1)}else if(k==='Home'){go(0)}else if(k==='End'){go(N-1)}else if(k==='Escape'){menu(false)}else if(k==='f'||k==='F'){document.getElementById('bf').click()}});
+var x0=null,y0=null;vw.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+vw.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){go(dx<0?i+1:i-1)}x0=null},{passive:true});
+vw.addEventListener('click',function(e){var r=vw.getBoundingClientRect(),x=e.clientX-r.left;if(x>r.width*.75)go(i+1);else if(x<r.width*.25)go(i-1)});
+window.addEventListener('resize',fit);window.addEventListener('hashchange',function(){var n=parseInt(location.hash.slice(1),10);if(n)go(n-1,true)});
+fit();var h=parseInt(location.hash.slice(1),10);go(h?h-1:0,true);setTimeout(function(){document.getElementById('hint').style.opacity=0},3500);
+})();
+</script></body></html>
