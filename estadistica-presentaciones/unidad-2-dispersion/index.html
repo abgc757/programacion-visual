@@ -1,0 +1,698 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Medidas de Dispersión – Unidad 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap">
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#0d1b24;font-family:'DM Sans',Arial,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+#app{position:fixed;inset:0;display:flex;flex-direction:column}
+#view{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:0}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;background:#000;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.slide{position:absolute;inset:0;display:none}.slide.on{display:block}
+.slide>section{width:1920px;height:1080px;overflow:hidden;position:relative}
+.slide *{margin:0}.slide aside{display:none}.slide table{border-collapse:collapse}
+.slide ul,.slide ol{padding-left:0}
+#bar{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#122a35;color:#fff}
+#bar button{border:0;background:#1c7293;color:#fff;font:700 16px 'DM Sans',Arial,sans-serif;border-radius:10px;min-width:44px;height:44px;padding:0 14px;cursor:pointer}
+#bar button:disabled{opacity:.35}#bar button.alt{background:#2b4a58}
+#bar .mid{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+#cnt{font-size:14px;text-align:center;color:#cfe8e4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#prog{height:6px;border-radius:3px;background:#2b4a58;overflow:hidden}#prog i{display:block;height:100%;width:0;background:#3fbf9f;transition:width .2s}
+#menu{position:fixed;left:0;top:0;bottom:0;width:min(340px,88vw);background:#fff;color:#1b2430;transform:translateX(-105%);transition:transform .22s;z-index:5;overflow:auto;padding:16px;box-shadow:4px 0 24px rgba(0,0,0,.4)}
+#menu.open{transform:none}#menu h2{margin:0 0 4px;font-size:18px;color:#094649}#menu p{margin:0 0 12px;font-size:13px;color:#5c7e7b}
+#menu h3{margin:14px 0 4px;font-size:13px;color:#1c7293;text-transform:uppercase;letter-spacing:.04em}
+#menu a{display:block;padding:9px 10px;border-radius:8px;color:#1b2430;text-decoration:none;font-size:15px}#menu a:hover,#menu a.cur{background:#dff0ed;font-weight:700}
+#shade{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;z-index:4}#shade.open{display:block}
+#hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;font-size:14px;padding:6px 14px;border-radius:20px;pointer-events:none;transition:opacity .6s}
+@media print{html,body{overflow:visible;height:auto;background:#fff}#app{position:static;display:block}#bar,#menu,#shade,#hint{display:none!important}#view{display:block;overflow:visible}#stage{position:static;transform:none!important;box-shadow:none;height:auto;width:1920px}.slide{display:block!important;position:relative;height:1080px;page-break-after:always;break-after:page}@page{size:1920px 1080px;margin:0}}
+</style></head><body>
+<div id="app"><div id="view"><div id="stage"><div class="slide" data-id="cover"><section id="cover" style="background:linear-gradient(135deg,#094649 0%,#1B2430 60%,#1C7293 100%);color:#FFFFFF;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between;height:100%">
+<div style="display:flex;justify-content:space-between;align-items:flex-start">
+  <div style="display:flex;align-items:center;gap:20px">
+    <div style="width:64px;height:64px;background:#3FBF9F;border-radius:12px;display:flex;align-items:center;justify-content:center">
+      <span style="font-size:28px;font-weight:700;color:#FFFFFF">C</span>
+    </div>
+    <div>
+      <p style="font-size:22px;font-weight:600;color:#3FBF9F;line-height:1">CEUM</p>
+      <p style="font-size:16px;color:#5C7E7B;line-height:1.2">Centro Universitario y<br>Cultural Morelos</p>
+    </div>
+  </div>
+  <p style="font-size:18px;color:#5C7E7B">Probabilidad y Estad&#237;stica · Unidad 2</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:32px">
+  <div style="display:flex;gap:20px;align-items:center">
+    <div style="width:8px;height:120px;background:linear-gradient(to bottom,#3FBF9F,#F4623A);border-radius:4px"></div>
+    <div>
+      <p style="font-size:28px;color:#3FBF9F;font-weight:500;letter-spacing:3px">UNIDAD 2 · TEMA 2.5&#8211;2.8</p>
+      <h1 style="font-size:88px;font-weight:700;color:#FFFFFF;line-height:1">Medidas de<br>Dispersi&#243;n</h1>
+    </div>
+  </div>
+  <div style="display:flex;gap:24px">
+    <div style="background:rgba(63,191,159,0.18);border:1px solid rgba(63,191,159,0.4);border-radius:40px;padding:12px 28px"><p style="font-size:26px;color:#3FBF9F">Rango</p></div>
+    <div style="background:rgba(28,114,147,0.18);border:1px solid rgba(28,114,147,0.4);border-radius:40px;padding:12px 28px"><p style="font-size:26px;color:#7EC8E3">Varianza</p></div>
+    <div style="background:rgba(244,98,58,0.18);border:1px solid rgba(244,98,58,0.4);border-radius:40px;padding:12px 28px"><p style="font-size:26px;color:#F4623A">Desviaci&#243;n Est&#225;ndar</p></div>
+    <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:40px;padding:12px 28px"><p style="font-size:26px;color:#FFFFFF">C.V.</p></div>
+  </div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end">
+  <p style="font-size:22px;color:#5C7E7B">M. en C. Abraham G&#243;mez Contreras</p>
+  <p style="font-size:20px;color:#5C7E7B">2026</p>
+</div>
+</section></div>
+<div class="slide" data-id="agenda"><section id="agenda" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<div>
+  <p style="font-size:22px;color:#3FBF9F;font-weight:600;letter-spacing:2px">CONTENIDO</p>
+  <h2 style="font-size:68px;font-weight:700;color:#094649">Temas de la Unidad 2 — Dispersi&#243;n</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1">
+  <div style="background:#094649;border-radius:20px;padding:48px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div style="width:52px;height:52px;background:#3FBF9F;border-radius:10px;display:flex;align-items:center;justify-content:center"><p style="font-size:22px;font-weight:700;color:#094649">2.5</p></div>
+      <p style="font-size:32px;font-weight:700;color:#FFFFFF">Rango</p>
+    </div>
+    <p style="font-size:22px;color:#DFF0ED;line-height:1.5">Medida m&#225;s simple: diferencia entre el valor m&#225;ximo y m&#237;nimo. R&#225;pida pero sensible a valores extremos.</p>
+  </div>
+  <div style="background:#1C7293;border-radius:20px;padding:48px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div style="width:52px;height:52px;background:#3FBF9F;border-radius:10px;display:flex;align-items:center;justify-content:center"><p style="font-size:22px;font-weight:700;color:#094649">2.6</p></div>
+      <p style="font-size:32px;font-weight:700;color:#FFFFFF">Varianza y Desv. Est&#225;ndar</p>
+    </div>
+    <p style="font-size:22px;color:#DFF0ED;line-height:1.5">Miden qu&#233; tan alejados est&#225;n los datos respecto a la media. Datos sin agrupar y agrupados.</p>
+  </div>
+  <div style="background:#1B2430;border-radius:20px;padding:48px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div style="width:52px;height:52px;background:#F4623A;border-radius:10px;display:flex;align-items:center;justify-content:center"><p style="font-size:22px;font-weight:700;color:#FFFFFF">2.7</p></div>
+      <p style="font-size:32px;font-weight:700;color:#FFFFFF">Coeficiente de Variaci&#243;n</p>
+    </div>
+    <p style="font-size:22px;color:#DFF0ED;line-height:1.5">Dispersi&#243;n relativa (en %). Permite comparar grupos con distintas unidades o escalas.</p>
+  </div>
+  <div style="background:#3FBF9F;border-radius:20px;padding:48px;display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div style="width:52px;height:52px;background:#094649;border-radius:10px;display:flex;align-items:center;justify-content:center"><p style="font-size:22px;font-weight:700;color:#FFFFFF">2.8</p></div>
+      <p style="font-size:32px;font-weight:700;color:#094649">An&#225;lisis Comparativo</p>
+    </div>
+    <p style="font-size:22px;color:#094649;line-height:1.5">Ejemplo integrador: todas las medidas sobre el mismo conjunto de datos. Interpretaci&#243;n pr&#225;ctica.</p>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="s25"><section id="s25" style="background:#094649;color:#FFFFFF;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-size:26px;color:#3FBF9F;font-weight:600;letter-spacing:4px">TEMA 2.5</p>
+<h2 style="font-size:112px;font-weight:700;color:#FFFFFF;line-height:1">Rango</h2>
+<div style="width:120px;height:6px;background:linear-gradient(to right,#3FBF9F,#1C7293);border-radius:3px"></div>
+<p style="font-size:34px;color:#DFF0ED;font-weight:300;max-width:960px">La medida m&#225;s sencilla para cuantificar qu&#233; tan dispersos est&#225;n los datos en un conjunto.</p>
+</section></div>
+<div class="slide" data-id="rango_def"><section id="rango_def" style="background:#F0F8F6;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">Rango — Definici&#243;n y F&#243;rmula</h2>
+<div style="display:flex;gap:32px;flex:1">
+  <div style="flex:1.2;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#094649;border-radius:16px;padding:40px;text-align:center">
+      <p style="font-size:26px;color:#3FBF9F;font-weight:500">F&#243;rmula</p>
+      <p style="font-size:72px;font-weight:700;color:#FFFFFF;line-height:1.2">R = X<sub style="font-size:40px">m&#225;x</sub> &#8722; X<sub style="font-size:40px">m&#237;n</sub></p>
+    </div>
+    <div style="background:#FFFFFF;border-radius:16px;padding:32px;border-left:6px solid #3FBF9F">
+      <p style="font-size:24px;color:#094649;font-weight:600">Caracter&#237;sticas</p>
+      <p style="font-size:22px;color:#4A4A4A;line-height:1.8">&#10003;&#160;&#160;F&#225;cil y r&#225;pido de calcular<br>&#10003;&#160;&#160;Mismas unidades que los datos<br>&#10007;&#160;&#160;Sensible a valores at&#237;picos (outliers)<br>&#10007;&#160;&#160;No considera todos los datos</p>
+    </div>
+  </div>
+  <div style="flex:1.8;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#FFFFFF;border-radius:16px;padding:36px">
+      <p style="font-size:24px;color:#1C7293;font-weight:600">Ejemplo — Calificaciones (n = 10)</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;padding:20px 0">
+        <span style="background:#EDF4F3;border-radius:8px;padding:10px 16px;font-size:26px;color:#4A4A4A">62</span>
+        <span style="background:#EDF4F3;border-radius:8px;padding:10px 16px;font-size:26px;color:#4A4A4A">68</span>
+        <span style="background:#EDF4F3;border-radius:8px;padding:10px 16px;font-size:26px;color:#4A4A4A">70</span>
+        <span style="background:#EDF4F3;border-radius:8px;padding:10px 16px;font-size:26px;color:#4A4A4A">72</span>
+        <span style="background:#EDF4F3;border-radius:8px;padding:10px 16px;font-size:26px;color:#4A4A4A">74</span>
+        <span style="background:#EDF4F3;border-radius:8px;padding:10px 16px;font-size:26px;color:#4A4A4A">74</span>
+        <span style="background:#EDF4F3;border-radius:8px;padding:10px 16px;font-size:26px;color:#4A4A4A">76</span>
+        <span style="background:#EDF4F3;border-radius:8px;padding:10px 16px;font-size:26px;color:#4A4A4A">82</span>
+        <span style="background:#3FBF9F;border-radius:8px;padding:10px 16px;font-size:26px;color:#094649;font-weight:700">88</span>
+        <span style="background:#F4623A;border-radius:8px;padding:10px 16px;font-size:26px;color:#FFFFFF;font-weight:700">94</span>
+      </div>
+      <div style="display:flex;gap:20px;padding-top:8px">
+        <span style="background:#3FBF9F;border-radius:8px;padding:8px 16px;font-size:20px;color:#094649">X<sub>m&#237;n</sub> = 62</span>
+        <span style="background:#F4623A;border-radius:8px;padding:8px 16px;font-size:20px;color:#FFFFFF">X<sub>m&#225;x</sub> = 94</span>
+      </div>
+    </div>
+    <div style="background:#094649;border-radius:16px;padding:36px;display:flex;align-items:center;justify-content:space-between">
+      <p style="font-size:28px;color:#DFF0ED">R = 94 &#8722; 62</p>
+      <div style="width:2px;height:48px;background:#3FBF9F"></div>
+      <p style="font-size:42px;font-weight:700;color:#3FBF9F">R = <b>32 puntos</b></p>
+    </div>
+    <div style="background:#FFFFFF;border-radius:12px;padding:24px;border-left:6px solid #F4623A">
+      <p style="font-size:21px;color:#4A4A4A">&#128161;&#160;&#160;Los datos tienen un <b style="color:#F4623A">rango de 32 puntos</b>. El alumno m&#225;s bajo y el m&#225;s alto difieren en casi un tercio de la escala total.</p>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="rango_visual"><section id="rango_visual" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:60px;font-weight:700;color:#094649">&#191;Por qu&#233; el rango no es suficiente?</h2>
+<p style="font-size:26px;color:#5C7E7B">Dos grupos con el <b style="color:#094649">mismo rango</b> pueden tener distribuciones muy distintas</p>
+<div style="display:flex;gap:32px;flex:1">
+  <div style="flex:1;background:#FFFFFF;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:24px;border-top:6px solid #1C7293">
+    <p style="font-size:28px;font-weight:700;color:#1C7293">Grupo A — Disperso</p>
+    <svg viewBox="0 0 440 80" style="width:100%;height:80px">
+      <line x1="20" y1="40" x2="420" y2="40" stroke="#DFF0ED" stroke-width="2"/>
+      <line x1="40" y1="30" x2="40" y2="50" stroke="#1C7293" stroke-width="2"/>
+      <line x1="400" y1="30" x2="400" y2="50" stroke="#1C7293" stroke-width="2"/>
+      <line x1="40" y1="40" x2="400" y2="40" stroke="#1C7293" stroke-width="2" stroke-dasharray="6"/>
+      <circle cx="40" cy="40" r="8" fill="#F4623A"/>
+      <circle cx="100" cy="40" r="8" fill="#1C7293"/>
+      <circle cx="160" cy="40" r="8" fill="#1C7293"/>
+      <circle cx="220" cy="40" r="8" fill="#3FBF9F"/>
+      <circle cx="280" cy="40" r="8" fill="#1C7293"/>
+      <circle cx="340" cy="40" r="8" fill="#1C7293"/>
+      <circle cx="400" cy="40" r="8" fill="#F4623A"/>
+      <text x="40" y="72" text-anchor="middle" font-size="14" fill="#F4623A" font-family="sans-serif">60</text>
+      <text x="400" y="72" text-anchor="middle" font-size="14" fill="#F4623A" font-family="sans-serif">96</text>
+      <text x="220" y="24" text-anchor="middle" font-size="13" fill="#3FBF9F" font-family="sans-serif">x&#773;=78</text>
+    </svg>
+    <p style="font-size:22px;color:#4A4A4A">Datos: 60, 68, 72, 78, 84, 90, 96</p>
+    <div style="display:flex;gap:16px">
+      <div style="background:#EDF4F3;border-radius:8px;padding:12px 20px;text-align:center"><p style="font-size:18px;color:#5C7E7B">Rango</p><p style="font-size:26px;font-weight:700;color:#1C7293">36</p></div>
+      <div style="background:#EDF4F3;border-radius:8px;padding:12px 20px;text-align:center"><p style="font-size:18px;color:#5C7E7B">Desv. est&#225;ndar</p><p style="font-size:26px;font-weight:700;color:#F4623A">&#8773; 12.2</p></div>
+    </div>
+  </div>
+  <div style="flex:1;background:#FFFFFF;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:24px;border-top:6px solid #3FBF9F">
+    <p style="font-size:28px;font-weight:700;color:#3FBF9F">Grupo B — Homog&#233;neo</p>
+    <svg viewBox="0 0 440 80" style="width:100%;height:80px">
+      <line x1="20" y1="40" x2="420" y2="40" stroke="#DFF0ED" stroke-width="2"/>
+      <line x1="40" y1="30" x2="40" y2="50" stroke="#3FBF9F" stroke-width="2"/>
+      <line x1="400" y1="30" x2="400" y2="50" stroke="#3FBF9F" stroke-width="2"/>
+      <line x1="40" y1="40" x2="400" y2="40" stroke="#3FBF9F" stroke-width="2" stroke-dasharray="6"/>
+      <circle cx="40" cy="40" r="8" fill="#F4623A"/>
+      <circle cx="184" cy="40" r="8" fill="#3FBF9F"/>
+      <circle cx="208" cy="40" r="8" fill="#3FBF9F"/>
+      <circle cx="220" cy="40" r="8" fill="#094649"/>
+      <circle cx="232" cy="40" r="8" fill="#3FBF9F"/>
+      <circle cx="256" cy="40" r="8" fill="#3FBF9F"/>
+      <circle cx="400" cy="40" r="8" fill="#F4623A"/>
+      <text x="40" y="72" text-anchor="middle" font-size="14" fill="#F4623A" font-family="sans-serif">60</text>
+      <text x="400" y="72" text-anchor="middle" font-size="14" fill="#F4623A" font-family="sans-serif">96</text>
+      <text x="220" y="24" text-anchor="middle" font-size="13" fill="#094649" font-family="sans-serif">x&#773;=78</text>
+    </svg>
+    <p style="font-size:22px;color:#4A4A4A">Datos: 60, 76, 78, 78, 79, 81, 96</p>
+    <div style="display:flex;gap:16px">
+      <div style="background:#EDF4F3;border-radius:8px;padding:12px 20px;text-align:center"><p style="font-size:18px;color:#5C7E7B">Rango</p><p style="font-size:26px;font-weight:700;color:#3FBF9F">36</p></div>
+      <div style="background:#EDF4F3;border-radius:8px;padding:12px 20px;text-align:center"><p style="font-size:18px;color:#5C7E7B">Desv. est&#225;ndar</p><p style="font-size:26px;font-weight:700;color:#3FBF9F">&#8773; 10.8</p></div>
+    </div>
+  </div>
+</div>
+<div style="background:#094649;border-radius:12px;padding:24px 40px">
+  <p style="font-size:24px;color:#3FBF9F">&#9888;&#160;&#160;Mismo rango (36), pero dispersi&#243;n interna <b style="color:#FFFFFF">muy distinta</b>. El rango ignora c&#243;mo se distribuyen los datos en el centro. Por eso necesitamos la <b style="color:#F4623A">varianza y la desviaci&#243;n est&#225;ndar</b>.</p>
+</div>
+</section></div>
+<div class="slide" data-id="s26"><section id="s26" style="background:#1C7293;color:#FFFFFF;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-size:26px;color:#3FBF9F;font-weight:600;letter-spacing:4px">TEMA 2.6</p>
+<h2 style="font-size:96px;font-weight:700;color:#FFFFFF;line-height:1">Varianza y<br>Desviaci&#243;n Est&#225;ndar</h2>
+<div style="width:120px;height:6px;background:linear-gradient(to right,#3FBF9F,#F4623A);border-radius:3px"></div>
+<p style="font-size:32px;color:#DFF0ED;font-weight:300;max-width:1000px">Cuantifican qu&#233; tan alejados est&#225;n los datos respecto a la media aritmética. Consideran <b style="color:#3FBF9F">todos los valores</b> del conjunto.</p>
+</section></div>
+<div class="slide" data-id="varianza_def"><section id="varianza_def" style="background:#F0F8F6;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:60px;font-weight:700;color:#094649">Varianza — F&#243;rmulas y L&#243;gica</h2>
+<div style="display:flex;gap:28px;flex:1">
+  <div style="flex:1;display:flex;flex-direction:column;gap:20px">
+    <div style="background:#094649;border-radius:16px;padding:36px;text-align:center">
+      <p style="font-size:20px;color:#3FBF9F;font-weight:600">POBLACI&#211;N (&#963;&#178;)</p>
+      <p style="font-size:52px;font-weight:700;color:#FFFFFF;line-height:1.3">&#963;&#178; = &#931;(x<sub>i</sub>&#8722;&#956;)&#178; / N</p>
+      <p style="font-size:20px;color:#5C7E7B;padding-top:8px">Se divide entre N (total de la poblaci&#243;n)</p>
+    </div>
+    <div style="background:#1C7293;border-radius:16px;padding:36px;text-align:center">
+      <p style="font-size:20px;color:#3FBF9F;font-weight:600">MUESTRA (S&#178;)</p>
+      <p style="font-size:52px;font-weight:700;color:#FFFFFF;line-height:1.3">S&#178; = &#931;(x<sub>i</sub>&#8722;x&#773;)&#178; / (n&#8722;1)</p>
+      <p style="font-size:20px;color:#DFF0ED;padding-top:8px">Se divide entre n&#8722;1 (correci&#243;n de Bessel)</p>
+    </div>
+  </div>
+  <div style="flex:1.6;display:flex;flex-direction:column;gap:20px">
+    <div style="background:#FFFFFF;border-radius:16px;padding:32px;border-left:6px solid #3FBF9F">
+      <p style="font-size:24px;font-weight:700;color:#094649">&#191;C&#243;mo se construye la varianza?</p>
+      <div style="display:flex;flex-direction:column;gap:12px;padding-top:16px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:36px;height:36px;background:#3FBF9F;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><p style="font-size:16px;font-weight:700;color:#FFFFFF">1</p></div>
+          <p style="font-size:22px;color:#4A4A4A">Calcula la media: x&#773;</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:36px;height:36px;background:#3FBF9F;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><p style="font-size:16px;font-weight:700;color:#FFFFFF">2</p></div>
+          <p style="font-size:22px;color:#4A4A4A">Resta la media a cada dato: (x<sub>i</sub> &#8722; x&#773;)</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:36px;height:36px;background:#3FBF9F;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><p style="font-size:16px;font-weight:700;color:#FFFFFF">3</p></div>
+          <p style="font-size:22px;color:#4A4A4A">Eleva al cuadrado: (x<sub>i</sub> &#8722; x&#773;)&#178; &nbsp;&#8594;&nbsp; siempre positivo</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:36px;height:36px;background:#3FBF9F;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><p style="font-size:16px;font-weight:700;color:#FFFFFF">4</p></div>
+          <p style="font-size:22px;color:#4A4A4A">Suma todos los cuadrados: &#931;(x<sub>i</sub> &#8722; x&#773;)&#178;</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:36px;height:36px;background:#F4623A;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><p style="font-size:16px;font-weight:700;color:#FFFFFF">5</p></div>
+          <p style="font-size:22px;color:#4A4A4A">Divide entre N &#243; (n&#8722;1)</p>
+        </div>
+      </div>
+    </div>
+    <div style="background:#1B2430;border-radius:12px;padding:24px 32px">
+      <p style="font-size:20px;color:#F4623A;font-weight:600">&#9888; Unidades al cuadrado</p>
+      <p style="font-size:22px;color:#DFF0ED">Si los datos est&#225;n en puntos, la varianza est&#225; en <b>puntos&#178;</b>. Por eso usamos la <b style="color:#3FBF9F">desviaci&#243;n est&#225;ndar</b> (&#963; = &#8730;S&#178;) que vuelve a las unidades originales.</p>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="varianza_paso"><section id="varianza_paso" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px 128px 80px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+  <h2 style="font-size:56px;font-weight:700;color:#094649">C&#225;lculo Paso a Paso — Datos sin Agrupar</h2>
+  <div style="background:#094649;border-radius:10px;padding:12px 24px"><p style="font-size:20px;color:#3FBF9F">x&#773; = 76 &nbsp;|&nbsp; n = 10</p></div>
+</div>
+<div style="background:#FFFFFF;border-radius:16px;overflow:hidden;flex:1">
+  <table style="border-collapse:collapse;width:100%;font-size:21px">
+    <thead>
+      <tr style="background:#094649">
+        <th style="padding:16px 20px;color:#3FBF9F;text-align:center;font-weight:600">x<sub>i</sub></th>
+        <th style="padding:16px 20px;color:#3FBF9F;text-align:center;font-weight:600">x<sub>i</sub> &#8722; x&#773;</th>
+        <th style="padding:16px 20px;color:#F4623A;text-align:center;font-weight:600">(x<sub>i</sub> &#8722; x&#773;)&#178;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#F0F8F6"><td style="padding:12px 20px;text-align:center">62</td><td style="padding:12px 20px;text-align:center;color:#F4623A">62 &#8722; 76 = <b>&#8722;14</b></td><td style="padding:12px 20px;text-align:center;color:#1C7293;font-weight:600">196</td></tr>
+      <tr><td style="padding:12px 20px;text-align:center">68</td><td style="padding:12px 20px;text-align:center;color:#F4623A">68 &#8722; 76 = <b>&#8722;8</b></td><td style="padding:12px 20px;text-align:center;color:#1C7293;font-weight:600">64</td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:12px 20px;text-align:center">70</td><td style="padding:12px 20px;text-align:center;color:#F4623A">70 &#8722; 76 = <b>&#8722;6</b></td><td style="padding:12px 20px;text-align:center;color:#1C7293;font-weight:600">36</td></tr>
+      <tr><td style="padding:12px 20px;text-align:center">72</td><td style="padding:12px 20px;text-align:center;color:#F4623A">72 &#8722; 76 = <b>&#8722;4</b></td><td style="padding:12px 20px;text-align:center;color:#1C7293;font-weight:600">16</td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:12px 20px;text-align:center">74</td><td style="padding:12px 20px;text-align:center;color:#F4623A">74 &#8722; 76 = <b>&#8722;2</b></td><td style="padding:12px 20px;text-align:center;color:#1C7293;font-weight:600">4</td></tr>
+      <tr><td style="padding:12px 20px;text-align:center">74</td><td style="padding:12px 20px;text-align:center;color:#F4623A">74 &#8722; 76 = <b>&#8722;2</b></td><td style="padding:12px 20px;text-align:center;color:#1C7293;font-weight:600">4</td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:12px 20px;text-align:center">76</td><td style="padding:12px 20px;text-align:center;color:#5C7E7B">76 &#8722; 76 = <b>0</b></td><td style="padding:12px 20px;text-align:center;color:#1C7293;font-weight:600">0</td></tr>
+      <tr><td style="padding:12px 20px;text-align:center">82</td><td style="padding:12px 20px;text-align:center;color:#094649">82 &#8722; 76 = <b>+6</b></td><td style="padding:12px 20px;text-align:center;color:#1C7293;font-weight:600">36</td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:12px 20px;text-align:center">88</td><td style="padding:12px 20px;text-align:center;color:#094649">88 &#8722; 76 = <b>+12</b></td><td style="padding:12px 20px;text-align:center;color:#1C7293;font-weight:600">144</td></tr>
+      <tr><td style="padding:12px 20px;text-align:center">94</td><td style="padding:12px 20px;text-align:center;color:#094649">94 &#8722; 76 = <b>+18</b></td><td style="padding:12px 20px;text-align:center;color:#1C7293;font-weight:600">324</td></tr>
+      <tr style="background:#094649">
+        <td style="padding:14px 20px;text-align:center;color:#FFFFFF;font-weight:700">&#931; = 760</td>
+        <td style="padding:14px 20px;text-align:center;color:#3FBF9F;font-weight:700">&#931; = 0 &#10003;</td>
+        <td style="padding:14px 20px;text-align:center;color:#F4623A;font-weight:700;font-size:24px">&#931; = 824</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="display:flex;gap:20px">
+  <div style="flex:1;background:#1C7293;border-radius:12px;padding:20px 28px;text-align:center">
+    <p style="font-size:18px;color:#DFF0ED">Varianza muestral</p>
+    <p style="font-size:32px;font-weight:700;color:#FFFFFF">S&#178; = 824 / 9 = <b>91.56 pts&#178;</b></p>
+  </div>
+  <div style="flex:1;background:#3FBF9F;border-radius:12px;padding:20px 28px;text-align:center">
+    <p style="font-size:18px;color:#094649">Desviaci&#243;n est&#225;ndar</p>
+    <p style="font-size:32px;font-weight:700;color:#094649">S = &#8730;91.56 = <b>9.57 puntos</b></p>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="varianza_grupo"><section id="varianza_grupo" style="background:#F0F8F6;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px 128px 80px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+  <h2 style="font-size:56px;font-weight:700;color:#094649">Varianza — Datos Agrupados</h2>
+  <div style="background:#094649;border-radius:10px;padding:12px 24px"><p style="font-size:20px;color:#3FBF9F">x&#773; = 34.75 &nbsp;|&nbsp; n = 40</p></div>
+</div>
+<div style="background:#094649;border-radius:12px;padding:24px 40px;text-align:center">
+  <p style="font-size:40px;font-weight:700;color:#FFFFFF">&#963;&#178; = &#931;&#160;f<sub>i</sub>&#160;(mc<sub>i</sub> &#8722; x&#773;)&#178; &nbsp;/&nbsp; n</p>
+</div>
+<div style="background:#FFFFFF;border-radius:16px;overflow:hidden;flex:1">
+  <table style="border-collapse:collapse;width:100%;font-size:20px">
+    <thead>
+      <tr style="background:#094649">
+        <th style="padding:14px 16px;color:#3FBF9F;text-align:center">Clase</th>
+        <th style="padding:14px 16px;color:#3FBF9F;text-align:center">mc<sub>i</sub></th>
+        <th style="padding:14px 16px;color:#3FBF9F;text-align:center">f<sub>i</sub></th>
+        <th style="padding:14px 16px;color:#FFFFFF;text-align:center">mc<sub>i</sub> &#8722; x&#773;</th>
+        <th style="padding:14px 16px;color:#FFFFFF;text-align:center">(mc<sub>i</sub> &#8722; x&#773;)&#178;</th>
+        <th style="padding:14px 16px;color:#F4623A;text-align:center">f<sub>i</sub>&#183;(mc<sub>i</sub> &#8722; x&#773;)&#178;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#F0F8F6"><td style="padding:11px 16px;text-align:center">[10&#8211;20)</td><td style="padding:11px 16px;text-align:center">15</td><td style="padding:11px 16px;text-align:center">4</td><td style="padding:11px 16px;text-align:center;color:#F4623A">&#8722;19.75</td><td style="padding:11px 16px;text-align:center;color:#1C7293">390.06</td><td style="padding:11px 16px;text-align:center;font-weight:600">1 560.25</td></tr>
+      <tr><td style="padding:11px 16px;text-align:center">[20&#8211;30)</td><td style="padding:11px 16px;text-align:center">25</td><td style="padding:11px 16px;text-align:center">10</td><td style="padding:11px 16px;text-align:center;color:#F4623A">&#8722;9.75</td><td style="padding:11px 16px;text-align:center;color:#1C7293">95.06</td><td style="padding:11px 16px;text-align:center;font-weight:600">950.63</td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:11px 16px;text-align:center">[30&#8211;40)</td><td style="padding:11px 16px;text-align:center">35</td><td style="padding:11px 16px;text-align:center">14</td><td style="padding:11px 16px;text-align:center;color:#5C7E7B">+0.25</td><td style="padding:11px 16px;text-align:center;color:#1C7293">0.06</td><td style="padding:11px 16px;text-align:center;font-weight:600">0.88</td></tr>
+      <tr><td style="padding:11px 16px;text-align:center">[40&#8211;50)</td><td style="padding:11px 16px;text-align:center">45</td><td style="padding:11px 16px;text-align:center">8</td><td style="padding:11px 16px;text-align:center;color:#094649">+10.25</td><td style="padding:11px 16px;text-align:center;color:#1C7293">105.06</td><td style="padding:11px 16px;text-align:center;font-weight:600">840.50</td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:11px 16px;text-align:center">[50&#8211;60)</td><td style="padding:11px 16px;text-align:center">55</td><td style="padding:11px 16px;text-align:center">3</td><td style="padding:11px 16px;text-align:center;color:#094649">+20.25</td><td style="padding:11px 16px;text-align:center;color:#1C7293">410.06</td><td style="padding:11px 16px;text-align:center;font-weight:600">1 230.19</td></tr>
+      <tr><td style="padding:11px 16px;text-align:center">[60&#8211;70)</td><td style="padding:11px 16px;text-align:center">65</td><td style="padding:11px 16px;text-align:center">1</td><td style="padding:11px 16px;text-align:center;color:#094649">+30.25</td><td style="padding:11px 16px;text-align:center;color:#1C7293">915.06</td><td style="padding:11px 16px;text-align:center;font-weight:600">915.06</td></tr>
+      <tr style="background:#094649">
+        <td colspan="2" style="padding:13px 16px;text-align:center;color:#FFFFFF;font-weight:700">TOTAL</td>
+        <td style="padding:13px 16px;text-align:center;color:#3FBF9F;font-weight:700">40</td>
+        <td style="padding:13px 16px;text-align:center;color:#3FBF9F">—</td>
+        <td style="padding:13px 16px;text-align:center;color:#3FBF9F">—</td>
+        <td style="padding:13px 16px;text-align:center;color:#F4623A;font-weight:700;font-size:22px">5 497.50</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="display:flex;gap:20px">
+  <div style="flex:1;background:#1C7293;border-radius:12px;padding:18px 28px;text-align:center">
+    <p style="font-size:18px;color:#DFF0ED">Varianza</p>
+    <p style="font-size:30px;font-weight:700;color:#FFFFFF">&#963;&#178; = 5&#160;497.50 / 40 = <b>137.44 min&#178;</b></p>
+  </div>
+  <div style="flex:1;background:#3FBF9F;border-radius:12px;padding:18px 28px;text-align:center">
+    <p style="font-size:18px;color:#094649">Desviaci&#243;n est&#225;ndar</p>
+    <p style="font-size:30px;font-weight:700;color:#094649">&#963; = &#8730;137.44 = <b>11.72 minutos</b></p>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="desv_interp"><section id="desv_interp" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:60px;font-weight:700;color:#094649">Interpretando la Desviaci&#243;n Est&#225;ndar</h2>
+<div style="display:flex;gap:28px;flex:1">
+  <div style="flex:1;display:flex;flex-direction:column;gap:20px">
+    <div style="background:#094649;border-radius:16px;padding:36px;text-align:center">
+      <p style="font-size:24px;color:#3FBF9F;font-weight:600">Relaci&#243;n con la Varianza</p>
+      <p style="font-size:64px;font-weight:700;color:#FFFFFF;line-height:1.2">S = &#8730;S&#178;</p>
+      <p style="font-size:22px;color:#DFF0ED;padding-top:12px">Vuelve a las <b>unidades originales</b> de los datos</p>
+    </div>
+    <div style="background:#FFFFFF;border-radius:16px;padding:32px;border-left:6px solid #F4623A">
+      <p style="font-size:22px;color:#094649;font-weight:600">&#191;Qu&#233; significa S = 9.57 puntos?</p>
+      <p style="font-size:21px;color:#4A4A4A;line-height:1.7;padding-top:8px">En promedio, cada calificaci&#243;n del grupo se aleja <b style="color:#F4623A">9.57 puntos</b> de la media (76). Es la &#8220;distancia t&#237;pica&#8221; de un dato a su centro.</p>
+    </div>
+    <div style="background:#1C7293;border-radius:12px;padding:24px;display:flex;align-items:center;gap:16px">
+      <p style="font-size:48px">&#128202;</p>
+      <p style="font-size:21px;color:#DFF0ED"><b style="color:#3FBF9F">S peque&#241;a</b> → datos concentrados cerca de la media.<br><b style="color:#F4623A">S grande</b> → datos muy dispersos.</p>
+    </div>
+  </div>
+  <div style="flex:1.5;display:flex;flex-direction:column;gap:20px">
+    <div style="background:#FFFFFF;border-radius:16px;padding:36px">
+      <p style="font-size:24px;font-weight:700;color:#094649">Regla Emp&#237;rica (distribuciones aprox. normales)</p>
+      <svg viewBox="0 0 560 240" style="width:100%;margin-top:16px">
+        <path d="M20,220 C80,220 120,20 280,20 C440,20 480,220 540,220" fill="none" stroke="#094649" stroke-width="3"/>
+        <line x1="280" y1="20" x2="280" y2="220" stroke="#5C7E7B" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="192" y1="20" x2="192" y2="220" stroke="#3FBF9F" stroke-width="1.5" stroke-dasharray="4"/>
+        <line x1="368" y1="20" x2="368" y2="220" stroke="#3FBF9F" stroke-width="1.5" stroke-dasharray="4"/>
+        <line x1="104" y1="20" x2="104" y2="220" stroke="#1C7293" stroke-width="1.5" stroke-dasharray="4"/>
+        <line x1="456" y1="20" x2="456" y2="220" stroke="#1C7293" stroke-width="1.5" stroke-dasharray="4"/>
+        <rect x="192" y="20" width="176" height="200" fill="rgba(63,191,159,0.15)"/>
+        <rect x="104" y="20" width="352" height="200" fill="rgba(28,114,147,0.10)"/>
+        <text x="280" y="240" text-anchor="middle" font-size="13" fill="#5C7E7B" font-family="sans-serif">x&#773;</text>
+        <text x="192" y="240" text-anchor="middle" font-size="12" fill="#3FBF9F" font-family="sans-serif">x&#773;&#8722;S</text>
+        <text x="368" y="240" text-anchor="middle" font-size="12" fill="#3FBF9F" font-family="sans-serif">x&#773;+S</text>
+        <text x="104" y="240" text-anchor="middle" font-size="12" fill="#1C7293" font-family="sans-serif">x&#773;&#8722;2S</text>
+        <text x="456" y="240" text-anchor="middle" font-size="12" fill="#1C7293" font-family="sans-serif">x&#773;+2S</text>
+        <text x="280" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="#094649" font-family="sans-serif">68%</text>
+        <text x="160" y="150" text-anchor="middle" font-size="12" fill="#1C7293" font-family="sans-serif">13.5%</text>
+        <text x="400" y="150" text-anchor="middle" font-size="12" fill="#1C7293" font-family="sans-serif">13.5%</text>
+      </svg>
+    </div>
+    <div style="display:flex;gap:12px">
+      <div style="flex:1;background:#3FBF9F;border-radius:12px;padding:18px;text-align:center">
+        <p style="font-size:36px;font-weight:700;color:#FFFFFF">68%</p>
+        <p style="font-size:18px;color:#094649">de los datos est&#225;n a<br>&#177;1S de la media</p>
+      </div>
+      <div style="flex:1;background:#1C7293;border-radius:12px;padding:18px;text-align:center">
+        <p style="font-size:36px;font-weight:700;color:#FFFFFF">95%</p>
+        <p style="font-size:18px;color:#DFF0ED">de los datos est&#225;n a<br>&#177;2S de la media</p>
+      </div>
+      <div style="flex:1;background:#094649;border-radius:12px;padding:18px;text-align:center">
+        <p style="font-size:36px;font-weight:700;color:#3FBF9F">99.7%</p>
+        <p style="font-size:18px;color:#DFF0ED">de los datos est&#225;n a<br>&#177;3S de la media</p>
+      </div>
+    </div>
+    <div style="background:#1B2430;border-radius:12px;padding:20px 28px">
+      <p style="font-size:20px;color:#DFF0ED">Ejemplo: x&#773; = 76, S = 9.57 → El <b style="color:#3FBF9F">68%</b> de los alumnos sac&#243; entre <b style="color:#F4623A">66.4 y 85.6</b> puntos.</p>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="s27"><section id="s27" style="background:#1B2430;color:#FFFFFF;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-size:26px;color:#F4623A;font-weight:600;letter-spacing:4px">TEMA 2.7</p>
+<h2 style="font-size:96px;font-weight:700;color:#FFFFFF;line-height:1">Coeficiente de<br>Variaci&#243;n</h2>
+<div style="width:120px;height:6px;background:linear-gradient(to right,#F4623A,#3FBF9F);border-radius:3px"></div>
+<p style="font-size:32px;color:#DFF0ED;font-weight:300;max-width:1000px">Permite comparar la dispersi&#243;n de grupos con <b style="color:#F4623A">distintas medias o unidades</b>: expresa la variabilidad como porcentaje de la media.</p>
+</section></div>
+<div class="slide" data-id="cv_def"><section id="cv_def" style="background:#F0F8F6;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:60px;font-weight:700;color:#094649">Coeficiente de Variaci&#243;n — CV</h2>
+<div style="display:flex;gap:28px;flex:1">
+  <div style="flex:1;display:flex;flex-direction:column;gap:20px">
+    <div style="background:#1B2430;border-radius:16px;padding:40px;text-align:center">
+      <p style="font-size:22px;color:#F4623A;font-weight:600">F&#211;RMULA</p>
+      <p style="font-size:60px;font-weight:700;color:#FFFFFF;line-height:1.3">CV = (S / x&#773;) &#215; 100</p>
+      <p style="font-size:22px;color:#5C7E7B;padding-top:8px">El resultado es un <b style="color:#3FBF9F">porcentaje (%)</b></p>
+    </div>
+    <div style="background:#FFFFFF;border-radius:16px;padding:32px;border-left:6px solid #F4623A">
+      <p style="font-size:22px;color:#094649;font-weight:700">&#191;Por qu&#233; usar el CV?</p>
+      <p style="font-size:20px;color:#4A4A4A;line-height:1.8;padding-top:8px">La desviaci&#243;n est&#225;ndar <b>no es comparable</b> entre grupos con diferentes medias o unidades. El CV elimina las unidades y expresa la dispersi&#243;n en t&#233;rminos relativos.</p>
+    </div>
+  </div>
+  <div style="flex:1.6;display:flex;flex-direction:column;gap:20px">
+    <div style="background:#FFFFFF;border-radius:16px;padding:32px">
+      <p style="font-size:24px;font-weight:700;color:#094649">Escala de interpretaci&#243;n</p>
+      <div style="display:flex;flex-direction:column;gap:12px;padding-top:16px">
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:16px;height:16px;background:#3FBF9F;border-radius:50%"></div>
+          <div style="flex:1;background:#EDF4F3;border-radius:8px;padding:12px 20px;display:flex;justify-content:space-between;align-items:center">
+            <p style="font-size:22px;color:#094649;font-weight:600">CV &lt; 15%</p>
+            <p style="font-size:21px;color:#4A4A4A">Baja variabilidad — grupo <b>homog&#233;neo</b></p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:16px;height:16px;background:#1C7293;border-radius:50%"></div>
+          <div style="flex:1;background:#EDF4F3;border-radius:8px;padding:12px 20px;display:flex;justify-content:space-between;align-items:center">
+            <p style="font-size:22px;color:#1C7293;font-weight:600">15% &#8211; 30%</p>
+            <p style="font-size:21px;color:#4A4A4A">Variabilidad <b>moderada</b></p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:16px;height:16px;background:#F4623A;border-radius:50%"></div>
+          <div style="flex:1;background:#EDF4F3;border-radius:8px;padding:12px 20px;display:flex;justify-content:space-between;align-items:center">
+            <p style="font-size:22px;color:#F4623A;font-weight:600">CV &gt; 30%</p>
+            <p style="font-size:21px;color:#4A4A4A">Alta variabilidad — grupo <b>heterog&#233;neo</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#094649;border-radius:16px;padding:32px">
+      <p style="font-size:22px;color:#3FBF9F;font-weight:600">Ejemplo con nuestros datos</p>
+      <div style="display:flex;gap:16px;padding-top:16px">
+        <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:10px;padding:16px;text-align:center">
+          <p style="font-size:18px;color:#DFF0ED">x&#773; = 76 | S = 9.57</p>
+          <p style="font-size:28px;font-weight:700;color:#3FBF9F">CV = 12.6%</p>
+          <p style="font-size:18px;color:#3FBF9F">&#10003; Grupo homog&#233;neo</p>
+        </div>
+        <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:10px;padding:16px;text-align:center">
+          <p style="font-size:18px;color:#DFF0ED">Tiempo: x&#773; = 34.75 | &#963; = 11.72</p>
+          <p style="font-size:28px;font-weight:700;color:#F4623A">CV = 33.7%</p>
+          <p style="font-size:18px;color:#F4623A">&#9888; Alta variabilidad</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="cv_comp"><section id="cv_comp" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<h2 style="font-size:58px;font-weight:700;color:#094649">CV — Comparando Grupos con Distintas Escalas</h2>
+<p style="font-size:24px;color:#5C7E7B">Una empresa eval&#250;a a sus trabajadores en <b style="color:#094649">productividad (puntos)</b> y <b style="color:#1C7293">satisfacci&#243;n laboral (escala 1&#8211;10)</b></p>
+<div style="display:flex;gap:28px">
+  <div style="flex:1;background:#094649;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:16px">
+    <p style="font-size:22px;color:#3FBF9F;font-weight:600">&#128200; Productividad</p>
+    <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:20px">
+      <p style="font-size:20px;color:#DFF0ED">x&#773; = 850 puntos</p>
+      <p style="font-size:20px;color:#DFF0ED">S = 120 puntos</p>
+    </div>
+    <div style="background:#3FBF9F;border-radius:10px;padding:20px;text-align:center">
+      <p style="font-size:18px;color:#094649">Coeficiente de Variaci&#243;n</p>
+      <p style="font-size:44px;font-weight:700;color:#094649">CV = 14.1%</p>
+    </div>
+    <p style="font-size:20px;color:#DFF0ED">Los trabajadores son <b style="color:#3FBF9F">bastante homog&#233;neos</b> en productividad.</p>
+  </div>
+  <div style="flex:1;background:#1C7293;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:16px">
+    <p style="font-size:22px;color:#3FBF9F;font-weight:600">&#128578; Satisfacci&#243;n laboral</p>
+    <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:20px">
+      <p style="font-size:20px;color:#DFF0ED">x&#773; = 6.8 puntos</p>
+      <p style="font-size:20px;color:#DFF0ED">S = 2.1 puntos</p>
+    </div>
+    <div style="background:#F4623A;border-radius:10px;padding:20px;text-align:center">
+      <p style="font-size:18px;color:#FFFFFF">Coeficiente de Variaci&#243;n</p>
+      <p style="font-size:44px;font-weight:700;color:#FFFFFF">CV = 30.9%</p>
+    </div>
+    <p style="font-size:20px;color:#DFF0ED">Las opiniones son <b style="color:#F4623A">muy diversas</b>: hay quien est&#225; muy satisfecho y quien no lo est&#225; en absoluto.</p>
+  </div>
+  <div style="flex:1;background:#FFFFFF;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:16px;border-top:6px solid #3FBF9F">
+    <p style="font-size:22px;color:#094649;font-weight:700">&#129300; &#191;Podr&#237;as comparar las S directamente?</p>
+    <div style="background:#EDF4F3;border-radius:10px;padding:20px">
+      <p style="font-size:20px;color:#4A4A4A">S(productividad) = <b>120 puntos</b></p>
+      <p style="font-size:20px;color:#4A4A4A">S(satisfacci&#243;n)  = <b>2.1 puntos</b></p>
+      <p style="font-size:18px;color:#F4623A;padding-top:8px">&#10007; NO — son unidades diferentes, no comparables</p>
+    </div>
+    <div style="background:#094649;border-radius:10px;padding:20px">
+      <p style="font-size:20px;color:#3FBF9F">Con el CV s&#237; podemos:</p>
+      <p style="font-size:20px;color:#DFF0ED">14.1% vs. 30.9% → la <b style="color:#F4623A">satisfacci&#243;n</b> tiene el <b style="color:#F4623A">doble</b> de variabilidad relativa</p>
+    </div>
+    <p style="font-size:19px;color:#4A4A4A;line-height:1.6">Recomendaci&#243;n: la empresa deber&#237;a atender la <b style="color:#1C7293">satisfacci&#243;n laboral</b> con mayor urgencia.</p>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="s28"><section id="s28" style="background:#3FBF9F;color:#094649;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-size:26px;color:#094649;font-weight:600;letter-spacing:4px">TEMA 2.8</p>
+<h2 style="font-size:96px;font-weight:700;color:#094649;line-height:1">An&#225;lisis<br>Comparativo</h2>
+<div style="width:120px;height:6px;background:#094649;border-radius:3px"></div>
+<p style="font-size:32px;color:#094649;font-weight:400;max-width:1000px;opacity:0.8">Ejemplo integrador: calcula todas las medidas de dispersi&#243;n sobre el mismo conjunto de datos y extrae conclusiones pr&#225;cticas.</p>
+</section></div>
+<div class="slide" data-id="ejemplo_int"><section id="ejemplo_int" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px 128px 80px;display:flex;flex-direction:column;gap:28px">
+<h2 style="font-size:56px;font-weight:700;color:#094649">Ejemplo Integrador — Dos Grupos de Estudiantes</h2>
+<p style="font-size:22px;color:#5C7E7B">Calificaciones del examen final en dos grupos del mismo semestre (n = 8 cada uno)</p>
+<div style="display:flex;gap:24px">
+  <div style="flex:1;background:#094649;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px">
+    <p style="font-size:24px;font-weight:700;color:#3FBF9F">Grupo Matutino</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">70</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">72</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">74</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">75</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">76</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">77</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">78</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">82</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;justify-content:space-between;background:rgba(255,255,255,0.08);border-radius:8px;padding:10px 16px">
+        <p style="font-size:20px;color:#DFF0ED">Media (x&#773;)</p>
+        <p style="font-size:20px;color:#FFFFFF;font-weight:600">75.5 pts</p>
+      </div>
+      <div style="display:flex;justify-content:space-between;background:rgba(255,255,255,0.08);border-radius:8px;padding:10px 16px">
+        <p style="font-size:20px;color:#DFF0ED">Rango (R)</p>
+        <p style="font-size:20px;color:#FFFFFF;font-weight:600">82 &#8722; 70 = 12</p>
+      </div>
+      <div style="display:flex;justify-content:space-between;background:rgba(255,255,255,0.08);border-radius:8px;padding:10px 16px">
+        <p style="font-size:20px;color:#DFF0ED">Desv. est&#225;ndar (S)</p>
+        <p style="font-size:20px;color:#FFFFFF;font-weight:600">3.54 pts</p>
+      </div>
+      <div style="display:flex;justify-content:space-between;background:#3FBF9F;border-radius:8px;padding:10px 16px">
+        <p style="font-size:20px;color:#094649;font-weight:600">C.V.</p>
+        <p style="font-size:24px;color:#094649;font-weight:700">4.7% — Muy homog&#233;neo &#10003;</p>
+      </div>
+    </div>
+  </div>
+  <div style="flex:1;background:#1C7293;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:16px">
+    <p style="font-size:24px;font-weight:700;color:#3FBF9F">Grupo Vespertino</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">52</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">60</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">65</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">72</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">80</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">88</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">92</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:6px;padding:6px 12px;font-size:22px;color:#FFFFFF">95</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;justify-content:space-between;background:rgba(255,255,255,0.08);border-radius:8px;padding:10px 16px">
+        <p style="font-size:20px;color:#DFF0ED">Media (x&#773;)</p>
+        <p style="font-size:20px;color:#FFFFFF;font-weight:600">75.5 pts</p>
+      </div>
+      <div style="display:flex;justify-content:space-between;background:rgba(255,255,255,0.08);border-radius:8px;padding:10px 16px">
+        <p style="font-size:20px;color:#DFF0ED">Rango (R)</p>
+        <p style="font-size:20px;color:#FFFFFF;font-weight:600">95 &#8722; 52 = 43</p>
+      </div>
+      <div style="display:flex;justify-content:space-between;background:rgba(255,255,255,0.08);border-radius:8px;padding:10px 16px">
+        <p style="font-size:20px;color:#DFF0ED">Desv. est&#225;ndar (S)</p>
+        <p style="font-size:20px;color:#FFFFFF;font-weight:600">15.03 pts</p>
+      </div>
+      <div style="display:flex;justify-content:space-between;background:#F4623A;border-radius:8px;padding:10px 16px">
+        <p style="font-size:20px;color:#FFFFFF;font-weight:600">C.V.</p>
+        <p style="font-size:24px;color:#FFFFFF;font-weight:700">19.9% — Moderado &#9888;</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="background:#094649;border-radius:12px;padding:22px 36px">
+  <p style="font-size:22px;color:#FFFFFF">&#128269;&#160;<b style="color:#3FBF9F">Misma media (75.5)</b>, pero dispersi&#243;n muy distinta. El grupo matutino es <b>4× m&#225;s homog&#233;neo</b> que el vespertino. La media sola no cuenta toda la historia.</p>
+</div>
+</section></div>
+<div class="slide" data-id="resumen"><section id="resumen" style="background:#F0F8F6;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px 128px 100px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:60px;font-weight:700;color:#094649">Resumen — &#191;Cu&#225;ndo usar cada medida?</h2>
+<div style="background:#FFFFFF;border-radius:16px;overflow:hidden;flex:1">
+  <table style="border-collapse:collapse;width:100%;font-size:22px">
+    <thead>
+      <tr style="background:#094649">
+        <th style="padding:20px 24px;color:#3FBF9F;text-align:left;width:14%">Medida</th>
+        <th style="padding:20px 24px;color:#3FBF9F;text-align:left;width:22%">F&#243;rmula</th>
+        <th style="padding:20px 24px;color:#FFFFFF;text-align:left;width:30%">Significa…</th>
+        <th style="padding:20px 24px;color:#FFFFFF;text-align:left;width:34%">&#218;sala cuando…</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#F0F8F6">
+        <td style="padding:18px 24px;font-weight:700;color:#094649">Rango<br><span style="font-size:16px;color:#5C7E7B">R</span></td>
+        <td style="padding:18px 24px;color:#1C7293;font-weight:600">X<sub>m&#225;x</sub> &#8722; X<sub>m&#237;n</sub></td>
+        <td style="padding:18px 24px">Amplitud total del conjunto de datos.</td>
+        <td style="padding:18px 24px">Necesitas un primer vistazo r&#225;pido. Los datos no tienen valores at&#237;picos.</td>
+      </tr>
+      <tr>
+        <td style="padding:18px 24px;font-weight:700;color:#1C7293">Varianza<br><span style="font-size:16px;color:#5C7E7B">S&#178; / &#963;&#178;</span></td>
+        <td style="padding:18px 24px;color:#1C7293;font-weight:600">&#931;(x<sub>i</sub>&#8722;x&#773;)&#178; / (n&#8722;1)</td>
+        <td style="padding:18px 24px">Promedio de desviaciones al cuadrado. Unidades&#178;.</td>
+        <td style="padding:18px 24px">C&#225;lculos intermedios, modelos estad&#237;sticos avanzados (ANOVA).</td>
+      </tr>
+      <tr style="background:#F0F8F6">
+        <td style="padding:18px 24px;font-weight:700;color:#3FBF9F">Desv. Est&#225;ndar<br><span style="font-size:16px;color:#5C7E7B">S / &#963;</span></td>
+        <td style="padding:18px 24px;color:#1C7293;font-weight:600">&#8730;S&#178;</td>
+        <td style="padding:18px 24px">Distancia t&#237;pica de un dato a la media. Mismas unidades.</td>
+        <td style="padding:18px 24px">Quieres interpretar la dispersi&#243;n en las unidades originales. &#10003; M&#225;s usada.</td>
+      </tr>
+      <tr>
+        <td style="padding:18px 24px;font-weight:700;color:#F4623A">C.V.<br><span style="font-size:16px;color:#5C7E7B">CV</span></td>
+        <td style="padding:18px 24px;color:#1C7293;font-weight:600">(S / x&#773;) &#215; 100</td>
+        <td style="padding:18px 24px">Variabilidad relativa (%). Sin unidades.</td>
+        <td style="padding:18px 24px">Comparas grupos con <b>distintas medias</b> o <b>distintas unidades</b> de medida.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="display:flex;gap:16px">
+  <div style="flex:1;background:#094649;border-radius:10px;padding:18px 24px;text-align:center">
+    <p style="font-size:20px;color:#DFF0ED">Datos sin agrupar</p>
+    <p style="font-size:18px;color:#3FBF9F">Todas las f&#243;rmulas aplican directamente sobre los datos originales</p>
+  </div>
+  <div style="flex:1;background:#1C7293;border-radius:10px;padding:18px 24px;text-align:center">
+    <p style="font-size:20px;color:#DFF0ED">Datos agrupados</p>
+    <p style="font-size:18px;color:#3FBF9F">Se usa el punto medio mc<sub>i</sub> de cada clase y se pondera por f<sub>i</sub></p>
+  </div>
+  <div style="flex:1;background:#1B2430;border-radius:10px;padding:18px 24px;text-align:center">
+    <p style="font-size:20px;color:#DFF0ED">Poblaci&#243;n vs Muestra</p>
+    <p style="font-size:18px;color:#3FBF9F">Muestra: divide entre (n&#8722;1). Poblaci&#243;n: divide entre N</p>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="cierre"><section id="cierre" style="background:linear-gradient(135deg,#094649 0%,#1B2430 100%);color:#FFFFFF;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:72px;font-weight:700;color:#FFFFFF">S&#237;ntesis — Medidas de Dispersi&#243;n</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1">
+  <div style="background:rgba(255,255,255,0.08);border-radius:16px;padding:36px;border-left:6px solid #3FBF9F">
+    <p style="font-size:26px;font-weight:700;color:#3FBF9F">Rango  R = X<sub>m&#225;x</sub> &#8722; X<sub>m&#237;n</sub></p>
+    <p style="font-size:22px;color:#DFF0ED;line-height:1.6;padding-top:8px">Medida r&#225;pida y sencilla. &#218;til como primer indicador pero ignora la distribuci&#243;n interna. Muy sensible a outliers.</p>
+  </div>
+  <div style="background:rgba(255,255,255,0.08);border-radius:16px;padding:36px;border-left:6px solid #1C7293">
+    <p style="font-size:26px;font-weight:700;color:#7EC8E3">Varianza  S&#178; = &#931;(x<sub>i</sub>&#8722;x&#773;)&#178; / (n&#8722;1)</p>
+    <p style="font-size:22px;color:#DFF0ED;line-height:1.6;padding-top:8px">Considera todos los datos. Unidades al cuadrado. Base para la desviaci&#243;n est&#225;ndar y muchos m&#233;todos avanzados.</p>
+  </div>
+  <div style="background:rgba(255,255,255,0.08);border-radius:16px;padding:36px;border-left:6px solid #3FBF9F">
+    <p style="font-size:26px;font-weight:700;color:#3FBF9F">Desviaci&#243;n Est&#225;ndar  S = &#8730;S&#178;</p>
+    <p style="font-size:22px;color:#DFF0ED;line-height:1.6;padding-top:8px">La medida de dispersi&#243;n m&#225;s usada. Mismas unidades que los datos. Se interpreta como la distancia t&#237;pica a la media.</p>
+  </div>
+  <div style="background:rgba(255,255,255,0.08);border-radius:16px;padding:36px;border-left:6px solid #F4623A">
+    <p style="font-size:26px;font-weight:700;color:#F4623A">C.V. = (S / x&#773;) &#215; 100%</p>
+    <p style="font-size:22px;color:#DFF0ED;line-height:1.6;padding-top:8px">Dispersi&#243;n relativa sin unidades. Indispensable para comparar grupos con distintas escalas o magnitudes.</p>
+  </div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end">
+  <p style="font-size:26px;color:#3FBF9F;font-weight:500">Pr&#243;xima sesi&#243;n: Probabilidad — Conceptos fundamentales y reglas de conteo</p>
+  <p style="font-size:22px;color:#5C7E7B">CEUM · Probabilidad y Estad&#237;stica</p>
+</div>
+</section></div></div><div id="hint">Usa las flechas del teclado o desliza el dedo</div></div>
+<div id="bar"><button id="bm" class="alt" aria-label="Índice">☰</button><button id="bp" aria-label="Anterior">◀</button><div class="mid"><div id="cnt"></div><div id="prog"><i></i></div></div><button id="bn" aria-label="Siguiente">▶</button><button id="bf" class="alt" aria-label="Pantalla completa">⛶</button><button id="bh" class="alt" aria-label="Volver" title="Volver a las presentaciones">⌂</button></div></div>
+<div id="shade"></div><div id="menu"><h2>Medidas de Dispersión – Unidad 2</h2><p>Toca un tema para ir directo a él</p><h3>Portada y agenda de la unidad</h3><a href="#1" data-n="0">1. Portada</a><a href="#2" data-n="1">2. Temas de la Unidad 2 — Dispersión</a><h3>2.5 Rango – medida más simple de dispersión</h3><a href="#3" data-n="2">3. Rango</a><a href="#4" data-n="3">4. Rango — Definición y Fórmula</a><a href="#5" data-n="4">5. ¿Por qué el rango no es suficiente?</a><h3>2.6 Varianza y Desviación Estándar – datos no agrupados y agrupados</h3><a href="#6" data-n="5">6. Varianza y Desviación Estándar</a><a href="#7" data-n="6">7. Varianza — Fórmulas y Lógica</a><a href="#8" data-n="7">8. Cálculo Paso a Paso — Datos sin Agrupar</a><a href="#9" data-n="8">9. Varianza — Datos Agrupados</a><a href="#10" data-n="9">10. Interpretando la Desviación Estándar</a><h3>2.7 Coeficiente de Variación – comparar grupos distintos</h3><a href="#11" data-n="10">11. Coeficiente de Variación</a><a href="#12" data-n="11">12. Coeficiente de Variación — CV</a><a href="#13" data-n="12">13. CV — Comparando Grupos con Distintas Escalas</a><h3>2.8 Análisis comparativo e interpretación</h3><a href="#14" data-n="13">14. Análisis Comparativo</a><a href="#15" data-n="14">15. Ejemplo Integrador — Dos Grupos de Estudiantes</a><a href="#16" data-n="15">16. Resumen — ¿Cuándo usar cada medida?</a><h3>Síntesis y cierre de la Unidad 2</h3><a href="#17" data-n="16">17. Cierre</a></div>
+<script>
+(function(){var S=[].slice.call(document.querySelectorAll('.slide')),N=S.length,i=0,st=document.getElementById('stage'),vw=document.getElementById('view');
+var TIT=["Portada", "Temas de la Unidad 2 — Dispersión", "Rango", "Rango — Definición y Fórmula", "¿Por qué el rango no es suficiente?", "Varianza y Desviación Estándar", "Varianza — Fórmulas y Lógica", "Cálculo Paso a Paso — Datos sin Agrupar", "Varianza — Datos Agrupados", "Interpretando la Desviación Estándar", "Coeficiente de Variación", "Coeficiente de Variación — CV", "CV — Comparando Grupos con Distintas Escalas", "Análisis Comparativo", "Ejemplo Integrador — Dos Grupos de Estudiantes", "Resumen — ¿Cuándo usar cada medida?", "Cierre"];
+function fit(){var w=vw.clientWidth,h=vw.clientHeight,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.left=((w-1920*k)/2)+'px';st.style.top=((h-1080*k)/2)+'px'}
+function go(n,noh){n=Math.max(0,Math.min(N-1,n));S[i].classList.remove('on');i=n;S[i].classList.add('on');
+ document.getElementById('cnt').textContent=(i+1)+' / '+N+' · '+TIT[i];document.querySelector('#prog i').style.width=((i+1)/N*100)+'%';
+ document.getElementById('bp').disabled=i===0;document.getElementById('bn').disabled=i===N-1;
+ [].forEach.call(document.querySelectorAll('#menu a'),function(a){a.classList.toggle('cur',+a.dataset.n===i)});
+ if(!noh){try{history.replaceState(null,'','#'+(i+1))}catch(e){}}}
+function menu(o){document.getElementById('menu').classList.toggle('open',o);document.getElementById('shade').classList.toggle('open',o)}
+document.getElementById('bp').onclick=function(){go(i-1)};document.getElementById('bn').onclick=function(){go(i+1)};
+document.getElementById('bm').onclick=function(){menu(true)};document.getElementById('shade').onclick=function(){menu(false)};
+[].forEach.call(document.querySelectorAll('#menu a'),function(a){a.onclick=function(e){e.preventDefault();go(+a.dataset.n);menu(false)}});
+document.getElementById('bh').onclick=function(){location.href='../'};
+document.getElementById('bf').onclick=function(){var d=document.documentElement;try{if(document.fullscreenElement){document.exitFullscreen()}else if(d.requestFullscreen){d.requestFullscreen()}}catch(e){}};
+document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();go(i+1)}else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){e.preventDefault();go(i-1)}else if(k==='Home'){go(0)}else if(k==='End'){go(N-1)}else if(k==='Escape'){menu(false)}else if(k==='f'||k==='F'){document.getElementById('bf').click()}});
+var x0=null,y0=null;vw.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+vw.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){go(dx<0?i+1:i-1)}x0=null},{passive:true});
+vw.addEventListener('click',function(e){var r=vw.getBoundingClientRect(),x=e.clientX-r.left;if(x>r.width*.75)go(i+1);else if(x<r.width*.25)go(i-1)});
+window.addEventListener('resize',fit);window.addEventListener('hashchange',function(){var n=parseInt(location.hash.slice(1),10);if(n)go(n-1,true)});
+fit();var h=parseInt(location.hash.slice(1),10);go(h?h-1:0,true);setTimeout(function(){document.getElementById('hint').style.opacity=0},3500);
+})();
+</script></body></html>

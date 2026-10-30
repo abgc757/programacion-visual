@@ -1,0 +1,539 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Medidas de Tendencia Central – Unidad 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap">
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#0d1b24;font-family:'DM Sans',Arial,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+#app{position:fixed;inset:0;display:flex;flex-direction:column}
+#view{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:0}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;background:#000;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.slide{position:absolute;inset:0;display:none}.slide.on{display:block}
+.slide>section{width:1920px;height:1080px;overflow:hidden;position:relative}
+.slide *{margin:0}.slide aside{display:none}.slide table{border-collapse:collapse}
+.slide ul,.slide ol{padding-left:0}
+#bar{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#122a35;color:#fff}
+#bar button{border:0;background:#1c7293;color:#fff;font:700 16px 'DM Sans',Arial,sans-serif;border-radius:10px;min-width:44px;height:44px;padding:0 14px;cursor:pointer}
+#bar button:disabled{opacity:.35}#bar button.alt{background:#2b4a58}
+#bar .mid{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+#cnt{font-size:14px;text-align:center;color:#cfe8e4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#prog{height:6px;border-radius:3px;background:#2b4a58;overflow:hidden}#prog i{display:block;height:100%;width:0;background:#3fbf9f;transition:width .2s}
+#menu{position:fixed;left:0;top:0;bottom:0;width:min(340px,88vw);background:#fff;color:#1b2430;transform:translateX(-105%);transition:transform .22s;z-index:5;overflow:auto;padding:16px;box-shadow:4px 0 24px rgba(0,0,0,.4)}
+#menu.open{transform:none}#menu h2{margin:0 0 4px;font-size:18px;color:#094649}#menu p{margin:0 0 12px;font-size:13px;color:#5c7e7b}
+#menu h3{margin:14px 0 4px;font-size:13px;color:#1c7293;text-transform:uppercase;letter-spacing:.04em}
+#menu a{display:block;padding:9px 10px;border-radius:8px;color:#1b2430;text-decoration:none;font-size:15px}#menu a:hover,#menu a.cur{background:#dff0ed;font-weight:700}
+#shade{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;z-index:4}#shade.open{display:block}
+#hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;font-size:14px;padding:6px 14px;border-radius:20px;pointer-events:none;transition:opacity .6s}
+@media print{html,body{overflow:visible;height:auto;background:#fff}#app{position:static;display:block}#bar,#menu,#shade,#hint{display:none!important}#view{display:block;overflow:visible}#stage{position:static;transform:none!important;box-shadow:none;height:auto;width:1920px}.slide{display:block!important;position:relative;height:1080px;page-break-after:always;break-after:page}@page{size:1920px 1080px;margin:0}}
+</style></head><body>
+<div id="app"><div id="view"><div id="stage"><div class="slide" data-id="cover"><section id="cover" data-transition="fade" style="background:linear-gradient(135deg,#094649 0%,#1B2430 60%,#1C7293 100%);color:#FFFFFF;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<div>
+  <p style="font-size:28px;color:#3FBF9F;font-weight:600;letter-spacing:3px;text-transform:uppercase">Probabilidad y Estadística · Unidad 2</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+  <h1 style="font-size:112px;font-weight:700;line-height:1.0;color:#FFFFFF">Medidas de<br>Tendencia Central</h1>
+  <p style="font-size:40px;font-weight:300;color:#DFF0ED">Media · Mediana · Moda</p>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end">
+  <div>
+    <p style="font-size:28px;color:#3FBF9F;font-weight:500">M. en C. Abraham Gómez Contreras</p>
+    <p style="font-size:24px;color:#5C7E7B">Centro Universitario y Cultural Morelos</p>
+  </div>
+  <p style="font-size:24px;color:#5C7E7B">2026</p>
+</div>
+<aside>Portada de la Unidad 2: Medidas de Tendencia Central. Esta unidad cubre media, mediana y moda, sus fórmulas, sus variantes para datos agrupados, y cuándo conviene usar cada una.</aside>
+</section></div>
+<div class="slide" data-id="agenda"><section id="agenda" data-transition="fade" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">Contenido de la Unidad</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;flex:1">
+  <div style="background:#094649;border-radius:16px;padding:48px;display:flex;flex-direction:column;gap:16px">
+    <p style="font-size:28px;font-weight:700;color:#3FBF9F">2.1</p>
+    <h3 style="font-size:44px;font-weight:700;color:#FFFFFF;line-height:1.2">Media Aritmética</h3>
+    <p style="font-size:26px;color:#DFF0ED">Simple · Ponderada · Datos agrupados</p>
+  </div>
+  <div style="background:#1C7293;border-radius:16px;padding:48px;display:flex;flex-direction:column;gap:16px">
+    <p style="font-size:28px;font-weight:700;color:#3FBF9F">2.2</p>
+    <h3 style="font-size:44px;font-weight:700;color:#FFFFFF;line-height:1.2">Mediana</h3>
+    <p style="font-size:26px;color:#DFF0ED">Datos sin agrupar · Datos agrupados</p>
+  </div>
+  <div style="background:#1B2430;border-radius:16px;padding:48px;display:flex;flex-direction:column;gap:16px">
+    <p style="font-size:28px;font-weight:700;color:#F4623A">2.3</p>
+    <h3 style="font-size:44px;font-weight:700;color:#FFFFFF;line-height:1.2">Moda</h3>
+    <p style="font-size:26px;color:#DFF0ED">Tipos · Czuber · Datos agrupados</p>
+  </div>
+  <div style="background:#3FBF9F;border-radius:16px;padding:48px;display:flex;flex-direction:column;gap:16px">
+    <p style="font-size:28px;font-weight:700;color:#094649">2.4</p>
+    <h3 style="font-size:44px;font-weight:700;color:#094649;line-height:1.2">Análisis Comparativo</h3>
+    <p style="font-size:26px;color:#094649">Cuándo usar cada medida · Sesgo</p>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="s21"><section id="s21" data-transition="push" style="background:#094649;color:#FFFFFF;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-size:32px;font-weight:600;color:#3FBF9F;letter-spacing:4px;text-transform:uppercase">Tema 2.1</p>
+<h1 style="font-size:108px;font-weight:700;line-height:1.0;color:#FFFFFF">Media Aritmética</h1>
+<p style="font-size:36px;color:#DFF0ED;font-weight:300">El promedio más conocido y utilizado en estadística</p>
+<div style="width:200px;border-top:3px solid #3FBF9F"></div>
+</section></div>
+<div class="slide" data-id="media_def"><section id="media_def" style="background:#F0F8F6;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">Media Aritmética — Definición</h2>
+<div style="display:flex;gap:48px;flex:1">
+  <div style="flex:1;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#094649;border-radius:12px;padding:40px">
+      <p style="font-size:26px;color:#DFF0ED;line-height:1.5">Suma de todos los valores dividida entre el número total de observaciones. Representa el "<b>centro de gravedad</b>" del conjunto de datos.</p>
+    </div>
+    <div style="background:#FFFFFF;border:2px solid #DFF0ED;border-radius:12px;padding:40px;display:flex;flex-direction:column;gap:20px">
+      <p style="font-size:28px;font-weight:700;color:#1C7293">Fórmula — datos no agrupados</p>
+      <p style="font-size:56px;font-weight:600;color:#094649;text-align:center">x&#773; = &#931;x&#7522; / n</p>
+      <div style="display:flex;gap:32px;justify-content:center">
+        <p style="font-size:24px;color:#5C7E7B"><b>x&#773;</b> = media muestral</p>
+        <p style="font-size:24px;color:#5C7E7B"><b>&#931;x&#7522;</b> = suma de valores</p>
+        <p style="font-size:24px;color:#5C7E7B"><b>n</b> = total de datos</p>
+      </div>
+    </div>
+  </div>
+  <div style="width:640px;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#1C7293;border-radius:12px;padding:40px">
+      <p style="font-size:28px;font-weight:700;color:#FFFFFF">Ejemplo</p>
+      <p style="font-size:26px;color:#DFF0ED;line-height:1.6">Calificaciones: 7, 8, 9, 6, 10</p>
+      <p style="font-size:26px;color:#3FBF9F;font-weight:600">x&#773; = (7+8+9+6+10) / 5</p>
+      <p style="font-size:40px;color:#FFFFFF;font-weight:700;text-align:center">x&#773; = 8.0</p>
+    </div>
+    <div style="background:#FFFFFF;border:2px solid #DFF0ED;border-radius:12px;padding:40px;display:flex;flex-direction:column;gap:16px">
+      <p style="font-size:28px;font-weight:700;color:#094649">Propiedades</p>
+      <p style="font-size:24px;color:#1B2430;line-height:1.6">• Única para cada conjunto de datos<br>• Sensible a valores extremos (outliers)<br>• &#931;(x&#7522; &#8722; x&#773;) = 0 siempre<br>• Solo aplica a variables cuantitativas</p>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="media_pond"><section id="media_pond" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">Media Ponderada</h2>
+<div style="display:flex;gap:48px;flex:1">
+  <div style="flex:1;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#FFFFFF;border-radius:12px;padding:36px;border-left:6px solid #1C7293">
+      <p style="font-size:26px;color:#1B2430;line-height:1.6">Cuando cada valor <b>no tiene la misma importancia</b>, se asigna un <b>peso w&#7522;</b> que refleja su relevancia relativa.</p>
+      <p style="font-size:48px;font-weight:700;color:#094649;text-align:center">x&#773;w = &#931;(x&#7522;·w&#7522;) / &#931;w&#7522;</p>
+    </div>
+    <div style="background:#094649;border-radius:12px;padding:36px">
+      <p style="font-size:26px;color:#DFF0ED;line-height:1.5"><b>Aplicaciones comunes:</b><br>• Calificación final con distintos porcentajes<br>• Índice de precios al consumidor<br>• Promedio ponderado de inversiones</p>
+    </div>
+  </div>
+  <div style="width:720px;display:flex;flex-direction:column;gap:24px">
+    <p style="font-size:28px;font-weight:700;color:#1C7293">Ejemplo — Calificación final del curso</p>
+    <table style="border-collapse:collapse;font-size:26px;width:100%;color:#1B2430">
+      <tr style="background:#094649">
+        <th style="padding:16px;text-align:left;color:#FFFFFF;width:36%">Evaluación</th>
+        <th style="padding:16px;text-align:center;color:#FFFFFF;width:20%">x&#7522;</th>
+        <th style="padding:16px;text-align:center;color:#FFFFFF;width:24%">w&#7522; (%)</th>
+        <th style="padding:16px;text-align:center;color:#FFFFFF;width:20%">x&#7522;·w&#7522;</th>
+      </tr>
+      <tr style="background:#F0F8F6">
+        <td style="padding:16px">Tareas</td>
+        <td style="padding:16px;text-align:center">8.5</td>
+        <td style="padding:16px;text-align:center">20</td>
+        <td style="padding:16px;text-align:center">170</td>
+      </tr>
+      <tr>
+        <td style="padding:16px">Exámenes Parciales</td>
+        <td style="padding:16px;text-align:center">7.0</td>
+        <td style="padding:16px;text-align:center">50</td>
+        <td style="padding:16px;text-align:center">350</td>
+      </tr>
+      <tr style="background:#F0F8F6">
+        <td style="padding:16px">Examen Final</td>
+        <td style="padding:16px;text-align:center">9.0</td>
+        <td style="padding:16px;text-align:center">30</td>
+        <td style="padding:16px;text-align:center">270</td>
+      </tr>
+      <tr style="background:#3FBF9F">
+        <td style="padding:16px;font-weight:700;color:#094649">Total</td>
+        <td style="padding:16px;text-align:center;color:#094649">—</td>
+        <td style="padding:16px;text-align:center;font-weight:700;color:#094649">100</td>
+        <td style="padding:16px;text-align:center;font-weight:700;color:#094649">790</td>
+      </tr>
+    </table>
+    <div style="background:#1C7293;border-radius:12px;padding:28px;text-align:center">
+      <p style="font-size:30px;color:#FFFFFF">x&#773;w = 790 / 100 = <b>7.90</b></p>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="media_grupo"><section id="media_grupo" style="background:#F0F8F6;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">Media para Datos Agrupados</h2>
+<div style="display:flex;gap:48px;flex:1">
+  <div style="width:560px;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#094649;border-radius:12px;padding:36px">
+      <p style="font-size:26px;color:#3FBF9F;font-weight:600">Fórmula</p>
+      <p style="font-size:52px;font-weight:700;color:#FFFFFF;text-align:center">x&#773; = &#931;(mc&#7522;·f&#7522;) / n</p>
+      <p style="font-size:24px;color:#DFF0ED;text-align:center"><b>mc = (L&#7522; + Ls) / 2</b> (marca de clase)</p>
+    </div>
+    <div style="background:#FFFFFF;border-radius:12px;padding:32px;border-left:6px solid #3FBF9F">
+      <p style="font-size:26px;color:#1B2430;line-height:1.6">Se usa cuando los datos están en una <b>tabla de distribución de frecuencias</b>. Se usa la <b>marca de clase</b> como representante del intervalo.</p>
+    </div>
+    <div style="background:#DFF0ED;border-radius:12px;padding:32px">
+      <p style="font-size:24px;color:#094649;font-weight:600">Pasos:</p>
+      <p style="font-size:24px;color:#094649;line-height:1.6">1. Calcular mc de cada clase<br>2. Multiplicar mc · f&#7522; de cada clase<br>3. Sumar todos los mc · f&#7522;<br>4. Dividir entre n</p>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:20px">
+    <p style="font-size:28px;font-weight:700;color:#1C7293">Ejemplo — Calificaciones (n = 30)</p>
+    <table style="border-collapse:collapse;font-size:24px;width:100%;color:#1B2430">
+      <tr style="background:#094649">
+        <th style="padding:14px;text-align:center;color:#FFFFFF;width:30%">Clase [L&#7522; – Ls)</th>
+        <th style="padding:14px;text-align:center;color:#FFFFFF;width:20%">mc</th>
+        <th style="padding:14px;text-align:center;color:#FFFFFF;width:20%">f&#7522;</th>
+        <th style="padding:14px;text-align:center;color:#FFFFFF;width:30%">mc · f&#7522;</th>
+      </tr>
+      <tr style="background:#F0F8F6"><td style="padding:14px;text-align:center">45 – 54</td><td style="padding:14px;text-align:center">49.5</td><td style="padding:14px;text-align:center">3</td><td style="padding:14px;text-align:center">148.5</td></tr>
+      <tr><td style="padding:14px;text-align:center">54 – 63</td><td style="padding:14px;text-align:center">58.5</td><td style="padding:14px;text-align:center">5</td><td style="padding:14px;text-align:center">292.5</td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:14px;text-align:center">63 – 72</td><td style="padding:14px;text-align:center">67.5</td><td style="padding:14px;text-align:center">8</td><td style="padding:14px;text-align:center">540.0</td></tr>
+      <tr><td style="padding:14px;text-align:center">72 – 81</td><td style="padding:14px;text-align:center">76.5</td><td style="padding:14px;text-align:center">7</td><td style="padding:14px;text-align:center">535.5</td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:14px;text-align:center">81 – 90</td><td style="padding:14px;text-align:center">85.5</td><td style="padding:14px;text-align:center">5</td><td style="padding:14px;text-align:center">427.5</td></tr>
+      <tr><td style="padding:14px;text-align:center">90 – 99</td><td style="padding:14px;text-align:center">94.5</td><td style="padding:14px;text-align:center">2</td><td style="padding:14px;text-align:center">189.0</td></tr>
+      <tr style="background:#3FBF9F">
+        <td style="padding:14px;text-align:center;font-weight:700;color:#094649">Total</td>
+        <td style="padding:14px;text-align:center;color:#094649">—</td>
+        <td style="padding:14px;text-align:center;font-weight:700;color:#094649">30</td>
+        <td style="padding:14px;text-align:center;font-weight:700;color:#094649">2 133.0</td>
+      </tr>
+    </table>
+    <div style="background:#1C7293;border-radius:12px;padding:24px;text-align:center">
+      <p style="font-size:28px;color:#FFFFFF;font-weight:600">x&#773; = 2 133 / 30 = <b>71.1 puntos</b></p>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="s22"><section id="s22" data-transition="push" style="background:#1C7293;color:#FFFFFF;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-size:32px;font-weight:600;color:#3FBF9F;letter-spacing:4px;text-transform:uppercase">Tema 2.2</p>
+<h1 style="font-size:108px;font-weight:700;line-height:1.0;color:#FFFFFF">Mediana</h1>
+<p style="font-size:36px;color:#DFF0ED;font-weight:300">El valor que divide al conjunto en dos mitades iguales</p>
+<div style="width:200px;border-top:3px solid #3FBF9F"></div>
+</section></div>
+<div class="slide" data-id="mediana_def"><section id="mediana_def" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">Mediana — Datos No Agrupados</h2>
+<div style="display:flex;gap:48px;flex:1">
+  <div style="flex:1;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#FFFFFF;border-radius:12px;padding:36px;border-left:6px solid #1C7293">
+      <p style="font-size:26px;color:#1B2430;line-height:1.6"><b>Paso 1:</b> Ordenar los datos de menor a mayor.<br><b>Paso 2:</b> Localizar el valor central.</p>
+    </div>
+    <div style="display:flex;gap:24px">
+      <div style="flex:1;background:#094649;border-radius:12px;padding:32px">
+        <p style="font-size:24px;font-weight:700;color:#3FBF9F">n impar</p>
+        <p style="font-size:40px;color:#FFFFFF;font-weight:600;text-align:center">Me = x&#8321;&#8326;&#8331;&#8320;&#8334;&#8321;&#8322;&#8322;</p>
+        <p style="font-size:36px;color:#FFFFFF;font-weight:600;text-align:center">Me = x&#8346;&#8326;&#8345;&#8342;&#8341;</p>
+        <p style="font-size:22px;color:#DFF0ED;text-align:center">posición (n+1)/2</p>
+      </div>
+      <div style="flex:1;background:#1C7293;border-radius:12px;padding:32px">
+        <p style="font-size:24px;font-weight:700;color:#3FBF9F">n par</p>
+        <p style="font-size:28px;color:#FFFFFF;font-weight:600;text-align:center">Me = (x&#8346;&#8326;&#8345;&#8342;&#8341; + x&#8346;&#8326;&#8345;&#8342;&#8341;&#8330;&#8321;) / 2</p>
+        <p style="font-size:22px;color:#DFF0ED;text-align:center">promedio de posiciones n/2 y (n/2)+1</p>
+      </div>
+    </div>
+    <div style="background:#DFF0ED;border-radius:12px;padding:28px">
+      <p style="font-size:24px;color:#094649;line-height:1.5">La mediana <b>no se ve afectada</b> por valores extremos. Es preferible cuando hay datos atípicos.</p>
+    </div>
+  </div>
+  <div style="width:620px;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#FFFFFF;border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:12px">
+      <p style="font-size:26px;font-weight:700;color:#094649">Ejemplo n = 7 (impar)</p>
+      <p style="font-size:24px;color:#5C7E7B">Datos: 9, 3, 7, 5, 8, 2, 6</p>
+      <p style="font-size:26px;color:#1C7293">Ordenados: 2, 3, 5, <b style="color:#F4623A">6</b>, 7, 8, 9</p>
+      <p style="font-size:24px;color:#5C7E7B">Posición: (7+1)/2 = 4</p>
+      <p style="font-size:32px;color:#094649;font-weight:700;text-align:center">Me = <span style="color:#F4623A">6</span></p>
+    </div>
+    <div style="background:#FFFFFF;border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:12px">
+      <p style="font-size:26px;font-weight:700;color:#094649">Ejemplo n = 6 (par)</p>
+      <p style="font-size:24px;color:#5C7E7B">Datos: 4, 8, 1, 9, 3, 7</p>
+      <p style="font-size:26px;color:#1C7293">Ordenados: 1, 3, <b style="color:#F4623A">4, 7</b>, 8, 9</p>
+      <p style="font-size:24px;color:#5C7E7B">Posiciones 3 y 4</p>
+      <p style="font-size:32px;color:#094649;font-weight:700;text-align:center">Me = (4 + 7) / 2 = <span style="color:#F4623A">5.5</span></p>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="mediana_grupo"><section id="mediana_grupo" style="background:#F0F8F6;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">Mediana — Datos Agrupados</h2>
+<div style="display:flex;gap:48px;flex:1">
+  <div style="width:560px;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#094649;border-radius:12px;padding:36px">
+      <p style="font-size:24px;color:#3FBF9F;font-weight:600">Fórmula de interpolación</p>
+      <p style="font-size:44px;font-weight:700;color:#FFFFFF;text-align:center">Me = L + [(n/2 &#8722; F) / f] · c</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <p style="font-size:22px;color:#DFF0ED"><b>L</b> = límite inferior de la clase mediana</p>
+        <p style="font-size:22px;color:#DFF0ED"><b>n</b> = total de datos</p>
+        <p style="font-size:22px;color:#DFF0ED"><b>F</b> = frecuencia acumulada ANTES de la clase mediana</p>
+        <p style="font-size:22px;color:#DFF0ED"><b>f</b> = frecuencia de la clase mediana</p>
+        <p style="font-size:22px;color:#DFF0ED"><b>c</b> = amplitud de clase</p>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:12px;padding:32px;border-left:6px solid #3FBF9F">
+      <p style="font-size:24px;font-weight:700;color:#1C7293">Cómo localizar la clase mediana</p>
+      <p style="font-size:24px;color:#1B2430;line-height:1.6">1. Calcular <b>n/2</b><br>2. La clase mediana es aquella donde la frecuencia acumulada <b>F supera n/2 por primera vez</b></p>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:20px">
+    <p style="font-size:26px;font-weight:700;color:#1C7293">Ejemplo — Calificaciones (n = 30, n/2 = 15)</p>
+    <table style="border-collapse:collapse;font-size:24px;width:100%;color:#1B2430">
+      <tr style="background:#094649">
+        <th style="padding:14px;color:#FFFFFF;text-align:center;width:35%">Clase</th>
+        <th style="padding:14px;color:#FFFFFF;text-align:center;width:20%">f&#7522;</th>
+        <th style="padding:14px;color:#FFFFFF;text-align:center;width:25%">F&#7522;</th>
+        <th style="padding:14px;color:#FFFFFF;text-align:center;width:20%"></th>
+      </tr>
+      <tr><td style="padding:12px;text-align:center">45 – 54</td><td style="padding:12px;text-align:center">3</td><td style="padding:12px;text-align:center">3</td><td style="padding:12px"></td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:12px;text-align:center">54 – 63</td><td style="padding:12px;text-align:center">5</td><td style="padding:12px;text-align:center">8</td><td style="padding:12px"></td></tr>
+      <tr style="background:#DFF0ED"><td style="padding:12px;text-align:center;font-weight:700;color:#094649">63 – 72</td><td style="padding:12px;text-align:center;font-weight:700;color:#094649">8</td><td style="padding:12px;text-align:center;font-weight:700;color:#094649">16</td><td style="padding:12px;text-align:center;font-size:20px;color:#F4623A">&#8592; clase Me (F &#8805; 15)</td></tr>
+      <tr><td style="padding:12px;text-align:center">72 – 81</td><td style="padding:12px;text-align:center">7</td><td style="padding:12px;text-align:center">23</td><td style="padding:12px"></td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:12px;text-align:center">81 – 90</td><td style="padding:12px;text-align:center">5</td><td style="padding:12px;text-align:center">28</td><td style="padding:12px"></td></tr>
+      <tr><td style="padding:12px;text-align:center">90 – 99</td><td style="padding:12px;text-align:center">2</td><td style="padding:12px;text-align:center">30</td><td style="padding:12px"></td></tr>
+    </table>
+    <div style="background:#1C7293;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px">
+      <p style="font-size:22px;color:#DFF0ED">L=63, n/2=15, F=8, f=8, c=9</p>
+      <p style="font-size:26px;color:#FFFFFF;font-weight:600">Me = 63 + [(15&#8722;8)/8]·9 = 63 + 7.88 = <b>70.9</b></p>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="s23"><section id="s23" data-transition="push" style="background:#1B2430;color:#FFFFFF;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-size:32px;font-weight:600;color:#F4623A;letter-spacing:4px;text-transform:uppercase">Tema 2.3</p>
+<h1 style="font-size:108px;font-weight:700;line-height:1.0;color:#FFFFFF">Moda</h1>
+<p style="font-size:36px;color:#DFF0ED;font-weight:300">El valor que aparece con mayor frecuencia en el conjunto</p>
+<div style="width:200px;border-top:3px solid #F4623A"></div>
+</section></div>
+<div class="slide" data-id="moda_def"><section id="moda_def" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">Moda — Tipos y Definición</h2>
+<div style="display:flex;gap:40px;flex:1">
+  <div style="flex:1;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#1B2430;border-radius:12px;padding:36px">
+      <p style="font-size:26px;color:#DFF0ED;line-height:1.6">La moda (<b>Mo</b>) es el valor que tiene la <b>mayor frecuencia absoluta</b>. Es la única medida que puede aplicarse a variables <b>cualitativas y cuantitativas</b>.</p>
+    </div>
+    <div style="background:#FFFFFF;border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:14px">
+      <p style="font-size:26px;font-weight:700;color:#094649">Datos no agrupados — Ejemplos</p>
+      <p style="font-size:24px;color:#1B2430"><b>Unimodal:</b> 2, 3, 3, 4, 5 → Mo = <b>3</b></p>
+      <p style="font-size:24px;color:#1B2430"><b>Bimodal:</b> 1, 2, 2, 3, 4, 4, 5 → Mo = <b>2</b> y <b>4</b></p>
+      <p style="font-size:24px;color:#1B2430"><b>Multimodal:</b> varios valores con la misma f máxima</p>
+      <p style="font-size:24px;color:#1B2430"><b>Amodal:</b> 1, 2, 3, 4, 5 → no existe moda</p>
+    </div>
+  </div>
+  <div style="width:700px;display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;gap:24px">
+      <div style="flex:1;background:#094649;border-radius:12px;padding:32px">
+        <p style="font-size:26px;font-weight:700;color:#FFFFFF">Unimodal</p>
+        <p style="font-size:22px;color:#DFF0ED">Un único valor con la mayor frecuencia</p>
+        <p style="font-size:32px;color:#3FBF9F;font-weight:600;text-align:center">3, 3, 3, 4, 5</p>
+        <p style="font-size:24px;color:#FFFFFF;text-align:center">Mo = 3</p>
+      </div>
+      <div style="flex:1;background:#1C7293;border-radius:12px;padding:32px">
+        <p style="font-size:26px;font-weight:700;color:#FFFFFF">Bimodal</p>
+        <p style="font-size:22px;color:#DFF0ED">Dos valores con la misma frecuencia máxima</p>
+        <p style="font-size:32px;color:#3FBF9F;font-weight:600;text-align:center">2, 2, 4, 4, 5</p>
+        <p style="font-size:24px;color:#FFFFFF;text-align:center">Mo = 2 y 4</p>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:12px;padding:32px;border-left:6px solid #F4623A">
+      <p style="font-size:26px;font-weight:700;color:#F4623A">Ventajas de la Moda</p>
+      <p style="font-size:24px;color:#1B2430;line-height:1.6">• No requiere cálculo aritmético<br>• Única aplicable a datos cualitativos<br>• No se ve afectada por valores extremos<br>• Puede ser múltiple</p>
+    </div>
+    <div style="background:#DFF0ED;border-radius:12px;padding:28px">
+      <p style="font-size:24px;color:#094649;line-height:1.5"><b>Ejemplo cualitativo:</b> Derecho×12, Psicología×8, Administración×15, Criminología×6 → Mo = <b>Administración</b></p>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="moda_grupo"><section id="moda_grupo" style="background:#F0F8F6;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">Moda — Datos Agrupados (Czuber)</h2>
+<div style="display:flex;gap:48px;flex:1">
+  <div style="width:600px;display:flex;flex-direction:column;gap:24px">
+    <div style="background:#1B2430;border-radius:12px;padding:36px">
+      <p style="font-size:24px;color:#F4623A;font-weight:600">Fórmula de Czuber</p>
+      <p style="font-size:46px;font-weight:700;color:#FFFFFF;text-align:center">Mo = L + [d&#8321; / (d&#8321;+d&#8322;)] · c</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <p style="font-size:22px;color:#DFF0ED"><b>L</b> = límite inferior de la clase modal</p>
+        <p style="font-size:22px;color:#DFF0ED"><b>d&#8321;</b> = f modal &#8722; f de la clase anterior</p>
+        <p style="font-size:22px;color:#DFF0ED"><b>d&#8322;</b> = f modal &#8722; f de la clase siguiente</p>
+        <p style="font-size:22px;color:#DFF0ED"><b>c</b> = amplitud de clase</p>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border-radius:12px;padding:32px;border-left:6px solid #F4623A">
+      <p style="font-size:24px;font-weight:700;color:#094649">Clase modal</p>
+      <p style="font-size:24px;color:#1B2430;line-height:1.6">Es la que tiene la <b>mayor frecuencia absoluta</b> (f&#7522; máxima) en la tabla de distribución.</p>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:20px">
+    <p style="font-size:26px;font-weight:700;color:#1C7293">Ejemplo — Calificaciones (n = 30)</p>
+    <table style="border-collapse:collapse;font-size:24px;width:100%;color:#1B2430">
+      <tr style="background:#094649">
+        <th style="padding:14px;color:#FFFFFF;text-align:center;width:36%">Clase</th>
+        <th style="padding:14px;color:#FFFFFF;text-align:center;width:20%">f&#7522;</th>
+        <th style="padding:14px;color:#FFFFFF;text-align:center;width:44%">Nota</th>
+      </tr>
+      <tr><td style="padding:12px;text-align:center">45 – 54</td><td style="padding:12px;text-align:center">3</td><td style="padding:12px;text-align:center;color:#5C7E7B">—</td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:12px;text-align:center">54 – 63</td><td style="padding:12px;text-align:center">5</td><td style="padding:12px;text-align:center;color:#5C7E7B">f anterior a la modal</td></tr>
+      <tr style="background:#DFF0ED"><td style="padding:12px;text-align:center;font-weight:700;color:#094649">63 – 72</td><td style="padding:12px;text-align:center;font-weight:700;color:#F4623A">8</td><td style="padding:12px;text-align:center;font-weight:700;color:#094649">Clase modal (f máxima)</td></tr>
+      <tr><td style="padding:12px;text-align:center">72 – 81</td><td style="padding:12px;text-align:center">7</td><td style="padding:12px;text-align:center;color:#5C7E7B">f siguiente a la modal</td></tr>
+      <tr style="background:#F0F8F6"><td style="padding:12px;text-align:center">81 – 90</td><td style="padding:12px;text-align:center">5</td><td style="padding:12px;text-align:center;color:#5C7E7B">—</td></tr>
+      <tr><td style="padding:12px;text-align:center">90 – 99</td><td style="padding:12px;text-align:center">2</td><td style="padding:12px;text-align:center;color:#5C7E7B">—</td></tr>
+    </table>
+    <div style="background:#1B2430;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:8px">
+      <p style="font-size:22px;color:#DFF0ED">d&#8321; = 8&#8722;5 = 3&#160;&#160;|&#160;&#160;d&#8322; = 8&#8722;7 = 1&#160;&#160;|&#160;&#160;L = 63&#160;&#160;|&#160;&#160;c = 9</p>
+      <p style="font-size:26px;color:#FFFFFF;font-weight:600">Mo = 63 + [3/(3+1)]·9 = 63 + 6.75 = <b>69.75</b></p>
+    </div>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="s24"><section id="s24" data-transition="push" style="background:#3FBF9F;color:#094649;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<p style="font-size:32px;font-weight:600;color:#094649;letter-spacing:4px;text-transform:uppercase;opacity:0.65">Tema 2.4</p>
+<h1 style="font-size:100px;font-weight:700;line-height:1.0;color:#094649">Análisis Comparativo</h1>
+<p style="font-size:36px;color:#094649;font-weight:400;opacity:0.8">¿Cuándo usar cada medida de tendencia central?</p>
+<div style="width:200px;border-top:3px solid #094649;opacity:0.4"></div>
+</section></div>
+<div class="slide" data-id="comparacion"><section id="comparacion" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">¿Cuándo usar cada medida?</h2>
+<table style="border-collapse:collapse;font-size:26px;width:100%;color:#1B2430;flex:1">
+  <tr style="background:#094649">
+    <th style="padding:20px;color:#FFFFFF;text-align:left;width:14%">Medida</th>
+    <th style="padding:20px;color:#FFFFFF;text-align:left;width:24%">Nivel de medición</th>
+    <th style="padding:20px;color:#FFFFFF;text-align:left;width:30%">Úsala cuando…</th>
+    <th style="padding:20px;color:#FFFFFF;text-align:left;width:32%">Evítala si…</th>
+  </tr>
+  <tr style="background:#F0F8F6">
+    <td style="padding:18px;font-weight:700;color:#094649">Media<br>x&#773;</td>
+    <td style="padding:18px">Intervalo o Razón</td>
+    <td style="padding:18px">Distribución simétrica, sin outliers. Necesitas el total o comparar grupos.</td>
+    <td style="padding:18px">Hay datos extremos que distorsionan el promedio.</td>
+  </tr>
+  <tr>
+    <td style="padding:18px;font-weight:700;color:#1C7293">Mediana<br>Me</td>
+    <td style="padding:18px">Ordinal, Intervalo o Razón</td>
+    <td style="padding:18px">Distribución sesgada o con outliers. Ej: salarios, precios de casas.</td>
+    <td style="padding:18px">Se requiere operar algebraicamente con el resultado.</td>
+  </tr>
+  <tr style="background:#F0F8F6">
+    <td style="padding:18px;font-weight:700;color:#F4623A">Moda<br>Mo</td>
+    <td style="padding:18px">Nominal, Ordinal, Intervalo o Razón</td>
+    <td style="padding:18px">Variable cualitativa o cuando importa el valor más típico/frecuente.</td>
+    <td style="padding:18px">La distribución es amodal o se necesita un valor único representativo.</td>
+  </tr>
+</table>
+<p style="font-size:24px;color:#5C7E7B">CEUM · Probabilidad y Estadística · Unidad 2</p>
+</section></div>
+<div class="slide" data-id="sesgo"><section id="sesgo" style="background:#F0F8F6;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-size:64px;font-weight:700;color:#094649">Medidas y Sesgo de la Distribución</h2>
+<div style="display:flex;gap:40px;flex:1">
+  <div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border-radius:16px;padding:40px;border-top:6px solid #3FBF9F">
+    <p style="font-size:30px;font-weight:700;color:#094649;text-align:center">Distribución Simétrica</p>
+    <svg aria-label="Curva simétrica normal" viewBox="0 0 380 170" style="width:100%;height:150px">
+      <path d="M20,160 C60,160 100,10 190,10 C280,10 320,160 360,160" fill="none" stroke="#3FBF9F" stroke-width="4"/>
+      <line x1="190" y1="10" x2="190" y2="160" stroke="#094649" stroke-width="2" stroke-dasharray="6"/>
+      <text x="190" y="155" text-anchor="middle" font-size="14" fill="#094649" font-family="sans-serif">x&#773; = Me = Mo</text>
+    </svg>
+    <p style="font-size:24px;color:#5C7E7B;text-align:center">Las tres medidas coinciden</p>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border-radius:16px;padding:40px;border-top:6px solid #F4623A">
+    <p style="font-size:30px;font-weight:700;color:#F4623A;text-align:center">Sesgo Positivo (derecha)</p>
+    <svg aria-label="Curva con sesgo positivo" viewBox="0 0 380 170" style="width:100%;height:150px">
+      <path d="M20,160 C50,160 80,20 130,40 C180,60 280,140 360,160" fill="none" stroke="#F4623A" stroke-width="4"/>
+      <line x1="115" y1="36" x2="115" y2="160" stroke="#F4623A" stroke-width="2" stroke-dasharray="5"/>
+      <line x1="155" y1="36" x2="155" y2="160" stroke="#1C7293" stroke-width="2" stroke-dasharray="5"/>
+      <line x1="200" y1="36" x2="200" y2="160" stroke="#094649" stroke-width="2" stroke-dasharray="5"/>
+      <text x="112" y="155" text-anchor="middle" font-size="13" fill="#F4623A" font-family="sans-serif">Mo</text>
+      <text x="155" y="155" text-anchor="middle" font-size="13" fill="#1C7293" font-family="sans-serif">Me</text>
+      <text x="200" y="155" text-anchor="middle" font-size="13" fill="#094649" font-family="sans-serif">x&#773;</text>
+    </svg>
+    <p style="font-size:24px;color:#5C7E7B;text-align:center">Mo &lt; Me &lt; x&#773; — Cola derecha</p>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;border-radius:16px;padding:40px;border-top:6px solid #1C7293">
+    <p style="font-size:30px;font-weight:700;color:#1C7293;text-align:center">Sesgo Negativo (izquierda)</p>
+    <svg aria-label="Curva con sesgo negativo" viewBox="0 0 380 170" style="width:100%;height:150px">
+      <path d="M20,160 C100,140 200,60 250,40 C300,20 330,160 360,160" fill="none" stroke="#1C7293" stroke-width="4"/>
+      <line x1="178" y1="36" x2="178" y2="160" stroke="#094649" stroke-width="2" stroke-dasharray="5"/>
+      <line x1="225" y1="36" x2="225" y2="160" stroke="#1C7293" stroke-width="2" stroke-dasharray="5"/>
+      <line x1="262" y1="36" x2="262" y2="160" stroke="#F4623A" stroke-width="2" stroke-dasharray="5"/>
+      <text x="178" y="155" text-anchor="middle" font-size="13" fill="#094649" font-family="sans-serif">x&#773;</text>
+      <text x="225" y="155" text-anchor="middle" font-size="13" fill="#1C7293" font-family="sans-serif">Me</text>
+      <text x="262" y="155" text-anchor="middle" font-size="13" fill="#F4623A" font-family="sans-serif">Mo</text>
+    </svg>
+    <p style="font-size:24px;color:#5C7E7B;text-align:center">x&#773; &lt; Me &lt; Mo — Cola izquierda</p>
+  </div>
+</div>
+</section></div>
+<div class="slide" data-id="ejemplo"><section id="ejemplo" style="background:#EDF4F3;color:#1B2430;font-family:'DM Sans',sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<h2 style="font-size:60px;font-weight:700;color:#094649">Ejemplo Integrador — Las Tres Medidas</h2>
+<p style="font-size:28px;color:#1C7293">Edades de 11 empleados: 22, 25, 28, <b>28</b>, 30, 32, 35, 38, 40, 45, 72</p>
+<div style="display:flex;gap:32px;flex:1">
+  <div style="flex:1;background:#094649;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:18px">
+    <p style="font-size:30px;font-weight:700;color:#3FBF9F">Media x&#773;</p>
+    <p style="font-size:24px;color:#DFF0ED">&#931;x&#7522; = 22+25+28+28+30+32+35+38+40+45+72</p>
+    <p style="font-size:24px;color:#DFF0ED">&#931;x&#7522; = 395</p>
+    <p style="font-size:28px;color:#FFFFFF;font-weight:600">x&#773; = 395 / 11 = <b>35.9 años</b></p>
+    <div style="background:#1C7293;border-radius:8px;padding:18px">
+      <p style="font-size:22px;color:#DFF0ED">El valor 72 "jala" la media hacia arriba. ¿Representa bien al grupo?</p>
+    </div>
+  </div>
+  <div style="flex:1;background:#1C7293;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:18px">
+    <p style="font-size:30px;font-weight:700;color:#3FBF9F">Mediana Me</p>
+    <p style="font-size:24px;color:#DFF0ED">n = 11 (impar) → posición (11+1)/2 = 6</p>
+    <p style="font-size:22px;color:#DFF0ED">22, 25, 28, 28, 30, <b>32</b>, 35, 38, 40, 45, 72</p>
+    <p style="font-size:28px;color:#FFFFFF;font-weight:600">Me = <b>32 años</b></p>
+    <div style="background:#094649;border-radius:8px;padding:18px">
+      <p style="font-size:22px;color:#DFF0ED">No se ve afectada por 72. Más representativa para este conjunto.</p>
+    </div>
+  </div>
+  <div style="flex:1;background:#1B2430;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:18px">
+    <p style="font-size:30px;font-weight:700;color:#F4623A">Moda Mo</p>
+    <p style="font-size:24px;color:#DFF0ED">El valor 28 aparece 2 veces (el más frecuente)</p>
+    <p style="font-size:28px;color:#FFFFFF;font-weight:600">Mo = <b>28 años</b></p>
+    <div style="background:#094649;border-radius:8px;padding:18px">
+      <p style="font-size:22px;color:#DFF0ED">La edad más común. Distribución con <b>sesgo positivo</b> por el outlier 72.</p>
+    </div>
+  </div>
+</div>
+<p style="font-size:24px;color:#5C7E7B">Conclusión: Mo(28) &lt; Me(32) &lt; x&#773;(35.9) confirma sesgo positivo. La mediana es la medida más adecuada.</p>
+</section></div>
+<div class="slide" data-id="cierre"><section id="cierre" data-transition="fade" style="background:linear-gradient(135deg,#094649 0%,#1B2430 100%);color:#FFFFFF;font-family:'DM Sans',sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<h2 style="font-size:72px;font-weight:700;color:#FFFFFF">Síntesis — Unidad 2</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;flex:1">
+  <div style="background:rgba(255,255,255,0.08);border-radius:16px;padding:40px;border-left:6px solid #3FBF9F">
+    <p style="font-size:28px;font-weight:700;color:#3FBF9F">Media x&#773;</p>
+    <p style="font-size:24px;color:#DFF0ED;line-height:1.6">Simple: x&#773; = &#931;x&#7522;/n&#160;·&#160;Ponderada: &#931;(x&#7522;·w&#7522;)/&#931;w&#7522;&#160;·&#160;Agrupada: &#931;(mc·f&#7522;)/n. Sensible a outliers. Nivel intervalo/razón.</p>
+  </div>
+  <div style="background:rgba(255,255,255,0.08);border-radius:16px;padding:40px;border-left:6px solid #1C7293">
+    <p style="font-size:28px;font-weight:700;color:#3FBF9F">Mediana Me</p>
+    <p style="font-size:24px;color:#DFF0ED;line-height:1.6">Sin agrupar: valor en posición (n+1)/2 o promedio de los dos centrales. Agrupada: L+[(n/2&#8722;F)/f]·c. Robusta ante outliers.</p>
+  </div>
+  <div style="background:rgba(255,255,255,0.08);border-radius:16px;padding:40px;border-left:6px solid #F4623A">
+    <p style="font-size:28px;font-weight:700;color:#F4623A">Moda Mo</p>
+    <p style="font-size:24px;color:#DFF0ED;line-height:1.6">Sin agrupar: valor más frecuente. Agrupada (Czuber): L+[d&#8321;/(d&#8321;+d&#8322;)]·c. Única medida aplicable a nivel nominal.</p>
+  </div>
+  <div style="background:rgba(255,255,255,0.08);border-radius:16px;padding:40px;border-left:6px solid #3FBF9F">
+    <p style="font-size:28px;font-weight:700;color:#3FBF9F">Sesgo y elección</p>
+    <p style="font-size:24px;color:#DFF0ED;line-height:1.6">Simétrica: x&#773; = Me = Mo. Sesgo positivo: Mo &lt; Me &lt; x&#773;. Sesgo negativo: x&#773; &lt; Me &lt; Mo. Elegir según contexto y tipo de variable.</p>
+  </div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end">
+  <p style="font-size:26px;color:#3FBF9F;font-weight:500">Próxima sesión: Medidas de Dispersión — Varianza y Desviación Estándar</p>
+  <p style="font-size:24px;color:#5C7E7B">CEUM · Probabilidad y Estadística</p>
+</div>
+</section></div></div><div id="hint">Usa las flechas del teclado o desliza el dedo</div></div>
+<div id="bar"><button id="bm" class="alt" aria-label="Índice">☰</button><button id="bp" aria-label="Anterior">◀</button><div class="mid"><div id="cnt"></div><div id="prog"><i></i></div></div><button id="bn" aria-label="Siguiente">▶</button><button id="bf" class="alt" aria-label="Pantalla completa">⛶</button><button id="bh" class="alt" aria-label="Volver" title="Volver a las presentaciones">⌂</button></div></div>
+<div id="shade"></div><div id="menu"><h2>Medidas de Tendencia Central – Unidad 2</h2><p>Toca un tema para ir directo a él</p><h3>Portada y agenda de la unidad</h3><a href="#1" data-n="0">1. Portada</a><a href="#2" data-n="1">2. Contenido de la Unidad</a><h3>2.1 Media Aritmética – simple, ponderada y datos agrupados</h3><a href="#3" data-n="2">3. Media Aritmética</a><a href="#4" data-n="3">4. Media Aritmética — Definición</a><a href="#5" data-n="4">5. Media Ponderada</a><a href="#6" data-n="5">6. Media para Datos Agrupados</a><h3>2.2 Mediana – datos sin agrupar e interpolación</h3><a href="#7" data-n="6">7. Mediana</a><a href="#8" data-n="7">8. Mediana — Datos No Agrupados</a><a href="#9" data-n="8">9. Mediana — Datos Agrupados</a><h3>2.3 Moda – tipos y fórmula de Czuber</h3><a href="#10" data-n="9">10. Moda</a><a href="#11" data-n="10">11. Moda — Tipos y Definición</a><a href="#12" data-n="11">12. Moda — Datos Agrupados (Czuber)</a><h3>2.4 Análisis comparativo y sesgo de distribución</h3><a href="#13" data-n="12">13. Análisis Comparativo</a><a href="#14" data-n="13">14. ¿Cuándo usar cada medida?</a><a href="#15" data-n="14">15. Medidas y Sesgo de la Distribución</a><a href="#16" data-n="15">16. Ejemplo Integrador — Las Tres Medidas</a><h3>Síntesis y cierre de la Unidad 2</h3><a href="#17" data-n="16">17. Cierre</a></div>
+<script>
+(function(){var S=[].slice.call(document.querySelectorAll('.slide')),N=S.length,i=0,st=document.getElementById('stage'),vw=document.getElementById('view');
+var TIT=["Portada", "Contenido de la Unidad", "Media Aritmética", "Media Aritmética — Definición", "Media Ponderada", "Media para Datos Agrupados", "Mediana", "Mediana — Datos No Agrupados", "Mediana — Datos Agrupados", "Moda", "Moda — Tipos y Definición", "Moda — Datos Agrupados (Czuber)", "Análisis Comparativo", "¿Cuándo usar cada medida?", "Medidas y Sesgo de la Distribución", "Ejemplo Integrador — Las Tres Medidas", "Cierre"];
+function fit(){var w=vw.clientWidth,h=vw.clientHeight,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.left=((w-1920*k)/2)+'px';st.style.top=((h-1080*k)/2)+'px'}
+function go(n,noh){n=Math.max(0,Math.min(N-1,n));S[i].classList.remove('on');i=n;S[i].classList.add('on');
+ document.getElementById('cnt').textContent=(i+1)+' / '+N+' · '+TIT[i];document.querySelector('#prog i').style.width=((i+1)/N*100)+'%';
+ document.getElementById('bp').disabled=i===0;document.getElementById('bn').disabled=i===N-1;
+ [].forEach.call(document.querySelectorAll('#menu a'),function(a){a.classList.toggle('cur',+a.dataset.n===i)});
+ if(!noh){try{history.replaceState(null,'','#'+(i+1))}catch(e){}}}
+function menu(o){document.getElementById('menu').classList.toggle('open',o);document.getElementById('shade').classList.toggle('open',o)}
+document.getElementById('bp').onclick=function(){go(i-1)};document.getElementById('bn').onclick=function(){go(i+1)};
+document.getElementById('bm').onclick=function(){menu(true)};document.getElementById('shade').onclick=function(){menu(false)};
+[].forEach.call(document.querySelectorAll('#menu a'),function(a){a.onclick=function(e){e.preventDefault();go(+a.dataset.n);menu(false)}});
+document.getElementById('bh').onclick=function(){location.href='../'};
+document.getElementById('bf').onclick=function(){var d=document.documentElement;try{if(document.fullscreenElement){document.exitFullscreen()}else if(d.requestFullscreen){d.requestFullscreen()}}catch(e){}};
+document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();go(i+1)}else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){e.preventDefault();go(i-1)}else if(k==='Home'){go(0)}else if(k==='End'){go(N-1)}else if(k==='Escape'){menu(false)}else if(k==='f'||k==='F'){document.getElementById('bf').click()}});
+var x0=null,y0=null;vw.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+vw.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){go(dx<0?i+1:i-1)}x0=null},{passive:true});
+vw.addEventListener('click',function(e){var r=vw.getBoundingClientRect(),x=e.clientX-r.left;if(x>r.width*.75)go(i+1);else if(x<r.width*.25)go(i-1)});
+window.addEventListener('resize',fit);window.addEventListener('hashchange',function(){var n=parseInt(location.hash.slice(1),10);if(n)go(n-1,true)});
+fit();var h=parseInt(location.hash.slice(1),10);go(h?h-1:0,true);setTimeout(function(){document.getElementById('hint').style.opacity=0},3500);
+})();
+</script></body></html>
