@@ -1,0 +1,478 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Edu-Share: guía práctica paso a paso</title><style>
+:root{--navy:#1b2a4a;--gold:#e8a317;--bg:#f5f7fb;--card:#fff;--ink:#1f2937;--mut:#5b6678;--line:#d9dfea;--ok:#157347;--code:#0f172a}
+@media(prefers-color-scheme:dark){:root{--bg:#10151f;--card:#18202e;--ink:#e6eaf2;--mut:#9aa6ba;--line:#2a3548;--navy:#9db8ee}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:#1b2a4a;color:#fff;padding:28px 16px 20px}header .w,main,.nav .w{max-width:980px;margin:auto}
+header h1{margin:0 0 6px;font-size:1.7rem}header p{margin:0;color:#cdd6ea}header .tag{display:inline-block;background:var(--gold);color:#1b2a4a;font-weight:700;border-radius:99px;padding:2px 12px;font-size:.8rem;margin-bottom:8px}
+.nav{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);z-index:5;padding:8px 16px}.nav .w{display:flex;gap:6px;flex-wrap:wrap}
+.nav a,.chip{border:1px solid var(--line);border-radius:99px;padding:3px 12px;font-size:.85rem;color:var(--ink);text-decoration:none;background:var(--card);cursor:pointer}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+main{padding:16px}section{margin:26px 0}h2{color:var(--navy);border-left:6px solid var(--gold);padding-left:10px;font-size:1.35rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+.card h3{margin:0 0 4px;font-size:1.05rem;color:var(--navy)}.mut{color:var(--mut);font-size:.92rem}
+pre{background:var(--code);color:#e5edff;border-radius:10px;padding:12px 14px;overflow-x:auto;font:13.5px/1.5 ui-monospace,Consolas,monospace;margin:8px 0;position:relative}
+code{font-family:ui-monospace,Consolas,monospace;background:rgba(120,130,150,.18);padding:1px 5px;border-radius:5px;font-size:.9em}pre code{background:none;padding:0}
+.cp{position:absolute;right:8px;top:8px;border:0;background:var(--gold);color:#1b2a4a;font-weight:700;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:.78rem}
+table{border-collapse:collapse;width:100%;font-size:.93rem}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:rgba(120,130,150,.15)}
+.tw{overflow-x:auto}.tip{background:rgba(232,163,23,.15);border-left:5px solid var(--gold);padding:10px 14px;border-radius:8px;margin:10px 0}
+.bad{background:rgba(200,50,50,.12);border-left:5px solid #c0392b;padding:10px 14px;border-radius:8px;margin:10px 0}
+.step{display:flex;gap:12px}.num{flex:none;width:38px;height:38px;border-radius:50%;background:var(--gold);color:#1b2a4a;font-weight:800;display:grid;place-items:center}
+input[type=search]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:1rem;background:var(--card);color:var(--ink)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.hide{display:none!important}svg{max-width:100%;height:auto}
+footer{text-align:center;color:var(--mut);padding:24px 16px;font-size:.85rem}
+</style></head><body>
+<header><div class="w"><span class="tag">Programación Visual · Proyecto</span><h1>Edu-Share: guía práctica paso a paso</h1><p>Construye tu proyecto semestral en 6 pasos y adapta la plantilla a tu propio proyecto</p></div></header><div class="nav"><div class="w"><a href="#p0">Paso 0</a><a href="#p1">1</a><a href="#p2">2</a><a href="#p3">3</a><a href="#p4">4</a><a href="#p5">5</a><a href="#p6">6</a><a href="#proy">Tu proyecto</a><a href="#entrega">Entrega</a></div></div><main>
+<section id="p0"><h2>Paso 0 · Prepara tu archivo</h2><p><b>Edu-Share</b> es una app donde estudiantes publican artículos escolares (libros, uniformes, útiles…) para <b>donar</b> o <b>intercambiar</b>. Vas a construirla paso a paso. <b>No leas todo: haz un paso, ejecuta, y pasa al siguiente.</b></p>
+<ol><li>Crea la carpeta <code>edu_share</code> y dentro el archivo <code>edu_share_TuApellido.py</code>.</li><li>Copia el esqueleto de abajo. Ya funciona, pero está vacío (cada método dice <code>pass</code>).</li><li>En cada paso reemplazas métodos por los de la guía.</li></ol>
+<div class="tip">Necesitas Python 3 con Tkinter (viene con Python en Windows). Ejecuta con <code>python edu_share_TuApellido.py</code>. Si algo falla, usa la <a href="../tkinter-guia-consulta/" target="_blank" rel="noopener">Guía de consulta</a>.</div>
+<pre><code># edu_share_Apellido.py
+# Proyecto semestral: Edu-Share · reutiliza, intercambia y dona artículos escolares
+# Integrantes: ______________________________   Grupo: BT_COMP_5
+
+import json
+import os
+import tkinter as tk
+from tkinter import ttk, messagebox
+from datetime import date
+
+# El archivo de datos se guarda junto a este programa (así no depende de la carpeta desde donde lo abras)
+ARCHIVO = os.path.join(os.path.dirname(os.path.abspath(__file__)), &quot;articulos.json&quot;)
+CATEGORIAS = [&quot;Libros&quot;, &quot;Uniformes&quot;, &quot;Útiles&quot;, &quot;Calculadoras&quot;, &quot;Otros&quot;]
+ESTADOS = [&quot;Nuevo&quot;, &quot;Buen estado&quot;, &quot;Usado&quot;]
+FUENTE = (&quot;Arial&quot;, 11)
+FUENTE_TITULO = (&quot;Arial&quot;, 16, &quot;bold&quot;)
+
+
+class EduShare(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title(&quot;Edu-Share · Reutiliza, intercambia y dona&quot;)
+        self.geometry(&quot;880x620&quot;)
+        self.minsize(780, 540)
+        self.articulos = []        # aquí viven los datos: una lista de diccionarios
+        self.siguiente_id = 1      # número que tendrá el próximo artículo
+        self.crear_estilos()
+        self.crear_pestanas()
+        self.crear_accesibilidad()
+        self.cargar()
+        self.refrescar_catalogo()
+        self.atajos()
+        self.protocol(&quot;WM_DELETE_WINDOW&quot;, self.cerrar)
+
+    # ===== PASO 1 · Ventana, estilos y pestañas =====
+    def crear_estilos(self):
+        pass
+
+    def crear_pestanas(self):
+        pass
+
+    # ===== PASO 2 · Formulario «Publicar artículo» =====
+    def crear_formulario(self):
+        pass
+
+    def alternar_cambio(self):
+        pass
+
+    def validar(self):
+        pass
+
+    def publicar(self):
+        pass
+
+    def limpiar_formulario(self):
+        pass
+
+    # ===== PASO 3 · Catálogo (tabla) =====
+    def crear_catalogo(self):
+        pass
+
+    def refrescar_catalogo(self):
+        pass
+
+    # ===== PASO 4 · Buscar, filtrar y ver detalle =====
+    def articulo_seleccionado(self):
+        pass
+
+    def ver_detalle(self, evento=None):
+        pass
+
+    def me_interesa(self):
+        pass
+
+    def marcar_entregado(self):
+        pass
+
+    # ===== PASO 5 · Guardar y cargar datos =====
+    def guardar(self):
+        pass
+
+    def cargar(self):
+        pass
+
+    def cerrar(self):
+        self.destroy()
+
+    # ===== PASO 6 · Resumen, atajos y accesibilidad =====
+    def actualizar_resumen(self):
+        pass
+
+    def ir_a_publicar(self, evento=None):
+        pass
+
+    def ir_a_catalogo(self, evento=None):
+        pass
+
+    def ayuda(self, evento=None):
+        pass
+
+    def atajos(self):
+        pass
+
+    def crear_accesibilidad(self):
+        pass
+
+    def aplicar_tamano(self):
+        pass
+
+
+if __name__ == &quot;__main__&quot;:
+    EduShare().mainloop()</code></pre>
+<div class="card"><h3>Mapa del programa</h3><svg viewBox="0 0 640 150" role="img" aria-label="Diagrama de los pasos"><g font-family="Arial" font-size="13" text-anchor="middle"><rect x="4" y="50" width="94" height="50" rx="10" fill="#1b2a4a"/><text x="51" y="80" fill="#fff">1 Ventana</text><rect x="110" y="50" width="94" height="50" rx="10" fill="#1b2a4a"/><text x="157" y="80" fill="#fff">2 Formulario</text><rect x="216" y="50" width="94" height="50" rx="10" fill="#1b2a4a"/><text x="263" y="80" fill="#fff">3 Catálogo</text><rect x="322" y="50" width="94" height="50" rx="10" fill="#1b2a4a"/><text x="369" y="80" fill="#fff">4 Filtros</text><rect x="428" y="50" width="94" height="50" rx="10" fill="#1b2a4a"/><text x="475" y="80" fill="#fff">5 Guardar</text><rect x="534" y="50" width="102" height="50" rx="10" fill="#e8a317"/><text x="585" y="80" fill="#1b2a4a" font-weight="700">6 Pulido</text><g stroke="#888" stroke-width="2" fill="none"><path d="M98 75h12M204 75h12M310 75h12M416 75h12M522 75h12"/></g><text x="320" y="25" fill="#888">Cada paso suma a lo anterior</text><text x="320" y="130" fill="#888">self.articulos (lista de diccionarios) = los datos de todo el programa</text></g></svg></div></section>
+<section id="p1"><div class="step"><div class="num">1</div><div style="min-width:0"><h2 style="margin-top:0">Ventana, estilos y pestañas</h2><p>Crea la ventana con dos pestañas: «Publicar artículo» y «Catálogo».</p><div class="card"><b>Qué hacer:</b> Reemplaza los métodos <code>crear_estilos</code> y <code>crear_pestanas</code>. Pega, guarda y ejecuta.</div><pre><code>    def crear_estilos(self):
+        estilo = ttk.Style(self)
+        estilo.theme_use(&quot;clam&quot;)
+        estilo.configure(&quot;.&quot;, font=FUENTE)
+        estilo.configure(&quot;TNotebook.Tab&quot;, padding=(16, 8), font=(&quot;Arial&quot;, 11, &quot;bold&quot;))
+        estilo.configure(&quot;Titulo.TLabel&quot;, font=FUENTE_TITULO, foreground=&quot;#14325c&quot;)
+        estilo.configure(&quot;Acento.TButton&quot;, font=(&quot;Arial&quot;, 11, &quot;bold&quot;), padding=8)
+        estilo.configure(&quot;Treeview&quot;, rowheight=28, font=FUENTE)
+        estilo.configure(&quot;Treeview.Heading&quot;, font=(&quot;Arial&quot;, 11, &quot;bold&quot;))
+        self.configure(bg=&quot;#f4f6fa&quot;)</code></pre><pre><code>    def crear_pestanas(self):
+        # Cabecera con el nombre del proyecto
+        self.cabecera = ttk.Frame(self)
+        self.cabecera.pack(fill=&quot;x&quot;, padx=14, pady=(10, 0))
+        ttk.Label(self.cabecera, text=&quot;♻ Edu-Share&quot;, style=&quot;Titulo.TLabel&quot;).pack(side=&quot;left&quot;)
+        # Barra de estado (se empaqueta primero para que siempre quede abajo)
+        self.estado = tk.StringVar(value=&quot;Bienvenido a Edu-Share&quot;)
+        ttk.Label(self, textvariable=self.estado, anchor=&quot;w&quot;, relief=&quot;sunken&quot;, padding=4).pack(side=&quot;bottom&quot;, fill=&quot;x&quot;)
+        # Pestañas
+        self.nb = ttk.Notebook(self)
+        self.nb.pack(fill=&quot;both&quot;, expand=True, padx=10, pady=10)
+        self.tab_publicar = ttk.Frame(self.nb, padding=14)
+        self.tab_catalogo = ttk.Frame(self.nb, padding=14)
+        self.nb.add(self.tab_publicar, text=&quot;Publicar artículo&quot;)
+        self.nb.add(self.tab_catalogo, text=&quot;Catálogo&quot;)
+        self.crear_formulario()
+        self.crear_catalogo()</code></pre><div class="tip"><b>✔ Así sabes que funciona:</b> Al ejecutar ves el título «♻ Edu-Share» y dos pestañas (vacías todavía).</div></div></div></section><section id="p2"><div class="step"><div class="num">2</div><div style="min-width:0"><h2 style="margin-top:0">Formulario «Publicar artículo»</h2><p>Captura los datos y valida antes de guardar.</p><div class="card"><b>Qué hacer:</b> Reemplaza estos 5 métodos del paso 2 (cada uno por el que tiene el mismo nombre). Pega, guarda y ejecuta.</div><pre><code>    def crear_formulario(self):
+        f = self.tab_publicar
+        f.columnconfigure(1, weight=1)
+        # Variables de control: guardan lo que el usuario escribe o elige
+        self.v_nombre = tk.StringVar()
+        self.v_categoria = tk.StringVar()
+        self.v_estado = tk.StringVar(value=&quot;Buen estado&quot;)
+        self.v_tipo = tk.StringVar(value=&quot;Donación&quot;)
+        self.v_cambio = tk.StringVar()
+        self.v_contacto = tk.StringVar()
+        self.v_acepto = tk.BooleanVar(value=False)
+
+        ttk.Label(f, text=&quot;Nombre del artículo:&quot;).grid(row=0, column=0, sticky=&quot;w&quot;, pady=6)
+        self.e_nombre = ttk.Entry(f, textvariable=self.v_nombre)
+        self.e_nombre.grid(row=0, column=1, sticky=&quot;ew&quot;, pady=6)
+
+        ttk.Label(f, text=&quot;Categoría:&quot;).grid(row=1, column=0, sticky=&quot;w&quot;, pady=6)
+        self.c_categoria = ttk.Combobox(f, textvariable=self.v_categoria, values=CATEGORIAS, state=&quot;readonly&quot;)
+        self.c_categoria.grid(row=1, column=1, sticky=&quot;w&quot;, pady=6)
+
+        ttk.Label(f, text=&quot;Estado del artículo:&quot;).grid(row=2, column=0, sticky=&quot;w&quot;, pady=6)
+        marco_estado = ttk.Frame(f)
+        marco_estado.grid(row=2, column=1, sticky=&quot;w&quot;)
+        for texto in ESTADOS:
+            ttk.Radiobutton(marco_estado, text=texto, value=texto, variable=self.v_estado).pack(side=&quot;left&quot;, padx=(0, 14))
+
+        ttk.Label(f, text=&quot;¿Qué ofreces?&quot;).grid(row=3, column=0, sticky=&quot;w&quot;, pady=6)
+        marco_tipo = ttk.Frame(f)
+        marco_tipo.grid(row=3, column=1, sticky=&quot;w&quot;)
+        for texto in (&quot;Donación&quot;, &quot;Intercambio&quot;):
+            ttk.Radiobutton(marco_tipo, text=texto, value=texto, variable=self.v_tipo,
+                            command=self.alternar_cambio).pack(side=&quot;left&quot;, padx=(0, 14))
+
+        ttk.Label(f, text=&quot;A cambio de:&quot;).grid(row=4, column=0, sticky=&quot;w&quot;, pady=6)
+        self.e_cambio = ttk.Entry(f, textvariable=self.v_cambio)
+        self.e_cambio.grid(row=4, column=1, sticky=&quot;ew&quot;, pady=6)
+
+        ttk.Label(f, text=&quot;Descripción:&quot;).grid(row=5, column=0, sticky=&quot;nw&quot;, pady=6)
+        self.t_descripcion = tk.Text(f, height=4, width=40, font=FUENTE, wrap=&quot;word&quot;)
+        self.t_descripcion.grid(row=5, column=1, sticky=&quot;ew&quot;, pady=6)
+
+        ttk.Label(f, text=&quot;Contacto (correo o teléfono):&quot;).grid(row=6, column=0, sticky=&quot;w&quot;, pady=6)
+        self.e_contacto = ttk.Entry(f, textvariable=self.v_contacto)
+        self.e_contacto.grid(row=6, column=1, sticky=&quot;ew&quot;, pady=6)
+
+        ttk.Checkbutton(f, text=&quot;Acepto entregar el artículo dentro del plantel&quot;,
+                        variable=self.v_acepto).grid(row=7, column=1, sticky=&quot;w&quot;, pady=6)
+
+        botones = ttk.Frame(f)
+        botones.grid(row=8, column=1, sticky=&quot;w&quot;, pady=10)
+        ttk.Button(botones, text=&quot;Publicar&quot;, style=&quot;Acento.TButton&quot;, command=self.publicar).pack(side=&quot;left&quot;, padx=(0, 10))
+        ttk.Button(botones, text=&quot;Limpiar&quot;, command=self.limpiar_formulario).pack(side=&quot;left&quot;)
+
+        self.alternar_cambio()
+        self.e_nombre.focus_set()</code></pre><pre><code>    def alternar_cambio(self):
+        # «A cambio de» solo se puede escribir si el tipo es Intercambio
+        if self.v_tipo.get() == &quot;Intercambio&quot;:
+            self.e_cambio.state([&quot;!disabled&quot;])
+        else:
+            self.v_cambio.set(&quot;&quot;)
+            self.e_cambio.state([&quot;disabled&quot;])</code></pre><pre><code>    def validar(self):
+        # Devuelve (mensaje, campo) si hay un problema, o None si todo está bien
+        if len(self.v_nombre.get().strip()) &lt; 3:
+            return &quot;Escribe el nombre del artículo (mínimo 3 letras).&quot;, self.e_nombre
+        if not self.v_categoria.get():
+            return &quot;Elige una categoría.&quot;, self.c_categoria
+        if self.v_tipo.get() == &quot;Intercambio&quot; and not self.v_cambio.get().strip():
+            return &quot;Escribe qué te gustaría recibir a cambio.&quot;, self.e_cambio
+        if not self.v_contacto.get().strip():
+            return &quot;Escribe un correo o teléfono para que te contacten.&quot;, self.e_contacto
+        if not self.v_acepto.get():
+            return &quot;Debes aceptar entregar el artículo dentro del plantel.&quot;, self.e_nombre
+        return None</code></pre><pre><code>    def publicar(self):
+        problema = self.validar()
+        if problema:
+            mensaje, campo = problema
+            messagebox.showwarning(&quot;Falta información&quot;, mensaje)
+            campo.focus_set()
+            return
+        articulo = {
+            &quot;id&quot;: self.siguiente_id,
+            &quot;nombre&quot;: self.v_nombre.get().strip(),
+            &quot;categoria&quot;: self.v_categoria.get(),
+            &quot;estado&quot;: self.v_estado.get(),
+            &quot;tipo&quot;: self.v_tipo.get(),
+            &quot;a_cambio&quot;: self.v_cambio.get().strip(),
+            &quot;descripcion&quot;: self.t_descripcion.get(&quot;1.0&quot;, &quot;end&quot;).strip(),
+            &quot;contacto&quot;: self.v_contacto.get().strip(),
+            &quot;situacion&quot;: &quot;Disponible&quot;,
+            &quot;fecha&quot;: date.today().strftime(&quot;%d/%m/%Y&quot;),
+        }
+        self.articulos.append(articulo)
+        self.siguiente_id += 1
+        self.guardar()
+        self.refrescar_catalogo()
+        self.limpiar_formulario()
+        self.estado.set(f&quot;Publicaste «{articulo[&#x27;nombre&#x27;]}»&quot;)
+        messagebox.showinfo(&quot;¡Publicado!&quot;, f&quot;«{articulo[&#x27;nombre&#x27;]}» ya está en el catálogo. ¡Gracias por compartir!&quot;)
+        self.nb.select(self.tab_catalogo)</code></pre><pre><code>    def limpiar_formulario(self):
+        self.v_nombre.set(&quot;&quot;)
+        self.v_categoria.set(&quot;&quot;)
+        self.v_estado.set(&quot;Buen estado&quot;)
+        self.v_tipo.set(&quot;Donación&quot;)
+        self.v_contacto.set(&quot;&quot;)
+        self.v_acepto.set(False)
+        self.t_descripcion.delete(&quot;1.0&quot;, &quot;end&quot;)
+        self.alternar_cambio()
+        self.e_nombre.focus_set()</code></pre><div class="tip"><b>✔ Así sabes que funciona:</b> Si dejas el nombre vacío aparece un aviso y el cursor va a ese campo. «A cambio de» solo se activa con Intercambio.</div></div></div></section><section id="p3"><div class="step"><div class="num">3</div><div style="min-width:0"><h2 style="margin-top:0">Catálogo en una tabla</h2><p>Muestra los artículos publicados en un Treeview.</p><div class="card"><b>Qué hacer:</b> Reemplaza <code>crear_catalogo</code> y <code>refrescar_catalogo</code>. Pega, guarda y ejecuta.</div><pre><code>    def crear_catalogo(self):
+        f = self.tab_catalogo
+        f.rowconfigure(1, weight=1)
+        f.columnconfigure(0, weight=1)
+
+        columnas = (&quot;nombre&quot;, &quot;categoria&quot;, &quot;tipo&quot;, &quot;estado&quot;, &quot;situacion&quot;)
+        titulos = {&quot;nombre&quot;: &quot;Artículo&quot;, &quot;categoria&quot;: &quot;Categoría&quot;, &quot;tipo&quot;: &quot;Tipo&quot;,
+                   &quot;estado&quot;: &quot;Estado&quot;, &quot;situacion&quot;: &quot;Situación&quot;}
+        anchos = {&quot;nombre&quot;: 260, &quot;categoria&quot;: 120, &quot;tipo&quot;: 110, &quot;estado&quot;: 110, &quot;situacion&quot;: 110}
+        self.tabla = ttk.Treeview(f, columns=columnas, show=&quot;headings&quot;, selectmode=&quot;browse&quot;)
+        for c in columnas:
+            self.tabla.heading(c, text=titulos[c])
+            self.tabla.column(c, width=anchos[c], anchor=&quot;w&quot;)
+        self.tabla.grid(row=1, column=0, sticky=&quot;nsew&quot;)
+
+        barra = ttk.Scrollbar(f, orient=&quot;vertical&quot;, command=self.tabla.yview)
+        barra.grid(row=1, column=1, sticky=&quot;ns&quot;)
+        self.tabla.configure(yscrollcommand=barra.set)</code></pre><pre><code>    def refrescar_catalogo(self):
+        # Borra la tabla y la vuelve a llenar con los datos de self.articulos
+        for fila in self.tabla.get_children():
+            self.tabla.delete(fila)
+        for a in self.articulos:
+            self.tabla.insert(&quot;&quot;, &quot;end&quot;, iid=str(a[&quot;id&quot;]),
+                              values=(a[&quot;nombre&quot;], a[&quot;categoria&quot;], a[&quot;tipo&quot;], a[&quot;estado&quot;], a[&quot;situacion&quot;]))
+        self.actualizar_resumen()</code></pre><div class="tip"><b>✔ Así sabes que funciona:</b> Publicas un artículo y aparece en la tabla de «Catálogo».</div></div></div></section><section id="p4"><div class="step"><div class="num">4</div><div style="min-width:0"><h2 style="margin-top:0">Buscar, filtrar y ver detalle</h2><p>Búsqueda en vivo, filtro por categoría, «Me interesa» y «Marcar entregado».</p><div class="card"><b>Qué hacer:</b> Estos métodos <b>reemplazan</b> a <code>crear_catalogo</code> y <code>refrescar_catalogo</code> del paso 3 y completan los vacíos. Pega, guarda y ejecuta.</div><pre><code>    def crear_catalogo(self):
+        f = self.tab_catalogo
+        f.rowconfigure(1, weight=1)
+        f.columnconfigure(0, weight=1)
+
+        # --- Barra de búsqueda y filtros (fila 0) ---
+        barra_filtros = ttk.Frame(f)
+        barra_filtros.grid(row=0, column=0, columnspan=2, sticky=&quot;ew&quot;, pady=(0, 10))
+        self.v_buscar = tk.StringVar()
+        self.v_filtro_cat = tk.StringVar(value=&quot;Todas&quot;)
+        self.v_solo_disp = tk.BooleanVar(value=False)
+        ttk.Label(barra_filtros, text=&quot;Buscar:&quot;).pack(side=&quot;left&quot;)
+        ttk.Entry(barra_filtros, textvariable=self.v_buscar, width=22).pack(side=&quot;left&quot;, padx=(6, 14))
+        ttk.Label(barra_filtros, text=&quot;Categoría:&quot;).pack(side=&quot;left&quot;)
+        combo = ttk.Combobox(barra_filtros, textvariable=self.v_filtro_cat,
+                             values=[&quot;Todas&quot;] + CATEGORIAS, state=&quot;readonly&quot;, width=13)
+        combo.pack(side=&quot;left&quot;, padx=(6, 14))
+        ttk.Checkbutton(barra_filtros, text=&quot;Solo disponibles&quot;, variable=self.v_solo_disp,
+                        command=self.refrescar_catalogo).pack(side=&quot;left&quot;)
+        # Cada vez que cambia el texto o el combo, se vuelve a filtrar la tabla
+        self.v_buscar.trace_add(&quot;write&quot;, lambda *args: self.refrescar_catalogo())
+        combo.bind(&quot;&lt;&lt;ComboboxSelected&gt;&gt;&quot;, lambda evento: self.refrescar_catalogo())
+
+        # --- Tabla (fila 1) ---
+        columnas = (&quot;nombre&quot;, &quot;categoria&quot;, &quot;tipo&quot;, &quot;estado&quot;, &quot;situacion&quot;)
+        titulos = {&quot;nombre&quot;: &quot;Artículo&quot;, &quot;categoria&quot;: &quot;Categoría&quot;, &quot;tipo&quot;: &quot;Tipo&quot;,
+                   &quot;estado&quot;: &quot;Estado&quot;, &quot;situacion&quot;: &quot;Situación&quot;}
+        anchos = {&quot;nombre&quot;: 260, &quot;categoria&quot;: 120, &quot;tipo&quot;: 110, &quot;estado&quot;: 110, &quot;situacion&quot;: 110}
+        self.tabla = ttk.Treeview(f, columns=columnas, show=&quot;headings&quot;, selectmode=&quot;browse&quot;)
+        for c in columnas:
+            self.tabla.heading(c, text=titulos[c])
+            self.tabla.column(c, width=anchos[c], anchor=&quot;w&quot;)
+        self.tabla.grid(row=1, column=0, sticky=&quot;nsew&quot;)
+        barra = ttk.Scrollbar(f, orient=&quot;vertical&quot;, command=self.tabla.yview)
+        barra.grid(row=1, column=1, sticky=&quot;ns&quot;)
+        self.tabla.configure(yscrollcommand=barra.set)
+        self.tabla.tag_configure(&quot;reservado&quot;, foreground=&quot;#a15c00&quot;)
+        self.tabla.tag_configure(&quot;entregado&quot;, foreground=&quot;#777777&quot;)
+        self.tabla.bind(&quot;&lt;Double-1&gt;&quot;, self.ver_detalle)
+
+        # --- Botones (fila 2) ---
+        botones = ttk.Frame(f)
+        botones.grid(row=2, column=0, columnspan=2, sticky=&quot;w&quot;, pady=(10, 0))
+        ttk.Button(botones, text=&quot;Ver detalle&quot;, command=self.ver_detalle).pack(side=&quot;left&quot;, padx=(0, 8))
+        ttk.Button(botones, text=&quot;Me interesa&quot;, style=&quot;Acento.TButton&quot;, command=self.me_interesa).pack(side=&quot;left&quot;, padx=(0, 8))
+        ttk.Button(botones, text=&quot;Marcar entregado&quot;, command=self.marcar_entregado).pack(side=&quot;left&quot;)</code></pre><pre><code>    def refrescar_catalogo(self):
+        texto = self.v_buscar.get().strip().lower()
+        categoria = self.v_filtro_cat.get()
+        seleccionado = self.tabla.selection()   # recordamos qué fila estaba elegida
+        for fila in self.tabla.get_children():
+            self.tabla.delete(fila)
+        for a in self.articulos:
+            # Cada «continue» salta al siguiente artículo si no cumple el filtro
+            if texto and texto not in a[&quot;nombre&quot;].lower() and texto not in a[&quot;descripcion&quot;].lower():
+                continue
+            if categoria != &quot;Todas&quot; and a[&quot;categoria&quot;] != categoria:
+                continue
+            if self.v_solo_disp.get() and a[&quot;situacion&quot;] != &quot;Disponible&quot;:
+                continue
+            self.tabla.insert(&quot;&quot;, &quot;end&quot;, iid=str(a[&quot;id&quot;]),
+                              values=(a[&quot;nombre&quot;], a[&quot;categoria&quot;], a[&quot;tipo&quot;], a[&quot;estado&quot;], a[&quot;situacion&quot;]),
+                              tags=(a[&quot;situacion&quot;].lower(),))
+        if seleccionado and self.tabla.exists(seleccionado[0]):
+            self.tabla.selection_set(seleccionado[0])   # la volvemos a elegir
+        self.actualizar_resumen()</code></pre><pre><code>    def articulo_seleccionado(self):
+        seleccion = self.tabla.selection()
+        if not seleccion:
+            messagebox.showinfo(&quot;Elige un artículo&quot;, &quot;Primero haz clic en un artículo de la lista.&quot;)
+            return None
+        id_buscado = int(seleccion[0])
+        for a in self.articulos:
+            if a[&quot;id&quot;] == id_buscado:
+                return a
+        return None</code></pre><pre><code>    def ver_detalle(self, evento=None):
+        a = self.articulo_seleccionado()
+        if a is None:
+            return
+        ventana = tk.Toplevel(self)
+        ventana.title(&quot;Detalle del artículo&quot;)
+        ventana.geometry(&quot;480x400&quot;)
+        ventana.transient(self)
+        marco = ttk.Frame(ventana, padding=16)
+        marco.pack(fill=&quot;both&quot;, expand=True)
+        ttk.Label(marco, text=a[&quot;nombre&quot;], style=&quot;Titulo.TLabel&quot;, wraplength=430).pack(anchor=&quot;w&quot;, pady=(0, 8))
+        lineas = [(&quot;Categoría&quot;, a[&quot;categoria&quot;]), (&quot;Estado&quot;, a[&quot;estado&quot;]), (&quot;Tipo&quot;, a[&quot;tipo&quot;])]
+        if a[&quot;tipo&quot;] == &quot;Intercambio&quot;:
+            lineas.append((&quot;A cambio de&quot;, a[&quot;a_cambio&quot;]))
+        lineas += [(&quot;Situación&quot;, a[&quot;situacion&quot;]), (&quot;Publicado&quot;, a[&quot;fecha&quot;]), (&quot;Contacto&quot;, a[&quot;contacto&quot;])]
+        for etiqueta, valor in lineas:
+            fila = ttk.Frame(marco)
+            fila.pack(fill=&quot;x&quot;, pady=2)
+            ttk.Label(fila, text=etiqueta + &quot;:&quot;, width=13, font=(&quot;Arial&quot;, 11, &quot;bold&quot;)).pack(side=&quot;left&quot;)
+            ttk.Label(fila, text=valor, wraplength=300).pack(side=&quot;left&quot;)
+        ttk.Label(marco, text=a[&quot;descripcion&quot;] or &quot;Sin descripción&quot;, wraplength=430,
+                  relief=&quot;groove&quot;, padding=8).pack(fill=&quot;x&quot;, pady=12)
+        ttk.Button(marco, text=&quot;Cerrar&quot;, command=ventana.destroy).pack(anchor=&quot;e&quot;)</code></pre><pre><code>    def me_interesa(self):
+        a = self.articulo_seleccionado()
+        if a is None:
+            return
+        if a[&quot;situacion&quot;] != &quot;Disponible&quot;:
+            messagebox.showinfo(&quot;No disponible&quot;, f&quot;Este artículo ya está {a[&#x27;situacion&#x27;].lower()}.&quot;)
+            return
+        if messagebox.askyesno(&quot;Me interesa&quot;, f&quot;¿Quieres reservar «{a[&#x27;nombre&#x27;]}»?\n\nContacto: {a[&#x27;contacto&#x27;]}&quot;):
+            a[&quot;situacion&quot;] = &quot;Reservado&quot;
+            self.guardar()
+            self.refrescar_catalogo()
+            self.estado.set(f&quot;Reservaste «{a[&#x27;nombre&#x27;]}». Ponte de acuerdo para la entrega.&quot;)</code></pre><pre><code>    def marcar_entregado(self):
+        a = self.articulo_seleccionado()
+        if a is None:
+            return
+        if a[&quot;situacion&quot;] != &quot;Reservado&quot;:
+            messagebox.showinfo(&quot;Aún no&quot;, &quot;Solo se puede marcar como entregado un artículo reservado.&quot;)
+            return
+        a[&quot;situacion&quot;] = &quot;Entregado&quot;
+        self.guardar()
+        self.refrescar_catalogo()
+        self.estado.set(f&quot;¡«{a[&#x27;nombre&#x27;]}» fue entregado! Gracias por reutilizar.&quot;)</code></pre><div class="tip"><b>✔ Así sabes que funciona:</b> Al escribir en Buscar la tabla se filtra sola; doble clic abre el detalle.</div></div></div></section><section id="p5"><div class="step"><div class="num">5</div><div style="min-width:0"><h2 style="margin-top:0">Guardar y cargar datos</h2><p>Que los artículos no se pierdan al cerrar.</p><div class="card"><b>Qué hacer:</b> Reemplaza <code>guardar</code>, <code>cargar</code> y <code>cerrar</code>. Pega, guarda y ejecuta.</div><pre><code>    def guardar(self):
+        try:
+            with open(ARCHIVO, &quot;w&quot;, encoding=&quot;utf-8&quot;) as archivo:
+                json.dump(self.articulos, archivo, ensure_ascii=False, indent=2)
+        except OSError as error:
+            messagebox.showerror(&quot;No se pudo guardar&quot;, str(error))</code></pre><pre><code>    def cargar(self):
+        if not os.path.exists(ARCHIVO):
+            return
+        try:
+            with open(ARCHIVO, encoding=&quot;utf-8&quot;) as archivo:
+                self.articulos = json.load(archivo)
+        except (OSError, json.JSONDecodeError):
+            messagebox.showwarning(&quot;Archivo dañado&quot;, &quot;No se pudo leer articulos.json; se empieza con la lista vacía.&quot;)
+            self.articulos = []
+        # El siguiente id es el más grande que existe + 1
+        self.siguiente_id = max([a[&quot;id&quot;] for a in self.articulos], default=0) + 1</code></pre><pre><code>    def cerrar(self):
+        self.guardar()
+        self.destroy()</code></pre><div class="tip"><b>✔ Así sabes que funciona:</b> Cierras el programa, lo abres otra vez y tus artículos siguen ahí.</div></div></div></section><section id="p6"><div class="step"><div class="num">6</div><div style="min-width:0"><h2 style="margin-top:0">Resumen, atajos y accesibilidad</h2><p>Barra de estado con totales, atajos de teclado y tamaño de letra.</p><div class="card"><b>Qué hacer:</b> Reemplaza los 7 métodos del paso 6. Pega, guarda y ejecuta.</div><pre><code>    def actualizar_resumen(self):
+        total = len(self.articulos)
+        disponibles = sum(1 for a in self.articulos if a[&quot;situacion&quot;] == &quot;Disponible&quot;)
+        entregados = sum(1 for a in self.articulos if a[&quot;situacion&quot;] == &quot;Entregado&quot;)
+        donaciones = sum(1 for a in self.articulos if a[&quot;tipo&quot;] == &quot;Donación&quot;)
+        intercambios = total - donaciones
+        self.estado.set(f&quot;Artículos: {total} · Disponibles: {disponibles} · Entregados: {entregados} · &quot;
+                        f&quot;Donaciones: {donaciones} · Intercambios: {intercambios}&quot;)</code></pre><pre><code>    def ir_a_publicar(self, evento=None):
+        self.nb.select(self.tab_publicar)
+        self.e_nombre.focus_set()</code></pre><pre><code>    def ir_a_catalogo(self, evento=None):
+        self.nb.select(self.tab_catalogo)
+        self.tabla.focus_set()</code></pre><pre><code>    def ayuda(self, evento=None):
+        messagebox.showinfo(&quot;Atajos de teclado&quot;,
+                            &quot;Ctrl + N → publicar un artículo\n&quot;
+                            &quot;Ctrl + B → ver el catálogo\n&quot;
+                            &quot;Enter (en la tabla) → ver detalle\n&quot;
+                            &quot;F1 → esta ayuda\n\n&quot;
+                            &quot;Tab → pasar al siguiente campo&quot;)</code></pre><pre><code>    def atajos(self):
+        self.bind(&quot;&lt;Control-n&gt;&quot;, self.ir_a_publicar)
+        self.bind(&quot;&lt;Control-b&gt;&quot;, self.ir_a_catalogo)
+        self.bind(&quot;&lt;F1&gt;&quot;, self.ayuda)
+        self.tabla.bind(&quot;&lt;Return&gt;&quot;, self.ver_detalle)</code></pre><pre><code>    def crear_accesibilidad(self):
+        grupo = ttk.Frame(self.cabecera)
+        grupo.pack(side=&quot;right&quot;)
+        ttk.Label(grupo, text=&quot;Tamaño de letra:&quot;).pack(side=&quot;left&quot;, padx=(0, 6))
+        self.v_tam = tk.IntVar(value=11)
+        ttk.Spinbox(grupo, from_=10, to=16, width=4, textvariable=self.v_tam,
+                    command=self.aplicar_tamano).pack(side=&quot;left&quot;)
+        ttk.Button(grupo, text=&quot;? Ayuda&quot;, command=self.ayuda).pack(side=&quot;left&quot;, padx=(10, 0))</code></pre><pre><code>    def aplicar_tamano(self):
+        tam = self.v_tam.get()
+        estilo = ttk.Style(self)
+        estilo.configure(&quot;.&quot;, font=(&quot;Arial&quot;, tam))
+        estilo.configure(&quot;Treeview&quot;, rowheight=tam * 2 + 6, font=(&quot;Arial&quot;, tam))
+        estilo.configure(&quot;Treeview.Heading&quot;, font=(&quot;Arial&quot;, tam, &quot;bold&quot;))
+        self.t_descripcion.configure(font=(&quot;Arial&quot;, tam))</code></pre><div class="tip"><b>✔ Así sabes que funciona:</b> Ctrl+N, Ctrl+B y F1 funcionan; el tamaño de letra cambia.</div></div></div></section>
+<section id="proy"><h2>Usa esta plantilla en tu proyecto independiente</h2><p>Edu-Share es un ejemplo. Casi cualquier proyecto de registros (biblioteca, inventario, citas, gastos) tiene las mismas piezas. Responde la columna del medio y cambia los nombres.</p><div class="tw"><table><tr><th>Pieza de Edu-Share</th><th>Pregunta para TU proyecto</th><th>Ejemplo (biblioteca)</th></tr>
+<tr><td><code>CATEGORIAS</code>, <code>ESTADOS</code></td><td>¿Qué listas fijas tiene?</td><td>Géneros, formato</td></tr>
+<tr><td>Diccionario del artículo</td><td>¿Qué datos tiene cada registro?</td><td>título, autor, año, prestado</td></tr>
+<tr><td><code>crear_formulario</code></td><td>¿Qué campos se capturan?</td><td>Entry título, Combobox género</td></tr>
+<tr><td><code>validar</code></td><td>¿Qué no puede quedar mal?</td><td>título no vacío, año numérico</td></tr>
+<tr><td><code>crear_catalogo</code></td><td>¿Qué columnas se ven?</td><td>título, autor, estado</td></tr>
+<tr><td><code>situacion</code> (Disponible/Reservado/Entregado)</td><td>¿Qué estados atraviesa un registro?</td><td>Disponible, Prestado</td></tr>
+<tr><td><code>guardar</code> / <code>cargar</code></td><td>¿Cómo se llama el archivo?</td><td><code>libros.json</code></td></tr></table></div>
+<div class="bad"><b>Antes de programar:</b> escribe en una hoja (1) qué datos tiene cada registro, (2) qué estados tiene y (3) qué 3 acciones hará el usuario. Si eso está claro, el código sale casi solo.</div></section>
+<section id="entrega"><h2>Entrega y evaluación</h2><p>Entrega por AulaEscolar el archivo <code>edu_share_TuApellido.py</code> (si tu equipo lo hizo, un solo integrante lo sube).</p><ul style="list-style:none;padding:0"><li><label><input type="checkbox"> Escribí mis nombres en el encabezado del archivo</label></li><li><label><input type="checkbox"> Probé cada paso antes de pasar al siguiente</label></li><li><label><input type="checkbox"> Publiqué al menos 3 artículos de prueba</label></li><li><label><input type="checkbox"> Cerré y abrí el programa: los datos siguen</label></li><li><label><input type="checkbox"> Mi archivo se llama edu_share_Apellido.py</label></li><li><label><input type="checkbox"> Lo entrego por AulaEscolar</label></li></ul><div class="tw"><table><tr><th>Criterio</th><th>Puntos</th></tr><tr><td>Se ejecuta sin errores</td><td>2</td></tr><tr><td>Formulario con validación (Entry, Combobox, Radio, Check)</td><td>2</td></tr><tr><td>Catálogo con Treeview y filtros</td><td>2</td></tr><tr><td>Persistencia en JSON</td><td>2</td></tr><tr><td>Extras (resumen, atajos, accesibilidad) y orden del código</td><td>2</td></tr></table></div></section></main>
+<footer>BT_COMP_5 · Programación Visual · CECUM Ecatepec</footer><script>
+document.querySelectorAll('pre').forEach(p=>{const b=document.createElement('button');b.className='cp';b.textContent='Copiar';b.onclick=()=>{const t=p.querySelector('code').innerText;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='¡Copiado!'}).catch(()=>{const r=document.createRange();r.selectNodeContents(p.querySelector('code'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecciona y Ctrl+C'});setTimeout(()=>b.textContent='Copiar',1800)};p.appendChild(b)});
+</script></body></html>

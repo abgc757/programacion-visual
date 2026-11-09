@@ -1,0 +1,118 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guía de consulta de Tkinter</title><style>
+:root{--navy:#1b2a4a;--gold:#e8a317;--bg:#f5f7fb;--card:#fff;--ink:#1f2937;--mut:#5b6678;--line:#d9dfea;--ok:#157347;--code:#0f172a}
+@media(prefers-color-scheme:dark){:root{--bg:#10151f;--card:#18202e;--ink:#e6eaf2;--mut:#9aa6ba;--line:#2a3548;--navy:#9db8ee}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:#1b2a4a;color:#fff;padding:28px 16px 20px}header .w,main,.nav .w{max-width:980px;margin:auto}
+header h1{margin:0 0 6px;font-size:1.7rem}header p{margin:0;color:#cdd6ea}header .tag{display:inline-block;background:var(--gold);color:#1b2a4a;font-weight:700;border-radius:99px;padding:2px 12px;font-size:.8rem;margin-bottom:8px}
+.nav{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);z-index:5;padding:8px 16px}.nav .w{display:flex;gap:6px;flex-wrap:wrap}
+.nav a,.chip{border:1px solid var(--line);border-radius:99px;padding:3px 12px;font-size:.85rem;color:var(--ink);text-decoration:none;background:var(--card);cursor:pointer}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+main{padding:16px}section{margin:26px 0}h2{color:var(--navy);border-left:6px solid var(--gold);padding-left:10px;font-size:1.35rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+.card h3{margin:0 0 4px;font-size:1.05rem;color:var(--navy)}.mut{color:var(--mut);font-size:.92rem}
+pre{background:var(--code);color:#e5edff;border-radius:10px;padding:12px 14px;overflow-x:auto;font:13.5px/1.5 ui-monospace,Consolas,monospace;margin:8px 0;position:relative}
+code{font-family:ui-monospace,Consolas,monospace;background:rgba(120,130,150,.18);padding:1px 5px;border-radius:5px;font-size:.9em}pre code{background:none;padding:0}
+.cp{position:absolute;right:8px;top:8px;border:0;background:var(--gold);color:#1b2a4a;font-weight:700;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:.78rem}
+table{border-collapse:collapse;width:100%;font-size:.93rem}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:rgba(120,130,150,.15)}
+.tw{overflow-x:auto}.tip{background:rgba(232,163,23,.15);border-left:5px solid var(--gold);padding:10px 14px;border-radius:8px;margin:10px 0}
+.bad{background:rgba(200,50,50,.12);border-left:5px solid #c0392b;padding:10px 14px;border-radius:8px;margin:10px 0}
+.step{display:flex;gap:12px}.num{flex:none;width:38px;height:38px;border-radius:50%;background:var(--gold);color:#1b2a4a;font-weight:800;display:grid;place-items:center}
+input[type=search]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:1rem;background:var(--card);color:var(--ink)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.hide{display:none!important}svg{max-width:100%;height:auto}
+footer{text-align:center;color:var(--mut);padding:24px 16px;font-size:.85rem}
+</style></head><body>
+<header><div class="w"><span class="tag">Programación Visual · Consulta</span><h1>Guía de consulta de Tkinter</h1><p>Widgets, métodos, eventos y errores comunes, listos para copiar</p></div></header><div class="nav"><div class="w"><a href="#buscar">Buscar</a><a href="#edu">Mapa Edu-Share</a></div></div><main>
+<section id="buscar"><h2>Guía de consulta de Tkinter</h2><p class="mut">Escribe lo que buscas (por ejemplo «tabla», «grid», «json») o elige una categoría. Cada ejemplo tiene botón para copiar.</p>
+<input type="search" id="q" placeholder="Buscar widget o método…" aria-label="Buscar"><div class="chips"><button class="chip on" data-f="all">Todo</button><button class="chip" data-f="base">Ventana y base</button><button class="chip" data-f="widgets">Widgets</button><button class="chip" data-f="layout">Acomodar</button><button class="chip" data-f="ttk">ttk y estilos</button><button class="chip" data-f="vars">Variables</button><button class="chip" data-f="eventos">Eventos</button><button class="chip" data-f="dialogos">Diálogos</button><button class="chip" data-f="datos">Datos y JSON</button><button class="chip" data-f="errores">Errores comunes</button></div>
+<div id="lista"><div class="card item" data-cat="base"><h3>tk.Tk()</h3><div class="mut">Crea la ventana principal. Solo debe haber una.</div><pre><code>import tkinter as tk
+ventana = tk.Tk()
+ventana.title(&#x27;Mi app&#x27;)
+ventana.geometry(&#x27;600x400&#x27;)   # ancho x alto
+ventana.minsize(500, 300)
+ventana.resizable(True, True)
+ventana.mainloop()           # SIEMPRE al final</code></pre></div><div class="card item" data-cat="base"><h3>Programación con clase</h3><div class="mut">Para proyectos grandes, la ventana es una clase. Así todo queda ordenado y los métodos comparten datos con <code>self</code>.</div><pre><code>class App(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title(&#x27;Mi app&#x27;)
+        self.datos = []
+
+if __name__ == &#x27;__main__&#x27;:
+    App().mainloop()</code></pre></div><div class="card item" data-cat="base"><h3>Métodos de la ventana</h3><div class="mut"><code>title()</code> título · <code>geometry()</code> tamaño · <code>after(ms, f)</code> ejecuta f después de ms · <code>destroy()</code> cierra · <code>protocol('WM_DELETE_WINDOW', f)</code> qué hacer al cerrar con la X · <code>focus_set()</code> pone el cursor · <code>update()</code> refresca · <code>configure(bg='#fff')</code> cambia opciones.</div></div><div class="card item" data-cat="widgets"><h3>tk.Frame / ttk.Frame</h3><div class="mut">Caja contenedora para agrupar widgets.</div><pre><code>marco = ttk.Frame(ventana, padding=10)
+marco.pack(fill=&#x27;both&#x27;, expand=True)</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.LabelFrame</h3><div class="mut">Marco con título.</div><pre><code>grupo = ttk.LabelFrame(ventana, text=&#x27;Datos&#x27;)</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Label</h3><div class="mut">Texto o imagen. Para cambiarlo después: <code>etiqueta.config(text='...')</code> o usa <code>textvariable</code>.</div><pre><code>ttk.Label(ventana, text=&#x27;Nombre:&#x27;).pack()</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Button</h3><div class="mut">Botón. <code>command</code> recibe la función SIN paréntesis.</div><pre><code>ttk.Button(ventana, text=&#x27;Guardar&#x27;, command=self.guardar).pack()</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Entry</h3><div class="mut">Una línea de texto. <code>get()</code> lee, <code>delete(0,'end')</code> borra, <code>insert(0,'hola')</code> escribe, <code>show='*'</code> oculta.</div><pre><code>e = ttk.Entry(ventana, textvariable=self.v_nombre)
+valor = e.get()</code></pre></div><div class="card item" data-cat="widgets"><h3>tk.Text</h3><div class="mut">Texto de varias líneas. Los índices son <code>'1.0'</code> (inicio) y <code>'end'</code>.</div><pre><code>t = tk.Text(ventana, height=4, width=40)
+texto = t.get(&#x27;1.0&#x27;, &#x27;end&#x27;).strip()
+t.delete(&#x27;1.0&#x27;, &#x27;end&#x27;)
+t.insert(&#x27;end&#x27;, &#x27;Hola&#x27;)</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Combobox</h3><div class="mut">Lista desplegable. <code>state='readonly'</code> impide escribir.</div><pre><code>c = ttk.Combobox(ventana, values=[&#x27;A&#x27;,&#x27;B&#x27;], state=&#x27;readonly&#x27;, textvariable=self.v_cat)</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Checkbutton</h3><div class="mut">Casilla (verdadero/falso). Usa <code>BooleanVar</code>.</div><pre><code>ttk.Checkbutton(ventana, text=&#x27;Acepto&#x27;, variable=self.v_acepto)</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Radiobutton</h3><div class="mut">Una opción entre varias. Todas comparten la misma variable.</div><pre><code>for t in (&#x27;Nuevo&#x27;,&#x27;Usado&#x27;):
+    ttk.Radiobutton(ventana, text=t, value=t, variable=self.v_estado).pack()</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Spinbox / ttk.Scale</h3><div class="mut">Número con flechas / deslizador.</div><pre><code>ttk.Spinbox(ventana, from_=10, to=16, textvariable=self.v_tam)
+ttk.Scale(ventana, from_=0, to=100, orient=&#x27;horizontal&#x27;)</code></pre></div><div class="card item" data-cat="widgets"><h3>tk.Listbox</h3><div class="mut">Lista simple. <code>insert('end', x)</code>, <code>curselection()</code>, <code>delete(0,'end')</code>.</div><pre><code>lb = tk.Listbox(ventana)
+lb.insert(&#x27;end&#x27;, &#x27;Elemento&#x27;)
+indices = lb.curselection()</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Treeview</h3><div class="mut">Tabla. Es el widget clave de un catálogo.</div><pre><code>t = ttk.Treeview(f, columns=(&#x27;a&#x27;,&#x27;b&#x27;), show=&#x27;headings&#x27;)
+t.heading(&#x27;a&#x27;, text=&#x27;Artículo&#x27;)
+t.insert(&#x27;&#x27;, &#x27;end&#x27;, iid=&#x27;1&#x27;, values=(&#x27;Libro&#x27;,&#x27;Usado&#x27;))
+fila = t.selection()          # tupla de iids
+t.delete(*t.get_children())  # vaciar</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Notebook</h3><div class="mut">Pestañas.</div><pre><code>nb = ttk.Notebook(ventana)
+p1 = ttk.Frame(nb)
+nb.add(p1, text=&#x27;Inicio&#x27;)
+nb.select(p1)</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Scrollbar</h3><div class="mut">Barra de desplazamiento; se conecta en los dos sentidos.</div><pre><code>barra = ttk.Scrollbar(f, command=tabla.yview)
+tabla.configure(yscrollcommand=barra.set)</code></pre></div><div class="card item" data-cat="widgets"><h3>tk.Toplevel</h3><div class="mut">Ventana secundaria.</div><pre><code>v = tk.Toplevel(self)
+v.title(&#x27;Detalle&#x27;)
+v.transient(self)</code></pre></div><div class="card item" data-cat="widgets"><h3>tk.Menu</h3><div class="mut">Barra de menú.</div><pre><code>barra = tk.Menu(self)
+arch = tk.Menu(barra, tearoff=0)
+arch.add_command(label=&#x27;Salir&#x27;, command=self.destroy)
+barra.add_cascade(label=&#x27;Archivo&#x27;, menu=arch)
+self.config(menu=barra)</code></pre></div><div class="card item" data-cat="widgets"><h3>tk.Canvas</h3><div class="mut">Dibujar formas y gráficos.</div><pre><code>c = tk.Canvas(ventana, width=300, height=200, bg=&#x27;white&#x27;)
+c.create_rectangle(10,10,100,60, fill=&#x27;gold&#x27;)
+c.create_text(150,100,text=&#x27;Hola&#x27;)</code></pre></div><div class="card item" data-cat="widgets"><h3>ttk.Progressbar / ttk.Separator</h3><div class="mut">Barra de avance / línea divisoria.</div><pre><code>ttk.Progressbar(ventana, maximum=100, value=40)
+ttk.Separator(ventana, orient=&#x27;horizontal&#x27;).pack(fill=&#x27;x&#x27;)</code></pre></div><div class="card item" data-cat="layout"><h3>pack()</h3><div class="mut">Apila widgets uno tras otro. Rápido para cosas simples.</div><pre><code>w.pack(side=&#x27;left&#x27;, fill=&#x27;x&#x27;, expand=True, padx=8, pady=4)</code></pre></div><div class="card item" data-cat="layout"><h3>grid()</h3><div class="mut">Acomoda en filas y columnas: ideal para formularios. <b>No mezcles pack y grid en el mismo contenedor.</b></div><pre><code>f.columnconfigure(1, weight=1)   # la columna 1 se estira
+ttk.Label(f, text=&#x27;Nombre:&#x27;).grid(row=0, column=0, sticky=&#x27;w&#x27;)
+ttk.Entry(f).grid(row=0, column=1, sticky=&#x27;ew&#x27;)   # sticky: n s e w</code></pre></div><div class="card item" data-cat="layout"><h3>place()</h3><div class="mut">Posición exacta en píxeles. Evítalo salvo casos especiales.</div><pre><code>w.place(x=20, y=30)</code></pre></div><div class="card item" data-cat="ttk"><h3>Estilos y tema</h3><div class="mut">Cambian la apariencia de todos los widgets <code>ttk</code>.</div><pre><code>estilo = ttk.Style(self)
+estilo.theme_use(&#x27;clam&#x27;)
+estilo.configure(&#x27;.&#x27;, font=(&#x27;Arial&#x27;, 11))
+estilo.configure(&#x27;Acento.TButton&#x27;, font=(&#x27;Arial&#x27;, 11, &#x27;bold&#x27;))
+ttk.Button(self, text=&#x27;OK&#x27;, style=&#x27;Acento.TButton&#x27;)</code></pre></div><div class="card item" data-cat="ttk"><h3>state() de ttk</h3><div class="mut">Activa o desactiva un widget ttk.</div><pre><code>e.state([&#x27;disabled&#x27;])    # desactivar
+e.state([&#x27;!disabled&#x27;])   # activar
+e.instate([&#x27;disabled&#x27;])  # ¿está desactivado?</code></pre></div><div class="card item" data-cat="vars"><h3>StringVar, IntVar, BooleanVar</h3><div class="mut">Variables de control: el widget y tu código leen y escriben el mismo dato.</div><pre><code>v = tk.StringVar(value=&#x27;hola&#x27;)
+v.set(&#x27;adiós&#x27;)
+dato = v.get()
+v.trace_add(&#x27;write&#x27;, lambda *a: print(v.get()))  # se ejecuta al cambiar</code></pre></div><div class="card item" data-cat="eventos"><h3>bind()</h3><div class="mut">Asocia un evento (clic, tecla) con una función que recibe <code>evento</code>.</div><pre><code>tabla.bind(&#x27;&lt;Double-1&gt;&#x27;, self.ver_detalle)
+self.bind(&#x27;&lt;Control-n&gt;&#x27;, self.nuevo)
+self.bind(&#x27;&lt;Return&gt;&#x27;, self.guardar)
+c.bind(&#x27;&lt;&lt;ComboboxSelected&gt;&gt;&#x27;, self.filtrar)
+
+def ver_detalle(self, evento=None):   # evento=None permite usarla también con un botón
+    ...</code></pre></div><div class="card item" data-cat="eventos"><h3>Eventos más usados</h3><div class="mut"><code>&lt;Button-1&gt;</code> clic · <code>&lt;Double-1&gt;</code> doble clic · <code>&lt;Key&gt;</code> tecla · <code>&lt;Return&gt;</code> Enter · <code>&lt;Escape&gt;</code> · <code>&lt;FocusIn&gt;</code> · <code>&lt;Control-s&gt;</code> · <code>&lt;F1&gt;</code></div></div><div class="card item" data-cat="dialogos"><h3>messagebox</h3><div class="mut">Mensajes emergentes.</div><pre><code>from tkinter import messagebox
+messagebox.showinfo(&#x27;Título&#x27;, &#x27;Listo&#x27;)
+messagebox.showwarning(&#x27;Ojo&#x27;, &#x27;Falta un dato&#x27;)
+messagebox.showerror(&#x27;Error&#x27;, &#x27;No se pudo&#x27;)
+if messagebox.askyesno(&#x27;Confirmar&#x27;, &#x27;¿Seguro?&#x27;):
+    ...</code></pre></div><div class="card item" data-cat="dialogos"><h3>filedialog y simpledialog</h3><div class="mut">Elegir archivos / pedir un dato.</div><pre><code>from tkinter import filedialog, simpledialog
+ruta = filedialog.askopenfilename(filetypes=[(&#x27;JSON&#x27;,&#x27;*.json&#x27;)])
+ruta = filedialog.asksaveasfilename(defaultextension=&#x27;.json&#x27;)
+nombre = simpledialog.askstring(&#x27;Nombre&#x27;, &#x27;¿Cómo te llamas?&#x27;)</code></pre></div><div class="card item" data-cat="datos"><h3>Guardar con JSON</h3><div class="mut">Convierte tu lista de diccionarios en un archivo.</div><pre><code>import json
+with open(&#x27;datos.json&#x27;, &#x27;w&#x27;, encoding=&#x27;utf-8&#x27;) as f:
+    json.dump(self.articulos, f, ensure_ascii=False, indent=2)</code></pre></div><div class="card item" data-cat="datos"><h3>Cargar con JSON</h3><div class="mut">Revisa que exista y protege con <code>try</code>.</div><pre><code>import os
+if os.path.exists(&#x27;datos.json&#x27;):
+    try:
+        with open(&#x27;datos.json&#x27;, encoding=&#x27;utf-8&#x27;) as f:
+            self.articulos = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        self.articulos = []</code></pre></div><div class="card item" data-cat="datos"><h3>Patrón: lista de diccionarios + tabla</h3><div class="mut">Los datos viven en la lista; la tabla solo los <i>muestra</i>. Después de cambiar la lista, llama a <code>refrescar()</code>, que borra la tabla y la vuelve a llenar.</div></div><div class="card item" data-cat="errores"><h3>Errores que más se repiten</h3><div class="tw"><table><tr><th>Lo que ves</th><th>Causa y solución</th></tr><tr><td>La ventana se abre y se cierra sola</td><td>Falta <code>mainloop()</code> al final.</td></tr><tr><td><code>command=self.guardar()</code> se ejecuta al abrir</td><td>Escribe <code>command=self.guardar</code> sin paréntesis.</td></tr><tr><td><code>TclError: cannot use geometry manager grid inside … which already has slaves managed by pack</code></td><td>Mezclaste pack y grid en el mismo contenedor. Elige uno por contenedor.</td></tr><tr><td>El widget no aparece</td><td>Olvidaste <code>.pack()</code>, <code>.grid()</code> o <code>.place()</code>. Ojo: <code>e = ttk.Entry(...).pack()</code> deja <code>e = None</code>; crea y acomoda en dos líneas.</td></tr><tr><td><code>_tkinter.TclError: image … doesn't exist</code> / variable</td><td>Creaste una <code>StringVar</code> antes de <code>tk.Tk()</code>. Crea primero la ventana.</td></tr><tr><td>Los cambios no se ven</td><td>Cambiaste la lista pero no llamaste a <code>refrescar_catalogo()</code>.</td></tr><tr><td><code>AttributeError: … has no attribute</code></td><td>Falta <code>self.</code> al crear el widget; sin él no se puede usar en otro método.</td></tr><tr><td><code>UnicodeDecodeError</code> al leer el JSON</td><td>Abre siempre con <code>encoding='utf-8'</code>.</td></tr><tr><td><code>KeyError</code> al leer un artículo</td><td>El nombre de la clave no coincide con el que guardaste (usa exactamente el mismo).</td></tr></table></div></div></div><p id="vacio" class="hide mut">No hay resultados. Prueba otra palabra.</p></section>
+<section id="edu"><h2>Mapa rápido para Edu-Share</h2><div class="tw"><table><tr><th>Quiero…</th><th>Uso</th><th>En Edu-Share</th></tr>
+<tr><td>Escribir un dato corto</td><td><code>Entry</code></td><td>Nombre, contacto, «a cambio de»</td></tr>
+<tr><td>Escribir un texto largo</td><td><code>Text</code></td><td>Descripción</td></tr>
+<tr><td>Elegir de una lista</td><td><code>Combobox</code></td><td>Categoría, filtro</td></tr>
+<tr><td>Elegir una sola opción</td><td><code>Radiobutton</code></td><td>Estado, Donación/Intercambio</td></tr>
+<tr><td>Marcar sí/no</td><td><code>Checkbutton</code></td><td>Acepto entregar en el plantel, «Solo disponibles»</td></tr>
+<tr><td>Mostrar muchos registros</td><td><code>Treeview</code></td><td>Catálogo</td></tr>
+<tr><td>Separar pantallas</td><td><code>Notebook</code></td><td>Publicar / Catálogo</td></tr>
+<tr><td>Ver un detalle</td><td><code>Toplevel</code></td><td>Ventana de detalle</td></tr>
+<tr><td>Avisar o confirmar</td><td><code>messagebox</code></td><td>Validaciones, «Me interesa»</td></tr>
+<tr><td>Que no se pierdan los datos</td><td><code>json</code></td><td>articulos.json</td></tr></table></div></section></main>
+<footer>BT_COMP_5 · Programación Visual · CECUM Ecatepec</footer><script>
+document.querySelectorAll('pre').forEach(p=>{const b=document.createElement('button');b.className='cp';b.textContent='Copiar';b.onclick=()=>{const t=p.querySelector('code').innerText;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='¡Copiado!'}).catch(()=>{const r=document.createRange();r.selectNodeContents(p.querySelector('code'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecciona y Ctrl+C'});setTimeout(()=>b.textContent='Copiar',1800)};p.appendChild(b)});
+
+const q=document.getElementById('q'),it=[...document.querySelectorAll('.item')];let f='all';
+function ap(){const t=q.value.toLowerCase();let n=0;it.forEach(i=>{const ok=(f==='all'||i.dataset.cat===f)&&i.innerText.toLowerCase().includes(t);i.classList.toggle('hide',!ok);if(ok)n++});document.getElementById('vacio').classList.toggle('hide',n>0)}
+q.oninput=ap;document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');f=c.dataset.f;ap()});
+</script></body></html>
