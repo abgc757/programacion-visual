@@ -1,0 +1,368 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unidad 3 · Estudio de métodos</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap">
+<style>html,body{margin:0;height:100%;background:#0e1730;overflow:hidden;font-family:'Nunito Sans',Arial,sans-serif}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.slide:not(.on){display:none !important}
+#stage *{margin:0;box-sizing:border-box} table{border-collapse:collapse;width:100%} th,td{padding:12px 18px;vertical-align:middle} h1,h2,h3{font-weight:inherit}
+#bar{position:fixed;left:0;right:0;bottom:0;height:44px;display:flex;align-items:center;justify-content:center;gap:14px;background:rgba(14,23,48,.92);color:#F6F3EA;font-size:15px;z-index:9}
+#bar button{background:#F29A4A;color:#14213D;border:0;border-radius:8px;padding:6px 16px;font-weight:700;font-size:15px;cursor:pointer;min-height:32px}
+#bar button:focus-visible{outline:3px solid #fff}</style></head><body>
+<div id="stage"><section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#14213D;color:#F6F3EA;font-family:'Nunito Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="position:absolute;left:1440px;top:128px;width:144px;height:144px;border:8px solid #F29A4A;border-radius:50%"></div>
+<div style="position:absolute;left:1632px;top:128px;width:144px;height:144px;border:8px solid #7CC0DE"></div>
+<svg viewBox="0 0 160 160" aria-label="Símbolo de almacenamiento: triángulo invertido" style="position:absolute;left:1440px;top:328px;width:160px;height:160px"><polygon points="14,20 146,20 80,140" fill="none" stroke="#F29A4A" stroke-width="8" stroke-linejoin="round"/></svg>
+<div style="position:absolute;left:1632px;top:372px;width:152px;height:80px;background:#7CC0DE;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F29A4A">Ingeniería de métodos · Unidad 3</p>
+<div style="display:flex;flex-direction:column;gap:32px">
+<div style="width:120px;height:10px;background:#F29A4A"></div>
+<h1 style="font-family:'Rubik', Arial, sans-serif;font-size:112px;font-weight:600;line-height:1.05;color:#F6F3EA">Estudio de métodos</h1>
+<p style="font-size:40px;line-height:1.35;color:#C9D3E6;width:1100px">Cómo registrar, analizar y mejorar la forma de trabajar</p>
+</div>
+<p style="font-size:28px;color:#9FB0CF">Ingeniería Industrial · Diagramas de proceso, operario, máquina y manos</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Mapa de la unidad</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Contenido de la unidad</h2>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">3.1</p><p style="font-size:32px;font-weight:700;line-height:1.25">Operaciones del proceso</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">3.2</p><p style="font-size:32px;font-weight:700;line-height:1.25">Análisis del proceso</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">3.3</p><p style="font-size:32px;font-weight:700;line-height:1.25">Recorrido</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">3.4</p><p style="font-size:32px;font-weight:700;line-height:1.25">Operario</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">3.5</p><p style="font-size:32px;font-weight:700;line-height:1.25">Actividades múltiples</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">3.6</p><p style="font-size:32px;font-weight:700;line-height:1.25">Hombre-máquina</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">3.7</p><p style="font-size:32px;font-weight:700;line-height:1.25">Bimanual</p></div>
+<div style="background:#14213D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Objetivo común</p><p style="font-size:32px;font-weight:700;line-height:1.25;color:#F6F3EA">Ver el trabajo para mejorarlo</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">2</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Concepto</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">¿Qué es el estudio de métodos?</h2>
+<div style="display:flex;gap:48px;align-items:stretch">
+<div style="flex:1.4;display:flex;flex-direction:column;gap:32px;justify-content:center">
+<p style="font-size:40px;line-height:1.35;font-weight:600">Es observar con orden y sentido crítico <span style="color:#B24E08">cómo se hace un trabajo</span>, para encontrar una forma más sencilla, rápida y económica de hacerlo.</p>
+<p style="font-size:32px;line-height:1.4;color:#3C465A">Se aplica a trabajos que ya existen y también a los que apenas se están planeando.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Menos esfuerzo</h3><p style="font-size:24px;color:#3C465A">Sin movimientos ni recorridos inútiles</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Menos tiempo</h3><p style="font-size:24px;color:#3C465A">Procesos más cortos y sin esperas</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Menos costo</h3><p style="font-size:24px;color:#3C465A">Más producción con los mismos recursos</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">3</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Procedimiento</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Ocho pasos para mejorar un método</h2>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">1</p><p style="font-size:32px;font-weight:700">Seleccionar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Elegir el trabajo con más potencial de mejora.</p></div>
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;line-height:1.1">2</p><p style="font-size:32px;font-weight:700;color:#F6F3EA">Registrar</p><p style="font-size:24px;line-height:1.4;color:#C9D3E6">Dibujar el método actual con diagramas. Aquí entra esta unidad.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">3</p><p style="font-size:32px;font-weight:700">Examinar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Cuestionar cada paso con espíritu crítico.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">4</p><p style="font-size:32px;font-weight:700">Idear</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Proponer el método más sencillo posible.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">5</p><p style="font-size:32px;font-weight:700">Evaluar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Comparar alternativas por costo y resultado.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">6</p><p style="font-size:32px;font-weight:700">Definir</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Documentar el nuevo método por escrito.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">7</p><p style="font-size:32px;font-weight:700">Implantar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Capacitar y poner en práctica.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">8</p><p style="font-size:32px;font-weight:700">Mantener</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Dar seguimiento para no volver atrás.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">4</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">El alfabeto de los diagramas</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Cinco símbolos ASME</h2>
+<div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:20px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<svg viewBox="0 0 128 128" width="112" height="112" aria-label="Operación: círculo"><circle cx="64" cy="64" r="52" fill="#F1DFC9" stroke="#14213D" stroke-width="8"/></svg>
+<p style="font-size:32px;font-weight:700">Operación</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Se transforma, arma o prepara el producto.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<svg viewBox="0 0 128 128" width="112" height="112" aria-label="Inspección: cuadrado"><rect x="14" y="14" width="100" height="100" fill="#F1DFC9" stroke="#14213D" stroke-width="8"/></svg>
+<p style="font-size:32px;font-weight:700">Inspección</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Se verifica calidad o cantidad.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<svg viewBox="0 0 128 128" width="112" height="112" aria-label="Transporte: flecha"><path d="M12 64 H100 M70 32 L112 64 L70 96" fill="none" stroke="#14213D" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<p style="font-size:32px;font-weight:700">Transporte</p><p style="font-size:24px;line-height:1.4;color:#3C465A">El producto o la persona se desplaza.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<svg viewBox="0 0 128 128" width="112" height="112" aria-label="Demora: letra D"><path d="M16 16 H62 A48 48 0 0 1 62 112 H16 Z" fill="#F1DFC9" stroke="#14213D" stroke-width="8" stroke-linejoin="round"/></svg>
+<p style="font-size:32px;font-weight:700">Demora</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Hay espera: nada avanza.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<svg viewBox="0 0 128 128" width="112" height="112" aria-label="Almacenamiento: triángulo invertido"><polygon points="14,18 114,18 64,114" fill="#F1DFC9" stroke="#14213D" stroke-width="8" stroke-linejoin="round"/></svg>
+<p style="font-size:32px;font-weight:700">Almacenamiento</p><p style="font-size:24px;line-height:1.4;color:#3C465A">El producto se guarda y se protege.</p></div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#3C465A">Actividad combinada: un círculo dentro de un cuadrado, cuando se opera e inspecciona a la vez.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">5</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">3.1 · Diagrama de operaciones del proceso</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Ver todo el proceso en una hoja</h2>
+<div style="display:flex;gap:48px;align-items:stretch">
+<div style="flex:1.2;display:flex;flex-direction:column;gap:32px;justify-content:center">
+<p style="font-size:40px;line-height:1.35;font-weight:600">El DOP muestra solo las <span style="color:#B24E08">operaciones</span> (círculo) y las <span style="color:#B24E08">inspecciones</span> (cuadrado), junto con los materiales que entran.</p>
+<p style="font-size:28px;line-height:1.4;color:#3C465A">También se conoce como cursograma sinóptico. Es la vista de pájaro del proceso.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Línea vertical</h3><p style="font-size:24px;line-height:1.4;color:#3C465A">Marca el orden del proceso, de arriba abajo.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Líneas horizontales</h3><p style="font-size:24px;line-height:1.4;color:#3C465A">Indican por dónde entran materiales y piezas.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Números consecutivos</h3><p style="font-size:24px;line-height:1.4;color:#3C465A">Cada operación e inspección lleva el suyo.</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">6</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">3.1 · Ejemplo ilustrativo</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">DOP de un soporte de aluminio</h2>
+<div style="display:flex;gap:96px;align-items:flex-start">
+<div style="display:flex;flex-direction:column;align-items:flex-start">
+<p style="font-size:24px;font-weight:700;background:#EAD1B2;padding:8px 20px;border-radius:40px">Entra: barra de aluminio</p>
+<div style="padding:0 0 0 30px"><div style="width:4px;height:20px;background:#14213D"></div></div>
+<div style="display:flex;align-items:center;gap:24px"><div style="width:64px;height:64px;border:6px solid #14213D;border-radius:50%;background:#F1DFC9;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700">1</p></div><p style="font-size:32px;font-weight:600">Cortar la barra</p></div>
+<div style="padding:0 0 0 30px"><div style="width:4px;height:20px;background:#14213D"></div></div>
+<div style="display:flex;align-items:center;gap:24px"><div style="width:64px;height:64px;border:6px solid #14213D;border-radius:50%;background:#F1DFC9;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700">2</p></div><p style="font-size:32px;font-weight:600">Taladrar</p></div>
+<div style="padding:0 0 0 30px"><div style="width:4px;height:20px;background:#14213D"></div></div>
+<div style="display:flex;align-items:center;gap:24px"><div style="width:64px;height:64px;border:6px solid #14213D;background:#F1DFC9;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700">1</p></div><p style="font-size:32px;font-weight:600">Inspeccionar diámetros</p></div>
+<div style="padding:0 0 0 30px"><div style="width:4px;height:20px;background:#14213D"></div></div>
+<div style="display:flex;align-items:center;gap:24px"><div style="width:64px;height:64px;border:6px solid #14213D;border-radius:50%;background:#F1DFC9;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700">3</p></div><p style="font-size:32px;font-weight:600">Rebabear los bordes</p></div>
+<div style="padding:0 0 0 30px"><div style="width:4px;height:20px;background:#14213D"></div></div>
+<div style="display:flex;align-items:center;gap:24px"><div style="width:64px;height:64px;border:6px solid #14213D;border-radius:50%;background:#F1DFC9;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700">4</p></div><p style="font-size:32px;font-weight:600">Limpiar y empacar</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Resumen del DOP</p><p style="font-size:32px;font-weight:700;color:#F6F3EA">4 operaciones y 1 inspección</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Cómo leerlo</h3><p style="font-size:24px;line-height:1.4;color:#3C465A">De arriba abajo; cada número es un paso del proceso.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Pregunta clave</h3><p style="font-size:24px;line-height:1.4;color:#3C465A">¿Se pueden combinar dos operaciones en una sola estación?</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">7</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">3.2 · Diagrama de análisis del proceso</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">DAP: cada paso con distancia y tiempo</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:8%;color:#F6F3EA;text-align:left">Paso</th><th style="width:24%;color:#F6F3EA;text-align:left">Símbolo</th><th style="width:38%;color:#F6F3EA;text-align:left">Descripción</th><th style="width:15%;color:#F6F3EA;text-align:left">Distancia</th><th style="width:15%;color:#F6F3EA;text-align:left">Tiempo</th></tr>
+<tr style="background:#FFFDF8"><td>1</td><td>→ Transporte</td><td>Llevar la barra a la sierra</td><td>20 m</td><td>1 min</td></tr>
+<tr style="background:#F6F3EA"><td>2</td><td>○ Operación</td><td>Cortar la barra a medida</td><td>—</td><td>3 min</td></tr>
+<tr style="background:#F3D9BE"><td>3</td><td>D Demora</td><td>Esperar el lote antes de taladrar</td><td>—</td><td>10 min</td></tr>
+<tr style="background:#F6F3EA"><td>4</td><td>○ Operación</td><td>Taladrar la pieza</td><td>—</td><td>2 min</td></tr>
+<tr style="background:#FFFDF8"><td>5</td><td>□ Inspección</td><td>Revisar diámetros</td><td>—</td><td>1 min</td></tr>
+<tr style="background:#F6F3EA"><td>6</td><td>→ Transporte</td><td>Mover la pieza al almacén</td><td>15 m</td><td>1 min</td></tr>
+<tr style="background:#FFFDF8"><td>7</td><td>▽ Almacenamiento</td><td>Guardar el producto terminado</td><td>—</td><td>—</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.4;color:#3C465A">Resumen: 2 operaciones, 2 transportes (35 m), 1 demora (10 min), 1 inspección y 1 almacenamiento.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">8</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">3.3 · Diagrama de recorrido</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">El proceso dibujado sobre el plano</h2>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="flex:1;background:#FFFDF8;border:2px solid #14213D;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px;align-items:center"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">1</p><p style="font-size:32px;font-weight:700">Almacén</p><p style="font-size:24px;color:#3C465A">Sale material</p></div>
+<div style="flex:none;width:64px;height:36px;background:#C2570C;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;background:#FFFDF8;border:2px solid #14213D;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px;align-items:center"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">2</p><p style="font-size:32px;font-weight:700">Sierra</p><p style="font-size:24px;color:#3C465A">Corte</p></div>
+<div style="flex:none;width:64px;height:36px;background:#C2570C;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;background:#FFFDF8;border:2px solid #14213D;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px;align-items:center"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">3</p><p style="font-size:32px;font-weight:700">Taladro</p><p style="font-size:24px;color:#3C465A">Agujeros</p></div>
+<div style="flex:none;width:64px;height:36px;background:#C2570C;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;background:#FFFDF8;border:2px solid #14213D;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px;align-items:center"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">4</p><p style="font-size:32px;font-weight:700">Inspección</p><p style="font-size:24px;color:#3C465A">Calidad</p></div>
+<div style="flex:none;width:64px;height:36px;background:#C2570C;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;background:#FFFDF8;border:2px solid #14213D;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px;align-items:center"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">5</p><p style="font-size:32px;font-weight:700">Embarque</p><p style="font-size:24px;color:#3C465A">Sale producto</p></div>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#F6F3EA">Retrocesos y cruces</h3><p style="font-size:24px;line-height:1.4;color:#C9D3E6">Trayectorias que se cruzan o regresan por donde ya pasaron.</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#F6F3EA">Distancias largas</h3><p style="font-size:24px;line-height:1.4;color:#C9D3E6">Traslados que se pueden acortar moviendo una estación.</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#F6F3EA">Áreas mal ubicadas</h3><p style="font-size:24px;line-height:1.4;color:#C9D3E6">Estaciones que deberían estar juntas y están lejos.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">9</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">3.4 · Diagrama del operario</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Seguir a una persona en su trabajo</h2>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#B24E08">Qué registra</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Las actividades de una sola persona, en orden: lo que hace, a dónde va y cuánto tarda.</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#B24E08">Cuándo usarlo</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">En tareas manuales, mantenimiento, surtido de almacén y trabajo de oficina.</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#B24E08">Qué obtienes</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Recorridos largos, esperas y tareas repetidas que sobran.</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Ejemplo</p><p style="font-size:32px;font-weight:600;line-height:1.4;color:#F6F3EA">Seguir a un surtidor de almacén durante un turno completo y anotar cada paso con los cinco símbolos.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">10</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">3.5 · Diagrama de actividades múltiples</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Varias actividades, una escala de tiempo</h2>
+<div style="display:flex;gap:64px;align-items:flex-start">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:32px;line-height:1.4;font-weight:600">Cada persona o máquina tiene su propia columna.</p>
+<p style="font-size:32px;line-height:1.4;color:#3C465A">Las barras muestran quién trabaja y quién espera en cada momento.</p>
+<p style="font-size:32px;line-height:1.4;color:#3C465A">Sirve para equilibrar cargas y armar cuadrillas.</p>
+<div style="background:#14213D;border-radius:16px;padding:28px"><p style="font-size:28px;line-height:1.4;color:#F6F3EA">El diagrama hombre-máquina (3.6) es el caso de un operario con sus máquinas.</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:24px;justify-content:center">
+<div style="width:190px;display:flex;flex-direction:column;gap:12px"><p style="font-size:28px;font-weight:700;text-align:center">Operario A</p>
+<div style="display:flex;flex-direction:column"><div style="height:150px;background:#1F6F8B;border-bottom:2px solid #F6F3EA;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:700;color:#F6F3EA">Trabaja</p></div><div style="height:100px;background:#EAD1B2;border-bottom:2px solid #F6F3EA;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:700;color:#14213D">Espera</p></div><div style="height:50px;background:#1F6F8B;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:700;color:#F6F3EA">Trabaja</p></div></div></div>
+<div style="width:190px;display:flex;flex-direction:column;gap:12px"><p style="font-size:28px;font-weight:700;text-align:center">Operario B</p>
+<div style="display:flex;flex-direction:column"><div style="height:100px;background:#EAD1B2;border-bottom:2px solid #F6F3EA;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:700;color:#14213D">Espera</p></div><div style="height:150px;background:#1F6F8B;border-bottom:2px solid #F6F3EA;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:700;color:#F6F3EA">Trabaja</p></div><div style="height:50px;background:#EAD1B2;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:700;color:#14213D">Espera</p></div></div></div>
+<div style="width:190px;display:flex;flex-direction:column;gap:12px"><p style="font-size:28px;font-weight:700;text-align:center">Máquina</p>
+<div style="display:flex;flex-direction:column"><div style="height:300px;background:#1F6F8B;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;font-weight:700;color:#F6F3EA">Trabaja</p></div></div></div>
+</div>
+<p style="font-size:24px;color:#5A6478;text-align:center">Tiempo: 6 minutos, de arriba hacia abajo (datos ilustrativos)</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">11</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">3.6 · Diagrama hombre-máquina · datos ilustrativos</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Un operario y su máquina: ¿quién espera a quién?</h2>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;gap:24px"><p style="width:200px;font-size:32px;font-weight:700">Operario</p>
+<div style="display:flex;width:1400px">
+<div style="width:175px;height:100px;background:#1F6F8B;border-right:2px solid #EDE8D8;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700;color:#F6F3EA">Cargar</p></div>
+<div style="width:525px;height:100px;background:#1F6F8B;border-right:2px solid #EDE8D8;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700;color:#F6F3EA">Preparar piezas</p></div>
+<div style="width:525px;height:100px;background:#EAD1B2;border-right:2px solid #EDE8D8;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700;color:#14213D">Espera (ocioso)</p></div>
+<div style="width:175px;height:100px;background:#1F6F8B;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700;color:#F6F3EA">Descargar</p></div>
+</div></div>
+<div style="display:flex;align-items:center;gap:24px"><p style="width:200px;font-size:32px;font-weight:700">Máquina</p>
+<div style="display:flex;width:1400px">
+<div style="width:175px;height:100px;background:#D8D2BF;border-right:2px solid #EDE8D8;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700;color:#14213D">Inactiva</p></div>
+<div style="width:1050px;height:100px;background:#14213D;border-right:2px solid #EDE8D8;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700;color:#F6F3EA">Maquinando</p></div>
+<div style="width:175px;height:100px;background:#D8D2BF;display:flex;align-items:center;justify-content:center"><p style="font-size:28px;font-weight:700;color:#14213D">Inactiva</p></div>
+</div></div>
+<div style="display:flex;padding:0 0 0 224px">
+<div style="width:175px;border-left:2px solid #14213D;padding:6px 0 0 8px"><p style="font-size:24px;color:#5A6478">0 min</p></div>
+<div style="width:175px;border-left:2px solid #14213D;padding:6px 0 0 8px"><p style="font-size:24px;color:#5A6478">1</p></div>
+<div style="width:175px;border-left:2px solid #14213D;padding:6px 0 0 8px"><p style="font-size:24px;color:#5A6478">2</p></div>
+<div style="width:175px;border-left:2px solid #14213D;padding:6px 0 0 8px"><p style="font-size:24px;color:#5A6478">3</p></div>
+<div style="width:175px;border-left:2px solid #14213D;padding:6px 0 0 8px"><p style="font-size:24px;color:#5A6478">4</p></div>
+<div style="width:175px;border-left:2px solid #14213D;padding:6px 0 0 8px"><p style="font-size:24px;color:#5A6478">5</p></div>
+<div style="width:175px;border-left:2px solid #14213D;padding:6px 0 0 8px"><p style="font-size:24px;color:#5A6478">6</p></div>
+<div style="width:175px;border-left:2px solid #14213D;border-right:2px solid #14213D;padding:6px 0 0 8px"><p style="font-size:24px;color:#5A6478">7 · fin: 8 min</p></div>
+</div>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Ciclo total</p><p style="font-size:32px;font-weight:700">8 min</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Operario ocupado</p><p style="font-size:32px;font-weight:700">5 de 8 min = 62.5 %</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Máquina ocupada</p><p style="font-size:32px;font-weight:700">6 de 8 min = 75 %</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">12</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">3.6 · Asignación de máquinas</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">¿Cuántas máquinas debe atender un operario?</h2>
+<div style="display:flex;gap:48px;align-items:stretch">
+<div style="flex:1.2;background:#14213D;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:20px;justify-content:center">
+<p style="font-size:24px;font-weight:700;color:#F29A4A">Fórmula</p>
+<p style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#F6F3EA">n = (a + t) ÷ (a + b)</p>
+<p style="font-size:32px;line-height:1.4;color:#C9D3E6">Ejemplo: a = 2, b = 3 y t = 6 min</p>
+<p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#F29A4A">n = (2 + 6) ÷ (2 + 3) = 1.6</p>
+<p style="font-size:28px;line-height:1.4;color:#C9D3E6">Se comparan 1 y 2 máquinas y se elige la de menor costo por pieza.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;width:56px">a</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Tiempo conjunto: operario y máquina juntos (cargar y descargar)</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;width:56px">b</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Tiempo del operario trabajando por su cuenta</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;width:56px">t</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Tiempo de la máquina trabajando sola</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">13</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">3.7 · Diagrama bimanual · ejemplo ilustrativo</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Qué hace cada mano, al mismo tiempo</h2>
+<table style="font-size:32px;color:#14213D">
+<tr style="background:#14213D"><th style="width:50%;color:#F6F3EA;text-align:left">Mano izquierda</th><th style="width:50%;color:#F6F3EA;text-align:left">Mano derecha</th></tr>
+<tr style="background:#FFFDF8"><td>Alcanzar la tuerca</td><td>Alcanzar el tornillo</td></tr>
+<tr style="background:#F6F3EA"><td>Tomar la tuerca</td><td>Tomar el tornillo</td></tr>
+<tr style="background:#FFFDF8"><td>Llevar la tuerca al centro</td><td>Llevar el tornillo al centro</td></tr>
+<tr style="background:#F3D9BE"><td>Sostener la tuerca (demora)</td><td>Enroscar el tornillo (operación)</td></tr>
+</table>
+<div style="background:#14213D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Hallazgo</p><p style="font-size:32px;line-height:1.4;font-weight:600;color:#F6F3EA">La mano izquierda solo sostiene. Un dispositivo de sujeción la libera para trabajar.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">14</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">3.7 · Cómo mejorar el trabajo con las manos</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Principios de economía de movimientos</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Un solo ritmo</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Las dos manos inician y terminan sus movimientos a la vez.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Manos ocupadas</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">No deben estar ociosas, salvo en los descansos.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Movimientos simétricos</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Los brazos se mueven en direcciones opuestas y simétricas.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Todo a la mano</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Herramientas y piezas en un lugar fijo y al alcance.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Usar la gravedad</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Contenedores que entregan por caída, sin cargar ni empujar.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Movimientos suaves</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Trayectorias curvas y continuas, sin cambios bruscos.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">15</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Del diagrama a la mejora</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Cómo mejorar un método: ECRS</h2>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;color:#B24E08;line-height:1.1">E</p><p style="font-size:32px;font-weight:700">Eliminar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">¿Se puede quitar este paso?</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;color:#B24E08;line-height:1.1">C</p><p style="font-size:32px;font-weight:700">Combinar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">¿Se puede hacer junto con otro?</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;color:#B24E08;line-height:1.1">R</p><p style="font-size:32px;font-weight:700">Reordenar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">¿Mejora si cambia el orden?</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;color:#B24E08;line-height:1.1">S</p><p style="font-size:32px;font-weight:700">Simplificar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">¿Se puede hacer más fácil?</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Antes de decidir, pregunta por cada paso</p><p style="font-size:32px;line-height:1.4;font-weight:600;color:#F6F3EA">¿Qué se hace? · ¿Por qué? · ¿Dónde? · ¿Cuándo? · ¿Quién? · ¿Cómo?</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">16</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Para elegir el diagrama correcto</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Los siete diagramas, comparados</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:28%;color:#F6F3EA;text-align:left">Diagrama</th><th style="width:36%;color:#F6F3EA;text-align:left">Qué muestra</th><th style="width:36%;color:#F6F3EA;text-align:left">Úsalo para</th></tr>
+<tr style="background:#FFFDF8"><td>3.1 Operaciones</td><td>Operaciones e inspecciones</td><td>Ver el proceso completo</td></tr>
+<tr style="background:#EDE8D8"><td>3.2 Análisis</td><td>Los cinco símbolos con tiempos</td><td>Detectar demoras y transportes</td></tr>
+<tr style="background:#FFFDF8"><td>3.3 Recorrido</td><td>Trayectoria sobre el plano</td><td>Mejorar la distribución</td></tr>
+<tr style="background:#EDE8D8"><td>3.4 Operario</td><td>Actividades de una persona</td><td>Tareas manuales y de almacén</td></tr>
+<tr style="background:#FFFDF8"><td>3.5 Múltiples</td><td>Varios sujetos en el tiempo</td><td>Equilibrar cuadrillas</td></tr>
+<tr style="background:#EDE8D8"><td>3.6 Hombre-máquina</td><td>Operario y máquina</td><td>Reducir esperas</td></tr>
+<tr style="background:#FFFDF8"><td>3.7 Bimanual</td><td>Qué hace cada mano</td><td>Diseñar puestos de trabajo</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">17</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#14213D;color:#F6F3EA;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F29A4A">Cierre</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#F6F3EA">Ideas clave de la unidad</h2>
+<div style="display:flex;flex-direction:column;gap:24px">
+<div style="background:#1F2F55;border-radius:16px;padding:24px 32px;display:flex;align-items:center;gap:32px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;width:48px">1</p><p style="font-size:32px;line-height:1.4;color:#F6F3EA">Primero se registra, luego se examina y al final se mejora.</p></div>
+<div style="background:#1F2F55;border-radius:16px;padding:24px 32px;display:flex;align-items:center;gap:32px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;width:48px">2</p><p style="font-size:32px;line-height:1.4;color:#F6F3EA">Cada diagrama responde una pregunta distinta: elige el que muestre tu problema.</p></div>
+<div style="background:#1F2F55;border-radius:16px;padding:24px 32px;display:flex;align-items:center;gap:32px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;width:48px">3</p><p style="font-size:32px;line-height:1.4;color:#F6F3EA">Eliminar, combinar, reordenar y simplificar son las palancas de mejora.</p></div>
+</div>
+<div style="background:#F29A4A;border-radius:16px;padding:32px"><p style="font-size:32px;line-height:1.4;font-weight:600;color:#14213D">Actividad: elige una tarea cotidiana (preparar café), dibuja su DAP y propón una mejora con ECRS.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#9FB0CF">Unidad 3 · Estudio de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#9FB0CF;text-align:right">18</p>
+
+</section>
+</div>
+<div id="bar"><button id="p" aria-label="Diapositiva anterior">◀ Anterior</button><span id="c" aria-live="polite"></span><button id="n" aria-label="Diapositiva siguiente">Siguiente ▶</button><button id="f" aria-label="Pantalla completa">⛶</button></div>
+<script>
+const S=[...document.querySelectorAll('.slide')];let i=0;const st=document.getElementById('stage');
+function fit(){const w=innerWidth,h=innerHeight-44,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.left=((w-1920*k)/2)+'px';st.style.top=((h-1080*k)/2)+'px'}
+function show(k){i=Math.max(0,Math.min(S.length-1,k));S.forEach((s,j)=>s.classList.toggle('on',j==i));document.getElementById('c').textContent=(i+1)+' / '+S.length;try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+document.getElementById('p').onclick=()=>show(i-1);document.getElementById('n').onclick=()=>show(i+1);
+document.getElementById('f').onclick=()=>{const e=document.documentElement;document.fullscreenElement?document.exitFullscreen():e.requestFullscreen&&e.requestFullscreen()};
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){show(i+1);e.preventDefault()}if(['ArrowLeft','PageUp'].includes(e.key)){show(i-1);e.preventDefault()}if(e.key=='Home')show(0);if(e.key=='End')show(S.length-1)});
+let tx=null;addEventListener('touchstart',e=>tx=e.touches[0].clientX);addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));tx=null});
+addEventListener('resize',fit);fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>

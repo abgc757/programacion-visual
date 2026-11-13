@@ -1,0 +1,401 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unidad 4 · Tiempos estimados</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap">
+<style>html,body{margin:0;height:100%;background:#0e1730;overflow:hidden;font-family:'Nunito Sans',Arial,sans-serif}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.slide:not(.on){display:none !important}
+#stage *{margin:0;box-sizing:border-box} table{border-collapse:collapse;width:100%} th,td{padding:12px 18px;vertical-align:middle} h1,h2,h3{font-weight:inherit}
+#bar{position:fixed;left:0;right:0;bottom:0;height:44px;display:flex;align-items:center;justify-content:center;gap:14px;background:rgba(14,23,48,.92);color:#F6F3EA;font-size:15px;z-index:9}
+#bar button{background:#F29A4A;color:#14213D;border:0;border-radius:8px;padding:6px 16px;font-weight:700;font-size:15px;cursor:pointer;min-height:32px}
+#bar button:focus-visible{outline:3px solid #fff}</style></head><body>
+<div id="stage"><section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#14213D;color:#F6F3EA;font-family:'Nunito Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<svg viewBox="0 0 320 340" aria-label="Cronómetro" style="position:absolute;left:1440px;top:128px;width:320px;height:340px"><rect x="132" y="0" width="56" height="26" rx="6" fill="#F29A4A"/><circle cx="160" cy="190" r="136" fill="none" stroke="#F29A4A" stroke-width="10"/><line x1="160" y1="70" x2="160" y2="92" stroke="#F6F3EA" stroke-width="8" stroke-linecap="round"/><line x1="160" y1="288" x2="160" y2="310" stroke="#F6F3EA" stroke-width="8" stroke-linecap="round"/><line x1="40" y1="190" x2="62" y2="190" stroke="#F6F3EA" stroke-width="8" stroke-linecap="round"/><line x1="258" y1="190" x2="280" y2="190" stroke="#F6F3EA" stroke-width="8" stroke-linecap="round"/><line x1="160" y1="190" x2="160" y2="116" stroke="#F6F3EA" stroke-width="10" stroke-linecap="round"/><line x1="160" y1="190" x2="214" y2="220" stroke="#7CC0DE" stroke-width="10" stroke-linecap="round"/><circle cx="160" cy="190" r="12" fill="#F29A4A"/></svg>
+<p style="position:absolute;left:1420px;top:560px;width:372px;font-size:24px;font-weight:700;color:#14213D;background:#F29A4A;padding:12px 16px;border-radius:40px">4.6 Micromovimientos</p>
+<p style="position:absolute;left:1420px;top:632px;width:372px;font-size:24px;font-weight:700;color:#14213D;background:#7CC0DE;padding:12px 16px;border-radius:40px">4.7 Therbligs</p>
+<p style="position:absolute;left:1420px;top:704px;width:372px;font-size:24px;font-weight:700;color:#14213D;background:#F6F3EA;padding:12px 16px;border-radius:40px">4.8 MTM</p>
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F29A4A">Ingeniería de métodos · Unidad 4</p>
+<div style="display:flex;flex-direction:column;gap:32px">
+<div style="width:120px;height:10px;background:#F29A4A"></div>
+<h1 style="font-family:'Rubik', Arial, sans-serif;font-size:112px;font-weight:600;line-height:1.05;color:#F6F3EA">Tiempos estimados</h1>
+<p style="font-size:40px;line-height:1.35;color:#C9D3E6;width:1100px">Cuánto tarda un trabajo, calculado antes de cronometrarlo</p>
+</div>
+<p style="font-size:28px;color:#9FB0CF">Ingeniería Industrial · Con ejemplos resueltos y ejercicios para el alumno</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Mapa de la unidad</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Contenido de la unidad</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">4.6</p><p style="font-size:32px;font-weight:700;line-height:1.25">Micromovimientos</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Filmar el trabajo y analizarlo cuadro por cuadro.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">4.7</p><p style="font-size:32px;font-weight:700;line-height:1.25">Therbligs</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Los 18 movimientos básicos del trabajo manual.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">4.8</p><p style="font-size:32px;font-weight:700;line-height:1.25">MTM</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Calcular el tiempo con tablas, en unidades TMU.</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:32px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">En cada tema encontrarás</p><p style="font-size:32px;font-weight:600;line-height:1.4;color:#F6F3EA">Un ejemplo resuelto paso a paso y un ejercicio para practicar, con sus soluciones al final.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">2</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Punto de partida</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">¿Por qué estimar tiempos sin cronómetro?</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:40px;font-weight:600;line-height:1.2">Con cronómetro</h3>
+<ul style="font-size:28px;line-height:1.45;color:#3C465A;padding:0 0 0 32px">
+<li>Necesitas el trabajo ya funcionando.</li>
+<li>El resultado depende del ritmo de la persona observada.</li>
+<li>Si cambia el método, hay que medir otra vez.</li>
+</ul>
+</div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:40px;font-weight:600;line-height:1.2;color:#F29A4A">Con tiempos estimados</h3>
+<ul style="font-size:28px;line-height:1.45;color:#F6F3EA;padding:0 0 0 32px">
+<li>Se calcula en papel, antes de montar la línea.</li>
+<li>Cualquier analista llega al mismo resultado.</li>
+<li>Permite comparar dos métodos antes de elegir.</li>
+</ul>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;font-weight:600">Idea central: dividir el trabajo en movimientos pequeños y asignar un tiempo a cada uno.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">3</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.6 · Micromovimientos</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Ver el trabajo en cámara lenta</h2>
+<p style="font-size:40px;line-height:1.35;font-weight:600">Dividir el trabajo en <span style="color:#B24E08">movimientos muy pequeños</span> de manos, ojos y cuerpo, y estudiarlos en un video.</p>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Qué es</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Cada movimiento se revisa cuadro por cuadro, como en una repetición en cámara lenta.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Quién lo creó</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Frank y Lillian Gilbreth, a principios del siglo XX, con película y un reloj dentro de la escena.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Cuándo conviene</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Trabajos muy cortos y repetitivos, con miles de ciclos: ensamble, empaque, costura.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">4</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.6 · Cómo se hace</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Cuatro pasos con un celular</h2>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">1</p><p style="font-size:32px;font-weight:700">Filmar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Celular fijo, mismo operario, varios ciclos completos.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">2</p><p style="font-size:32px;font-weight:700">Reproducir</p><p style="font-size:28px;line-height:1.4;color:#3C465A">En cámara lenta o cuadro por cuadro.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">3</p><p style="font-size:32px;font-weight:700">Registrar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Qué hace cada mano y en qué cuadro empieza y termina.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">4</p><p style="font-size:32px;font-weight:700">Mejorar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Eliminar o combinar movimientos y volver a filmar.</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:32px 40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:700;color:#F29A4A">Cómo se convierten cuadros en tiempo</p>
+<p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;line-height:1.2;color:#F6F3EA">Tiempo (s) = cuadros ÷ cuadros por segundo</p>
+<p style="font-size:28px;line-height:1.4;color:#C9D3E6">A 30 cuadros por segundo: 30 cuadros = 1 s y 1 cuadro ≈ 0.033 s.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">5</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.6 · Ejemplo resuelto · video a 30 cuadros por segundo</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Carta SIMO: unir arandela y tornillo</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:18%;color:#F6F3EA;text-align:left">Cuadros</th><th style="width:14%;color:#F6F3EA;text-align:left">Tiempo</th><th style="width:34%;color:#F6F3EA;text-align:left">Mano izquierda</th><th style="width:34%;color:#F6F3EA;text-align:left">Mano derecha</th></tr>
+<tr style="background:#FFFDF8"><td>0 a 6</td><td>0.20 s</td><td>Alcanzar la arandela</td><td>Alcanzar el tornillo</td></tr>
+<tr style="background:#EDE8D8"><td>6 a 9</td><td>0.10 s</td><td>Tomar la arandela</td><td>Tomar el tornillo</td></tr>
+<tr style="background:#FFFDF8"><td>9 a 18</td><td>0.30 s</td><td>Llevar la arandela al centro</td><td>Llevar el tornillo al centro</td></tr>
+<tr style="background:#F3D9BE"><td>18 a 30</td><td>0.40 s</td><td>Sostener la arandela (espera)</td><td>Ensamblar: meter el tornillo</td></tr>
+<tr style="background:#FFFDF8"><td>30 a 33</td><td>0.10 s</td><td>Soltar</td><td>Soltar</td></tr>
+<tr style="background:#EDE8D8"><td><b>Ciclo: 33</b></td><td><b>1.10 s</b></td><td></td><td></td></tr>
+</table>
+<div style="background:#14213D;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Hallazgo (fila resaltada)</p><p style="font-size:32px;line-height:1.35;font-weight:600;color:#F6F3EA">La mano izquierda solo sostiene durante 0.40 s: 36 % del ciclo.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">6</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 1 · Para el alumno · 10 minutos, en parejas</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Graba y analiza una tarea corta</h2>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1.5;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">1</p><p style="font-size:28px;line-height:1.4;flex:1">Elijan una tarea corta: sacar una pluma del estuche, cerrar una libreta o abrochar un botón.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">2</p><p style="font-size:28px;line-height:1.4;flex:1">Grábenla con el celular, tres ciclos seguidos, con las dos manos a la vista.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">3</p><p style="font-size:28px;line-height:1.4;flex:1">Reprodúzcanla en cámara lenta y llenen una carta SIMO: qué hace cada mano y en qué cuadros.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">4</p><p style="font-size:28px;line-height:1.4;flex:1">Respondan: ¿qué mano estuvo ociosa? ¿Qué movimiento se puede eliminar?</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Recuerda</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#F6F3EA">Tiempo (s) = cuadros ÷ 30</p></div>
+<div style="background:#F7FBFC;border:1px solid #B9D3DB;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#185A72">Entregable</h3><p style="font-size:28px;line-height:1.4;color:#33475A">Una carta SIMO con al menos 4 filas, el tiempo del ciclo y una mejora propuesta.</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 4 · Tiempos estimados · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">7</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.7 · Therbligs</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">El alfabeto del movimiento</h2>
+<p style="font-size:36px;line-height:1.4;font-weight:600">Un therblig es un <span style="color:#B24E08">movimiento básico</span>. Todo trabajo manual se puede escribir como una secuencia de therbligs. El nombre es Gilbreth casi al revés.</p>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;color:#B24E08;line-height:1.1">7</p><p style="font-size:32px;font-weight:700">Eficaces</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Hacen avanzar el trabajo.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;color:#B24E08;line-height:1.1">7</p><p style="font-size:32px;font-weight:700">Auxiliares</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Apoyan; muchos se pueden eliminar.</p></div>
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;color:#F29A4A;line-height:1.1">4</p><p style="font-size:32px;font-weight:700;color:#F6F3EA">Detienen el trabajo</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">No avanzan; se eliminan o se reducen.</p></div>
+</div>
+<p style="font-size:24px;line-height:1.4;color:#5A6478">Total: 18 therbligs (la lista clásica de 17 más «Encontrar»). La clasificación en tres grupos varía según el autor.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">8</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.7 · Grupo 1 de 3</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Therbligs eficaces: hacen avanzar el trabajo</h2>
+<table style="font-size:26px;color:#14213D">
+<tr style="background:#14213D"><th style="width:22%;color:#F6F3EA;text-align:left">Nombre</th><th style="width:8%;color:#F6F3EA;text-align:left">Clave</th><th style="width:40%;color:#F6F3EA;text-align:left">Qué es</th><th style="width:30%;color:#F6F3EA;text-align:left">Ejemplo con una taza</th></tr>
+<tr style="background:#FFFDF8"><td>Transportar vacío</td><td>TE</td><td>La mano se mueve sin carga hacia el objeto</td><td>Estirar la mano hacia la taza</td></tr>
+<tr style="background:#EDE8D8"><td>Tomar</td><td>G</td><td>Cerrar los dedos para controlar el objeto</td><td>Agarrar el asa</td></tr>
+<tr style="background:#FFFDF8"><td>Transportar cargado</td><td>TL</td><td>Mover el objeto con la mano</td><td>Llevar la taza a la boca</td></tr>
+<tr style="background:#EDE8D8"><td>Soltar</td><td>RL</td><td>Dejar de controlar el objeto</td><td>Apoyar la taza y abrir la mano</td></tr>
+<tr style="background:#FFFDF8"><td>Usar</td><td>U</td><td>Emplear una herramienta para su fin</td><td>Girar el destornillador</td></tr>
+<tr style="background:#EDE8D8"><td>Ensamblar</td><td>A</td><td>Unir dos partes</td><td>Meter el tornillo en la tuerca</td></tr>
+<tr style="background:#FFFDF8"><td>Desensamblar</td><td>DA</td><td>Separar dos partes</td><td>Quitar la tapa del bolígrafo</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.4;font-weight:600">Se conservan, pero se pueden hacer más cortos y más fáciles.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">9</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.7 · Grupo 2 de 3</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Therbligs auxiliares: apoyan el trabajo</h2>
+<table style="font-size:26px;color:#14213D">
+<tr style="background:#14213D"><th style="width:22%;color:#F6F3EA;text-align:left">Nombre</th><th style="width:8%;color:#F6F3EA;text-align:left">Clave</th><th style="width:40%;color:#F6F3EA;text-align:left">Qué es</th><th style="width:30%;color:#F6F3EA;text-align:left">Ejemplo con llaves</th></tr>
+<tr style="background:#FFFDF8"><td>Buscar</td><td>Sh</td><td>Se intenta ubicar el objeto</td><td>Buscar las llaves en el bolso</td></tr>
+<tr style="background:#F6F3EA"><td>Encontrar</td><td>F</td><td>Se localiza el objeto buscado</td><td>Ver las llaves</td></tr>
+<tr style="background:#FFFDF8"><td>Seleccionar</td><td>St</td><td>Elegir una pieza entre varias</td><td>Escoger la llave correcta</td></tr>
+<tr style="background:#F6F3EA"><td>Planear</td><td>Pn</td><td>Decidir mentalmente el siguiente paso</td><td>Pensar qué llave probar</td></tr>
+<tr style="background:#FFFDF8"><td>Colocar</td><td>P</td><td>Orientar el objeto para usarlo</td><td>Alinear la llave con la cerradura</td></tr>
+<tr style="background:#F6F3EA"><td>Pre-colocar</td><td>PP</td><td>Dejar el objeto listo para después</td><td>Dejar la pieza ya orientada</td></tr>
+<tr style="background:#FFFDF8"><td>Inspeccionar</td><td>I</td><td>Comparar con un estándar</td><td>Revisar rebabas en la pieza</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.4;font-weight:600">Buscar, encontrar y seleccionar casi siempre se eliminan con un puesto bien ordenado.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">10</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.7 · Grupo 3 de 3</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Therbligs que detienen el trabajo</h2>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:700;line-height:1.2">Sostener</h3><p style="font-size:24px;font-weight:700;color:#B24E08">Clave H</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Una mano sostiene mientras la otra trabaja.</p><p style="font-size:24px;font-weight:700;color:#B24E08">Acción: eliminar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Usa una prensa o un dispositivo de sujeción.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:700;line-height:1.2">Demora evitable</h3><p style="font-size:24px;font-weight:700;color:#B24E08">Clave AD</p><p style="font-size:28px;line-height:1.4;color:#3C465A">La espera la causa el operario o el diseño del puesto.</p><p style="font-size:24px;font-weight:700;color:#B24E08">Acción: eliminar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Prepara el material antes y ordena el flujo.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:700;line-height:1.2">Demora inevitable</h3><p style="font-size:24px;font-weight:700;color:#B24E08">Clave UD</p><p style="font-size:28px;line-height:1.4;color:#3C465A">La espera la impone el proceso, como una máquina trabajando.</p><p style="font-size:24px;font-weight:700;color:#B24E08">Acción: aprovechar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Asigna otra tarea mientras tanto.</p></div>
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><h3 style="font-size:32px;font-weight:700;line-height:1.2;color:#F6F3EA">Descansar</h3><p style="font-size:24px;font-weight:700;color:#F29A4A">Clave R</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">Pausa para recuperarse de la fatiga.</p><p style="font-size:24px;font-weight:700;color:#F29A4A">Acción: respetar</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">Se suma como tolerancia en el tiempo estándar.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">11</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.7 · Ejemplo resuelto</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Meter un bolígrafo en una bolsa</h2>
+<div style="display:flex;gap:32px;align-items:flex-start">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:32px;font-weight:600;line-height:1.2;padding:0 0 8px 0">Antes: bolígrafos revueltos en una caja</h3>
+<p style="font-size:28px;line-height:1.4"><b>1</b> Buscar (Sh) · <span style="color:#B24E08"><b>se elimina</b></span></p>
+<p style="font-size:28px;line-height:1.4"><b>2</b> Seleccionar (St) · <span style="color:#B24E08"><b>se elimina</b></span></p>
+<p style="font-size:28px;line-height:1.4"><b>3</b> Transportar vacío (TE)</p>
+<p style="font-size:28px;line-height:1.4"><b>4</b> Tomar (G)</p>
+<p style="font-size:28px;line-height:1.4"><b>5</b> Transportar cargado (TL)</p>
+<p style="font-size:28px;line-height:1.4"><b>6</b> Colocar (P)</p>
+<p style="font-size:28px;line-height:1.4"><b>7</b> Soltar (RL)</p>
+</div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#F29A4A;padding:0 0 8px 0">Después: charola con lugar fijo</h3>
+<p style="font-size:28px;line-height:1.4;color:#F6F3EA"><b>1</b> Transportar vacío (TE)</p>
+<p style="font-size:28px;line-height:1.4;color:#F6F3EA"><b>2</b> Tomar (G)</p>
+<p style="font-size:28px;line-height:1.4;color:#F6F3EA"><b>3</b> Transportar cargado (TL)</p>
+<p style="font-size:28px;line-height:1.4;color:#F6F3EA"><b>4</b> Colocar (P)</p>
+<p style="font-size:28px;line-height:1.4;color:#F6F3EA"><b>5</b> Soltar (RL)</p>
+<p style="font-size:28px;line-height:1.4;color:#C9D3E6">Los bolígrafos están ordenados, siempre en el mismo lugar y con la punta hacia el mismo lado.</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.4;font-weight:600">De 7 a 5 therbligs: se eliminan 2 de 7 (≈ 29 %).</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">12</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 2 · Para el alumno · 10 minutos, individual</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Divide una tarea cotidiana en therbligs</h2>
+<div style="background:#14213D;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Tarea</p><p style="font-size:32px;line-height:1.4;font-weight:600;color:#F6F3EA">Abrir la puerta de tu casa con la llave. La llave está dentro de la mochila y la puerta tiene cerradura.</p></div>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1.5;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">Escribe la secuencia completa de therbligs, con sus claves.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">Clasifica cada uno: eficaz, auxiliar o que detiene el trabajo.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">Propón un cambio que elimine al menos 2 therbligs.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">d</p><p style="font-size:28px;line-height:1.4;flex:1">¿Qué principio de economía de movimientos aplicaste?</p></div>
+</div>
+<div style="flex:1;background:#F7FBFC;border:1px solid #B9D3DB;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#185A72">Pista</h3><p style="font-size:28px;line-height:1.4;color:#33475A">Piensa en lo que hace cada mano y también en lo que hacen los ojos. Anota los therbligs en orden.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 4 · Tiempos estimados · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">13</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.8 · MTM (Methods-Time Measurement)</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Un tiempo de tabla para cada movimiento</h2>
+<p style="font-size:36px;line-height:1.4;font-weight:600">MTM es un sistema de <span style="color:#B24E08">tiempos predeterminados</span>: cada movimiento básico ya tiene un tiempo medido y publicado en tablas. Lo desarrollaron Maynard, Stegemerten y Schwab, y se publicó en 1948.</p>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">1</p><p style="font-size:32px;font-weight:700">Dividir</p><p style="font-size:28px;line-height:1.4;color:#3C465A">La tarea en movimientos básicos.</p></div>
+<div style="flex:none;width:64px;height:36px;background:#C2570C;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">2</p><p style="font-size:32px;font-weight:700">Buscar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Cada movimiento en la tabla.</p></div>
+<div style="flex:none;width:64px;height:36px;background:#C2570C;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08;line-height:1.1">3</p><p style="font-size:32px;font-weight:700">Sumar</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Los TMU de todo el ciclo.</p></div>
+<div style="flex:none;width:64px;height:36px;background:#C2570C;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%)"></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#F29A4A;line-height:1.1">4</p><p style="font-size:32px;font-weight:700;color:#F6F3EA">Convertir</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">De TMU a segundos.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">14</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.8 · La unidad de medida</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">El TMU: una unidad muy pequeña</h2>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<div style="background:#14213D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-size:24px;font-weight:700;color:#F29A4A">TMU = Time Measurement Unit</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1;color:#F6F3EA">1 TMU = 0.036 s</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#B24E08">Ejemplo rápido</p><p style="font-size:32px;line-height:1.4;font-weight:600">100 TMU × 0.036 = 3.6 segundos</p></div>
+</div>
+<table style="flex:1;font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:50%;color:#F6F3EA;text-align:left">Equivalencia</th><th style="width:50%;color:#F6F3EA;text-align:left">Valor</th></tr>
+<tr style="background:#FFFDF8"><td>1 TMU</td><td>0.00001 horas</td></tr>
+<tr style="background:#F6F3EA"><td>1 TMU</td><td>0.0006 minutos</td></tr>
+<tr style="background:#FFFDF8"><td>1 TMU</td><td>0.036 segundos</td></tr>
+<tr style="background:#F6F3EA"><td>1 hora</td><td>100,000 TMU</td></tr>
+<tr style="background:#FFFDF8"><td>1 minuto</td><td>≈ 1,667 TMU</td></tr>
+<tr style="background:#F6F3EA"><td>1 segundo</td><td>≈ 27.8 TMU</td></tr>
+</table>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">15</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.8 · Los elementos</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Los movimientos básicos de MTM-1</h2>
+<div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">R</p><p style="font-size:28px;font-weight:700;line-height:1.2">Alcanzar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">La mano llega al objeto.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">M</p><p style="font-size:28px;font-weight:700;line-height:1.2">Mover</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Llevar el objeto a su destino.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">T</p><p style="font-size:28px;font-weight:700;line-height:1.2">Girar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Rotar la mano o la muñeca.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">AP</p><p style="font-size:28px;font-weight:700;line-height:1.2">Aplicar presión</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Empujar con fuerza.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">G</p><p style="font-size:28px;font-weight:700;line-height:1.2">Asir</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Controlar el objeto con los dedos.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">P</p><p style="font-size:28px;font-weight:700;line-height:1.2">Posicionar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Alinear y encajar la pieza.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">RL</p><p style="font-size:28px;font-weight:700;line-height:1.2">Soltar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Abrir los dedos y liberar.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">D</p><p style="font-size:28px;font-weight:700;line-height:1.2">Desacoplar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Separar piezas encajadas.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">ET·EF</p><p style="font-size:28px;font-weight:700;line-height:1.2">Movimiento ocular</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Mover y enfocar la vista.</p></div>
+<div style="background:#14213D;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;line-height:1.1">+</p><p style="font-size:28px;font-weight:700;line-height:1.2;color:#F6F3EA">Cuerpo y pies</p><p style="font-size:24px;line-height:1.4;color:#C9D3E6">Caminar, agacharse, pedal.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">16</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.8 · Ejemplo resuelto</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Tomar una pieza y llevarla a una charola</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:22%;color:#F6F3EA;text-align:left">Elemento</th><th style="width:12%;color:#F6F3EA;text-align:left">Código</th><th style="width:50%;color:#F6F3EA;text-align:left">Qué pasa</th><th style="width:16%;color:#F6F3EA;text-align:left">TMU</th></tr>
+<tr style="background:#FFFDF8"><td>Alcanzar</td><td>R</td><td>La mano llega a la pieza</td><td>9</td></tr>
+<tr style="background:#F6F3EA"><td>Asir</td><td>G</td><td>Los dedos toman la pieza</td><td>2</td></tr>
+<tr style="background:#FFFDF8"><td>Mover</td><td>M</td><td>Se lleva la pieza a la charola</td><td>12</td></tr>
+<tr style="background:#F6F3EA"><td>Posicionar</td><td>P</td><td>Se acomoda la pieza en su lugar</td><td>6</td></tr>
+<tr style="background:#FFFDF8"><td>Soltar</td><td>RL</td><td>Se abren los dedos</td><td>2</td></tr>
+<tr style="background:#F3D9BE"><td><b>Total</b></td><td></td><td><b>Ciclo completo de la mano derecha</b></td><td><b>31</b></td></tr>
+</table>
+<div style="background:#14213D;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Conversión a segundos</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#F6F3EA">31 TMU × 0.036 = 1.116 s ≈ 1.12 s</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados · Valores didácticos simplificados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">17</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">4.8 · Del cálculo al tiempo estándar</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">De TMU a piezas por hora</h2>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1.2;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:48px">1</p><p style="font-size:28px;line-height:1.4;flex:1">Suma los TMU de todo el ciclo.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:48px">2</p><p style="font-size:28px;line-height:1.4;flex:1">Multiplica por 0.036 para obtener el tiempo normal en segundos.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:48px">3</p><p style="font-size:28px;line-height:1.4;flex:1">Tiempo estándar = tiempo normal × (1 + tolerancia).</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:48px">4</p><p style="font-size:28px;line-height:1.4;flex:1">Piezas por hora = 3,600 ÷ tiempo estándar.</p></div>
+</div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:14px">
+<p style="font-size:24px;font-weight:700;color:#F29A4A">Ejemplo: ciclo de 250 TMU y tolerancia de 15 %</p>
+<p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#F6F3EA">250 × 0.036 = 9.0 s</p>
+<p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#F6F3EA">9.0 × 1.15 = 10.35 s</p>
+<p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#F6F3EA">3,600 ÷ 10.35 ≈ 348 piezas por hora</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#3C465A">Las tablas MTM ya suponen un ritmo normal, por eso no se califica la velocidad del operario. Las tolerancias (fatiga y necesidades personales) se agregan al final.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">18</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 3 · Para el alumno · 15 minutos, individual</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Calcula el tiempo estándar de una tarea</h2>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;line-height:1.4;font-weight:600">Tarea: tomar un sobre y meterlo en una caja. Tolerancia: 12 %.</p>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:65%;color:#F6F3EA;text-align:left">Elemento</th><th style="width:35%;color:#F6F3EA;text-align:left">TMU</th></tr>
+<tr style="background:#F7FBFC"><td>Alcanzar</td><td>10</td></tr>
+<tr style="background:#DCE9ED"><td>Asir</td><td>3</td></tr>
+<tr style="background:#F7FBFC"><td>Mover</td><td>14</td></tr>
+<tr style="background:#DCE9ED"><td>Posicionar</td><td>8</td></tr>
+<tr style="background:#F7FBFC"><td>Soltar</td><td>2</td></tr>
+</table>
+</div>
+<div style="flex:1.1;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuántos TMU tiene el ciclo?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuál es el tiempo normal, en segundos?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuál es el tiempo estándar con 12 % de tolerancia?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">d</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuántas piezas por hora se producen?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">e</p><p style="font-size:28px;line-height:1.4;flex:1">Extra: ¿cuántos TMU equivalen a 5 segundos?</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 4 · Tiempos estimados · Ejercicio · Valores didácticos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">19</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Para elegir la técnica</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Las tres técnicas, comparadas</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:24%;color:#F6F3EA;text-align:left">Técnica</th><th style="width:28%;color:#F6F3EA;text-align:left">Qué usa</th><th style="width:22%;color:#F6F3EA;text-align:left">¿Necesita la tarea real?</th><th style="width:26%;color:#F6F3EA;text-align:left">Mejor para</th></tr>
+<tr style="background:#FFFDF8"><td>Micromovimientos</td><td>Video cuadro por cuadro</td><td>Sí, grabada</td><td>Ciclos muy cortos y repetitivos</td></tr>
+<tr style="background:#EDE8D8"><td>Therbligs</td><td>18 movimientos básicos</td><td>Sí, o en el papel</td><td>Detectar movimientos inútiles</td></tr>
+<tr style="background:#FFFDF8"><td>MTM</td><td>Tablas de TMU</td><td>No, se calcula antes</td><td>Diseñar y comparar métodos</td></tr>
+<tr style="background:#EDE8D8"><td>Cronómetro (unidad 5)</td><td>Tiempo real medido</td><td>Sí</td><td>Tareas largas o variables</td></tr>
+</table>
+<p style="font-size:32px;line-height:1.4;font-weight:600">Se complementan: primero se describe el movimiento, después se le asigna un tiempo.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">22</p>
+
+</section>
+<section class="slide" style="position:relative;width:1920px;height:1080px;overflow:hidden;box-sizing:border-box;background:#14213D;color:#F6F3EA;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F29A4A">Cierre</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1;color:#F6F3EA">Ideas clave de la unidad</h2>
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="background:#1F2F55;border-radius:16px;padding:24px 32px;display:flex;align-items:center;gap:32px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;width:48px">1</p><p style="font-size:30px;line-height:1.4;color:#F6F3EA"><b>Micromovimientos:</b> grabar el trabajo y analizarlo cuadro por cuadro. Tiempo = cuadros ÷ cuadros por segundo.</p></div>
+<div style="background:#1F2F55;border-radius:16px;padding:24px 32px;display:flex;align-items:center;gap:32px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;width:48px">2</p><p style="font-size:30px;line-height:1.4;color:#F6F3EA"><b>Therbligs:</b> 18 movimientos básicos. Se eliminan los que detienen el trabajo y los auxiliares innecesarios.</p></div>
+<div style="background:#1F2F55;border-radius:16px;padding:24px 32px;display:flex;align-items:center;gap:32px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;width:48px">3</p><p style="font-size:30px;line-height:1.4;color:#F6F3EA"><b>MTM:</b> 1 TMU = 0.036 s. El ciclo es la suma de los TMU de cada movimiento.</p></div>
+</div>
+<div style="background:#F29A4A;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#14213D">Tarea para la siguiente sesión</p><p style="font-size:30px;line-height:1.4;font-weight:600;color:#14213D">Elige una tarea cotidiana de 10 a 20 segundos, descríbela en therbligs y calcula su tiempo con las tablas MTM de tu libro.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#9FB0CF">Unidad 4 · Tiempos estimados</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#9FB0CF;text-align:right">23</p>
+
+</section>
+</div>
+<div id="bar"><button id="p" aria-label="Diapositiva anterior">◀ Anterior</button><span id="c" aria-live="polite"></span><button id="n" aria-label="Diapositiva siguiente">Siguiente ▶</button><button id="f" aria-label="Pantalla completa">⛶</button></div>
+<script>
+const S=[...document.querySelectorAll('.slide')];let i=0;const st=document.getElementById('stage');
+function fit(){const w=innerWidth,h=innerHeight-44,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.left=((w-1920*k)/2)+'px';st.style.top=((h-1080*k)/2)+'px'}
+function show(k){i=Math.max(0,Math.min(S.length-1,k));S.forEach((s,j)=>s.classList.toggle('on',j==i));document.getElementById('c').textContent=(i+1)+' / '+S.length;try{history.replaceState(null,'','#'+(i+1))}catch(e){}}
+document.getElementById('p').onclick=()=>show(i-1);document.getElementById('n').onclick=()=>show(i+1);
+document.getElementById('f').onclick=()=>{const e=document.documentElement;document.fullscreenElement?document.exitFullscreen():e.requestFullscreen&&e.requestFullscreen()};
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){show(i+1);e.preventDefault()}if(['ArrowLeft','PageUp'].includes(e.key)){show(i-1);e.preventDefault()}if(e.key=='Home')show(0);if(e.key=='End')show(S.length-1)});
+let tx=null;addEventListener('touchstart',e=>tx=e.touches[0].clientX);addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));tx=null});
+addEventListener('resize',fit);fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>
