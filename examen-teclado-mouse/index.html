@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Examen de Teclado y Mouse — Puericultura</title>
+<style>
+  :root{
+    --ink:#20263a;
+    --dim:#5b6480;
+    --bg:#f1f3f9;
+    --paper:#ffffff;
+    --line:#d9dded;
+    --accent:#6c4fd6;
+    --accent-deep:#4d35ad;
+    --accent-soft:#ece7fb;
+    --mint:#d8efe3;
+    --mint-ink:#1c7a4f;
+    --coral:#d1483a;
+    --coral-soft:#fbe4e0;
+    --amber:#e8a93b;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+    font-size:16px;line-height:1.55;
+  }
+  h1,h2,h3{font-family:Candara,"Segoe UI",system-ui,sans-serif;line-height:1.2;margin:0;}
+  p{margin:0 0 .6em;}
+  kbd{
+    font-family:Consolas,"Cascadia Mono",monospace;font-size:.86em;
+    background:#fff;border:1px solid var(--line);border-bottom-width:2px;
+    border-radius:5px;padding:1px 7px;white-space:nowrap;
+  }
+  :focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px;}
+  button{font:inherit;}
+
+  .topbar{position:sticky;top:0;z-index:30;background:var(--accent-deep);color:#fff;padding:10px 0;}
+  .topbar .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .topbar strong{font-size:14px;}
+  .meter{flex:1 1 180px;height:10px;background:rgba(255,255,255,.22);border-radius:99px;overflow:hidden;}
+  .meter i{display:block;height:100%;width:0;background:var(--amber);border-radius:99px;transition:width .3s;}
+  .topbar .count{font-size:14px;font-variant-numeric:tabular-nums;}
+
+  header.hero{padding:40px 0 26px;}
+  header.hero h1{font-size:clamp(28px,4.6vw,40px);color:var(--accent-deep);margin-bottom:10px;}
+  header.hero .lead{font-size:17px;max-width:62ch;color:var(--ink);}
+  .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .fact{background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:13.5px;color:var(--dim);}
+
+  section.block{padding:22px 0;}
+  .block > .wrap > h2{font-size:23px;color:var(--accent-deep);margin-bottom:4px;}
+  .block .intro{color:var(--dim);max-width:70ch;margin-bottom:16px;font-size:15px;}
+  .notice{background:#fdf3d9;border-left:5px solid var(--amber);border-radius:8px;padding:12px 16px;font-size:14.5px;margin-bottom:18px;}
+
+  .item{background:var(--paper);border:1px solid var(--line);border-radius:14px;margin-bottom:18px;overflow:hidden;}
+  .item-head{display:flex;align-items:center;gap:12px;padding:15px 20px;background:#f7f7fc;border-bottom:1px solid var(--line);}
+  .item-num{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;}
+  .item-head h3{font-size:18px;color:var(--accent-deep);flex:1;}
+  .pts{font-size:12.5px;color:var(--dim);}
+  .badge{font-size:12.5px;font-weight:700;padding:3px 11px;border-radius:99px;background:#e9e9f3;color:var(--dim);}
+  .badge.ok{background:var(--mint);color:var(--mint-ink);}
+  .item-body{padding:20px;}
+  .instr{color:var(--dim);font-size:14.5px;margin-bottom:14px;}
+
+  /* Reactivo 1: precision de clic */
+  .click-field{position:relative;height:220px;background:#f3f4fb;border:1px dashed var(--line);border-radius:10px;overflow:hidden;}
+  .target{
+    position:absolute;width:46px;height:46px;border-radius:50%;
+    background:var(--accent);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.18);
+    cursor:pointer;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;
+  }
+  .target:hover{background:var(--accent-deep);}
+  .click-stats{margin-top:10px;font-size:14px;color:var(--dim);}
+
+  /* Reactivo 2: doble clic */
+  .dblzone{display:flex;gap:14px;flex-wrap:wrap;}
+  .dblbox{
+    width:150px;height:90px;border-radius:10px;background:var(--accent-soft);
+    border:2px solid var(--accent);display:grid;place-items:center;text-align:center;
+    font-size:13.5px;color:var(--accent-deep);cursor:pointer;user-select:none;padding:8px;
+  }
+  .dblbox.done{background:var(--mint);border-color:var(--mint-ink);color:var(--mint-ink);}
+
+  /* Reactivo 3: arrastrar y soltar */
+  .dnd-wrap{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start;}
+  .dnd-source{display:flex;flex-direction:column;gap:10px;}
+  .dnd-item{
+    padding:10px 14px;background:#fff;border:1.5px solid var(--accent);border-radius:8px;
+    cursor:grab;font-size:14px;color:var(--accent-deep);font-weight:600;min-width:150px;text-align:center;
+  }
+  .dnd-item.placed{opacity:.35;cursor:default;}
+  .dnd-targets{display:flex;flex-direction:column;gap:10px;flex:1;min-width:220px;}
+  .dnd-slot{
+    min-height:46px;border:2px dashed var(--line);border-radius:8px;
+    display:flex;align-items:center;gap:10px;padding:6px 12px;font-size:13.5px;color:var(--dim);
+  }
+  .dnd-slot .lbl{flex:0 0 auto;font-weight:700;color:var(--ink);min-width:110px;}
+  .dnd-slot.over{border-color:var(--accent);background:var(--accent-soft);}
+  .dnd-slot.correct{border-style:solid;border-color:var(--mint-ink);background:var(--mint);}
+  .dnd-slot.wrong{border-style:solid;border-color:var(--coral);background:var(--coral-soft);}
+  .dnd-slot .chip{background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 10px;font-weight:600;color:var(--ink);}
+
+  /* Reactivo 4: clic derecho */
+  .ctx-area{
+    height:170px;background:#f3f4fb;border:1px dashed var(--line);border-radius:10px;
+    display:grid;place-items:center;color:var(--dim);font-size:14.5px;position:relative;
+  }
+  .ctx-menu{
+    position:absolute;background:#fff;border:1px solid var(--line);border-radius:8px;
+    box-shadow:0 10px 24px rgba(20,20,40,.18);min-width:180px;overflow:hidden;z-index:5;display:none;
+  }
+  .ctx-menu button{display:block;width:100%;text-align:left;padding:9px 14px;border:none;background:#fff;cursor:pointer;font-size:14px;color:var(--ink);}
+  .ctx-menu button:hover{background:var(--accent-soft);}
+  .ctx-menu button.target-opt{font-weight:700;color:var(--accent-deep);}
+
+  /* Reactivo 5: scroll */
+  .scroll-box{height:180px;overflow-y:scroll;border:1px solid var(--line);border-radius:10px;background:#fff;padding:0 16px;}
+  .scroll-pad{padding:14px 0;color:var(--dim);font-size:14px;border-bottom:1px dashed var(--line);}
+  .scroll-pad:last-child{border-bottom:none;}
+  .scroll-prize{background:var(--mint);color:var(--mint-ink);font-weight:700;border-radius:8px;padding:12px;text-align:center;}
+
+  /* Reactivo 6: mecanografia */
+  .type-prompt{
+    font-family:Consolas,"Cascadia Mono",monospace;font-size:17px;line-height:1.7;
+    background:#f3f4fb;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:12px;
+  }
+  .ch-pending{color:var(--dim);}
+  .ch-correct{color:var(--mint-ink);}
+  .ch-wrong{color:var(--coral);text-decoration:underline wavy var(--coral);}
+  .ch-current{background:var(--accent);color:#fff;border-radius:2px;}
+  .type-input{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:8px;font-family:Consolas,monospace;font-size:15px;}
+  .type-input:focus{border-color:var(--accent);outline:none;}
+  .type-stats{margin-top:8px;font-size:13.5px;color:var(--dim);}
+
+  /* Reactivo 7: atajos */
+  .combo-row{display:grid;grid-template-columns:1fr 160px 100px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);}
+  .combo-row:last-child{border-bottom:none;}
+  .combo-row select{font:inherit;padding:7px 9px;border:1.5px solid var(--line);border-radius:8px;}
+  .combo-res{font-size:13.5px;font-weight:600;}
+  .combo-res.ok{color:var(--mint-ink);}
+  .combo-res.bad{color:var(--coral);}
+
+  /* Reactivo 8: combinacion de teclas */
+  .combo-catch{background:#f3f4fb;border:1px dashed var(--line);border-radius:10px;padding:18px;text-align:center;}
+  .combo-target{font-family:Consolas,monospace;font-size:20px;color:var(--accent-deep);margin-bottom:10px;}
+  .combo-flag{font-size:14px;font-weight:700;margin-top:8px;}
+  .combo-flag.ok{color:var(--mint-ink);}
+
+  .btn{border:none;border-radius:8px;padding:9px 16px;background:var(--accent);color:#fff;font-weight:600;cursor:pointer;}
+  .btn:hover{background:var(--accent-deep);}
+  .btn.ghost{background:#fff;color:var(--accent-deep);border:1.5px solid var(--line);}
+  .btn.ghost:hover{border-color:var(--accent);background:var(--accent-soft);}
+  .btn.big{padding:13px 26px;font-size:16.5px;}
+  .btn[disabled]{opacity:.5;cursor:not-allowed;}
+
+  /* Resultado final */
+  #resultPanel{display:none;}
+  #resultPanel.show{display:block;}
+  .score-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:34px;text-align:center;
+  }
+  .score-num{font-family:Consolas,monospace;font-size:56px;color:var(--accent-deep);font-weight:700;line-height:1;}
+  .score-lbl{color:var(--dim);font-size:15px;margin-top:4px;}
+  .score-grade{display:inline-block;margin-top:14px;padding:6px 18px;border-radius:99px;font-weight:700;font-size:14.5px;}
+  .score-grade.hi{background:var(--mint);color:var(--mint-ink);}
+  .score-grade.mid{background:#fdf3d9;color:#8a6412;}
+  .score-grade.lo{background:var(--coral-soft);color:var(--coral);}
+  .breakdown{text-align:left;max-width:460px;margin:26px auto 0;}
+  .breakdown .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:14.5px;}
+  .breakdown .row b{color:var(--accent-deep);}
+
+  .submit-box{
+    margin-top:26px;background:var(--accent-soft);border-radius:12px;padding:20px 24px;text-align:left;
+  }
+  .submit-box h3{font-size:17px;color:var(--accent-deep);margin-bottom:8px;}
+  .submit-box ol{margin:0;padding-left:20px;font-size:14.5px;color:var(--ink);}
+  .submit-box li{margin-bottom:6px;}
+  .submit-box .dest{font-weight:700;color:var(--accent-deep);}
+
+  .toast{
+    position:fixed;left:50%;bottom:22px;transform:translateX(-50%);
+    background:var(--ink);color:#fff;padding:10px 18px;border-radius:10px;
+    font-size:14.5px;max-width:90vw;z-index:50;opacity:0;pointer-events:none;transition:opacity .2s;
+  }
+  .toast.show{opacity:1;}
+
+  footer{text-align:center;color:var(--dim);font-size:12.5px;margin:30px 0 50px;}
+
+  @media (max-width:640px){
+    .combo-row{grid-template-columns:1fr;}
+    .dnd-wrap{flex-direction:column;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .meter i,.toast{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar" role="status" aria-live="polite">
+  <div class="wrap">
+    <strong>Progreso del examen</strong>
+    <div class="meter" aria-hidden="true"><i id="meterFill"></i></div>
+    <span class="count" id="meterText">0 de 8 reactivos resueltos</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Examen de dominio de teclado y mouse</h1>
+    <p class="lead">Ocho reactivos breves para demostrar que controlas el mouse y el teclado con precisión: clics, doble clic, arrastrar y soltar, clic derecho, desplazamiento, mecanografía y atajos. Al final verás tu puntaje y las instrucciones para entregar tu evidencia.</p>
+    <div class="facts">
+      <span class="fact">8 reactivos</span>
+      <span class="fact">100 puntos en total</span>
+      <span class="fact">Unos 20 minutos</span>
+      <span class="fact">Entrega: captura de pantalla</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="notice"><strong>Antes de iniciar:</strong> resuelve los reactivos en orden, de arriba hacia abajo. Al terminar el último, presiona <b>Calcular mi puntaje</b> y sigue las instrucciones de entrega. No cierres ni recargues la página hasta terminar.</div>
+</div>
+
+<section class="block"><div class="wrap" id="items"></div></section>
+
+<section class="block" id="resultSection">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:16px;">
+      <button class="btn big" id="calcBtn" type="button">Calcular mi puntaje</button>
+    </div>
+    <div class="score-card" id="resultPanel">
+      <div class="score-lbl">Puntaje obtenido</div>
+      <div class="score-num" id="scoreNum">0</div>
+      <div class="score-lbl">de 100 puntos</div>
+      <div id="scoreGrade" class="score-grade">—</div>
+
+      <div class="breakdown" id="breakdown"></div>
+
+      <div class="submit-box">
+        <h3>Cómo entregar tu examen</h3>
+        <ol>
+          <li>Toma una captura de pantalla completa de esta página mostrando tu puntaje final (usa <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> en Windows).</li>
+          <li>Verifica que en la captura se vea con claridad el número de puntos obtenido y la calificación.</li>
+          <li>Ingresa a <span class="dest">CECUM.aulaescolar.net</span> con tu cuenta de alumna.</li>
+          <li>Sube tu captura de pantalla en la tarea correspondiente a este examen.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Examen generado para uso en clase · Puericultura · funciona sin conexión una vez cargado</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+function $(s,r){return (r||document).querySelector(s);}
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e;}
+var toastTimer=null;
+function toast(msg){
+  var t=$('#toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show');},2800);
+}
+
+/* Puntaje por reactivo: 8 reactivos, total 100 */
+var MAXPTS=[10,10,15,10,10,20,15,10];
+var score=new Array(8).fill(0);
+var done=new Array(8).fill(false);
+var itemsEl=$('#items');
+
+function markDone(i,pts){
+  done[i]=true;score[i]=Math.max(0,Math.min(MAXPTS[i],pts));
+  var b=$('#badge'+i);b.textContent='Resuelto';b.className='badge ok';
+  refreshProgress();
+}
+
+function refreshProgress(){
+  var n=done.filter(Boolean).length;
+  $('#meterFill').style.width=Math.round(n/8*100)+'%';
+  $('#meterText').textContent=n+' de 8 reactivos resueltos';
+}
+
+/* ---------- Construcción de reactivos ---------- */
+function makeItem(i,title,pts,instrText){
+  var art=el('article','item');art.id='item'+i;
+  var head=el('div','item-head');
+  head.appendChild(el('div','item-num',String(i+1)));
+  head.appendChild(el('h3',null,title));
+  head.appendChild(el('span','pts',pts+' pts'));
+  var badge=el('span','badge','Pendiente');badge.id='badge'+i;
+  head.appendChild(badge);
+  art.appendChild(head);
+  var body=el('div','item-body');
+  if(instrText) body.appendChild(el('p','instr',instrText));
+  art.appendChild(body);
+  itemsEl.appendChild(art);
+  return body;
+}
+
+/* ===== Reactivo 1: precisión de clic (10 pts, 5 objetivos) ===== */
+(function(){
+  var body=makeItem(0,'Precisión de clic',10,'Haz clic en cada círculo en cuanto aparezca. Tienes 5 objetivos.');
+  var field=el('div','click-field');
+  var stats=el('div','click-stats','Objetivos restantes: 5');
+  body.appendChild(field);body.appendChild(stats);
+  var total=5,hit=0;
+  function spawn(){
+    field.innerHTML='';
+    var t=el('div','target',String(hit+1));
+    var w=field.clientWidth||300,h=field.clientHeight||220;
+    var x=20+Math.random()*(w-66),y=20+Math.random()*(h-66);
+    t.style.left=x+'px';t.style.top=y+'px';
+    t.addEventListener('click',function(){
+      hit++;
+      if(hit>=total){
+        field.innerHTML='<p style="color:var(--mint-ink);font-weight:700;">¡Completado!</p>';
+        stats.textContent='Objetivos acertados: '+hit+' de '+total;
+        markDone(0,10);
+      }else{
+        stats.textContent='Objetivos restantes: '+(total-hit);
+        spawn();
+      }
+    });
+    field.appendChild(t);
+  }
+  spawn();
+})();
+
+/* ===== Reactivo 2: doble clic (10 pts, 3 cajas) ===== */
+(function(){
+  var body=makeItem(1,'Doble clic',10,'Haz doble clic en cada una de las tres cajas para activarlas.');
+  var zone=el('div','dblzone');
+  body.appendChild(zone);
+  var n=3,activated=0;
+  for(var k=0;k<n;k++){
+    (function(k){
+      var box=el('div','dblbox','Caja '+(k+1)+'<br>doble clic aquí');
+      box.addEventListener('dblclick',function(){
+        if(box.classList.contains('done'))return;
+        box.classList.add('done');box.innerHTML='Caja '+(k+1)+'<br>✓ activada';
+        activated++;
+        if(activated===n) markDone(1,10);
+      });
+      zone.appendChild(box);
+    })(k);
+  }
+})();
+
+/* ===== Reactivo 3: arrastrar y soltar (15 pts, 4 pares) ===== */
+(function(){
+  var body=makeItem(2,'Arrastrar y soltar',15,'Arrastra cada accesorio del bebé a la categoría correcta.');
+  var pairs=[
+    {item:'Biberón',cat:'Alimentación'},
+    {item:'Pañal',cat:'Higiene'},
+    {item:'Sonaja',cat:'Juego'},
+    {item:'Cobija',cat:'Descanso'}
+  ];
+  var cats=['Alimentación','Higiene','Juego','Descanso'];
+  var wrap=el('div','dnd-wrap');
+  var source=el('div','dnd-source');
+  var targets=el('div','dnd-targets');
+  var order=pairs.slice().sort(function(){return Math.random()-0.5;});
+  var placedCount=0,correctCount=0;
+
+  order.forEach(function(p,idx){
+    var d=el('div','dnd-item',p.item);
+    d.draggable=true;d.dataset.item=p.item;d.dataset.cat=p.cat;d.id='dnditem'+idx;
+    d.addEventListener('dragstart',function(e){
+      e.dataTransfer.setData('text/plain',d.id);
+      setTimeout(function(){d.style.opacity='.4';},0);
+    });
+    d.addEventListener('dragend',function(){d.style.opacity='';});
+    source.appendChild(d);
+  });
+
+  cats.forEach(function(c){
+    var slot=el('div','dnd-slot');
+    slot.dataset.cat=c;
+    slot.appendChild(el('span','lbl',c));
+    var holder=el('span','holder');
+    slot.appendChild(holder);
+    slot.addEventListener('dragover',function(e){e.preventDefault();slot.classList.add('over');});
+    slot.addEventListener('dragleave',function(){slot.classList.remove('over');});
+    slot.addEventListener('drop',function(e){
+      e.preventDefault();slot.classList.remove('over');
+      var id=e.dataTransfer.getData('text/plain');
+      var dragEl=document.getElementById(id);
+      if(!dragEl||dragEl.classList.contains('placed'))return;
+      var ok=dragEl.dataset.cat===c;
+      placedCount++;
+      if(ok){correctCount++;slot.classList.add('correct');}
+      else{slot.classList.add('wrong');setTimeout(function(){slot.classList.remove('wrong');},700);}
+      var chip=el('span','chip',dragEl.dataset.item+(ok?' ✓':' ✗'));
+      holder.appendChild(chip);
+      dragEl.classList.add('placed');dragEl.setAttribute('draggable','false');
+      if(placedCount===pairs.length){
+        markDone(2,Math.round(correctCount/pairs.length*15));
+      }
+    });
+    targets.appendChild(slot);
+  });
+
+  wrap.appendChild(source);wrap.appendChild(targets);
+  body.appendChild(wrap);
+})();
+
+/* ===== Reactivo 4: clic derecho (10 pts) ===== */
+(function(){
+  var body=makeItem(3,'Clic derecho (menú contextual)',10,'Haz clic derecho dentro del recuadro y, en el menú que aparece, elige la opción "Confirmar entrega".');
+  var area=el('div','ctx-area','Haz clic derecho aquí');
+  var menu=el('div','ctx-menu');
+  menu.appendChild((function(){var b=el('button',null,'Copiar');b.type='button';return b;})());
+  menu.appendChild((function(){var b=el('button',null,'Pegar');b.type='button';return b;})());
+  var correctBtn=el('button','target-opt','Confirmar entrega');correctBtn.type='button';
+  menu.appendChild(correctBtn);
+  menu.appendChild((function(){var b=el('button',null,'Cancelar');b.type='button';return b;})());
+  area.appendChild(menu);
+  body.appendChild(area);
+
+  area.addEventListener('contextmenu',function(e){
+    e.preventDefault();
+    var r=area.getBoundingClientRect();
+    var x=e.clientX-r.left,y=e.clientY-r.top;
+    menu.style.left=Math.min(x,r.width-190)+'px';
+    menu.style.top=Math.min(y,r.height-150)+'px';
+    menu.style.display='block';
+  });
+  document.addEventListener('click',function(e){
+    if(!menu.contains(e.target)) menu.style.display='none';
+  });
+  menu.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      menu.style.display='none';
+      if(btn===correctBtn){
+        area.innerHTML='<p style="color:var(--mint-ink);font-weight:700;">Entrega confirmada ✓</p>';
+        markDone(3,10);
+      }else{
+        toast('Esa no era la opción correcta. Vuelve a intentarlo.');
+      }
+    });
+  });
+})();
+
+/* ===== Reactivo 5: desplazamiento / scroll (10 pts) ===== */
+(function(){
+  var body=makeItem(4,'Desplazamiento con el mouse',10,'Usa la rueda del mouse (o arrastra la barra) para bajar hasta encontrar el recuadro de premio, al final de la lista.');
+  var box=el('div','scroll-box');
+  var lines=['Revisión de temperatura','Control de peso','Registro de alimentación','Cambio de pañal','Hora de siesta','Estimulación temprana','Lavado de manos','Preparación de biberón','Observación de signos vitales','Registro en bitácora'];
+  lines.forEach(function(t){box.appendChild(el('div','scroll-pad',t));});
+  var prize=el('div','scroll-prize','🏆 Llegaste al final: reactivo completado');
+  box.appendChild(prize);
+  body.appendChild(box);
+  var triggered=false;
+  box.addEventListener('scroll',function(){
+    if(triggered)return;
+    if(box.scrollTop+box.clientHeight>=box.scrollHeight-6){
+      triggered=true;markDone(4,10);
+    }
+  });
+})();
+
+/* ===== Reactivo 6: mecanografía (20 pts) ===== */
+(function(){
+  var body=makeItem(5,'Mecanografía',20,'Escribe el siguiente texto exactamente como se muestra, incluyendo mayúsculas y signos de puntuación.');
+  var text='El cuidado del lactante requiere paciencia, orden y mucho cariño.';
+  var promptEl=el('div','type-prompt');
+  var input=el('input','type-input');input.type='text';input.autocomplete='off';input.spellcheck=false;
+  var stats=el('div','type-stats','Precisión: 100%  ·  Errores: 0');
+  body.appendChild(promptEl);body.appendChild(input);body.appendChild(stats);
+
+  var errors=0,finished=false;
+  function render(){
+    var v=input.value,html='';
+    for(var i=0;i<text.length;i++){
+      var ch=text[i]===' '?' ':text[i].replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      var cls='ch-pending';
+      if(i<v.length) cls=v[i]===text[i]?'ch-correct':'ch-wrong';
+      if(i===v.length) cls+=' ch-current';
+      html+='<span class="'+cls+'">'+ch+'</span>';
+    }
+    promptEl.innerHTML=html;
+  }
+  render();
+  input.addEventListener('input',function(){
+    if(finished)return;
+    if(input.value.length>text.length) input.value=input.value.slice(0,text.length);
+    render();
+    var v=input.value,wrong=0;
+    for(var i=0;i<v.length;i++){ if(v[i]!==text[i]) wrong++; }
+    var acc=v.length?Math.round((v.length-wrong)/v.length*100):100;
+    stats.textContent='Precisión: '+acc+'%  ·  Errores: '+wrong;
+    if(v.length===text.length){
+      finished=true;input.disabled=true;
+      var pts=Math.round(Math.max(0,(acc-50))/50*20);
+      pts=Math.max(0,Math.min(20,acc===100?20:pts));
+      markDone(5,pts);
+    }
+  });
+})();
+
+/* ===== Reactivo 7: funciones secundarias del teclado (15 pts, 5 preguntas) ===== */
+(function(){
+  var body=makeItem(6,'Funciones secundarias del teclado',15,'Muchas teclas tienen un símbolo adicional que se escribe sosteniendo <kbd>Shift</kbd>. Presiona cada combinación en tu propio teclado y escribe en el cuadro el símbolo que realmente aparece (la distribución del teclado puede variar según el equipo).');
+  /* Respuestas aceptadas por distribución: Latinoamérica, España y EE. UU. */
+  var Q=[
+    {q:'Shift + 1',ans:['!','¡']},
+    {q:'Shift + 2',ans:['"','@']},
+    {q:'Shift + 6',ans:['&','^']},
+    {q:'Shift + 7',ans:['/','&']},
+    {q:'Shift + 0',ans:['=',')']}
+  ];
+  var rows=el('div');
+  Q.forEach(function(item,i){
+    var row=el('div','combo-row');
+    row.appendChild(el('span',null,'¿Qué símbolo obtienes con '+item.q+'?'));
+    var inp=el('input');inp.type='text';inp.maxLength=3;inp.autocomplete='off';inp.spellcheck=false;
+    inp.placeholder='Escribe el símbolo';
+    inp.style.textAlign='center';
+    var res=el('span','combo-res');
+    row.appendChild(inp);row.appendChild(res);
+    inp.dataset.idx=i;
+    rows.appendChild(row);
+  });
+  body.appendChild(rows);
+  var checkBtn=el('button','btn','Comprobar respuestas');checkBtn.type='button';
+  checkBtn.style.marginTop='12px';
+  body.appendChild(checkBtn);
+  checkBtn.addEventListener('click',function(){
+    var inputs=rows.querySelectorAll('input'),ok=0,empty=0;
+    inputs.forEach(function(inp,i){
+      var res=inp.nextElementSibling;
+      var v=inp.value.trim();
+      if(!v){empty++;res.textContent='';res.className='combo-res';return;}
+      var accepted=Q[i].ans;
+      if(accepted.indexOf(v)!==-1){ok++;res.textContent='Correcto';res.className='combo-res ok';}
+      else{res.textContent='Incorrecto';res.className='combo-res bad';}
+    });
+    if(empty===inputs.length){toast('Escribe un símbolo en cada cuadro antes de comprobar.');return;}
+    markDone(6,Math.round(ok/Q.length*15));
+    checkBtn.disabled=true;checkBtn.textContent='Respuestas comprobadas';
+    inputs.forEach(function(inp){inp.disabled=true;});
+  });
+})();
+
+/* ===== Reactivo 8: combinación de teclas en vivo (10 pts) ===== */
+(function(){
+  var body=makeItem(7,'Combinación de teclas',10,'Haz clic dentro del recuadro y presiona la combinación indicada en tu teclado.');
+  var box=el('div','combo-catch');
+  var targetLabel=el('div','combo-target','Ctrl + S');
+  var hintP=el('p',null,'Haz clic aquí y presiona la combinación de teclas.');
+  var flag=el('div','combo-flag','Esperando combinación...');
+  box.appendChild(targetLabel);box.appendChild(hintP);box.appendChild(flag);
+  box.tabIndex=0;
+  body.appendChild(box);
+
+  var need={ctrl:true,shift:false,alt:false,key:'s'};
+  var solved=false;
+  box.addEventListener('keydown',function(e){
+    if(solved)return;
+    e.preventDefault();
+    var key=e.key.toLowerCase();
+    if(['control','shift','alt','meta'].indexOf(key)!==-1)return;
+    var ok=e.ctrlKey===need.ctrl && e.shiftKey===need.shift && e.altKey===need.alt && key===need.key;
+    if(ok){
+      solved=true;flag.textContent='¡Combinación correcta!';flag.classList.add('ok');
+      markDone(7,10);
+    }else{
+      flag.textContent='Esa no es la combinación. Vuelve a intentar.';flag.classList.remove('ok');
+    }
+  });
+  box.addEventListener('click',function(){box.focus();});
+})();
+
+/* ---------- Resultado final ---------- */
+$('#calcBtn').addEventListener('click',function(){
+  var n=done.filter(Boolean).length;
+  if(n<8){
+    toast('Te faltan '+(8-n)+' reactivo(s) por resolver antes de calcular tu puntaje.');
+    return;
+  }
+  var total=score.reduce(function(a,b){return a+b;},0);
+  $('#scoreNum').textContent=total;
+  var grade=$('#scoreGrade');
+  if(total>=90){grade.textContent='Excelente dominio';grade.className='score-grade hi';}
+  else if(total>=70){grade.textContent='Buen dominio';grade.className='score-grade mid';}
+  else{grade.textContent='Necesita práctica';grade.className='score-grade lo';}
+
+  var titles=['Precisión de clic','Doble clic','Arrastrar y soltar','Clic derecho','Desplazamiento','Mecanografía','Funciones secundarias del teclado','Combinación de teclas'];
+  var bd=$('#breakdown');bd.innerHTML='';
+  titles.forEach(function(t,i){
+    var row=el('div','row');
+    row.innerHTML='<span>'+t+'</span><b>'+score[i]+' / '+MAXPTS[i]+'</b>';
+    bd.appendChild(row);
+  });
+
+  $('#resultPanel').classList.add('show');
+  $('#calcBtn').disabled=true;$('#calcBtn').textContent='Puntaje calculado';
+  $('#resultPanel').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+refreshProgress();
+})();
+</script>
+</body>
+</html>
