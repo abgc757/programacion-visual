@@ -1,0 +1,14 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ingeniería de Métodos I · Unidades 1 y 2</title>
+<style>html,body{margin:0;height:100%;background:#0f172a;font-family:system-ui,sans-serif;color:#fff;overflow:hidden}
+#st{position:absolute;inset:0 0 40px 0;display:flex;align-items:center;justify-content:center}
+#st img{max-width:100%;max-height:100%;object-fit:contain}
+#bar{position:absolute;bottom:0;left:0;right:0;height:40px;display:flex;gap:8px;align-items:center;justify-content:center;font-size:14px}
+button{background:#1e293b;color:#fff;border:1px solid #334155;border-radius:6px;padding:4px 12px;cursor:pointer}</style></head><body>
+<div id="st"><img id="im" alt="Diapositiva"></div>
+<div id="bar"><button id="p">◀</button><span id="n"></span><button id="x">▶</button><button id="f">⛶</button></div>
+<script>var T=21,i=1,im=document.getElementById('im');
+function go(k){i=Math.max(1,Math.min(T,k));im.src='s-'+String(i).padStart(2,'0')+'.jpg';document.getElementById('n').textContent=i+' / '+T;}
+p.onclick=()=>go(i-1);x.onclick=()=>go(i+1);f.onclick=()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()};
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))go(i+1);if(['ArrowLeft','PageUp'].includes(e.key))go(i-1)});
+var sx;addEventListener('touchstart',e=>sx=e.touches[0].clientX);addEventListener('touchend',e=>{var d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>40)go(i+(d<0?1:-1))});
+im.onclick=()=>go(i+1);go(1);</script></body></html>
