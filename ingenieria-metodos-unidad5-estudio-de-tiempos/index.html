@@ -1,0 +1,477 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ingeniería de Métodos I · Unidad 5 · Estudio de tiempos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#0d1426;overflow:hidden;font-family:'Nunito Sans',Arial,sans-serif}
+#stage{position:absolute;left:50%;top:0;transform-origin:0 0}
+.slide:not(.on){display:none !important}
+.slide[style*="display:grid"]{} x-shape{display:block}
+table{border-collapse:collapse;width:100%} th,td{padding:14px 20px;border-bottom:1px solid #DDD6C3}
+h1,h2,h3,p,ul,ol{margin:0}
+#bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#14213D;display:flex;align-items:center;justify-content:center;gap:14px;color:#F6F3EA;font-size:15px;z-index:9}
+#bar button{background:#F29A4A;border:0;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;color:#14213D}
+#bar button:disabled{opacity:.4}
+</style></head><body>
+<div id="stage">
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#14213D;color:#F6F3EA;font-family:'Nunito Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<svg viewBox="0 0 320 200" aria-label="Medidor de ritmo de trabajo, con la aguja en la zona normal" style="position:absolute;left:1440px;top:128px;width:320px;height:200px"><path d="M20 180 A140 140 0 0 1 90 58.76" fill="none" stroke="#7CC0DE" stroke-width="16"/><path d="M90 58.76 A140 140 0 0 1 230 58.76" fill="none" stroke="#F6F3EA" stroke-width="16"/><path d="M230 58.76 A140 140 0 0 1 300 180" fill="none" stroke="#F29A4A" stroke-width="16"/><line x1="160" y1="180" x2="178" y2="78" stroke="#F6F3EA" stroke-width="8" stroke-linecap="round"/><circle cx="160" cy="180" r="14" fill="#F29A4A"/></svg>
+<p style="position:absolute;left:1380px;top:372px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#F29A4A;padding:12px 16px;border-radius:40px">5.6 Muestreo</p>
+<p style="position:absolute;left:1380px;top:438px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#7CC0DE;padding:12px 16px;border-radius:40px">5.7 Cronometraje</p>
+<p style="position:absolute;left:1380px;top:504px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#F6F3EA;padding:12px 16px;border-radius:40px">5.8 Observación</p>
+<p style="position:absolute;left:1380px;top:570px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#F29A4A;padding:12px 16px;border-radius:40px">5.9 Ritmo</p>
+<p style="position:absolute;left:1380px;top:636px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#7CC0DE;padding:12px 16px;border-radius:40px">5.10 Producción</p>
+<p style="position:absolute;left:1380px;top:702px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#F6F3EA;padding:12px 16px;border-radius:40px">5.11 Tiempo estándar</p>
+<p style="position:absolute;left:1380px;top:768px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#F29A4A;padding:12px 16px;border-radius:40px">5.12 Fatiga y eficiencia</p>
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F29A4A">Ingeniería de métodos · Unidad 5</p>
+<div style="display:flex;flex-direction:column;gap:32px">
+<div style="width:120px;height:10px;background:#F29A4A"></div>
+<h1 style="font-family:'Rubik', Arial, sans-serif;font-size:112px;font-weight:600;line-height:1.05;color:#F6F3EA">Estudio de tiempos</h1>
+<p style="font-size:40px;line-height:1.35;color:#C9D3E6;width:1100px">Medir, calificar y calcular el tiempo estándar de un trabajo</p>
+</div>
+<p style="font-size:28px;color:#9FB0CF">Ingeniería Industrial · Con ejemplos resueltos y ejercicios para el alumno</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Mapa de la unidad</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Contenido de la unidad</h2>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">5.6</p><p style="font-size:28px;font-weight:700;line-height:1.2">Muestreo y registro</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Cuántas lecturas tomar y cómo anotarlas.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">5.7</p><p style="font-size:28px;font-weight:700;line-height:1.2">Cronometraje</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Pasos del estudio y uso del cronómetro.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">5.8</p><p style="font-size:28px;font-weight:700;line-height:1.2">Observación</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Regreso a cero y lectura continua.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">5.9</p><p style="font-size:28px;font-weight:700;line-height:1.2">Ritmo de trabajo</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Calificar la velocidad del operario.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">5.10</p><p style="font-size:28px;font-weight:700;line-height:1.2">Producción</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Producción normal, estándar y óptima.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">5.11</p><p style="font-size:28px;font-weight:700;line-height:1.2">Tiempo estándar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Tiempo-máquina y tolerancias.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">5.12</p><p style="font-size:28px;font-weight:700;line-height:1.2">Fatiga y eficiencia</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Coeficientes de fatiga y de eficiencia.</p></div>
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">En cada tema</p><p style="font-size:28px;font-weight:600;line-height:1.3;color:#F6F3EA">Un ejemplo resuelto y un ejercicio. Seis en total.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">2</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Idea central de la unidad</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Del reloj al tiempo estándar</h2>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">1 · Cronómetro</p><p style="font-size:32px;font-weight:700;line-height:1.2">Tiempo observado (TO)</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Lo que marca el reloj.</p></div>
+<x-shape kind="arrow-right" style="flex:none;width:64px;height:36px;background:#C2570C"></x-shape>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">2 · Ritmo</p><p style="font-size:32px;font-weight:700;line-height:1.2">Tiempo normal (TN)</p><p style="font-size:28px;line-height:1.4;color:#3C465A">TN = TO × calificación</p></div>
+<x-shape kind="arrow-right" style="flex:none;width:64px;height:36px;background:#C2570C"></x-shape>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">3 · Tolerancias</p><p style="font-size:32px;font-weight:700;line-height:1.2">Tiempo estándar (TE)</p><p style="font-size:28px;line-height:1.4;color:#3C465A">TE = TN × (1 + tolerancia)</p></div>
+<x-shape kind="arrow-right" style="flex:none;width:64px;height:36px;background:#C2570C"></x-shape>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#F29A4A">4 · Producción</p><p style="font-size:32px;font-weight:700;line-height:1.2;color:#F6F3EA">Piezas por hora</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">3,600 ÷ TE</p></div>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#B24E08">Ejemplo con números</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.4">TO = 40 s · ritmo 90 % → TN = 36 s · tolerancia 15 % → TE = 41.4 s → 87 piezas por hora</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">3</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.6 · Registro y recopilación de datos</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Qué se anota antes de cronometrar</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Operación</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Nombre, número de pieza y plano.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Operario</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Quién la realiza y cuánta experiencia tiene.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Máquina y herramientas</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Tipo, número y estado.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Método y materiales</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Cómo se hace hoy y con qué material.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Condiciones</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Iluminación, ruido y temperatura.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Elementos</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Las partes del ciclo, con inicio y final claros.</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Regla práctica para dividir en elementos</p><p style="font-size:32px;line-height:1.4;font-weight:600;color:#F6F3EA">Fáciles de reconocer y no muy cortos: de unos 3 segundos o más.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">4</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.6 · Muestreo · Ejemplo resuelto</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">¿Cuántos ciclos hay que observar?</h2>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#14213D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Fórmula</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;line-height:1.2;color:#F6F3EA">n = (z · s ÷ (k · x̄))²</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:28px;line-height:1.4"><b>z</b> = 2 (confianza de 95 %)</p>
+<p style="font-size:28px;line-height:1.4"><b>s</b> = desviación estándar de las lecturas</p>
+<p style="font-size:28px;line-height:1.4"><b>k</b> = error aceptado (0.05 = ±5 %)</p>
+<p style="font-size:28px;line-height:1.4"><b>x̄</b> = promedio de las lecturas</p>
+</div>
+</div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:700;color:#B24E08">Lecturas preliminares (s): 18, 22, 20, 24, 21</p>
+<p style="font-size:28px;line-height:1.4"><b>1</b> Promedio: 105 ÷ 5 = 21.0 s</p>
+<p style="font-size:28px;line-height:1.4"><b>2</b> Desviación estándar: s ≈ 2.236 s</p>
+<p style="font-size:28px;line-height:1.4"><b>3</b> n = (2 × 2.236 ÷ (0.05 × 21))² ≈ 18.14</p>
+<p style="font-size:32px;line-height:1.4;font-weight:700;color:#B24E08">Se necesitan 19 ciclos (siempre hacia arriba).</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">5</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 1 · Para el alumno · 10 minutos, individual</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Calcula cuántos ciclos observar</h2>
+<div style="background:#14213D;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Lecturas preliminares de un elemento (segundos)</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;line-height:1.3;color:#F6F3EA">30 · 36 · 33 · 39 · 27</p></div>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1.5;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el promedio de las lecturas.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula la desviación estándar de la muestra.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuántos ciclos se necesitan con z = 2 y k = 0.05?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">d</p><p style="font-size:28px;line-height:1.4;flex:1">¿Y con k = 0.10 (error de ±10 %)? ¿Por qué cambia?</p></div>
+</div>
+<div style="flex:1;background:#F7FBFC;border:1px solid #B9D3DB;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#185A72">Recuerda</h3><p style="font-size:28px;line-height:1.4;color:#33475A">s = √(Σ(x − x̄)² ÷ (n − 1)). El resultado de n siempre se redondea hacia arriba.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 5 · Estudio de tiempos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">6</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.7 · Cronometraje</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">El cronómetro y su uso</h2>
+<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Cronómetro mecánico</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">De minutos decimales: cada división vale 0.01 min, es decir 0.6 s.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Cronómetro electrónico</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Digital, con vueltas en memoria y lectura en centésimas de segundo.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Celular o video</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Útil en prácticas y para revisar lecturas dudosas.</p></div>
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#F29A4A">Buenas prácticas</h3><p style="font-size:28px;line-height:1.4;color:#F6F3EA">De pie, un poco atrás del operario, sin interferir y sin mostrar prisa.</p></div>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Conversión útil</p><p style="font-size:32px;line-height:1.4;font-weight:600">Minutos decimales × 60 = segundos. Ejemplo: 0.45 min = 27 s.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">7</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.7 · Procedimiento</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Ocho pasos de un estudio de tiempos</h2>
+<div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">1</p><p style="font-size:32px;font-weight:700">Seleccionar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Elegir la operación que se va a estudiar.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">2</p><p style="font-size:32px;font-weight:700">Elegir</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Un operario con experiencia y ritmo cercano al normal.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">3</p><p style="font-size:32px;font-weight:700">Registrar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Llenar la hoja con método, máquina y condiciones.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">4</p><p style="font-size:32px;font-weight:700">Dividir</p><p style="font-size:24px;line-height:1.4;color:#3C465A">La operación en elementos con inicio y final claros.</p></div>
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;line-height:1.1">5</p><p style="font-size:32px;font-weight:700;color:#F6F3EA">Cronometrar</p><p style="font-size:24px;line-height:1.4;color:#C9D3E6">Tomar las lecturas de varios ciclos.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">6</p><p style="font-size:32px;font-weight:700">Calificar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Valorar la velocidad del operario contra el ritmo normal.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">7</p><p style="font-size:32px;font-weight:700">Calcular</p><p style="font-size:24px;line-height:1.4;color:#3C465A">El tiempo normal: promedio × calificación.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">8</p><p style="font-size:32px;font-weight:700">Completar</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Agregar tolerancias para obtener el tiempo estándar.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">8</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.7 · Ejemplo resuelto · Lecturas en segundos</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Hoja de observaciones: taladrar una pieza</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:33%;color:#F6F3EA;text-align:left">Elemento</th><th style="width:10%;color:#F6F3EA;text-align:left">C1</th><th style="width:10%;color:#F6F3EA;text-align:left">C2</th><th style="width:10%;color:#F6F3EA;text-align:left">C3</th><th style="width:10%;color:#F6F3EA;text-align:left">C4</th><th style="width:10%;color:#F6F3EA;text-align:left">C5</th><th style="width:17%;color:#F6F3EA;text-align:left">Promedio</th></tr>
+<tr style="background:#FFFDF8"><td>A. Tomar la pieza</td><td>8</td><td>9</td><td>8</td><td>7</td><td>8</td><td>8.0 s</td></tr>
+<tr style="background:#EDE8D8"><td>B. Taladrar</td><td>20</td><td>22</td><td>21</td><td>21</td><td>21</td><td>21.0 s</td></tr>
+<tr style="background:#FFFDF8"><td>C. Colocar en la charola</td><td>6</td><td>5</td><td>7</td><td>6</td><td>6</td><td>6.0 s</td></tr>
+<tr style="background:#F3D9BE"><td><b>Ciclo observado</b></td><td></td><td></td><td></td><td></td><td></td><td><b>35.0 s</b></td></tr>
+</table>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Cómo se calcula</p><p style="font-size:28px;line-height:1.4">Promedio = suma de lecturas ÷ número de ciclos. Elemento A: 40 ÷ 5 = 8.0 s.</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Siguiente paso</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA">Estos 35.0 s se califican por ritmo en el tema 5.9.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">9</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 2 · Para el alumno · 10 minutos, individual</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Promedia y descarta lecturas anormales</h2>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1.1;display:flex;flex-direction:column;gap:16px">
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:40%;color:#F6F3EA;text-align:left">Elemento</th><th style="width:12%;color:#F6F3EA;text-align:left">C1</th><th style="width:12%;color:#F6F3EA;text-align:left">C2</th><th style="width:12%;color:#F6F3EA;text-align:left">C3</th><th style="width:12%;color:#F6F3EA;text-align:left">C4</th><th style="width:12%;color:#F6F3EA;text-align:left">C5</th></tr>
+<tr style="background:#F7FBFC"><td>A. Tomar pieza</td><td>10</td><td>11</td><td>25</td><td>10</td><td>9</td></tr>
+<tr style="background:#DCE9ED"><td>B. Operación</td><td>30</td><td>32</td><td>31</td><td>29</td><td>33</td></tr>
+<tr style="background:#F7FBFC"><td>C. Soltar y apartar</td><td>12</td><td>11</td><td>13</td><td>12</td><td>12</td></tr>
+</table>
+<p style="font-size:24px;line-height:1.4;color:#33475A">Lecturas en segundos. En el ciclo 3 del elemento A se le cayó la pieza al operario.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">¿Qué lectura se excluye y por qué?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el promedio de cada elemento.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el tiempo observado del ciclo.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">d</p><p style="font-size:28px;line-height:1.4;flex:1">¿La lectura excluida se borra o se anota? Justifica.</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 5 · Estudio de tiempos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">10</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.8 · Métodos de observación</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Cuatro formas de observar</h2>
+<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Regreso a cero</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Al terminar cada elemento se lee el tiempo y se regresa el reloj a cero.</p><p style="font-size:24px;line-height:1.4;color:#14213D"><b>Ventaja:</b> lees el tiempo directo. <b>Límite:</b> se pierde el tiempo del regreso.</p></div>
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2;color:#F29A4A">Lectura continua</h3><p style="font-size:28px;line-height:1.4;color:#F6F3EA">El reloj corre sin parar; se anota la lectura al final de cada elemento y luego se restan.</p><p style="font-size:24px;line-height:1.4;color:#C9D3E6"><b>Ventaja:</b> no se pierde ningún tiempo. <b>Límite:</b> hay que restar.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Acumulativo</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Dos cronómetros enlazados: uno corre mientras el otro se lee.</p><p style="font-size:24px;line-height:1.4;color:#14213D"><b>Ventaja:</b> tiempos directos sin pérdidas. <b>Límite:</b> equipo especial.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:32px;font-weight:600;line-height:1.2">Video</h3><p style="font-size:28px;line-height:1.4;color:#3C465A">Se filma el trabajo y los tiempos se leen después.</p><p style="font-size:24px;line-height:1.4;color:#14213D"><b>Ventaja:</b> se puede repetir y revisar. <b>Límite:</b> más tiempo de análisis y permisos.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">11</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.8 · Ejemplo resuelto · Lectura continua</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">De las lecturas al tiempo de cada elemento</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:14%;color:#F6F3EA;text-align:left">Ciclo</th><th style="width:16%;color:#F6F3EA;text-align:left">Elemento</th><th style="width:22%;color:#F6F3EA;text-align:left">Lectura (s)</th><th style="width:26%;color:#F6F3EA;text-align:left">Resta</th><th style="width:22%;color:#F6F3EA;text-align:left">Tiempo (s)</th></tr>
+<tr style="background:#FFFDF8"><td>1</td><td>A</td><td>8</td><td>8 − 0</td><td>8</td></tr>
+<tr style="background:#EDE8D8"><td>1</td><td>B</td><td>29</td><td>29 − 8</td><td>21</td></tr>
+<tr style="background:#FFFDF8"><td>1</td><td>C</td><td>35</td><td>35 − 29</td><td>6</td></tr>
+<tr style="background:#EDE8D8"><td>2</td><td>A</td><td>43</td><td>43 − 35</td><td>8</td></tr>
+<tr style="background:#FFFDF8"><td>2</td><td>B</td><td>64</td><td>64 − 43</td><td>21</td></tr>
+<tr style="background:#EDE8D8"><td>2</td><td>C</td><td>70</td><td>70 − 64</td><td>6</td></tr>
+</table>
+<div style="background:#14213D;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Regla</p><p style="font-size:32px;line-height:1.35;font-weight:600;color:#F6F3EA">Tiempo del elemento = lectura actual − lectura anterior.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">12</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 3 · Para el alumno · 10 minutos, individual</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Convierte lecturas continuas en tiempos</h2>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:31%;color:#F6F3EA;text-align:left">Ciclo</th><th style="width:23%;color:#F6F3EA;text-align:left">A</th><th style="width:23%;color:#F6F3EA;text-align:left">B</th><th style="width:23%;color:#F6F3EA;text-align:left">C</th></tr>
+<tr style="background:#F7FBFC"><td>1</td><td>10</td><td>34</td><td>41</td></tr>
+<tr style="background:#DCE9ED"><td>2</td><td>52</td><td>77</td><td>84</td></tr>
+</table>
+<p style="font-size:24px;line-height:1.4;color:#33475A">Lecturas continuas en segundos, tomadas al final de cada elemento.</p>
+</div>
+<div style="flex:1.2;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el tiempo de cada elemento en cada ciclo.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el promedio de cada elemento.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el tiempo observado del ciclo.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">d</p><p style="font-size:28px;line-height:1.4;flex:1">Si los elementos duraran solo 2 s, ¿qué método usarías? Justifica.</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 5 · Estudio de tiempos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">13</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.9 · Velocidades y tiempos de trabajo</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Calificar el ritmo del operario</h2>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1.2;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:36px;line-height:1.4;font-weight:600">El cronómetro mide a una persona, pero el estándar debe valer para un operario con <span style="color:#B24E08">ritmo normal = 100 %</span>.</p>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700;color:#B24E08">Referencia 1</p><p style="font-size:28px;line-height:1.4">Caminar a 4.8 km/h (3 millas por hora).</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700;color:#B24E08">Referencia 2</p><p style="font-size:28px;line-height:1.4">Repartir 52 cartas en 30 segundos.</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:140px">80 %</p><p style="font-size:28px;line-height:1.3;flex:1">Más lento que el normal</p></div>
+<div style="background:#14213D;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;width:140px">100 %</p><p style="font-size:28px;line-height:1.3;flex:1;color:#F6F3EA">Ritmo normal</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:140px">120 %</p><p style="font-size:28px;line-height:1.3;flex:1">Más rápido que el normal</p></div>
+</div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Fórmula</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#F6F3EA">TN = TO × (calificación ÷ 100)</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">14</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.9 · Ejemplo resuelto</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">De tiempo observado a tiempo normal</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Operario A, más lento</p><p style="font-size:28px;line-height:1.4">TO = 40 s</p><p style="font-size:28px;line-height:1.4">Calificación: 90 %</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3">TN = 40 × 0.90 = 36.0 s</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Operario B, más rápido</p><p style="font-size:28px;line-height:1.4">TO = 30 s</p><p style="font-size:28px;line-height:1.4">Calificación: 120 %</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3">TN = 30 × 1.20 = 36.0 s</p></div>
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Datos del tema 5.7</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA">TO = 35.0 s</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA">Calificación: 110 %</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#F6F3EA">TN = 35.0 × 1.10 = 38.5 s</p></div>
+</div>
+<div style="background:#EDE8D8;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#B24E08">Conclusión</p><p style="font-size:32px;line-height:1.4;font-weight:600">Aunque trabajen a distinto ritmo, A y B llegan al mismo tiempo normal: 36.0 s.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">15</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.9 · ¿De dónde sale la calificación?</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Sistema Westinghouse: cuatro factores</h2>
+<table style="font-size:24px;color:#14213D">
+<tr style="background:#14213D"><th style="width:22%;color:#F6F3EA;text-align:left">Nivel</th><th style="width:22%;color:#F6F3EA;text-align:left">Habilidad</th><th style="width:22%;color:#F6F3EA;text-align:left">Esfuerzo</th><th style="width:17%;color:#F6F3EA;text-align:left">Condiciones</th><th style="width:17%;color:#F6F3EA;text-align:left">Consistencia</th></tr>
+<tr style="background:#FFFDF8"><td>A (superior)</td><td>+0.15 / +0.13</td><td>+0.13 / +0.12</td><td>+0.06</td><td>+0.04</td></tr>
+<tr style="background:#EDE8D8"><td>B (excelente)</td><td>+0.11 / +0.08</td><td>+0.10 / +0.08</td><td>+0.04</td><td>+0.03</td></tr>
+<tr style="background:#FFFDF8"><td>C (bueno)</td><td>+0.06 / +0.03</td><td>+0.05 / +0.02</td><td>+0.02</td><td>+0.01</td></tr>
+<tr style="background:#EDE8D8"><td>D (regular)</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+<tr style="background:#FFFDF8"><td>E (aceptable)</td><td>−0.05 / −0.10</td><td>−0.04 / −0.08</td><td>−0.03</td><td>−0.02</td></tr>
+<tr style="background:#EDE8D8"><td>F (deficiente)</td><td>−0.16 / −0.22</td><td>−0.12 / −0.17</td><td>−0.07</td><td>−0.04</td></tr>
+</table>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1.3;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700;color:#B24E08">Ejemplo</p><p style="font-size:24px;line-height:1.4">Habilidad C1 (+0.06), esfuerzo C2 (+0.02), condiciones C (+0.02), consistencia D (0.00).</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Resultado</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:28px;font-weight:600;line-height:1.3;color:#F6F3EA">1 + 0.10 = 1.10 → 110 %</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#5A6478">Unidad 5 · Valores de referencia (Westinghouse); confirma con tu libro</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">16</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 4 · Para el alumno · 10 minutos, en parejas</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Calcula el tiempo normal</h2>
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:32px;line-height:1.4;flex:1">TO = 24 s con calificación de 105 %. ¿Cuál es el TN?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:32px;line-height:1.4;flex:1">TO = 18 s con calificación de 125 %. ¿Cuál es el TN?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:32px;line-height:1.4;flex:1">Un operario tardó TO = 50 s y el TN resultó 45 s. ¿Qué calificación se le dio?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">d</p><p style="font-size:32px;line-height:1.4;flex:1">Un operario con TO = 28.8 s fue calificado con 125 %. ¿Cuál es el TN?</p></div>
+</div>
+<div style="background:#F7FBFC;border:1px solid #BCD3DA;border-radius:16px;padding:24px 40px"><p style="font-size:28px;line-height:1.4"><b>Pista:</b> TN = TO × (calificación ÷ 100). Para el inciso c, despeja la calificación.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 5 · Estudio de tiempos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">17</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.10 · Producciones de trabajo normales y óptimas</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Del tiempo a piezas por hora</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Producción normal</p><p style="font-size:28px;line-height:1.4">Ritmo normal, sin tolerancias.</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:28px;font-weight:600;line-height:1.3">3,600 ÷ TN</p><p style="font-size:28px;line-height:1.4">TN = 36 s</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08">100 pzas/h</p></div>
+<div style="background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Producción estándar</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA">Incluye tolerancias; es la meta del puesto.</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:28px;font-weight:600;line-height:1.3;color:#F6F3EA">3,600 ÷ TE</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA">TE = 41.4 s</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A">≈ 87 pzas/h</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Producción óptima</p><p style="font-size:28px;line-height:1.4">Ritmo alto sostenido (aquí 120 %).</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:28px;font-weight:600;line-height:1.3">3,600 ÷ (TN ÷ 1.20)</p><p style="font-size:28px;line-height:1.4">TN ÷ 1.20 = 30 s</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08">120 pzas/h</p></div>
+</div>
+<div style="background:#EDE8D8;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#B24E08">Turno de 8 horas</p><p style="font-size:32px;line-height:1.4;font-weight:600">Con 87 piezas/h, la meta estándar es de unas 696 piezas.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">18</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.11 · Tiempo-máquina y tiempo estándar</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Dos tipos de elementos</h2>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Elementos del operario</p><p style="font-size:28px;line-height:1.4">Cargar, descargar, inspeccionar.</p><p style="font-size:28px;line-height:1.4"><b>Sí se califican:</b> el ritmo depende de la persona.</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Elementos de la máquina</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA">Maquinado, prensado o cocido automático.</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA"><b>No se califican:</b> la máquina fija su propio tiempo.</p></div>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Tiempo estándar</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;line-height:1.2">TE = TN × (1 + T)</p><p style="font-size:28px;line-height:1.4">TN es la suma de los tiempos normales; T es la tolerancia (por ejemplo, 14 % = 0.14).</p></div>
+<div style="background:#14213D;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Ojo</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA">Otra versión: TE = TN ÷ (1 − p), si la tolerancia p es un porcentaje del turno. Usa la que indique tu libro.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">19</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.11 · Ejemplo resuelto</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Ciclo con una máquina automática</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:32%;color:#F6F3EA;text-align:left">Elemento</th><th style="width:18%;color:#F6F3EA;text-align:left">TO (s)</th><th style="width:20%;color:#F6F3EA;text-align:left">Calificación</th><th style="width:30%;color:#F6F3EA;text-align:left">TN (s)</th></tr>
+<tr style="background:#FFFDF8"><td>Cargar pieza</td><td>12</td><td>110 %</td><td>13.2</td></tr>
+<tr style="background:#EDE8D8"><td>Maquinado automático</td><td>45</td><td>no se califica</td><td>45.0</td></tr>
+<tr style="background:#FFFDF8"><td>Descargar pieza</td><td>8</td><td>95 %</td><td>7.6</td></tr>
+</table>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">1 · Suma de TN</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3">13.2 + 45 + 7.6 = 65.8 s</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">2 · Tolerancia 14 %</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3">TE = 65.8 × 1.14 ≈ 75.0 s</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">3 · Producción</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#F6F3EA">3,600 ÷ 75.0 ≈ 48 pzas/h</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">20</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 5 · Para el alumno · 15 minutos, en equipos</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Estudio de una prensa automática</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:36%;color:#F6F3EA;text-align:left">Elemento</th><th style="width:18%;color:#F6F3EA;text-align:left">TO (s)</th><th style="width:46%;color:#F6F3EA;text-align:left">Calificación</th></tr>
+<tr style="background:#F7FBFC"><td>Colocar pieza</td><td>10</td><td>100 %</td></tr>
+<tr style="background:#DCE9ED"><td>Prensado automático</td><td>30</td><td>tiempo-máquina</td></tr>
+<tr style="background:#F7FBFC"><td>Retirar pieza</td><td>6</td><td>120 %</td></tr>
+</table>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el tiempo normal del ciclo (TN).</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">Con tolerancias de 15 %, calcula el tiempo estándar (TE).</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuántas piezas por hora y cuántas en un turno de 8 horas?</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 5 · Estudio de tiempos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">21</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.12 · Coeficientes de fatiga</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Las tolerancias: tiempo para ser humano</h2>
+<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:150px">5–7 %</p><p style="font-size:28px;line-height:1.3;flex:1">Necesidades personales</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:150px">4 %</p><p style="font-size:28px;line-height:1.3;flex:1">Fatiga básica</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:150px">2 %</p><p style="font-size:28px;line-height:1.3;flex:1">Trabajo de pie</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:150px">+ %</p><p style="font-size:28px;line-height:1.3;flex:1">Otras: ruido, calor, peso, esfuerzo visual</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Ejemplo</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:36px;font-weight:600;line-height:1.3;color:#F6F3EA">5 % + 4 % + 2 % = 11 % → factor 1.11</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">Si TN = 36 s, entonces TE = 36 × 1.11 ≈ 40.0 s.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos · Valores de referencia</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">22</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.12 · ¿De dónde sale la tolerancia?</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Tabla de tolerancias por concepto</h2>
+<table style="font-size:26px;color:#14213D">
+<tr style="background:#14213D"><th style="width:36%;color:#F6F3EA;text-align:left">Tipo</th><th style="width:44%;color:#F6F3EA;text-align:left">Concepto</th><th style="width:20%;color:#F6F3EA;text-align:left">Tolerancia</th></tr>
+<tr style="background:#FFFDF8"><td>Constante</td><td>Necesidades personales</td><td>5 % (hombre) · 7 % (mujer)</td></tr>
+<tr style="background:#EDE8D8"><td>Constante</td><td>Fatiga básica</td><td>4 %</td></tr>
+<tr style="background:#FFFDF8"><td>Variable</td><td>Trabajo de pie</td><td>2 %</td></tr>
+<tr style="background:#EDE8D8"><td>Variable</td><td>Postura incómoda (agachado)</td><td>2 %</td></tr>
+<tr style="background:#FFFDF8"><td>Variable</td><td>Ruido intermitente fuerte</td><td>2 %</td></tr>
+<tr style="background:#EDE8D8"><td>Variable</td><td>Iluminación bastante deficiente</td><td>2 %</td></tr>
+</table>
+<div style="background:#14213D;border-radius:16px;padding:20px 40px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Así se usa</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA">Se suman las que aplican al puesto: 5 + 4 + 2 + 2 = 13 %, factor 1.13.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#5A6478">Unidad 5 · Valores de referencia tipo OIT; confirma con tu libro</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">23</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">5.12 · Eficiencia</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">¿Cómo se compara el operario con el estándar?</h2>
+<div style="background:#14213D;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Fórmula</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;line-height:1.2;color:#F6F3EA">Eficiencia = producción real ÷ producción estándar × 100</p></div>
+<p style="font-size:32px;line-height:1.4;font-weight:600">Ejemplo: el estándar del puesto es de 48 piezas por hora.</p>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Operario 1</p><p style="font-size:28px;line-height:1.4">Produce 54 piezas por hora.</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3">54 ÷ 48 × 100 = 112.5 %</p><p style="font-size:28px;line-height:1.4">Supera el estándar.</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Operario 2</p><p style="font-size:28px;line-height:1.4">Produce 40 piezas por hora.</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3">40 ÷ 48 × 100 = 83.3 %</p><p style="font-size:28px;line-height:1.4">Está por debajo del estándar.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">24</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 6 · Para el alumno · 15 minutos, en equipos</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Tolerancias y eficiencia</h2>
+<p style="font-size:32px;line-height:1.4;font-weight:600">Un puesto de ensamble tiene TN = 50 s. Las tolerancias son: personales 5 %, fatiga básica 4 %, de pie 2 % y ruido 2 %.</p>
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuál es la tolerancia total y cuál es el tiempo estándar (TE)?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuál es la producción estándar por hora? Un operario produce 70 piezas por hora: ¿cuál es su eficiencia?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">Repite el inciso a usando TE = TN ÷ (1 − p). ¿Cuánto cambia el resultado?</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 5 · Estudio de tiempos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">25</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Referencia rápida</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Fórmulas de la unidad</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:40%;color:#F6F3EA;text-align:left">Concepto</th><th style="width:60%;color:#F6F3EA;text-align:left">Fórmula</th></tr>
+<tr style="background:#FFFDF8"><td>Tamaño de muestra</td><td>n = (z · s ÷ (k · x̄))², redondear hacia arriba</td></tr>
+<tr style="background:#EDE8D8"><td>Tiempo normal</td><td>TN = TO × (calificación ÷ 100)</td></tr>
+<tr style="background:#FFFDF8"><td>Tiempo estándar</td><td>TE = TN × (1 + T)  ·  alternativa: TN ÷ (1 − p)</td></tr>
+<tr style="background:#EDE8D8"><td>Producción por hora</td><td>3,600 ÷ TE (estándar)  ·  3,600 ÷ TN (normal)</td></tr>
+<tr style="background:#FFFDF8"><td>Lectura continua</td><td>tiempo = lectura actual − lectura anterior</td></tr>
+<tr style="background:#EDE8D8"><td>Eficiencia</td><td>producción real ÷ producción estándar × 100</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">29</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Resumen de la unidad 5</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Tres ideas para llevarte</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08">1</p><p style="font-size:28px;line-height:1.4">Mide con muestra suficiente: calcula n y redondea hacia arriba.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08">2</p><p style="font-size:28px;line-height:1.4">Califica el ritmo para llegar al tiempo normal; el tiempo-máquina no se califica.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08">3</p><p style="font-size:28px;line-height:1.4">Agrega tolerancias para obtener el tiempo estándar y la meta en piezas por hora.</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Tarea</p><p style="font-size:32px;line-height:1.4;font-weight:600;color:#F6F3EA">Cronometra una actividad de menos de 2 minutos (armar algo, preparar café) y calcula su TN y TE con 5 ciclos.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 5 · Estudio de tiempos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">30</p>
+
+</section>
+</div>
+<div id="bar"><button id="p">◀ Anterior</button><span id="n"></span><button id="nx">Siguiente ▶</button><button id="fs">Pantalla completa</button></div>
+<script>
+var S=[].slice.call(document.querySelectorAll('.slide')),i=0,st=document.getElementById('stage');
+function fit(){var w=innerWidth,h=innerHeight-48,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.marginLeft=(-960*k)+'px'}
+function show(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,j){s.classList.toggle('on',j==i)});document.getElementById('n').textContent=(i+1)+' / '+S.length;document.getElementById('p').disabled=i==0;document.getElementById('nx').disabled=i==S.length-1;try{location.hash='#'+(i+1)}catch(e){}}
+document.getElementById('p').onclick=function(){show(i-1)};document.getElementById('nx').onclick=function(){show(i+1)};
+document.getElementById('fs').onclick=function(){var e=document.documentElement;(e.requestFullscreen||e.webkitRequestFullscreen||function(){}).call(e)};
+document.addEventListener('keydown',function(e){if(e.key=='ArrowRight'||e.key==' '||e.key=='PageDown')show(i+1);if(e.key=='ArrowLeft'||e.key=='PageUp')show(i-1)});
+var x0=null;document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX});document.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));x0=null});
+addEventListener('resize',fit);fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>

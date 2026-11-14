@@ -1,0 +1,390 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ingeniería de Métodos I · Unidad 6 · Administración en la ingeniería de métodos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#0d1426;overflow:hidden;font-family:'Nunito Sans',Arial,sans-serif}
+#stage{position:absolute;left:50%;top:0;transform-origin:0 0}
+.slide:not(.on){display:none !important}
+.slide[style*="display:grid"]{} x-shape{display:block}
+table{border-collapse:collapse;width:100%} th,td{padding:14px 20px;border-bottom:1px solid #DDD6C3}
+h1,h2,h3,p,ul,ol{margin:0}
+#bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#14213D;display:flex;align-items:center;justify-content:center;gap:14px;color:#F6F3EA;font-size:15px;z-index:9}
+#bar button{background:#F29A4A;border:0;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;color:#14213D}
+#bar button:disabled{opacity:.4}
+</style></head><body>
+<div id="stage">
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#14213D;color:#F6F3EA;font-family:'Nunito Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between">
+<svg viewBox="0 0 400 260" aria-label="Curva de aprendizaje: el tiempo por unidad baja al repetir el trabajo" style="position:absolute;left:1392px;top:128px;width:400px;height:260px"><path d="M40 20 V224 H384" fill="none" stroke="#9FB0CF" stroke-width="4" stroke-linecap="round"/><path d="M62 52 C110 150 170 196 372 208" fill="none" stroke="#F29A4A" stroke-width="8" stroke-linecap="round"/><circle cx="62" cy="52" r="10" fill="#F6F3EA"/><circle cx="110" cy="124" r="10" fill="#7CC0DE"/><circle cx="190" cy="178" r="10" fill="#7CC0DE"/><circle cx="300" cy="200" r="10" fill="#7CC0DE"/></svg>
+<p style="position:absolute;left:1380px;top:430px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#F29A4A;padding:12px 16px;border-radius:40px">6.6 Curva de aprendizaje</p>
+<p style="position:absolute;left:1380px;top:496px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#7CC0DE;padding:12px 16px;border-radius:40px">6.7 Manejo de materiales</p>
+<p style="position:absolute;left:1380px;top:562px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#F6F3EA;padding:12px 16px;border-radius:40px">6.8 Seguridad industrial</p>
+<p style="position:absolute;left:1380px;top:628px;width:412px;font-size:24px;font-weight:700;color:#14213D;background:#F29A4A;padding:12px 16px;border-radius:40px">6.9 Automatización y robótica</p>
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#F29A4A">Ingeniería de métodos · Unidad 6</p>
+<div style="display:flex;flex-direction:column;gap:32px">
+<div style="width:120px;height:10px;background:#F29A4A"></div>
+<h1 style="font-family:'Rubik', Arial, sans-serif;font-size:96px;font-weight:600;line-height:1.05;color:#F6F3EA;width:1160px">Administración en la ingeniería de métodos</h1>
+<p style="font-size:40px;line-height:1.35;color:#C9D3E6;width:1100px">Aprender, mover, proteger y automatizar: cómo se mantiene un buen método</p>
+</div>
+<p style="font-size:28px;color:#9FB0CF">Ingeniería Industrial · Con ejemplos resueltos y ejercicios para el alumno</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Mapa de la unidad</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Cuatro temas, una idea</h2>
+<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">6.6</p><p style="font-size:32px;font-weight:700;line-height:1.2">Curva de aprendizaje</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Cómo baja el tiempo cada vez que se repite el trabajo.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">6.7</p><p style="font-size:32px;font-weight:700;line-height:1.2">Manejo de materiales</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Mover lo necesario, a tiempo y con la menor distancia.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">6.8</p><p style="font-size:32px;font-weight:700;line-height:1.2">Seguridad industrial</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Prevenir accidentes y medirlos con índices.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;line-height:1.1">6.9</p><p style="font-size:32px;font-weight:700;line-height:1.2">Automatización y robótica</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Cuándo conviene sustituir trabajo manual por tecnología.</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">En cada tema</p><p style="font-size:28px;font-weight:600;line-height:1.3;color:#F6F3EA">Un ejemplo resuelto y un ejercicio. Cinco ejercicios en total.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Administración en la ingeniería de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">2</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Idea central de la unidad</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Cuatro palancas para administrar un método</h2>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">6.6 · Personas</p><p style="font-size:32px;font-weight:700;line-height:1.2">Aprender</p><p style="font-size:28px;line-height:1.4;color:#3C465A">El tiempo por unidad baja con la repetición.</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">6.7 · Flujo</p><p style="font-size:32px;font-weight:700;line-height:1.2">Mover</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Menos distancia y menos manipulación.</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">6.8 · Protección</p><p style="font-size:32px;font-weight:700;line-height:1.2">Proteger</p><p style="font-size:28px;line-height:1.4;color:#3C465A">Cero accidentes como meta medible.</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#F29A4A">6.9 · Tecnología</p><p style="font-size:32px;font-weight:700;line-height:1.2;color:#F6F3EA">Automatizar</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">Solo si el número lo justifica.</p></div>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#B24E08">Ejemplo con números</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.4">Un trabajo de 40 min la primera vez baja a 25.6 min promedio con 4 repeticiones (curva de 80 %).</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Administración en la ingeniería de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">3</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.6 · Curva de aprendizaje</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Repetir hace al trabajo más rápido</h2>
+<div style="display:flex;gap:40px;align-items:flex-start">
+<div style="flex:1.1;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:32px;line-height:1.4;font-weight:600">Cada vez que se duplica la producción acumulada, el tiempo por unidad baja en un porcentaje constante.</p>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700;color:#B24E08">¿Por qué baja el tiempo?</p><p style="font-size:28px;line-height:1.4">Mejor destreza, menos errores, mejor orden del puesto y ajustes al método.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700;color:#B24E08">¿Para qué sirve?</p><p style="font-size:28px;line-height:1.4">Estimar tiempos y costos de lotes nuevos, programar la producción y fijar estándares.</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:140px">70 %</p><p style="font-size:28px;line-height:1.3;flex:1">Aprende muy rápido (trabajo muy manual)</p></div>
+<div style="background:#14213D;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#F29A4A;width:140px">80 %</p><p style="font-size:28px;line-height:1.3;flex:1;color:#F6F3EA">Caso típico de manufactura</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#B24E08;width:140px">90 %</p><p style="font-size:28px;line-height:1.3;flex:1">Aprende poco (trabajo con mucha máquina)</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#5A6478">Unidad 6 · Tasas de referencia; confirma con tu libro</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">4</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.6 · El modelo del promedio acumulado</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">La fórmula de la curva</h2>
+<div style="background:#14213D;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Promedio de las primeras x unidades</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:44px;font-weight:600;line-height:1.2;color:#F6F3EA">Yx = Y1 × x^b</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">con b = log(r) ÷ log(2), donde r es la tasa (0.80 para 80 %).</p></div>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Tiempo total de x unidades</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600">Tx = x × Yx</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Tiempo de la unidad número x</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600">Tx − T(x−1)</p></div>
+</div>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:34%;color:#F6F3EA;text-align:left">Unidades acumuladas</th><th style="width:22%;color:#F6F3EA;text-align:left">1</th><th style="width:22%;color:#F6F3EA;text-align:left">2</th><th style="width:22%;color:#F6F3EA;text-align:left">4</th></tr>
+<tr style="background:#FFFDF8"><td>Promedio con r = 80 %</td><td>100 %</td><td>80 %</td><td>64 %</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#5A6478">Unidad 6 · Modelo de Wright (promedio acumulado)</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">5</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.6 · Ejemplo resuelto</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Primera unidad de 40 min y curva de 80 %</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:28%;color:#F6F3EA;text-align:left">Unidades (x)</th><th style="width:36%;color:#F6F3EA;text-align:left">Promedio Yx (min)</th><th style="width:36%;color:#F6F3EA;text-align:left">Total Tx (min)</th></tr>
+<tr style="background:#FFFDF8"><td>1</td><td>40.00</td><td>40.00</td></tr>
+<tr style="background:#EDE8D8"><td>2</td><td>32.00</td><td>64.00</td></tr>
+<tr style="background:#FFFDF8"><td>4</td><td>25.60</td><td>102.40</td></tr>
+<tr style="background:#EDE8D8"><td>8</td><td>20.48</td><td>163.84</td></tr>
+</table>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Sin duplicar: x = 5</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:28px;font-weight:600;line-height:1.3">Y5 = 40 × 5^(−0.3219) ≈ 23.83 min</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Unidades 5 a 8</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:28px;font-weight:600;line-height:1.3;color:#F6F3EA">163.84 − 102.40 = 61.44 min</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">6</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 1 · Para el alumno · 15 minutos, en parejas</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Ensamble nuevo con curva de 85 %</h2>
+<p style="font-size:32px;line-height:1.4;font-weight:600">La primera unidad de un ensamble tarda 20 horas.</p>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuál es el tiempo promedio de las primeras 2 y de las primeras 4 unidades?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuál es el tiempo total para fabricar 4 unidades?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">Con b = −0.2345, calcula el promedio y el total de 3 unidades.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">d</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuánto tarda la cuarta unidad por sí sola?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">e</p><p style="font-size:28px;line-height:1.4;flex:1">En otro producto, la primera unidad tardó 20 h y el promedio de las primeras 4 fue 12.8 h. ¿Cuál es la tasa de aprendizaje?</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 6 · Administración en la ingeniería de métodos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">7</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.7 · Manejo de materiales</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">El material correcto, en el lugar y momento correctos</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Flujo</p><p style="font-size:28px;line-height:1.35">Que el material avance en una sola dirección, sin retrocesos.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Distancia</p><p style="font-size:28px;line-height:1.35">Acercar los departamentos que más se comunican.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Simplificar</p><p style="font-size:28px;line-height:1.35">Eliminar movimientos innecesarios o combinarlos.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Unidad de carga</p><p style="font-size:28px;line-height:1.35">Mover tarimas o contenedores, no piezas sueltas.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Gravedad</p><p style="font-size:28px;line-height:1.35">Usar rampas y rodillos en vez de esfuerzo.</p></div>
+<div style="background:#14213D;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Mecanizar</p><p style="font-size:28px;line-height:1.35;color:#F6F3EA">Equipo cuando el volumen lo justifique.</p></div>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Objetivos</p><p style="font-size:28px;line-height:1.4">Menos costo, menos tiempo, menos daños al producto y menos riesgo para las personas.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#5A6478">Unidad 6 · Principios resumidos; la lista varía entre autores</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">8</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.7 · Equipos de manejo</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Del carrito al robot móvil</h2>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Manual</p><p style="font-size:28px;line-height:1.4">Carretilla, diablo, patín hidráulico.</p><p style="font-size:24px;line-height:1.4;color:#3C465A"><b>Conviene:</b> poco volumen, distancias cortas, inversión mínima.</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Mecánico</p><p style="font-size:28px;line-height:1.4">Montacargas, transportador de rodillos o banda, grúa viajera.</p><p style="font-size:24px;line-height:1.4;color:#3C465A"><b>Conviene:</b> volumen medio o alto, cargas pesadas.</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Automático</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA">Vehículo guiado (AGV), almacén automatizado (AS/RS).</p><p style="font-size:24px;line-height:1.4;color:#C9D3E6"><b>Conviene:</b> volumen alto y constante; exige inversión grande.</p></div>
+</div>
+<div style="background:#EDE8D8;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Cómo elegir</p><p style="font-size:28px;line-height:1.4">Volumen, distancia, peso, frecuencia, tipo de ruta (fija o variable) e inversión disponible.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Administración en la ingeniería de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">9</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.7 · Ejemplo resuelto · Carga-distancia</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">¿Cuántos metros mueve el material al día?</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:36%;color:#F6F3EA;text-align:left">Ruta</th><th style="width:20%;color:#F6F3EA;text-align:left">Viajes/día</th><th style="width:20%;color:#F6F3EA;text-align:left">Distancia (m)</th><th style="width:24%;color:#F6F3EA;text-align:left">Viajes × m</th></tr>
+<tr style="background:#FFFDF8"><td>Recepción → Corte</td><td>40</td><td>20</td><td>800</td></tr>
+<tr style="background:#F6F3EA"><td>Corte → Ensamble</td><td>30</td><td>15</td><td>450</td></tr>
+<tr style="background:#FFFDF8"><td>Ensamble → Embarque</td><td>25</td><td>30</td><td>750</td></tr>
+<tr style="background:#14213D"><td style="color:#F29A4A">Total</td><td></td><td></td><td style="color:#F6F3EA">2,000</td></tr>
+</table>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1.2;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Mejora</p><p style="font-size:28px;line-height:1.4">Acercar Embarque a Ensamble: de 30 a 10 m. Esa ruta pasa a 25 × 10 = 250.</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Resultado</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:28px;font-weight:600;line-height:1.3;color:#F6F3EA">1,500 m/día: ahorro de 500 m (25 %)</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">10</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 2 · Para el alumno · 15 minutos, en parejas</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Reubica un departamento</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:46%;color:#F6F3EA;text-align:left">Ruta</th><th style="width:27%;color:#F6F3EA;text-align:left">Viajes/día</th><th style="width:27%;color:#F6F3EA;text-align:left">Distancia (m)</th></tr>
+<tr style="background:#F7FBFC"><td>Recepción → Armado</td><td>50</td><td>12</td></tr>
+<tr style="background:#DCE9ED"><td>Armado → Pintura</td><td>35</td><td>25</td></tr>
+<tr style="background:#F7FBFC"><td>Pintura → Empaque</td><td>20</td><td>18</td></tr>
+</table>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula viajes × metros de cada ruta y el total diario.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">¿Qué ruta pesa más hoy?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">Si Pintura se acerca a Armado (de 25 a 10 m), ¿cuál es el nuevo total y cuánto se ahorra, en metros y en porcentaje?</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 6 · Administración en la ingeniería de métodos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">11</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.7 · Ejemplo resuelto · Capacidad del equipo</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">¿Cuántos montacargas hacen falta?</h2>
+<p style="font-size:28px;line-height:1.4">Datos: 80 m de ida, 100 m/min, cargar 1.0 min, descargar 0.8 min, utilización de 85 %, demanda de 60 tarimas por hora.</p>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#B24E08">1 · Viaje</p><p style="font-size:28px;line-height:1.35">160 m ÷ 100 = 1.6 min</p></div>
+<x-shape kind="arrow-right" style="flex:none;width:56px;height:32px;background:#C2570C"></x-shape>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#B24E08">2 · Ciclo</p><p style="font-size:28px;line-height:1.35">1.6 + 1.0 + 0.8 = 3.4 min</p></div>
+<x-shape kind="arrow-right" style="flex:none;width:56px;height:32px;background:#C2570C"></x-shape>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#B24E08">3 · Viajes/h</p><p style="font-size:28px;line-height:1.35">60 ÷ 3.4 × 0.85 = 15.0</p></div>
+<x-shape kind="arrow-right" style="flex:none;width:56px;height:32px;background:#C2570C"></x-shape>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">4 · Equipos</p><p style="font-size:28px;line-height:1.35;color:#F6F3EA">60 ÷ 15.0 = 4</p></div>
+</div>
+<div style="background:#EDE8D8;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Regla</p><p style="font-size:28px;line-height:1.4">Si el resultado no es entero, se redondea hacia arriba: 4.2 equipos son 5.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">12</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:34px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 3 · Para el alumno · 10 minutos, individual</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Dimensiona el equipo de una bodega</h2>
+<p style="font-size:32px;line-height:1.4;font-weight:600">Un montacargas recorre 60 m de ida a 120 m/min. Cargar toma 1.0 min y descargar 1.0 min. Su utilización es de 80 %.</p>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el tiempo de un ciclo completo.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuántos viajes por hora realiza considerando la utilización?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">Si la demanda es de 100 tarimas por hora, ¿cuántos montacargas se necesitan?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">d</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cuántas tarimas mueve un montacargas en un turno de 8 horas?</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 6 · Administración en la ingeniería de métodos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">13</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.8 · Seguridad industrial</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Un accidente casi nunca es mala suerte</h2>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Actos inseguros</p><p style="font-size:28px;line-height:1.4">Lo que hace la persona: no usar el equipo de protección, quitar una guarda, trabajar con prisa.</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Condiciones inseguras</p><p style="font-size:28px;line-height:1.4">Lo que hay en el entorno: piso mojado, máquina sin protección, poca luz, desorden.</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:12px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Pirámide de Heinrich (proporción clásica)</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:36px;font-weight:600;line-height:1.3;color:#F6F3EA">1 lesión grave : 29 lesiones leves : 300 incidentes sin lesión</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">Atender los incidentes pequeños evita los graves.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#5A6478">Unidad 6 · Proporción de Heinrich como referencia histórica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">14</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.8 · Cómo controlar el riesgo</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Jerarquía de controles: de lo más a lo menos efectivo</h2>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="background:#14213D;border-radius:16px;padding:18px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:36px;font-weight:600;color:#F29A4A;width:56px">1</p><p style="font-size:28px;line-height:1.3;flex:1;color:#F6F3EA"><b>Eliminar</b> el peligro (quitar el paso que lo causa).</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:18px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:36px;font-weight:600;color:#B24E08;width:56px">2</p><p style="font-size:28px;line-height:1.3;flex:1"><b>Sustituir</b> por algo menos peligroso.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:18px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:36px;font-weight:600;color:#B24E08;width:56px">3</p><p style="font-size:28px;line-height:1.3;flex:1"><b>Controles de ingeniería:</b> guardas, ventilación, paros de emergencia.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:18px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:36px;font-weight:600;color:#B24E08;width:56px">4</p><p style="font-size:28px;line-height:1.3;flex:1"><b>Controles administrativos:</b> procedimientos, capacitación, señales.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:18px 28px;display:flex;align-items:center;gap:24px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:36px;font-weight:600;color:#B24E08;width:56px">5</p><p style="font-size:28px;line-height:1.3;flex:1"><b>Equipo de protección personal:</b> la última barrera.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5A6478">Unidad 6 · Normas STPS relacionadas: confirma vigencia (NOM-017, NOM-026)</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">15</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.8 · Medir la seguridad</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Índices de frecuencia y de gravedad</h2>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Índice de frecuencia (IF)</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#F6F3EA">IF = accidentes × 1,000,000 ÷ HHT</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">Cuántos accidentes ocurren por cada millón de horas trabajadas.</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Índice de gravedad (IG)</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3;color:#F6F3EA">IG = días perdidos × 1,000 ÷ HHT</p><p style="font-size:28px;line-height:1.4;color:#C9D3E6">Cuántos días se pierden por cada mil horas trabajadas.</p></div>
+</div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">HHT = horas-hombre trabajadas</p><p style="font-size:28px;line-height:1.4">Número de trabajadores × horas que trabajó cada uno en el periodo.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:1300px;font-size:24px;color:#5A6478">Unidad 6 · Constantes según la convención usada; confirma con tu libro</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">16</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.8 · Ejemplo resuelto</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Calcula los índices de una planta</h2>
+<p style="font-size:28px;line-height:1.4">Datos del año: 120 trabajadores, 2,000 horas cada uno, 6 accidentes con incapacidad y 90 días perdidos.</p>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#B24E08">1 · Horas-hombre</p><p style="font-size:28px;line-height:1.35">120 × 2,000 = 240,000 HHT</p></div>
+<x-shape kind="arrow-right" style="flex:none;width:56px;height:32px;background:#C2570C"></x-shape>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#B24E08">2 · Frecuencia</p><p style="font-size:28px;line-height:1.35">6 × 1,000,000 ÷ 240,000 = 25.0</p></div>
+<x-shape kind="arrow-right" style="flex:none;width:56px;height:32px;background:#C2570C"></x-shape>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">3 · Gravedad</p><p style="font-size:28px;line-height:1.35;color:#F6F3EA">90 × 1,000 ÷ 240,000 = 0.375</p></div>
+</div>
+<div style="background:#EDE8D8;border-radius:16px;padding:24px 40px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Interpretación</p><p style="font-size:28px;line-height:1.4">25 accidentes por millón de horas; 0.375 días perdidos por cada mil horas.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">17</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:34px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 4 · Para el alumno · 10 minutos, individual</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Mide la seguridad de una planta</h2>
+<p style="font-size:32px;line-height:1.4;font-weight:600">Una planta tiene 150 trabajadores que trabajaron 2,000 horas cada uno. Tuvo 9 accidentes con incapacidad y 135 días perdidos.</p>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula las horas-hombre trabajadas.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el índice de frecuencia y el de gravedad.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">La meta es un IF de 20 con las mismas horas. ¿Cuántos accidentes como máximo puede haber?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">d</p><p style="font-size:28px;line-height:1.4;flex:1">Un trabajador se corta con una cuchilla sin guarda. Propón un control según la jerarquía.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 6 · Administración en la ingeniería de métodos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">18</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.9 · Automatización</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Tres niveles de automatización</h2>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Fija</p><p style="font-size:28px;line-height:1.4">Secuencia rígida, hecha para un solo producto.</p><p style="font-size:24px;line-height:1.4;color:#3C465A"><b>Ejemplo:</b> línea de embotellado.</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Programable</p><p style="font-size:28px;line-height:1.4">Se reprograma para cada lote de producto.</p><p style="font-size:24px;line-height:1.4;color:#3C465A"><b>Ejemplo:</b> máquina CNC.</p></div>
+<div style="flex:1;background:#14213D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Flexible</p><p style="font-size:28px;line-height:1.4;color:#F6F3EA">Cambia de producto casi sin pausas.</p><p style="font-size:24px;line-height:1.4;color:#C9D3E6"><b>Ejemplo:</b> celda flexible con robot.</p></div>
+</div>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Ventajas</p><p style="font-size:28px;line-height:1.4">Más producción, calidad constante, menos tareas peligrosas.</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:24px;font-weight:700;color:#B24E08">Límites</p><p style="font-size:28px;line-height:1.4">Inversión alta, menor flexibilidad, mantenimiento especializado.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Administración en la ingeniería de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">19</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.9 · Robótica industrial</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Cinco tipos de robot y su tarea típica</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.2">Articulado</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Brazo de varios ejes. Soldadura, pintura, manipulación.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.2">SCARA</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Rápido en un plano. Ensamble de componentes pequeños.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.2">Cartesiano</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Ejes lineales X, Y, Z. Tomar y colocar, impresión 3D.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.2">Delta</p><p style="font-size:24px;line-height:1.4;color:#3C465A">Muy veloz con piezas ligeras. Empaque y clasificación.</p></div>
+<div style="background:#14213D;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.2;color:#F29A4A">Colaborativo (cobot)</p><p style="font-size:24px;line-height:1.4;color:#F6F3EA">Trabaja junto a personas con fuerza limitada.</p></div>
+<div style="background:#EDE8D8;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><p style="font-size:28px;font-weight:700;line-height:1.2;color:#B24E08">Cómo elegir</p><p style="font-size:24px;line-height:1.4">Carga, alcance, precisión, velocidad y costo.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Administración en la ingeniería de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">20</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">6.9 · Ejemplo resuelto · ¿Conviene automatizar?</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">Un robot de soldadura</h2>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Capacidad</p><p style="font-size:28px;line-height:1.4">Manual: 40 s por pieza → 3,600 ÷ 40 = 90 pzas/h.</p><p style="font-size:28px;line-height:1.4">Robot: 25 s por pieza → 3,600 ÷ 25 = 144 pzas/h.</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3">+54 pzas/h (+60 %)</p></div>
+<div style="flex:1;background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-size:24px;font-weight:700;color:#B24E08">Costo anual</p><p style="font-size:28px;line-height:1.4">Reemplaza 2 operadores: 2 × $180,000 = $360,000.</p><p style="font-size:28px;line-height:1.4">Mantenimiento y energía: −$60,000.</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:32px;font-weight:600;line-height:1.3">Ahorro neto: $300,000/año</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Recuperación de la inversión (inversión $900,000)</p><p style="font-family:'Rubik', Arial, sans-serif;font-size:36px;font-weight:600;line-height:1.3;color:#F6F3EA">Periodo = 900,000 ÷ 300,000 = 3.0 años</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Datos ilustrativos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">21</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#E3EEF1;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#185A72">Ejercicio 5 · Para el alumno · 15 minutos, en equipos</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:56px;font-weight:600;line-height:1.1">¿Conviene el robot de ensamble?</h2>
+<p style="font-size:28px;line-height:1.4;font-weight:600">Inversión: $1,200,000. Reemplaza a 3 operarios de $150,000/año cada uno. Mantenimiento y energía: $90,000/año. Ciclo manual: 36 s; con robot: 24 s. La empresa exige recuperar la inversión en menos de 4 años.</p>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">a</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el ahorro neto anual.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">b</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula el periodo de recuperación en años.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">c</p><p style="font-size:28px;line-height:1.4;flex:1">Calcula las piezas por hora manual y con robot, y el aumento en porcentaje.</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">d</p><p style="font-size:28px;line-height:1.4;flex:1">Con vida útil de 8 años, ¿cuál es el ahorro acumulado menos la inversión?</p></div>
+<div style="display:flex;gap:20px;align-items:flex-start"><p style="font-family:'Rubik', Arial, sans-serif;font-size:40px;font-weight:600;color:#185A72;width:48px">e</p><p style="font-size:28px;line-height:1.4;flex:1">¿Cumple el criterio de la empresa?</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#3F5F6C">Unidad 6 · Administración en la ingeniería de métodos · Ejercicio</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#3F5F6C;text-align:right">22</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F6F3EA;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Referencia rápida</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Fórmulas de la unidad</h2>
+<table style="font-size:28px;color:#14213D">
+<tr style="background:#14213D"><th style="width:38%;color:#F6F3EA;text-align:left">Concepto</th><th style="width:62%;color:#F6F3EA;text-align:left">Fórmula</th></tr>
+<tr style="background:#FFFDF8"><td>Promedio acumulado</td><td>Yx = Y1 × x^b, con b = log(r) ÷ log(2)</td></tr>
+<tr style="background:#EDE8D8"><td>Total y unidad x</td><td>Tx = x × Yx  ·  unidad x = Tx − T(x−1)</td></tr>
+<tr style="background:#FFFDF8"><td>Carga-distancia</td><td>Σ (viajes × distancia) de cada ruta</td></tr>
+<tr style="background:#EDE8D8"><td>Montacargas necesarios</td><td>demanda ÷ [(60 ÷ ciclo) × utilización], hacia arriba</td></tr>
+<tr style="background:#FFFDF8"><td>Índice de frecuencia</td><td>IF = accidentes × 1,000,000 ÷ HHT</td></tr>
+<tr style="background:#EDE8D8"><td>Índice de gravedad</td><td>IG = días perdidos × 1,000 ÷ HHT</td></tr>
+<tr style="background:#FFFDF8"><td>Recuperación de inversión</td><td>inversión ÷ ahorro neto anual</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Administración en la ingeniería de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">26</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#EDE8D8;color:#14213D;font-family:'Nunito Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="font-size:24px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#B24E08">Resumen de la unidad 6</p>
+<h2 style="font-family:'Rubik', Arial, sans-serif;font-size:64px;font-weight:600;line-height:1.1">Tres ideas para llevarte</h2>
+<div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px">
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08">1</p><p style="font-size:28px;line-height:1.4">El tiempo baja con la práctica de forma predecible: la curva de aprendizaje sirve para planear.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08">2</p><p style="font-size:28px;line-height:1.4">Mover menos y proteger más: acorta distancias y elimina riesgos antes de pedir equipo de protección.</p></div>
+<div style="background:#FFFDF8;border:1px solid #DDD6C3;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px"><p style="font-family:'Rubik', Arial, sans-serif;font-size:48px;font-weight:600;color:#B24E08">3</p><p style="font-size:28px;line-height:1.4">Automatiza con números: capacidad y recuperación de la inversión deciden.</p></div>
+</div>
+<div style="background:#14213D;border-radius:16px;padding:28px 40px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;font-weight:700;color:#F29A4A">Tarea</p><p style="font-size:32px;line-height:1.4;font-weight:600;color:#F6F3EA">Elige una tarea repetitiva (armar, empacar, doblar ropa), cronometra 4 repeticiones y estima su tasa de aprendizaje.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#5A6478">Unidad 6 · Administración en la ingeniería de métodos</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#5A6478;text-align:right">27</p>
+
+</section>
+</div>
+<div id="bar"><button id="p">◀ Anterior</button><span id="n"></span><button id="nx">Siguiente ▶</button><button id="fs">Pantalla completa</button></div>
+<script>
+var S=[].slice.call(document.querySelectorAll('.slide')),i=0,st=document.getElementById('stage');
+function fit(){var w=innerWidth,h=innerHeight-48,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.marginLeft=(-960*k)+'px'}
+function show(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,j){s.classList.toggle('on',j==i)});document.getElementById('n').textContent=(i+1)+' / '+S.length;document.getElementById('p').disabled=i==0;document.getElementById('nx').disabled=i==S.length-1;try{location.hash='#'+(i+1)}catch(e){}}
+document.getElementById('p').onclick=function(){show(i-1)};document.getElementById('nx').onclick=function(){show(i+1)};
+document.getElementById('fs').onclick=function(){var e=document.documentElement;(e.requestFullscreen||e.webkitRequestFullscreen||function(){}).call(e)};
+document.addEventListener('keydown',function(e){if(e.key=='ArrowRight'||e.key==' '||e.key=='PageDown')show(i+1);if(e.key=='ArrowLeft'||e.key=='PageUp')show(i-1)});
+var x0=null;document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX});document.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));x0=null});
+addEventListener('resize',fit);fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>
