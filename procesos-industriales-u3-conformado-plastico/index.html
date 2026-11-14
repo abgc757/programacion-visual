@@ -1,0 +1,674 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Procesos Industriales · Conformado por deformación plástica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#1E2226;overflow:hidden;font-family:'IBM Plex Sans',Arial,sans-serif}
+#stage{position:absolute;left:50%;top:0;transform-origin:0 0}
+.slide:not(.on){display:none !important}
+.slide[style*="display:grid"]{} x-shape{display:block}
+table{border-collapse:collapse;width:100%} th,td{padding:14px 20px;border-bottom:1px solid #DDD6C3}
+h1,h2,h3,p,ul,ol{margin:0}
+#bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#14213D;display:flex;align-items:center;justify-content:center;gap:14px;color:#F6F3EA;font-size:15px;z-index:9}
+#bar button{background:#F29A4A;border:0;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;color:#14213D}
+#bar button:disabled{opacity:.4}
+</style></head><body>
+<div id="stage">
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between;gap:40px">
+<div style="display:flex;flex-direction:column;gap:32px">
+<p style="font-size:32px;font-weight:600;color:#F08A4B;letter-spacing:3px;text-transform:uppercase">Procesos de Manufactura · Unidad 3</p>
+<h1 style="font-family:'Oswald', Arial, sans-serif;font-size:128px;font-weight:600;line-height:1.05">Conformado por deformación plástica</h1>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<hr style="width:160px;border-top:6px solid #F08A4B">
+<p style="font-size:30px;line-height:1.4;color:#B9BDC0">Al terminar la unidad podrás explicar cómo se deforma un metal sin romperse, describir laminado, forja, extrusión, trefilado, doblado, embutido y corte, y calcular fuerzas y reducciones básicas.</p>
+<p style="font-size:28px;font-weight:600">M. en C. Abraham Gómez Contreras · Ingeniería Industrial</p>
+</div>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">¿Qué es la deformación plástica?</h2>
+</div>
+<p style="font-size:34px;line-height:1.4">Se aplica una fuerza mayor que el límite elástico del metal para cambiar su forma de manera permanente, sin fundirlo ni arrancar material.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Poco desperdicio</h3>
+<p style="font-size:28px;color:#4A5056">El volumen se conserva: casi todo el material se convierte en pieza.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Mejor resistencia</h3>
+<p style="font-size:28px;color:#4A5056">La estructura de grano se refina y, en frío, el metal se endurece.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Alta productividad</h3>
+<p style="font-size:28px;color:#4A5056">Una pieza por golpe o por metro de material; ideal para series largas.</p>
+</div>
+</div>
+<p style="font-size:30px;font-weight:500">Exige un metal dúctil y equipos que desarrollan fuerzas muy grandes.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">02</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Curva esfuerzo-deformación</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="position:relative;width:780px;height:600px">
+<svg width="780" height="560" viewBox="0 0 780 560" xmlns="http://www.w3.org/2000/svg" aria-label="Curva esfuerzo-deformación con zona elástica, punto de fluencia, resistencia última, fractura y una descarga paralela a la zona elástica que deja deformación permanente">
+<line x1="80" y1="500" x2="80" y2="30" stroke="#F4F1EA" stroke-width="4"/>
+<line x1="80" y1="500" x2="740" y2="500" stroke="#F4F1EA" stroke-width="4"/>
+<path d="M80 500 L170 210 C250 170 400 110 560 100 C620 98 660 120 690 170" fill="none" stroke="#F08A4B" stroke-width="7"/>
+<line x1="400" y1="125" x2="284" y2="500" stroke="#B9BDC0" stroke-width="4" stroke-dasharray="12 9"/>
+<circle cx="170" cy="210" r="10" fill="#F4F1EA"/>
+<circle cx="560" cy="100" r="10" fill="#F4F1EA"/>
+<circle cx="690" cy="170" r="10" fill="#F4F1EA"/>
+<circle cx="400" cy="125" r="8" fill="#B9BDC0"/>
+</svg>
+<p style="position:absolute;left:100px;top:20px;width:260px;font-size:28px;font-weight:600">σ  Esfuerzo</p>
+<p style="position:absolute;left:560px;top:510px;width:220px;font-size:28px;font-weight:600">ε  Deformación</p>
+<p style="position:absolute;left:100px;top:300px;width:90px;font-size:26px;color:#B9BDC0">Elástica</p>
+<p style="position:absolute;left:190px;top:222px;width:200px;font-size:26px;color:#F4F1EA">Fluencia</p>
+<p style="position:absolute;left:430px;top:48px;width:330px;font-size:26px;color:#F4F1EA">Resistencia última</p>
+<p style="position:absolute;left:610px;top:195px;width:150px;font-size:26px;color:#F4F1EA">Fractura</p>
+<p style="position:absolute;left:300px;top:290px;width:260px;font-size:26px;color:#B9BDC0">Descarga elástica</p>
+<p style="position:absolute;left:100px;top:512px;width:420px;font-size:26px;color:#B9BDC0">Deformación permanente</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#2B3136;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Zona elástica (ley de Hooke)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">σ = E · ε</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Zona plástica (curva de flujo)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">σf = K · εⁿ</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Deformación real</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">ε = ln (L / L0)</p>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#B9BDC0">K: coeficiente de resistencia (MPa) · n: exponente de endurecimiento</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">03</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Trabajo en frío, tibio y caliente</h2>
+</div>
+<p style="font-size:30px;line-height:1.4">La clasificación depende de la temperatura de trabajo respecto al punto de fusión Tm, ambos en kelvin. Ejemplo: aluminio, Tm ≈ 933 K, así que 0.5 Tm ≈ 467 K ≈ 193 °C.</p>
+<table style="font-size:26px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:22%;color:#F4F1EA;text-align:left">Característica</th><th style="width:26%;color:#8FB8D6;text-align:left">Frío</th><th style="width:26%;color:#F4F1EA;text-align:left">Tibio</th><th style="width:26%;color:#F08A4B;text-align:left">Caliente</th></tr>
+<tr style="background:#E9E4D8"><td><b>Temperatura</b></td><td>Menor que 0.3 Tm</td><td>0.3 a 0.5 Tm</td><td>Mayor que 0.5 Tm</td></tr>
+<tr><td><b>Fuerza necesaria</b></td><td>Alta</td><td>Media</td><td>Baja</td></tr>
+<tr style="background:#E9E4D8"><td><b>Acabado y tolerancia</b></td><td>Excelentes</td><td>Buenos</td><td>Regulares, con cascarilla</td></tr>
+<tr><td><b>Propiedades</b></td><td>El metal se endurece</td><td>Endurecimiento parcial</td><td>Recristaliza: sin endurecer</td></tr>
+<tr style="background:#E9E4D8"><td><b>Ejemplos</b></td><td>Laminado de lámina, trefilado</td><td>Forja de piezas automotrices</td><td>Vigas, rieles, forja libre</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">04</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Clasificación de los procesos</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;background:#1E2226;color:#F4F1EA;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:18px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:500;color:#F08A4B">Procesos masivos</h3>
+<p style="font-size:28px;color:#B9BDC0">Piezas gruesas, con poca superficie respecto a su volumen.</p>
+<ul style="font-size:32px;line-height:1.45">
+<li>Laminado</li>
+<li>Forja</li>
+<li>Extrusión</li>
+<li>Trefilado y estirado</li>
+</ul>
+</div>
+<div style="flex:1;background:#E9E4D8;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:18px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:500;color:#2F6285">Procesos de lámina</h3>
+<p style="font-size:28px;color:#4A5056">Láminas delgadas, con mucha superficie respecto a su volumen.</p>
+<ul style="font-size:32px;line-height:1.45">
+<li>Doblado</li>
+<li>Embutido</li>
+<li>Corte y punzonado</li>
+</ul>
+</div>
+</div>
+<p style="font-size:30px;color:#4A5056">Los masivos cambian el espesor o la sección; los de lámina cambian la forma sin alterar el espesor, salvo el corte.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">05</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Procesos masivos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Laminado</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="position:relative;width:800px;height:560px">
+<svg width="800" height="520" viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" aria-label="Dos rodillos de laminado reducen el espesor de una placa de t cero a t f; la placa avanza de izquierda a derecha">
+<polygon points="40,225 340,225 400,242 760,242 760,278 400,278 340,295 40,295" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<circle cx="380" cy="127" r="115" fill="#4A5056" stroke="#1E2226" stroke-width="4"/>
+<circle cx="380" cy="393" r="115" fill="#4A5056" stroke="#1E2226" stroke-width="4"/>
+<path d="M300 40 A115 115 0 0 1 460 40" fill="none" stroke="#1E2226" stroke-width="5"/>
+<polygon points="468,36 446,30 450,56" fill="#1E2226"/>
+<path d="M300 480 A115 115 0 0 0 460 480" fill="none" stroke="#1E2226" stroke-width="5"/>
+<polygon points="468,484 446,490 450,464" fill="#1E2226"/>
+<line x1="520" y1="150" x2="520" y2="368" stroke="#A23F10" stroke-width="3" stroke-dasharray="8 8" opacity="0"/>
+</svg>
+<p style="position:absolute;left:330px;top:105;width:100px;font-size:28px;font-weight:600;color:#F4F1EA">R</p>
+<p style="position:absolute;left:300px;top:370px;width:160px;font-size:26px;font-weight:600;color:#F4F1EA;text-align:center">Rodillos</p>
+<p style="position:absolute;left:110px;top:176px;width:100px;font-size:32px;font-weight:600">t0</p>
+<p style="position:absolute;left:560px;top:190px;width:100px;font-size:32px;font-weight:600">tf</p>
+<p style="position:absolute;left:60px;top:310px;width:300px;font-size:26px;color:#4A5056">Entrada: espesor t0</p>
+<p style="position:absolute;left:470px;top:300px;width:300px;font-size:26px;color:#4A5056">Salida: espesor tf</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Tipos de laminado</h3>
+<ul style="font-size:26px;line-height:1.4">
+<li>En caliente: planchones a placa, perfiles y rieles</li>
+<li>En frío: lámina y fleje con buen acabado</li>
+</ul>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Laminadores</h3>
+<ul style="font-size:26px;line-height:1.4">
+<li>Dúo: dos rodillos, reversible o no</li>
+<li>Trío y cuarto: rodillos de apoyo para mayor rigidez</li>
+<li>Tándem: varias cajas en serie</li>
+</ul>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">06</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Procesos masivos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Laminado: cálculos básicos</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#2B3136;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Reducción (draft)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">d = t0 − tf</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Reducción relativa</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">r = d / t0</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Deformación real</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">ε = ln (t0 / tf)</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Draft máximo (μ: fricción)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">dmáx = μ² · R</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Longitud de contacto</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">L = √(R · d)</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Fuerza de laminado</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">F = Yf · w · L</p>
+</div>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Esfuerzo de fluencia promedio en la pasada</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">Yf = K · εⁿ / (1 + n)</p>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#B9BDC0">R: radio del rodillo · w: ancho de la placa · Yf: esfuerzo de fluencia promedio · el ancho se supone constante</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">07</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Procesos masivos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Forja</h2>
+</div>
+<div style="display:flex;gap:40px">
+<div style="position:relative;width:640px;height:560px">
+<svg width="640" height="520" viewBox="0 0 640 520" xmlns="http://www.w3.org/2000/svg" aria-label="Recalcado entre dados planos: el cilindro de altura inicial h cero, punteado, se aplasta hasta la altura h y se ensancha">
+<rect x="110" y="440" width="420" height="60" fill="#4A5056" stroke="#1E2226" stroke-width="3"/>
+<rect x="250" y="130" width="140" height="310" fill="none" stroke="#1E2226" stroke-width="3" stroke-dasharray="10 8"/>
+<rect x="195" y="270" width="250" height="170" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<rect x="110" y="210" width="420" height="60" fill="#4A5056" stroke="#1E2226" stroke-width="3"/>
+<line x1="320" y1="40" x2="320" y2="195" stroke="#1E2226" stroke-width="7"/>
+<polygon points="298,175 342,175 320,208" fill="#1E2226"/>
+</svg>
+<p style="position:absolute;left:340px;top:30px;width:100px;font-size:32px;font-weight:600">F</p>
+<p style="position:absolute;left:170px;top:226px;width:300px;font-size:26px;font-weight:600;color:#F4F1EA;text-align:center">Dado superior</p>
+<p style="position:absolute;left:170px;top:456px;width:300px;font-size:26px;font-weight:600;color:#F4F1EA;text-align:center">Dado inferior</p>
+<p style="position:absolute;left:470px;top:330px;width:160px;font-size:32px;font-weight:600">h</p>
+<p style="position:absolute;left:410px;top:140px;width:220px;font-size:32px;font-weight:600">h0</p>
+<p style="position:absolute;left:0px;top:530px;width:640px;font-size:24px;color:#4A5056">Línea punteada: pieza inicial · Naranja: pieza final</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<table style="font-size:26px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:30%;color:#F4F1EA;text-align:left">Tipo</th><th style="width:44%;color:#F4F1EA;text-align:left">Descripción</th><th style="width:26%;color:#F4F1EA;text-align:left">Ejemplo</th></tr>
+<tr style="background:#E9E4D8"><td><b>Forja libre</b></td><td>Entre dados planos, por golpes sucesivos</td><td>Ejes, anillos</td></tr>
+<tr><td><b>Dado cerrado</b></td><td>La cavidad da la forma; el exceso sale como rebaba</td><td>Bielas, cigüeñales</td></tr>
+<tr style="background:#E9E4D8"><td><b>Recalcado</b></td><td>Aumenta la sección en un extremo</td><td>Cabezas de tornillos</td></tr>
+<tr><td><b>Acuñado</b></td><td>Presión alta en frío para detalle fino</td><td>Monedas</td></tr>
+</table>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">08</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Procesos masivos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Forja: cálculos básicos</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;color:#B9BDC0">Conservación del volumen</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">A · h = A0 · h0</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;color:#B9BDC0">Deformación real en compresión</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">ε = ln (h0 / h)</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;color:#B9BDC0">Esfuerzo de fluencia al final</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">Yf = K · εⁿ</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;color:#B9BDC0">Fuerza de forja</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">F = Kf · Yf · A</p>
+</div>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#F08A4B">Factor de forma Kf</h3>
+<p style="font-size:26px;line-height:1.4">Vale 1 sin fricción ni complejidad, y crece con la fricción entre pieza y dado y con la complejidad de la forma; en dado cerrado complejo puede superar 10.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">09</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Procesos masivos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Extrusión</h2>
+</div>
+<div style="display:flex;gap:40px">
+<div style="position:relative;width:860px;height:480px">
+<svg width="860" height="400" viewBox="0 0 860 400" xmlns="http://www.w3.org/2000/svg" aria-label="Extrusión directa: un pistón empuja una palanquilla dentro del contenedor a través de un dado y sale un perfil más delgado">
+<rect x="170" y="90" width="270" height="22" fill="#4A5056"/>
+<rect x="170" y="258" width="270" height="22" fill="#4A5056"/>
+<rect x="440" y="90" width="40" height="86" fill="#4A5056"/>
+<rect x="440" y="194" width="40" height="86" fill="#4A5056"/>
+<rect x="190" y="112" width="250" height="146" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<polygon points="440,112 440,258 480,194 480,176" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<rect x="480" y="176" width="360" height="18" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<rect x="90" y="112" width="100" height="146" fill="#1E2226"/>
+<line x1="20" y1="185" x2="86" y2="185" stroke="#1E2226" stroke-width="7"/>
+<polygon points="76,166 76,204 110,185" fill="#1E2226" opacity="0"/>
+<polygon points="68,165 68,205 100,185" fill="#1E2226"/>
+</svg>
+<p style="position:absolute;left:96px;top:270px;width:130px;font-size:26px;font-weight:600">Pistón</p>
+<p style="position:absolute;left:230px;top:290px;width:250px;font-size:26px;font-weight:600">Palanquilla (A0)</p>
+<p style="position:absolute;left:420px;top:60px;width:120px;font-size:26px;font-weight:600">Dado</p>
+<p style="position:absolute;left:560px;top:215px;width:280px;font-size:26px;font-weight:600">Producto (Af)</p>
+<p style="position:absolute;left:200px;top:55px;width:200px;font-size:24px;color:#4A5056">Contenedor</p>
+<p style="position:absolute;left:0px;top:340px;width:860px;font-size:26px;color:#4A5056">Extrusión directa: el pistón empuja en el mismo sentido en que sale el producto.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Razón de extrusión</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">rx = A0 / Af</p>
+<p style="font-size:26px;color:#B9BDC0">ε = ln (rx)</p>
+</div>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#4A5056">Directa: más fricción con el contenedor. Indirecta: el dado avanza contra la palanquilla, con menos fricción y menor fuerza. Caliente para aluminio, cobre y acero; frío para piezas pequeñas.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">10</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Procesos masivos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Trefilado y estirado</h2>
+</div>
+<div style="position:relative;width:1664px;height:340px">
+<svg width="840" height="340" viewBox="0 0 840 340" xmlns="http://www.w3.org/2000/svg" aria-label="Un alambre se jala a través de un dado cónico y sale con menor diámetro">
+<polygon points="40,130 330,130 450,145 800,145 800,175 450,175 330,190 40,190" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<polygon points="320,80 530,80 530,145 450,145 320,120" fill="#4A5056" stroke="#1E2226" stroke-width="3"/>
+<polygon points="320,240 530,240 530,175 450,175 320,200" fill="#4A5056" stroke="#1E2226" stroke-width="3"/>
+<line x1="720" y1="260" x2="800" y2="260" stroke="#1E2226" stroke-width="6" opacity="0"/>
+<polygon points="780,140 836,160 780,180" fill="#1E2226"/>
+</svg>
+<p style="position:absolute;left:60px;top:90px;width:260px;font-size:28px;font-weight:600">Alambre: D0</p>
+<p style="position:absolute;left:560px;top:190px;width:260px;font-size:28px;font-weight:600">Salida: Df</p>
+<p style="position:absolute;left:380px;top:250px;width:200px;font-size:28px;font-weight:600">Dado</p>
+<p style="position:absolute;left:640px;top:100px;width:200px;font-size:28px;font-weight:600">Tracción</p>
+<div style="position:absolute;left:900px;top:0px;width:764px;display:flex;flex-direction:column;gap:20px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Reducción de área</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">r = (A0 − Af) / A0</p>
+<p style="font-size:26px;color:#B9BDC0">ε = ln (A0 / Af)</p>
+</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Se jala, no se empuja</h3>
+<p style="font-size:26px;line-height:1.4;color:#4A5056">La diferencia clave con la extrusión: el material se tira por el lado de salida.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Varias pasadas</h3>
+<p style="font-size:26px;line-height:1.4;color:#4A5056">Cada dado reduce poco (del orden de 20 a 30 %); se intercala recocido.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Productos</h3>
+<p style="font-size:26px;line-height:1.4;color:#4A5056">Alambre, cable, varilla y tubos de pared delgada, con muy buen acabado.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">11</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Procesos de lámina</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Doblado</h2>
+</div>
+<div style="display:flex;gap:40px">
+<div style="position:relative;width:700px;height:520px">
+<svg width="700" height="440" viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" aria-label="Doblado en V: un punzón empuja una lámina dentro de una matriz con ranura en V">
+<polygon points="60,230 210,230 350,350 490,230 640,230 640,420 60,420" fill="#4A5056" stroke="#B9BDC0" stroke-width="3"/>
+<polyline points="100,222 350,336 600,222" fill="none" stroke="#F08A4B" stroke-width="14" stroke-linejoin="round"/>
+<polygon points="305,70 395,70 395,200 350,322 305,200" fill="#B9BDC0" stroke="#F4F1EA" stroke-width="3"/>
+<line x1="350" y1="10" x2="350" y2="62" stroke="#F4F1EA" stroke-width="6"/>
+<polygon points="330,52 370,52 350,76" fill="#F4F1EA"/>
+</svg>
+<p style="position:absolute;left:372px;top:6px;width:100px;font-size:32px;font-weight:600">F</p>
+<p style="position:absolute;left:420px;top:112px;width:260px;font-size:26px;font-weight:600">Punzón</p>
+<p style="position:absolute;left:90px;top:380px;width:260px;font-size:26px;font-weight:600">Matriz en V</p>
+<p style="position:absolute;left:20px;top:182px;width:200px;font-size:26px;font-weight:600;color:#F08A4B">Lámina</p>
+<p style="position:absolute;left:290px;top:350px;width:120px;font-size:30px;font-weight:600;color:#F08A4B">R</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:18px">
+<div style="background:#2B3136;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;color:#B9BDC0">Longitud desarrollada (α: ángulo doblado, en grados)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:600;color:#F08A4B;line-height:1.1">BA = 2π (α / 360) (R + Kba · t)</p>
+<p style="font-size:24px;color:#B9BDC0">Kba = 0.33 si R &lt; 2t · Kba = 0.5 si R ≥ 2t</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;color:#B9BDC0">Fuerza de doblado en V (w: ancho, D: abertura de la matriz)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:600;color:#F08A4B;line-height:1.1">F = 1.33 · TS · w · t² / D</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;color:#B9BDC0">Recuperación elástica (springback)</p>
+<p style="font-size:26px;line-height:1.35">El metal regresa parcialmente al soltar el punzón; se compensa sobredoblando.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">12</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Procesos de lámina</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Embutido profundo</h2>
+</div>
+<div style="display:flex;gap:40px">
+<div style="position:relative;width:700px;height:540px">
+<svg width="700" height="440" viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" aria-label="Embutido: el punzón empuja un disco de lámina dentro de la matriz mientras el sujetador presiona la brida y se forma una copa">
+<rect x="60" y="230" width="190" height="170" fill="#4A5056" stroke="#1E2226" stroke-width="3"/>
+<rect x="450" y="230" width="190" height="170" fill="#4A5056" stroke="#1E2226" stroke-width="3"/>
+<rect x="60" y="160" width="190" height="50" fill="#8A8F94" stroke="#1E2226" stroke-width="3"/>
+<rect x="450" y="160" width="190" height="50" fill="#8A8F94" stroke="#1E2226" stroke-width="3"/>
+<rect x="268" y="90" width="164" height="232" fill="#B9BDC0" stroke="#1E2226" stroke-width="3"/>
+<polyline points="70,220 256,220 256,338 444,338 444,220 630,220" fill="none" stroke="#F08A4B" stroke-width="12" stroke-linejoin="round"/>
+<line x1="350" y1="10" x2="350" y2="82" stroke="#1E2226" stroke-width="6"/>
+<polygon points="330,70 370,70 350,94" fill="#1E2226"/>
+</svg>
+<p style="position:absolute;left:372px;top:8px;width:100px;font-size:32px;font-weight:600">F</p>
+<p style="position:absolute;left:285px;top:180px;width:140px;font-size:26px;font-weight:600;text-align:center">Punzón</p>
+<p style="position:absolute;left:70px;top:168px;width:180px;font-size:24px;font-weight:600;text-align:center">Sujetador</p>
+<p style="position:absolute;left:70px;top:290px;width:170px;font-size:26px;font-weight:600;color:#F4F1EA;text-align:center">Matriz</p>
+<p style="position:absolute;left:470px;top:104px;width:200px;font-size:26px;font-weight:600;color:#A23F10">Brida</p>
+<p style="position:absolute;left:490px;top:360px;width:200px;font-size:26px;font-weight:600;color:#A23F10">Lámina</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;color:#B9BDC0">Relación de embutido (Db: disco, Dp: punzón)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;color:#F08A4B;line-height:1.1">DR = Db / Dp ≤ 2.0 aprox.</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;color:#B9BDC0">Reducción y fuerza</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:600;color:#F08A4B;line-height:1.1">r = (Db − Dp) / Db &lt; 0.5</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:600;color:#F08A4B;line-height:1.1">F = π Dp t TS (Db / Dp − 0.7)</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:26px;line-height:1.35"><b>Holgura</b> punzón-matriz: c ≈ 1.1 t · <b>Defectos:</b> arrugas en la brida, desgarro en la base de la copa y orejas</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">13</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Procesos de lámina</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Corte y punzonado</h2>
+</div>
+<div style="display:flex;gap:40px">
+<div style="position:relative;width:700px;height:420px">
+<svg width="700" height="360" viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" aria-label="Corte de lámina: el punzón baja sobre la lámina apoyada en la matriz, con una pequeña holgura entre ambos">
+<rect x="50" y="240" width="210" height="100" fill="#4A5056" stroke="#1E2226" stroke-width="3"/>
+<rect x="440" y="240" width="210" height="100" fill="#4A5056" stroke="#1E2226" stroke-width="3"/>
+<rect x="50" y="205" width="600" height="35" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<rect x="272" y="50" width="156" height="155" fill="#B9BDC0" stroke="#1E2226" stroke-width="3"/>
+<line x1="350" y1="2" x2="350" y2="44" stroke="#1E2226" stroke-width="6"/>
+<polygon points="330,36 370,36 350,56" fill="#1E2226"/>
+<line x1="260" y1="350" x2="272" y2="350" stroke="#A23F10" stroke-width="4"/>
+</svg>
+<p style="position:absolute;left:372px;top:0px;width:100px;font-size:32px;font-weight:600">F</p>
+<p style="position:absolute;left:290px;top:110px;width:120px;font-size:26px;font-weight:600;text-align:center">Punzón</p>
+<p style="position:absolute;left:60px;top:268px;width:190px;font-size:26px;font-weight:600;color:#F4F1EA;text-align:center">Matriz</p>
+<p style="position:absolute;left:480px;top:158px;width:200px;font-size:26px;font-weight:600;color:#A23F10">Lámina (t)</p>
+<p style="position:absolute;left:180px;top:362px;width:240px;font-size:26px;font-weight:600;color:#A23F10">c: holgura</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;color:#B9BDC0">Fuerza de corte (S ≈ 0.7 TS, L: perímetro cortado)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;color:#F08A4B;line-height:1.1">F = S · t · L</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;color:#B9BDC0">Holgura entre punzón y matriz</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;color:#F08A4B;line-height:1.1">c = a · t, a ≈ 0.045–0.075</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:20px 28px">
+<p style="font-size:26px;line-height:1.4"><b>Recorte (blanking):</b> lo cortado es la pieza. <b>Punzonado (punching):</b> lo cortado es el desperdicio y la lámina con el agujero es la pieza.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">14</p>
+
+</section>
+<section class="slide" data-section="Defectos" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Defectos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Defectos típicos por proceso</h2>
+</div>
+<table style="font-size:25px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:17%;color:#F4F1EA;text-align:left">Proceso</th><th style="width:33%;color:#F4F1EA;text-align:left">Defecto</th><th style="width:50%;color:#F4F1EA;text-align:left">Causa principal</th></tr>
+<tr style="background:#E9E4D8"><td><b>Laminado</b></td><td>Bordes ondulados y grietas de borde</td><td>Flexión del rodillo; poca ductilidad</td></tr>
+<tr><td><b>Forja</b></td><td>Pliegues y llenado incompleto</td><td>Flujo mal diseñado; metal frío</td></tr>
+<tr style="background:#E9E4D8"><td><b>Extrusión</b></td><td>Cavidad central en la cola</td><td>Flujo desigual; velocidad excesiva</td></tr>
+<tr><td><b>Trefilado</b></td><td>Rotura y rayas en el alambre</td><td>Reducción excesiva; lubricación pobre</td></tr>
+<tr style="background:#E9E4D8"><td><b>Doblado</b></td><td>Grietas exteriores y recuperación</td><td>Radio muy pequeño; no sobredoblar</td></tr>
+<tr><td><b>Embutido</b></td><td>Arrugas, desgarros y orejas</td><td>Presión del sujetador; DR alto; anisotropía</td></tr>
+<tr style="background:#E9E4D8"><td><b>Corte</b></td><td>Rebabas excesivas</td><td>Holgura incorrecta; herramienta desgastada</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">15</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Selección de proceso</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Fundición frente a deformación plástica</h2>
+</div>
+<table style="font-size:25px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:22%;color:#F4F1EA;text-align:left">Criterio</th><th style="width:39%;color:#8FB8D6;text-align:left">Fundición</th><th style="width:39%;color:#F08A4B;text-align:left">Deformación plástica</th></tr>
+<tr style="background:#E9E4D8"><td><b>Forma de la pieza</b></td><td>Casi cualquier geometría, con huecos internos</td><td>Más limitada: perfiles, discos, copas</td></tr>
+<tr><td><b>Propiedades</b></td><td>Más porosidad; grano grueso</td><td>Grano orientado; mayor resistencia</td></tr>
+<tr style="background:#E9E4D8"><td><b>Desperdicio</b></td><td>Canales, mazarotas y rebabas</td><td>Bajo; el volumen se conserva</td></tr>
+<tr><td><b>Herramental</b></td><td>Barato en arena, caro en molde metálico</td><td>Caro: dados, troqueles, prensas</td></tr>
+<tr style="background:#E9E4D8"><td><b>Volumen económico</b></td><td>Piezas sueltas y lotes cortos en arena</td><td>Series largas</td></tr>
+<tr><td><b>Acabado y tolerancia</b></td><td>Regulares; casi siempre se maquina</td><td>Buenos, sobre todo en frío</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">16</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#A23F10;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F4F1EA;letter-spacing:2px;text-transform:uppercase">Seguridad</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Seguridad en prensas y equipos de conformado</h2>
+</div>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:500;line-height:1.15">Las manos nunca entran a la zona de los dados con la máquina energizada.</p>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#7E300D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<x-icon name="Warning" style="color:#F4F1EA;width:56px;height:56px"></x-icon>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Guardas y paros</h3>
+<p style="font-size:26px;line-height:1.4">Guardas fijas, cortinas de luz y paro de emergencia al alcance.</p>
+</div>
+<div style="flex:1;background:#7E300D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<x-icon name="Lock" style="color:#F4F1EA;width:56px;height:56px"></x-icon>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Bloqueo y etiquetado</h3>
+<p style="font-size:26px;line-height:1.4">Energía cero y candado antes de cambiar dados o ajustar.</p>
+</div>
+<div style="flex:1;background:#7E300D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<x-icon name="Users" style="color:#F4F1EA;width:56px;height:56px"></x-icon>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Protección personal</h3>
+<p style="font-size:26px;line-height:1.4">Lentes, guantes, calzado, protección auditiva y cabello recogido.</p>
+</div>
+<div style="flex:1;background:#7E300D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<x-icon name="CheckCircle" style="color:#F4F1EA;width:56px;height:56px"></x-icon>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Procedimiento</h3>
+<p style="font-size:26px;line-height:1.4">Mando a dos manos, un solo operario y piezas calientes con pinzas.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#F4F1EA">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#F4F1EA;text-align:right">17</p>
+
+</section>
+<section class="slide" data-section="Ejemplos" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Ejemplo 1</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Fuerza de laminado en una pasada</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="width:520px;background:#1E2226;color:#F4F1EA;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#F08A4B">Datos</h3>
+<ul style="font-size:26px;line-height:1.45">
+<li>Acero bajo carbono: K = 530 MPa, n = 0.26</li>
+<li>t0 = 25 mm y tf = 20 mm</li>
+<li>Ancho w = 300 mm</li>
+<li>Rodillo R = 250 mm, μ = 0.15</li>
+</ul>
+</div>
+<table style="font-size:26px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:30%;color:#F4F1EA;text-align:left">Paso</th><th style="width:44%;color:#F4F1EA;text-align:left">Cálculo</th><th style="width:26%;color:#F4F1EA;text-align:left">Resultado</th></tr>
+<tr style="background:#E9E4D8"><td><b>1. Draft</b></td><td>25 − 20</td><td>d = 5 mm</td></tr>
+<tr><td><b>2. ¿Una pasada?</b></td><td>0.15² × 250</td><td>dmáx = 5.6 mm: sí</td></tr>
+<tr style="background:#E9E4D8"><td><b>3. Deformación</b></td><td>ln (25 / 20)</td><td>ε = 0.223</td></tr>
+<tr><td><b>4. Fluencia</b></td><td>530 · 0.223^0.26 / 1.26</td><td>Yf ≈ 285 MPa</td></tr>
+<tr style="background:#E9E4D8"><td><b>5. Contacto</b></td><td>√(250 · 5)</td><td>L = 35.4 mm</td></tr>
+<tr><td><b>6. Fuerza</b></td><td>285 · 300 · 35.4</td><td>F ≈ 3.0 MN</td></tr>
+</table>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#4A5056">Equivale a unas 308 toneladas-fuerza. Si el draft pedido fuera de 6 mm, superaría dmáx y haría falta una segunda pasada.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">18</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Ejemplo 2</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Fuerza para recalcar un cilindro</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="width:520px;background:#1E2226;color:#F4F1EA;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#F08A4B">Datos</h3>
+<ul style="font-size:26px;line-height:1.45">
+<li>Acero bajo carbono: K = 530 MPa, n = 0.26</li>
+<li>Cilindro de D0 = 50 mm y h0 = 60 mm</li>
+<li>Altura final h = 30 mm</li>
+<li>Forja libre, sin fricción (Kf = 1)</li>
+</ul>
+</div>
+<table style="font-size:26px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:30%;color:#F4F1EA;text-align:left">Paso</th><th style="width:42%;color:#F4F1EA;text-align:left">Cálculo</th><th style="width:28%;color:#F4F1EA;text-align:left">Resultado</th></tr>
+<tr style="background:#E9E4D8"><td><b>1. Volumen</b></td><td>π/4 · 50² · 60</td><td>V = 117,810 mm³</td></tr>
+<tr><td><b>2. Área final</b></td><td>117,810 / 30</td><td>A = 3,927 mm²</td></tr>
+<tr style="background:#E9E4D8"><td><b>3. Deformación</b></td><td>ln (60 / 30)</td><td>ε = 0.693</td></tr>
+<tr><td><b>4. Fluencia</b></td><td>530 · 0.693^0.26</td><td>Yf ≈ 482 MPa</td></tr>
+<tr style="background:#E9E4D8"><td><b>5. Fuerza</b></td><td>482 · 3,927</td><td>F ≈ 1.89 MN</td></tr>
+</table>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#4A5056">Equivale a unas 193 toneladas-fuerza; el diámetro final es 70.7 mm. Con Kf = 1.2 por fricción, la fuerza sube a unos 2.27 MN.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">19</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Cierre</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Resumen y preguntas de reflexión</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#F08A4B">Lo esencial</h3>
+<ul style="font-size:28px;line-height:1.4">
+<li>Deformación plástica: cambio permanente de forma con el volumen constante</li>
+<li>Frío (menos de 0.3 Tm) endurece; caliente (más de 0.5 Tm) recristaliza</li>
+<li>Masivos: laminado, forja, extrusión y trefilado, con fuerzas del orden de MN</li>
+<li>Lámina: doblado (springback), embutido (DR hasta 2) y corte (F = S · t · L)</li>
+<li>La elección frente a la fundición depende de forma, volumen y propiedades</li>
+</ul>
+</div>
+<div style="width:640px;background:#2B3136;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#F08A4B">Para reflexionar</h3>
+<ol style="font-size:28px;line-height:1.4">
+<li>¿Por qué un metal frágil no se puede forjar?</li>
+<li>¿Cómo se evitan las arrugas y los desgarros en un embutido?</li>
+<li>¿Fundirías o forjarías 100,000 bielas? ¿Por qué?</li>
+</ol>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Conformado por deformación plástica</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">20</p>
+
+</section>
+</div>
+<div id="bar"><button id="p">◀ Anterior</button><span id="n"></span><button id="nx">Siguiente ▶</button><button id="fs">Pantalla completa</button></div>
+<script>
+var S=[].slice.call(document.querySelectorAll('.slide')),i=0,st=document.getElementById('stage');
+function fit(){var w=innerWidth,h=innerHeight-48,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.marginLeft=(-960*k)+'px'}
+function show(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,j){s.classList.toggle('on',j==i)});document.getElementById('n').textContent=(i+1)+' / '+S.length;document.getElementById('p').disabled=i==0;document.getElementById('nx').disabled=i==S.length-1;try{location.hash='#'+(i+1)}catch(e){}}
+document.getElementById('p').onclick=function(){show(i-1)};document.getElementById('nx').onclick=function(){show(i+1)};
+document.getElementById('fs').onclick=function(){var e=document.documentElement;(e.requestFullscreen||e.webkitRequestFullscreen||function(){}).call(e)};
+document.addEventListener('keydown',function(e){if(e.key=='ArrowRight'||e.key==' '||e.key=='PageDown')show(i+1);if(e.key=='ArrowLeft'||e.key=='PageUp')show(i-1)});
+var x0=null;document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX});document.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));x0=null});
+addEventListener('resize',fit);fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>

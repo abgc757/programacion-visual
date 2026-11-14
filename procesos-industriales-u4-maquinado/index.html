@@ -1,0 +1,910 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Procesos Industriales · Maquinado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#1E2226;overflow:hidden;font-family:'IBM Plex Sans',Arial,sans-serif}
+#stage{position:absolute;left:50%;top:0;transform-origin:0 0}
+.slide:not(.on){display:none !important}
+.slide[style*="display:grid"]{} x-shape{display:block}
+table{border-collapse:collapse;width:100%} th,td{padding:14px 20px;border-bottom:1px solid #DDD6C3}
+h1,h2,h3,p,ul,ol{margin:0}
+#bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#14213D;display:flex;align-items:center;justify-content:center;gap:14px;color:#F6F3EA;font-size:15px;z-index:9}
+#bar button{background:#F29A4A;border:0;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;color:#14213D}
+#bar button:disabled{opacity:.4}
+</style></head><body>
+<div id="stage">
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between;gap:40px">
+<div style="display:flex;flex-direction:column;gap:32px">
+<p style="font-size:32px;font-weight:600;color:#F08A4B;letter-spacing:3px;text-transform:uppercase">Procesos de Manufactura · Unidad 4</p>
+<h1 style="font-family:'Oswald', Arial, sans-serif;font-size:160px;font-weight:600;line-height:1.05">Maquinado</h1>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:500;line-height:1.15;color:#B9BDC0">Torneado, fresado, taladrado y rectificado</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<hr style="width:160px;border-top:6px solid #F08A4B">
+<p style="font-size:30px;line-height:1.4;color:#B9BDC0">Al terminar la unidad podrás explicar cómo se forma una viruta, calcular velocidad de giro, tiempo de maquinado y potencia, y predecir la vida de una herramienta.</p>
+<p style="font-size:28px;font-weight:600">M. en C. Abraham Gómez Contreras · Ingeniería Industrial</p>
+</div>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">¿Qué es el maquinado?</h2>
+</div>
+<p style="font-size:34px;line-height:1.4">Proceso de arranque de material: una herramienta de filo remueve una capa en forma de viruta hasta dejar la pieza con la geometría, las tolerancias y el acabado requeridos.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Alta precisión</h3>
+<p style="font-size:28px;color:#4A5056">Alcanza tolerancias y acabados que fundición y conformado no logran.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Versatilidad</h3>
+<p style="font-size:28px;color:#4A5056">Casi cualquier material y geometría, sin herramental especial por pieza.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Costo en material</h3>
+<p style="font-size:28px;color:#4A5056">Parte del material se convierte en viruta y el proceso consume tiempo y energía.</p>
+</div>
+</div>
+<p style="font-size:30px;font-weight:500">Por eso el maquinado suele ser la última etapa: remueve poco sobre una pieza ya casi terminada.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">02</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Mecánica del corte</h2>
+</div>
+<div style="display:flex;gap:40px">
+<div style="position:relative;width:760px;height:540px">
+<svg width="760" height="480" viewBox="0 0 760 480" xmlns="http://www.w3.org/2000/svg" aria-label="Corte ortogonal: la herramienta avanza hacia la izquierda y corta una capa de espesor t cero; el material se desprende por el plano de corte y sale como viruta a lo largo de la cara de ataque">
+<polygon points="30,220 311,220 380,260 730,260 730,440 30,440" fill="#4A5056"/>
+<polygon points="311,220 380,260 409,95 335,95" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<polygon points="380,260 409,95 600,95 600,240" fill="#1E2226" stroke="#1E2226" stroke-width="3"/>
+<line x1="380" y1="260" x2="380" y2="95" stroke="#1E2226" stroke-width="3" stroke-dasharray="8 7"/>
+<line x1="150" y1="220" x2="150" y2="260" stroke="#F4F1EA" stroke-width="4"/>
+<line x1="140" y1="220" x2="160" y2="220" stroke="#F4F1EA" stroke-width="4"/>
+<line x1="140" y1="260" x2="160" y2="260" stroke="#F4F1EA" stroke-width="4"/>
+<path d="M340 260 A40 40 0 0 1 345 240" fill="none" stroke="#F4F1EA" stroke-width="4"/>
+<line x1="610" y1="50" x2="490" y2="50" stroke="#1E2226" stroke-width="7"/>
+<polygon points="478,50 506,36 506,64" fill="#1E2226"/>
+</svg>
+<p style="position:absolute;left:620px;top:28px;width:60px;font-size:34px;font-weight:600">v</p>
+<p style="position:absolute;left:150px;top:100px;width:170px;font-size:26px;font-weight:600;text-align:right">Viruta (tc)</p>
+<p style="position:absolute;left:100px;top:160px;width:220px;font-size:26px;font-weight:600;text-align:right;color:#A23F10">Plano de corte</p>
+<p style="position:absolute;left:340px;top:140px;width:40px;font-size:30px;font-weight:600;color:#1E2226">α</p>
+<p style="position:absolute;left:290px;top:262px;width:50px;font-size:30px;font-weight:600;color:#F4F1EA">φ</p>
+<p style="position:absolute;left:170px;top:226px;width:70px;font-size:28px;font-weight:600;color:#F4F1EA">t0</p>
+<p style="position:absolute;left:440px;top:150px;width:150px;font-size:26px;font-weight:600;color:#F4F1EA">Herramienta</p>
+<p style="position:absolute;left:60px;top:340px;width:200px;font-size:26px;font-weight:600;color:#F4F1EA">Pieza</p>
+<p style="position:absolute;left:0px;top:490px;width:760px;font-size:24px;color:#4A5056">α: ángulo de ataque · φ: ángulo del plano de corte · t0: espesor sin cortar</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Relación de espesor de viruta (siempre menor que 1)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">r = t0 / tc</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;color:#B9BDC0">Ángulo del plano de corte</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;color:#F08A4B;line-height:1.1">tan φ = r · cos α / (1 − r · sin α)</p>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#4A5056">La viruta sale más gruesa que la capa cortada (tc &gt; t0): el material se comprime al deformarse en el plano de corte.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">03</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Tipos de viruta</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#F08A4B">Continua</h3>
+<p style="font-size:26px;line-height:1.4">Cinta larga. Materiales dúctiles, velocidad alta y ángulo de ataque grande. Da buen acabado, pero se enreda: pide rompevirutas.</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#F08A4B">Con arista recrecida</h3>
+<p style="font-size:26px;line-height:1.4">Material adherido a la punta que cambia la geometría. Ocurre con velocidades bajas en materiales dúctiles y empeora el acabado.</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#F08A4B">Discontinua</h3>
+<p style="font-size:26px;line-height:1.4">Fragmentos separados. Materiales frágiles como el hierro fundido y velocidades bajas. Fuerza variable y acabado regular.</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#F08A4B">Dentada</h3>
+<p style="font-size:26px;line-height:1.4">Segmentos unidos en forma de sierra. Típica de aleaciones de titanio y de níquel a velocidad alta; genera vibración y exige máquinas rígidas.</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#B9BDC0">En producción lo deseable es una viruta continua corta o en fragmentos controlados: fácil de evacuar y sin dañar la pieza.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">04</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Materiales y geometría de la herramienta</h2>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:26px;line-height:1.3">
+<tr style="background:#1E2226;color:#F4F1EA">
+<td style="width:28%;padding:12px 20px;font-weight:600">Material</td>
+<td style="width:34%;padding:12px 20px;font-weight:600">Característica</td>
+<td style="width:38%;padding:12px 20px;font-weight:600">Uso típico</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px;font-weight:600">Acero rápido (HSS)</td>
+<td style="padding:10px 20px">Tenaz y económico; se reafila</td>
+<td style="padding:10px 20px">Brocas, machuelos, fresas, velocidades bajas</td>
+</tr>
+<tr>
+<td style="padding:10px 20px;font-weight:600">Carburo cementado</td>
+<td style="padding:10px 20px">Duro y resistente al desgaste</td>
+<td style="padding:10px 20px">Insertos para acero, hierro y aluminio</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px;font-weight:600">Carburo recubierto</td>
+<td style="padding:10px 20px">TiN, TiAlN, Al2O3: menos fricción</td>
+<td style="padding:10px 20px">Producción en serie, mayor vida</td>
+</tr>
+<tr>
+<td style="padding:10px 20px;font-weight:600">Cerámica</td>
+<td style="padding:10px 20px">Dura en caliente, pero frágil</td>
+<td style="padding:10px 20px">Hierro fundido y superaleaciones</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px;font-weight:600">CBN</td>
+<td style="padding:10px 20px">Dureza solo menor que el diamante</td>
+<td style="padding:10px 20px">Aceros templados</td>
+</tr>
+<tr>
+<td style="padding:10px 20px;font-weight:600">Diamante (PCD)</td>
+<td style="padding:10px 20px">Máxima dureza</td>
+<td style="padding:10px 20px">Aluminio y no ferrosos; no para acero</td>
+</tr>
+</table>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:22px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B">Geometría del filo</p>
+<p style="font-size:26px;line-height:1.4">Ángulo de ataque (facilita el corte) · ángulo de relieve (evita el roce con la pieza) · ángulo de filo (da resistencia) · radio de punta (afecta acabado y resistencia).</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">05</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Parámetros de corte</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:600;color:#A23F10;line-height:1">v</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">Velocidad de corte</h3>
+<p style="font-size:26px;color:#4A5056">m/min. Velocidad relativa entre filo y pieza. Es la que más afecta la vida de la herramienta.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:600;color:#A23F10;line-height:1">f</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">Avance</h3>
+<p style="font-size:26px;color:#4A5056">mm/rev en torno, mm/diente en fresado. Define el espesor de la viruta y el acabado.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:600;color:#A23F10;line-height:1">d</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">Profundidad de corte</h3>
+<p style="font-size:26px;color:#4A5056">mm. Espesor de la capa que se remueve en cada pasada.</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">Velocidad de giro</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;color:#F08A4B;line-height:1.1">N = 1000 v / (π D)</p>
+<p style="font-size:24px;color:#B9BDC0">N en rpm, v en m/min, D en mm</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">Tasa de remoción de material</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;color:#F08A4B;line-height:1.1">MRR = v · f · d</p>
+<p style="font-size:24px;color:#B9BDC0">Con v en mm/min da mm³/min</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">Tiempo de maquinado (torneado)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:600;color:#F08A4B;line-height:1.1">Tm = L / (f · N)</p>
+<p style="font-size:24px;color:#B9BDC0">L en mm, f en mm/rev, Tm en min</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#4A5056">Regla práctica: se sube la profundidad y el avance para producir más; la velocidad se limita por la vida de la herramienta.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">06</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Procesos principales</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Torneado</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="position:relative;width:900px;height:520px">
+<svg width="900" height="480" viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" aria-label="Torneado de cilindrado: la pieza sujeta en el mandril gira y la herramienta avanza paralela al eje, reduciendo el diámetro">
+<rect x="20" y="110" width="110" height="260" fill="#4A5056"/>
+<rect x="130" y="150" width="310" height="180" fill="#B9BDC0"/>
+<rect x="440" y="170" width="300" height="140" fill="#B9BDC0"/>
+<line x1="20" y1="240" x2="780" y2="240" stroke="#F08A4B" stroke-width="3" stroke-dasharray="14 8"/>
+<polygon points="440,170 470,150 500,60 620,60 620,170" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<line x1="560" y1="30" x2="400" y2="30" stroke="#F4F1EA" stroke-width="6"/>
+<polygon points="388,30 414,17 414,43" fill="#F4F1EA"/>
+<path d="M770 180 A70 70 0 0 1 770 300" fill="none" stroke="#8FB8D6" stroke-width="6"/>
+<polygon points="770,312 752,288 788,288" fill="#8FB8D6"/>
+<line x1="400" y1="150" x2="400" y2="170" stroke="#F4F1EA" stroke-width="4"/>
+<line x1="390" y1="150" x2="410" y2="150" stroke="#F4F1EA" stroke-width="4"/>
+<line x1="390" y1="170" x2="410" y2="170" stroke="#F4F1EA" stroke-width="4"/>
+</svg>
+<p style="position:absolute;left:26px;top:380px;width:120px;font-size:26px;font-weight:600;color:#B9BDC0">Mandril</p>
+<p style="position:absolute;left:190px;top:270px;width:200px;font-size:26px;font-weight:600;color:#1E2226">Pieza</p>
+<p style="position:absolute;left:490px;top:100px;width:200px;font-size:26px;font-weight:600;color:#1E2226">Herramienta</p>
+<p style="position:absolute;left:470px;top:2px;width:60px;font-size:32px;font-weight:600">f</p>
+<p style="position:absolute;left:810px;top:220px;width:60px;font-size:32px;font-weight:600;color:#8FB8D6">N</p>
+<p style="position:absolute;left:350px;top:120px;width:40px;font-size:30px;font-weight:600">d</p>
+<p style="position:absolute;left:0px;top:490px;width:900px;font-size:24px;color:#B9BDC0">Cilindrado: la pieza gira (N) y la herramienta avanza (f) paralela al eje</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B">Operaciones en el torno</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Cilindrado:</span> reduce el diámetro.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Refrentado:</span> deja una cara plana perpendicular al eje.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Roscado:</span> avance igual al paso de la rosca.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Ranurado y tronzado:</span> hacen una ranura o cortan la pieza.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Taladrado y mandrinado:</span> hacen o agrandan agujeros.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Moleteado:</span> marca una textura por deformación.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">07</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Procesos principales</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Torneado: cálculo de una pasada</h2>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#A23F10">Datos: cilindrado de un eje de acero</p>
+<p style="font-size:28px;line-height:1.4">D = 50 mm · L = 160 mm · v = 100 m/min · f = 0.2 mm/rev · d = 3 mm</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;color:#B9BDC0">1. Velocidad de giro</p>
+<p style="font-size:30px">N = 1000 · 100 / (π · 50)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">N ≈ 637 rpm</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;color:#B9BDC0">2. Tiempo de maquinado</p>
+<p style="font-size:30px">Tm = 160 / (0.2 · 637)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">Tm ≈ 1.26 min</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;color:#B9BDC0">3. Tasa de remoción</p>
+<p style="font-size:30px">MRR = 100 000 · 0.2 · 3</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">MRR = 60 000 mm³/min</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;color:#B9BDC0">4. Diámetro final</p>
+<p style="font-size:30px">Df = D − 2d = 50 − 2 · 3</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">Df = 44 mm</p>
+</div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#4A5056">En la máquina se elige la velocidad disponible más cercana. En refrentado, v disminuye al acercarse al centro, porque el diámetro se reduce.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">08</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Procesos principales</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Fresado</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="position:relative;width:760px;height:560px">
+<svg width="760" height="500" viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg" aria-label="Fresado periférico: la fresa de varios dientes gira sobre la pieza que avanza debajo de ella">
+<circle cx="380" cy="170" r="130" fill="#4A5056" stroke="#B9BDC0" stroke-width="4"/>
+<polygon points="380,40 366,22 394,22" fill="#F08A4B"/>
+<polygon points="472,78 480,56 498,74" fill="#F08A4B"/>
+<polygon points="510,170 532,156 532,184" fill="#F08A4B"/>
+<polygon points="472,262 498,266 480,284" fill="#F08A4B"/>
+<polygon points="380,300 394,318 366,318" fill="#F08A4B"/>
+<polygon points="288,262 280,284 262,266" fill="#F08A4B"/>
+<polygon points="250,170 228,184 228,156" fill="#F08A4B"/>
+<polygon points="288,78 262,74 280,56" fill="#F08A4B"/>
+<circle cx="380" cy="170" r="14" fill="#1E2226"/>
+<rect x="60" y="310" width="640" height="140" fill="#B9BDC0"/>
+<path d="M270 170 A110 110 0 0 1 380 60" fill="none" stroke="#8FB8D6" stroke-width="6"/>
+<polygon points="396,60 372,46 372,74" fill="#8FB8D6"/>
+<line x1="220" y1="480" x2="520" y2="480" stroke="#F4F1EA" stroke-width="6"/>
+<polygon points="536,480 510,466 510,494" fill="#F4F1EA"/>
+</svg>
+<p style="position:absolute;left:215px;top:90px;width:60px;font-size:32px;font-weight:600;color:#8FB8D6">N</p>
+<p style="position:absolute;left:560px;top:466px;width:160px;font-size:28px;font-weight:600">avance</p>
+<p style="position:absolute;left:100px;top:360px;width:260px;font-size:26px;font-weight:600;color:#1E2226">Pieza</p>
+<p style="position:absolute;left:0px;top:520px;width:760px;font-size:24px;color:#B9BDC0">Fresa de varios dientes: cada diente corta de forma intermitente</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B">Tipos de fresado</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Periférico:</span> el eje de la fresa es paralelo a la superficie; cortan los dientes de la periferia.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Frontal:</span> el eje es perpendicular; cortan frente y periferia. Da superficies planas con buen acabado.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">De ranuras y contornos:</span> fresa de vástago para cajas, ranuras y perfiles.</p>
+<div style="background:#2B3136;border-radius:16px;padding:20px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Sentido del corte</p>
+<p style="font-size:24px;line-height:1.35"><span style="font-weight:600">Convencional:</span> dientes contra el avance; la viruta va de delgada a gruesa.</p>
+<p style="font-size:24px;line-height:1.35"><span style="font-weight:600">Concordante:</span> dientes a favor del avance; viruta de gruesa a delgada y mejor acabado.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">09</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Procesos principales</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Fresado: cálculo de una pasada</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#A23F10">Fórmulas</p>
+<p style="font-size:28px;line-height:1.5">N = 1000 v / (π D)</p>
+<p style="font-size:28px;line-height:1.5">vf = fz · z · N</p>
+<p style="font-size:28px;line-height:1.5">MRR = w · d · vf</p>
+<p style="font-size:28px;line-height:1.5">Tm = L / vf</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#A23F10">Datos: planeado con fresa frontal</p>
+<p style="font-size:28px;line-height:1.5">D = 100 mm · z = 8 dientes</p>
+<p style="font-size:28px;line-height:1.5">v = 200 m/min · fz = 0.1 mm/diente</p>
+<p style="font-size:28px;line-height:1.5">w = 50 mm · d = 3 mm</p>
+<p style="font-size:28px;line-height:1.5">L = 300 mm (con aproximación)</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;color:#B9BDC0">Velocidad de giro</p>
+<p style="font-size:26px">1000 · 200 / (π · 100)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">N ≈ 637 rpm</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;color:#B9BDC0">Avance de mesa</p>
+<p style="font-size:26px">0.1 · 8 · 637</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">vf ≈ 510 mm/min</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;color:#B9BDC0">Remoción y tiempo</p>
+<p style="font-size:26px">50 · 3 · 510 y 300 / 510</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:600;color:#F08A4B;line-height:1.1">76 500 mm³/min · 0.59 min</p>
+</div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#4A5056">Aquí z es el número de dientes y fz el avance por diente: el espesor de viruta depende de fz, no del avance de la mesa.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">10</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Procesos principales</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Taladrado</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="position:relative;width:640px;height:540px">
+<svg width="640" height="480" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" aria-label="Taladrado: la broca gira y avanza hacia abajo, abriendo un agujero en la pieza; la punta tiene 118 grados">
+<rect x="70" y="250" width="500" height="200" fill="#4A5056"/>
+<rect x="285" y="250" width="70" height="140" fill="#F4F1EA"/>
+<polygon points="285,390 355,390 320,411" fill="#F4F1EA"/>
+<rect x="285" y="90" width="70" height="300" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<polygon points="285,390 355,390 320,411" fill="#F08A4B" stroke="#A23F10" stroke-width="3"/>
+<rect x="305" y="20" width="30" height="70" fill="#B9BDC0"/>
+<path d="M255 70 A70 40 0 0 1 385 70" fill="none" stroke="#8FB8D6" stroke-width="6"/>
+<polygon points="385,86 371,62 399,62" fill="#8FB8D6"/>
+<line x1="470" y1="120" x2="470" y2="220" stroke="#1E2226" stroke-width="6"/>
+<polygon points="470,236 456,210 484,210" fill="#1E2226"/>
+<line x1="230" y1="250" x2="230" y2="390" stroke="#1E2226" stroke-width="4"/>
+<line x1="220" y1="250" x2="240" y2="250" stroke="#1E2226" stroke-width="4"/>
+<line x1="220" y1="390" x2="240" y2="390" stroke="#1E2226" stroke-width="4"/>
+</svg>
+<p style="position:absolute;left:400px;top:70px;width:60px;font-size:32px;font-weight:600;color:#2F6285">N</p>
+<p style="position:absolute;left:490px;top:150px;width:60px;font-size:32px;font-weight:600">f</p>
+<p style="position:absolute;left:150px;top:305px;width:70px;font-size:32px;font-weight:600">L</p>
+<p style="position:absolute;left:190px;top:110px;width:90px;font-size:26px;font-weight:600;color:#A23F10;text-align:right">Broca</p>
+<p style="position:absolute;left:90px;top:410px;width:200px;font-size:26px;font-weight:600;color:#F4F1EA">Pieza</p>
+<p style="position:absolute;left:0px;top:490px;width:640px;font-size:24px;color:#4A5056">Punta típica de 118°: la longitud de entrada vale cerca de 0.3 D</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px">
+<p style="font-size:28px;font-weight:600;color:#A23F10">Operaciones afines</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Escariado:</span> afina un agujero ya hecho para dar tolerancia y acabado.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Avellanado y refrenteado:</span> cónico o plano para alojar tornillos.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Machueleado:</span> corta una rosca interior.</p>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">Tiempo y remoción</p>
+<p style="font-size:28px">Tm = (L + 0.3 D) / (f · N)</p>
+<p style="font-size:28px">MRR = (π D² / 4) · f · N</p>
+</div>
+<p style="font-size:24px;line-height:1.4;color:#4A5056">Ejemplo: D = 10 mm, L = 30 mm, v = 30 m/min, f = 0.15 mm/rev: N ≈ 955 rpm, Tm ≈ 0.23 min.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">11</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Procesos principales</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Rectificado</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="position:relative;width:700px;height:540px">
+<svg width="700" height="480" viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg" aria-label="Rectificado plano: una muela abrasiva giratoria pasa sobre la pieza que se desplaza en la mesa">
+<circle cx="350" cy="150" r="120" fill="#8FB8D6" stroke="#B9BDC0" stroke-width="4"/>
+<circle cx="350" cy="150" r="22" fill="#1E2226"/>
+<rect x="80" y="262" width="540" height="70" fill="#B9BDC0"/>
+<rect x="60" y="332" width="580" height="50" fill="#4A5056"/>
+<path d="M240 150 A110 110 0 0 1 350 40" fill="none" stroke="#F08A4B" stroke-width="6"/>
+<polygon points="366,40 342,26 342,54" fill="#F08A4B"/>
+<line x1="150" y1="430" x2="500" y2="430" stroke="#F4F1EA" stroke-width="6"/>
+<polygon points="516,430 490,416 490,444" fill="#F4F1EA"/>
+</svg>
+<p style="position:absolute;left:216px;top:70px;width:70px;font-size:32px;font-weight:600;color:#F08A4B">ns</p>
+<p style="position:absolute;left:310px;top:128px;width:200px;font-size:26px;font-weight:600;color:#1E2226">Muela</p>
+<p style="position:absolute;left:110px;top:278px;width:200px;font-size:26px;font-weight:600;color:#1E2226">Pieza</p>
+<p style="position:absolute;left:530px;top:416px;width:160px;font-size:28px;font-weight:600">mesa</p>
+<p style="position:absolute;left:0px;top:490px;width:700px;font-size:24px;color:#B9BDC0">Rectificado plano: muela abrasiva de alta velocidad y pasadas muy finas</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B">Características</p>
+<p style="font-size:26px;line-height:1.35">Cada grano abrasivo es un filo microscópico: la viruta es diminuta y la profundidad de pasada, de centésimas de milímetro.</p>
+<p style="font-size:26px;line-height:1.35">Logra tolerancias muy cerradas y acabados finos, incluso en aceros templados que otras herramientas no cortan.</p>
+<p style="font-size:26px;line-height:1.35">La velocidad periférica de la muela es del orden de 30 m/s.</p>
+<div style="background:#2B3136;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Tipos</p>
+<p style="font-size:24px;line-height:1.35">Plano · cilíndrico exterior e interior · sin centros · de perfiles</p>
+</div>
+<p style="font-size:24px;line-height:1.4;color:#B9BDC0">Cuidado: el calor puede quemar la superficie y generar grietas; se controla con refrigerante y reavivado de la muela.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">12</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Potencia, desgaste y acabado</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Potencia y fuerza de corte</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">Potencia de corte (u en W·s/mm³, MRR en mm³/s)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">Pc = u · MRR</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">Potencia en el motor (η: eficiencia de la máquina)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">Pm = Pc / η</p>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">Fuerza de corte (v en m/s)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">Fc = Pc / v</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<table style="width:100%;border-collapse:collapse;font-size:26px">
+<tr style="background:#1E2226;color:#F4F1EA">
+<td style="width:65%;padding:12px 20px;font-weight:600">Material</td>
+<td style="width:35%;padding:12px 20px;font-weight:600">u (W·s/mm³)</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px">Aluminio</td>
+<td style="padding:10px 20px">≈ 0.7</td>
+</tr>
+<tr>
+<td style="padding:10px 20px">Hierro fundido</td>
+<td style="padding:10px 20px">≈ 1.6</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px">Acero de bajo carbono</td>
+<td style="padding:10px 20px">≈ 2.5</td>
+</tr>
+<tr>
+<td style="padding:10px 20px">Aleación de titanio</td>
+<td style="padding:10px 20px">≈ 3.5</td>
+</tr>
+</table>
+<div style="background:#E9E4D8;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;font-weight:600;color:#A23F10">Ejemplo del torneado anterior</p>
+<p style="font-size:26px;line-height:1.4">MRR = 60 000 mm³/min = 1 000 mm³/s</p>
+<p style="font-size:26px;line-height:1.4">Pc = 2.5 · 1000 = 2.5 kW · Pm (η = 0.8) ≈ 3.1 kW</p>
+<p style="font-size:26px;line-height:1.4">Fc = 2500 W / 1.667 m/s = 1 500 N</p>
+</div>
+</div>
+</div>
+<p style="font-size:24px;color:#4A5056">Valores de u orientativos; para diseño se usa la tabla del libro de texto.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">13</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Potencia, desgaste y acabado</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Desgaste y vida de la herramienta</h2>
+</div>
+<div style="display:flex;gap:44px">
+<div style="position:relative;width:560px;height:520px">
+<svg width="560" height="440" viewBox="0 0 560 440" xmlns="http://www.w3.org/2000/svg" aria-label="Perfil de una herramienta con desgaste de flanco VB cerca de la punta y un cráter en la cara de ataque">
+<polygon points="120,340 500,320 500,60 170,60" fill="#4A5056" stroke="#B9BDC0" stroke-width="3"/>
+<line x1="120" y1="340" x2="220" y2="335" stroke="#F08A4B" stroke-width="12"/>
+<path d="M165 150 Q135 190 160 230" fill="none" stroke="#F08A4B" stroke-width="8"/>
+<line x1="120" y1="385" x2="220" y2="385" stroke="#F4F1EA" stroke-width="4"/>
+<line x1="120" y1="375" x2="120" y2="395" stroke="#F4F1EA" stroke-width="4"/>
+<line x1="220" y1="375" x2="220" y2="395" stroke="#F4F1EA" stroke-width="4"/>
+</svg>
+<p style="position:absolute;left:135px;top:395px;width:100px;font-size:30px;font-weight:600">VB</p>
+<p style="position:absolute;left:210px;top:170px;width:200px;font-size:26px;font-weight:600;color:#F08A4B">Cráter</p>
+<p style="position:absolute;left:230px;top:290px;width:260px;font-size:26px;font-weight:600;color:#F08A4B">Desgaste de flanco</p>
+<p style="position:absolute;left:290px;top:110px;width:200px;font-size:26px;font-weight:600;color:#F4F1EA">Herramienta</p>
+<p style="position:absolute;left:0px;top:450px;width:560px;font-size:24px;color:#B9BDC0">Fin de vida: VB ≈ 0.3 mm (criterio usual)</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B">Mecanismos de falla</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Abrasión y adhesión:</span> desgaste de flanco, el más común.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Difusión a alta temperatura:</span> cráter en la cara de ataque.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600">Astillado y fractura:</span> golpes, cortes interrumpidos.</p>
+<div style="background:#2B3136;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Ecuación de Taylor</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;line-height:1.1">v · T<span style="font-size:30px">ⁿ</span> = C</p>
+<p style="font-size:24px;line-height:1.4;color:#B9BDC0">v en m/min y T en min. Con n = 0.25 y C = 250: v = 100 da T ≈ 39.1 min; v = 120 da T ≈ 18.8 min.</p>
+</div>
+<p style="font-size:24px;line-height:1.4;color:#B9BDC0">Un aumento de 20 % en la velocidad reduce la vida a menos de la mitad.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">14</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Potencia, desgaste y acabado</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Acabado superficial</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;color:#B9BDC0">Rugosidad teórica en torneado (f y r en mm)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">Ra ≈ f² / (32 r)</p>
+<p style="font-size:24px;color:#B9BDC0">r es el radio de punta de la herramienta</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;font-weight:600;color:#A23F10">Ejemplo</p>
+<p style="font-size:26px;line-height:1.4">f = 0.2 mm/rev y r = 0.8 mm</p>
+<p style="font-size:26px;line-height:1.4">Ra = 0.04 / 25.6 ≈ 0.0016 mm ≈ 1.6 µm</p>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#4A5056">Reducir f a la mitad baja Ra a la cuarta parte. En la práctica Ra real es mayor por vibración, arista recrecida y desgaste.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<table style="width:100%;border-collapse:collapse;font-size:26px">
+<tr style="background:#1E2226;color:#F4F1EA">
+<td style="width:62%;padding:12px 20px;font-weight:600">Proceso</td>
+<td style="width:38%;padding:12px 20px;font-weight:600">Ra típica (µm)</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px">Fundición en arena</td>
+<td style="padding:10px 20px">6 a 25</td>
+</tr>
+<tr>
+<td style="padding:10px 20px">Taladrado</td>
+<td style="padding:10px 20px">1.6 a 6.3</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px">Fresado</td>
+<td style="padding:10px 20px">0.8 a 6.3</td>
+</tr>
+<tr>
+<td style="padding:10px 20px">Torneado</td>
+<td style="padding:10px 20px">0.4 a 6.3</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px">Rectificado</td>
+<td style="padding:10px 20px">0.1 a 1.6</td>
+</tr>
+</table>
+<p style="font-size:24px;line-height:1.4;color:#4A5056">Para mejor acabado: avance pequeño, radio de punta mayor, herramienta afilada, velocidad adecuada y máquina rígida. Valores orientativos.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">15</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">CNC, problemas, selección y seguridad</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Control numérico (CNC)</h2>
+</div>
+<div style="display:flex;gap:40px">
+<div style="width:760px;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Programa de ejemplo: cilindrado en torno</p>
+<div style="background:#2B3136;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:2px">
+<p style="font-family:'Courier New', monospace;font-size:26px;line-height:1.5">G21 G90</p>
+<p style="font-family:'Courier New', monospace;font-size:26px;line-height:1.5">G97 S637 M03</p>
+<p style="font-family:'Courier New', monospace;font-size:26px;line-height:1.5">G00 X44.0 Z2.0</p>
+<p style="font-family:'Courier New', monospace;font-size:26px;line-height:1.5">G01 Z-160.0 F0.2</p>
+<p style="font-family:'Courier New', monospace;font-size:26px;line-height:1.5">G00 X52.0 Z2.0</p>
+<p style="font-family:'Courier New', monospace;font-size:26px;line-height:1.5">M05</p>
+<p style="font-family:'Courier New', monospace;font-size:26px;line-height:1.5">M30</p>
+</div>
+<p style="font-size:24px;line-height:1.4;color:#B9BDC0">G21 mm · G90 absoluto · G97 rpm directas · M03 husillo adelante · G00 rápido · G01 avance de trabajo · M05 paro · M30 fin</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B">Del diseño a la pieza</p>
+<p style="font-size:26px;line-height:1.35">CAD (modelo) → CAM (trayectorias) → postprocesador (código G) → máquina.</p>
+<div style="background:#2B3136;border-radius:16px;padding:20px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Ejes</p>
+<p style="font-size:24px;line-height:1.35">Torno: X (diámetro) y Z (longitud). Centro de maquinado: X, Y y Z; con 4 o 5 ejes, giros adicionales.</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:20px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Ventajas</p>
+<p style="font-size:24px;line-height:1.35">Repetibilidad, geometrías complejas, menos tiempo muerto y un operador para varias máquinas.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">16</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">CNC, problemas, selección y seguridad</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Problemas comunes y cómo corregirlos</h2>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:25px;line-height:1.3">
+<tr style="background:#1E2226;color:#F4F1EA">
+<td style="width:22%;padding:12px 20px;font-weight:600">Síntoma</td>
+<td style="width:36%;padding:12px 20px;font-weight:600">Causa probable</td>
+<td style="width:42%;padding:12px 20px;font-weight:600">Corrección</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px;font-weight:600">Vibración (chatter)</td>
+<td style="padding:10px 20px">Falta de rigidez, voladizo largo, v o d excesivas</td>
+<td style="padding:10px 20px">Acortar voladizo, sujetar mejor, cambiar v o f</td>
+</tr>
+<tr>
+<td style="padding:10px 20px;font-weight:600">Acabado rugoso</td>
+<td style="padding:10px 20px">Avance alto, filo desgastado, arista recrecida</td>
+<td style="padding:10px 20px">Bajar f, afilar o cambiar inserto, subir v</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px;font-weight:600">Desgaste rápido</td>
+<td style="padding:10px 20px">Velocidad alta, material duro, sin refrigerante</td>
+<td style="padding:10px 20px">Bajar v, usar recubrimiento y fluido de corte</td>
+</tr>
+<tr>
+<td style="padding:10px 20px;font-weight:600">Viruta larga</td>
+<td style="padding:10px 20px">Material dúctil, avance pequeño</td>
+<td style="padding:10px 20px">Rompevirutas, aumentar f</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 20px;font-weight:600">Pieza fuera de medida</td>
+<td style="padding:10px 20px">Deflexión, dilatación térmica, desgaste</td>
+<td style="padding:10px 20px">Pasada de acabado, compensar desgaste, enfriar</td>
+</tr>
+<tr>
+<td style="padding:10px 20px;font-weight:600">Rebaba</td>
+<td style="padding:10px 20px">Filo sin afilar, salida de la herramienta</td>
+<td style="padding:10px 20px">Filo afilado, chaflán de salida, desbarbado</td>
+</tr>
+</table>
+<p style="font-size:26px;line-height:1.4;color:#4A5056">Regla de diagnóstico: cambiar una sola variable a la vez y observar el efecto en viruta, sonido y acabado.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">17</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">CNC, problemas, selección y seguridad</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">¿Qué proceso elegir?</h2>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:26px;line-height:1.3">
+<tr style="background:#F08A4B;color:#1E2226">
+<td style="width:46%;padding:12px 22px;font-weight:600">Si la pieza necesita…</td>
+<td style="width:54%;padding:12px 22px;font-weight:600">Proceso principal</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:12px 22px">Forma de revolución: ejes, bujes, roscas</td>
+<td style="padding:12px 22px;font-weight:600">Torneado</td>
+</tr>
+<tr>
+<td style="padding:12px 22px">Planos, ranuras, cajas, contornos y engranes</td>
+<td style="padding:12px 22px;font-weight:600">Fresado</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:12px 22px">Agujeros cilíndricos</td>
+<td style="padding:12px 22px;font-weight:600">Taladrado, luego escariado o mandrinado si pide tolerancia</td>
+</tr>
+<tr>
+<td style="padding:12px 22px">Tolerancia fina o material templado</td>
+<td style="padding:12px 22px;font-weight:600">Rectificado</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:12px 22px">Geometría compleja o lotes repetitivos</td>
+<td style="padding:12px 22px;font-weight:600">CNC (torno, centro de maquinado)</td>
+</tr>
+</table>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px">
+<div style="background:#2B3136;border-radius:16px;padding:18px 22px">
+<p style="font-size:24px;font-weight:600;color:#F08A4B">Geometría</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:18px 22px">
+<p style="font-size:24px;font-weight:600;color:#F08A4B">Tolerancia y acabado</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:18px 22px">
+<p style="font-size:24px;font-weight:600;color:#F08A4B">Material</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:18px 22px">
+<p style="font-size:24px;font-weight:600;color:#F08A4B">Volumen y costo</p>
+</div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#B9BDC0">Cuatro criterios para decidir. En la práctica los procesos se encadenan: se tornea o fresa, y se rectifica al final.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">18</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">CNC, problemas, selección y seguridad</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Seguridad en el taller</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 30px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:38px;font-weight:500;color:#A23F10">Protección personal</h3>
+<p style="font-size:26px;line-height:1.4">Lentes de seguridad siempre, calzado cerrado, cabello recogido. Sin guantes, anillos, pulseras ni mangas sueltas cerca de piezas giratorias.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 30px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:38px;font-weight:500;color:#A23F10">Máquina y pieza</h3>
+<p style="font-size:26px;line-height:1.4">Pieza bien sujeta. Retirar la llave del mandril antes de arrancar. Guardas colocadas. Conocer el paro de emergencia.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 30px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:38px;font-weight:500;color:#A23F10">Viruta</h3>
+<p style="font-size:26px;line-height:1.4">Caliente y filosa: retirarla con gancho o escobilla, nunca con la mano, y con la máquina detenida. Aire comprimido no hacia personas.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 30px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:38px;font-weight:500;color:#A23F10">Rectificado</h3>
+<p style="font-size:26px;line-height:1.4">Revisar la muela, probar sin carga, no exceder su velocidad máxima y mantenerse fuera del plano de giro al arrancar.</p>
+</div>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:20px 30px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B">Medir, limpiar y ajustar siempre con la máquina detenida.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">19</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Ejemplos y resumen</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Ejemplo resuelto 1: torneado completo</h2>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#A23F10">Problema</p>
+<p style="font-size:26px;line-height:1.4">Un eje de acero de bajo carbono de 50 mm de diámetro se cilindra en una longitud de 160 mm con v = 100 m/min, f = 0.2 mm/rev y d = 3 mm. Con u = 2.5 W·s/mm³ y η = 0.8, determine N, Tm, MRR, Pc, la potencia del motor y la fuerza de corte.</p>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:26px">
+<tr style="background:#1E2226;color:#F4F1EA">
+<td style="width:24%;padding:12px 20px;font-weight:600">Resultado</td>
+<td style="width:46%;padding:12px 20px;font-weight:600">Cálculo</td>
+<td style="width:30%;padding:12px 20px;font-weight:600">Valor</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:9px 20px;font-weight:600">N</td>
+<td style="padding:9px 20px">1000 · 100 / (π · 50)</td>
+<td style="padding:9px 20px;font-weight:600">637 rpm</td>
+</tr>
+<tr>
+<td style="padding:9px 20px;font-weight:600">Tm</td>
+<td style="padding:9px 20px">160 / (0.2 · 637)</td>
+<td style="padding:9px 20px;font-weight:600">1.26 min</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:9px 20px;font-weight:600">MRR</td>
+<td style="padding:9px 20px">100 000 · 0.2 · 3</td>
+<td style="padding:9px 20px;font-weight:600">60 000 mm³/min</td>
+</tr>
+<tr>
+<td style="padding:9px 20px;font-weight:600">Pc</td>
+<td style="padding:9px 20px">2.5 · 1 000 mm³/s</td>
+<td style="padding:9px 20px;font-weight:600">2.5 kW</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:9px 20px;font-weight:600">Pm</td>
+<td style="padding:9px 20px">2.5 / 0.8</td>
+<td style="padding:9px 20px;font-weight:600">3.1 kW</td>
+</tr>
+<tr>
+<td style="padding:9px 20px;font-weight:600">Fc</td>
+<td style="padding:9px 20px">2 500 W / 1.667 m/s</td>
+<td style="padding:9px 20px;font-weight:600">1 500 N</td>
+</tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">20</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Ejemplos y resumen</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Ejemplo resuelto 2: vida de herramienta</h2>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:22px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Problema</p>
+<p style="font-size:26px;line-height:1.4">Para el eje del ejemplo 1, la herramienta cumple v · T^0.25 = 250 (v en m/min, T en min). Calcule la vida a 100 y 120 m/min, la velocidad para 60 min de vida y cuántas piezas se hacen con cada filo.</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#2B3136;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">a) Vida con v = 100 m/min</p>
+<p style="font-size:26px">T = (250 / 100)^4</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">T ≈ 39.1 min</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">b) Vida con v = 120 m/min</p>
+<p style="font-size:26px">T = (250 / 120)^4</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">T ≈ 18.8 min</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">c) Velocidad para T = 60 min</p>
+<p style="font-size:26px">v = 250 / 60^0.25</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">v ≈ 90 m/min</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">d) Piezas por filo (Tm = 1.26 y 1.05 min)</p>
+<p style="font-size:26px">39.1 / 1.26 y 18.8 / 1.05</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">31 contra 18 piezas</p>
+</div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#B9BDC0">Subir 20 % la velocidad ahorra 17 % de tiempo por pieza, pero casi duplica el consumo de filos.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">21</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Ejemplos y resumen</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Lo que debes recordar</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Corte</h3>
+<p style="font-size:25px;line-height:1.35">La viruta se forma por cortante en el plano de corte. r = t0 / tc es menor que 1; el tipo de viruta indica si el proceso va bien.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Procesos</h3>
+<p style="font-size:25px;line-height:1.35">Torneado para revolución, fresado para formas prismáticas, taladrado para agujeros y rectificado para acabado fino.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Herramienta</h3>
+<p style="font-size:25px;line-height:1.35">La velocidad es el parámetro que más acorta la vida: v · Tⁿ = C. El criterio usual de fin de vida es VB ≈ 0.3 mm.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Potencia y acabado</h3>
+<p style="font-size:25px;line-height:1.35">Pc = u · MRR; el acabado depende sobre todo del avance y del radio de punta: Ra ≈ f² / (32 r).</p>
+</div>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;font-weight:600;color:#F08A4B">Fórmulas clave</p>
+<p style="font-size:26px;line-height:1.45">N = 1000 v / (π D) · Tm = L / (f N) · MRR = v f d · Pc = u MRR · vf = fz z N</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Maquinado</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">22</p>
+
+</section>
+</div>
+<div id="bar"><button id="p">◀ Anterior</button><span id="n"></span><button id="nx">Siguiente ▶</button><button id="fs">Pantalla completa</button></div>
+<script>
+var S=[].slice.call(document.querySelectorAll('.slide')),i=0,st=document.getElementById('stage');
+function fit(){var w=innerWidth,h=innerHeight-48,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.marginLeft=(-960*k)+'px'}
+function show(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,j){s.classList.toggle('on',j==i)});document.getElementById('n').textContent=(i+1)+' / '+S.length;document.getElementById('p').disabled=i==0;document.getElementById('nx').disabled=i==S.length-1;try{location.hash='#'+(i+1)}catch(e){}}
+document.getElementById('p').onclick=function(){show(i-1)};document.getElementById('nx').onclick=function(){show(i+1)};
+document.getElementById('fs').onclick=function(){var e=document.documentElement;(e.requestFullscreen||e.webkitRequestFullscreen||function(){}).call(e)};
+document.addEventListener('keydown',function(e){if(e.key=='ArrowRight'||e.key==' '||e.key=='PageDown')show(i+1);if(e.key=='ArrowLeft'||e.key=='PageUp')show(i-1)});
+var x0=null;document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX});document.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));x0=null});
+addEventListener('resize',fit);fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>

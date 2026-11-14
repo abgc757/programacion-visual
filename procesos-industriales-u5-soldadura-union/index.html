@@ -1,0 +1,947 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Procesos Industriales · Soldadura y unión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#1E2226;overflow:hidden;font-family:'IBM Plex Sans',Arial,sans-serif}
+#stage{position:absolute;left:50%;top:0;transform-origin:0 0}
+.slide:not(.on){display:none !important}
+.slide[style*="display:grid"]{} x-shape{display:block}
+table{border-collapse:collapse;width:100%} th,td{padding:14px 20px;border-bottom:1px solid #DDD6C3}
+h1,h2,h3,p,ul,ol{margin:0}
+#bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#14213D;display:flex;align-items:center;justify-content:center;gap:14px;color:#F6F3EA;font-size:15px;z-index:9}
+#bar button{background:#F29A4A;border:0;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;color:#14213D}
+#bar button:disabled{opacity:.4}
+</style></head><body>
+<div id="stage">
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between;gap:40px">
+<div style="display:flex;flex-direction:column;gap:32px">
+<p style="font-size:32px;font-weight:600;color:#F08A4B;letter-spacing:3px;text-transform:uppercase">Procesos de Manufactura · Unidad 5</p>
+<h1 style="font-family:'Oswald', Arial, sans-serif;font-size:160px;font-weight:600;line-height:1.05">Soldadura y unión</h1>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:500;line-height:1.15;color:#B9BDC0">Arco, resistencia, soldadura fuerte y blanda, uniones mecánicas y adhesivas</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<hr style="width:160px;border-top:6px solid #F08A4B">
+<p style="font-size:30px;line-height:1.4;color:#B9BDC0">Al terminar la unidad podrás clasificar los procesos de unión, calcular el calor aportado y la resistencia de un cordón, e identificar defectos y medidas de seguridad.</p>
+<p style="font-size:28px;font-weight:600">M. en C. Abraham Gómez Contreras · Ingeniería Industrial</p>
+</div>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">¿Por qué unir piezas?</h2>
+</div>
+<p style="font-size:34px;line-height:1.4">Casi ningún producto se fabrica de una sola pieza: por tamaño, por forma, por materiales distintos o para poder darle mantenimiento, se fabrican componentes y luego se unen.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Soldadura</h3>
+<p style="font-size:28px;color:#4A5056">Junta permanente y continua; la pieza unida se comporta casi como una sola.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Uniones mecánicas</h3>
+<p style="font-size:28px;color:#4A5056">Tornillos y remaches; permiten desmontar y unir materiales distintos.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Adhesivos</h3>
+<p style="font-size:28px;color:#4A5056">Reparten la carga en toda el área y unen metales con plásticos o vidrio.</p>
+</div>
+</div>
+<p style="font-size:30px;font-weight:500">Se elige según carga, materiales, necesidad de desmontaje, costo y volumen de producción.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">02</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:0px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Clasificación de los procesos de unión</h2>
+</div>
+<div style="display:flex;flex-direction:row;justify-content:center;padding:36px 0px 0px 0px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;background:#F08A4B;color:#1E2226;border-radius:14px;padding:14px 48px">Procesos de unión</p>
+</div>
+<svg width="1664" height="90" viewBox="0 0 1664 90" xmlns="http://www.w3.org/2000/svg" aria-label="Líneas que unen el título con cinco familias de procesos de unión">
+<line x1="832" y1="0" x2="832" y2="40" stroke="#B9BDC0" stroke-width="3"/>
+<line x1="152" y1="40" x2="1512" y2="40" stroke="#B9BDC0" stroke-width="3"/>
+<line x1="152" y1="40" x2="152" y2="90" stroke="#B9BDC0" stroke-width="3"/>
+<line x1="492" y1="40" x2="492" y2="90" stroke="#B9BDC0" stroke-width="3"/>
+<line x1="832" y1="40" x2="832" y2="90" stroke="#B9BDC0" stroke-width="3"/>
+<line x1="1172" y1="40" x2="1172" y2="90" stroke="#B9BDC0" stroke-width="3"/>
+<line x1="1512" y1="40" x2="1512" y2="90" stroke="#B9BDC0" stroke-width="3"/>
+</svg>
+<div style="display:flex;flex-direction:row;gap:36px">
+<div style="width:304px;background:#2B3136;border-radius:16px;padding:22px 20px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:32px;font-weight:500;color:#F08A4B">Fusión</h3>
+<p style="font-size:25px;line-height:1.35">Arco, resistencia y oxigás. Se funde el metal base.</p>
+</div>
+<div style="width:304px;background:#2B3136;border-radius:16px;padding:22px 20px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:32px;font-weight:500;color:#F08A4B">Estado sólido</h3>
+<p style="font-size:25px;line-height:1.35">Fricción, ultrasonido y difusión. Sin fundir el metal base.</p>
+</div>
+<div style="width:304px;background:#2B3136;border-radius:16px;padding:22px 20px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:32px;font-weight:500;color:#F08A4B">Fuerte y blanda</h3>
+<p style="font-size:25px;line-height:1.35">Aporte con punto de fusión menor que el del metal base.</p>
+</div>
+<div style="width:304px;background:#2B3136;border-radius:16px;padding:22px 20px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:32px;font-weight:500;color:#F08A4B">Mecánicas</h3>
+<p style="font-size:25px;line-height:1.35">Tornillos, remaches y ajustes por interferencia.</p>
+</div>
+<div style="width:304px;background:#2B3136;border-radius:16px;padding:22px 20px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:32px;font-weight:500;color:#F08A4B">Adhesivas</h3>
+<p style="font-size:25px;line-height:1.35">Epóxicos, acrílicos y cianoacrilatos.</p>
+</div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#B9BDC0;padding:28px 0px 0px 0px">La soldadura por arco es la familia de mayor uso en la industria y será el centro de la unidad.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">03</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Soldadura por arco</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Principio del arco eléctrico</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="position:relative;width:800px;height:520px">
+<svg width="800" height="480" viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" aria-label="Circuito de soldadura por arco: la fuente alimenta al electrodo y a la pinza de tierra; entre la punta del electrodo y la pieza salta el arco que funde el metal y forma el cordón">
+<rect x="20" y="40" width="170" height="120" rx="10" fill="#2B3136"/>
+<path d="M190 80 L560 50" fill="none" stroke="#1E2226" stroke-width="6"/>
+<path d="M190 130 L120 130 L120 340" fill="none" stroke="#1E2226" stroke-width="6"/>
+<rect x="60" y="340" width="700" height="100" fill="#4A5056"/>
+<rect x="100" y="326" width="40" height="30" fill="#B9BDC0"/>
+<line x1="560" y1="50" x2="440" y2="290" stroke="#8FB8D6" stroke-width="28" stroke-linecap="round"/>
+<line x1="560" y1="50" x2="440" y2="290" stroke="#F4F1EA" stroke-width="8" stroke-linecap="round"/>
+<path d="M440 292 L430 312 L446 322 L436 342" fill="none" stroke="#F08A4B" stroke-width="7" stroke-linejoin="round"/>
+<path d="M300 336 Q380 334 436 336 L436 346 Q380 348 300 346 Z" fill="#A23F10"/>
+<ellipse cx="436" cy="340" rx="70" ry="18" fill="#F08A4B"/>
+</svg>
+<p style="position:absolute;left:30px;top:78px;width:170px;font-size:24px;font-weight:600;color:#F4F1EA">Fuente de poder</p>
+<p style="position:absolute;left:580px;top:30px;width:200px;font-size:26px;font-weight:600;color:#1E2226">Electrodo</p>
+<p style="position:absolute;left:480px;top:290px;width:280px;font-size:26px;font-weight:600;color:#A23F10">Arco y charco fundido</p>
+<p style="position:absolute;left:150px;top:278px;width:230px;font-size:24px;font-weight:600;color:#A23F10;text-align:right">Cordón</p>
+<p style="position:absolute;left:30px;top:200px;width:170px;font-size:24px;font-weight:600;color:#1E2226">Pinza de tierra</p>
+<p style="position:absolute;left:560px;top:400px;width:200px;font-size:26px;font-weight:600;color:#F4F1EA">Metal base</p>
+<p style="position:absolute;left:0px;top:490px;width:800px;font-size:24px;color:#4A5056">El circuito se cierra por la pieza; el arco salta en el espacio de aire</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;color:#A23F10">Cómo funciona</p>
+<p style="font-size:26px;line-height:1.4">Entre el electrodo y la pieza salta un arco, una descarga eléctrica que concentra calor suficiente para fundir ambos metales y formar el charco.</p>
+<p style="font-size:26px;line-height:1.4">Valores típicos: de 20 a 40 V y de 50 a 500 A, según proceso, material y espesor.</p>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:20px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Polaridad en corriente directa</p>
+<p style="font-size:24px;line-height:1.35">Electrodo positivo (CCEP): penetración profunda. Electrodo negativo (CCEN): funde más electrodo y penetra menos.</p>
+</div>
+<p style="font-size:24px;line-height:1.4;color:#4A5056">La corriente alterna, sin polaridad fija, es común en electrodos revestidos de uso general.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">04</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Soldadura por arco</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Electrodo revestido (SMAW)</h2>
+</div>
+<div style="display:flex;gap:44px">
+<div style="position:relative;width:760px;height:520px">
+<svg width="760" height="470" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg" aria-label="Soldadura con electrodo revestido: el revestimiento genera gas protector y escoria que cubre el cordón">
+<rect x="40" y="340" width="700" height="100" fill="#4A5056"/>
+<rect x="140" y="326" width="250" height="18" rx="6" fill="#A23F10"/>
+<rect x="130" y="306" width="260" height="22" rx="6" fill="#8FB8D6"/>
+<ellipse cx="440" cy="338" rx="64" ry="16" fill="#F08A4B"/>
+<ellipse cx="452" cy="300" rx="78" ry="56" fill="none" stroke="#F08A4B" stroke-width="3" stroke-dasharray="10 8"/>
+<line x1="600" y1="40" x2="450" y2="290" stroke="#8FB8D6" stroke-width="36" stroke-linecap="butt"/>
+<line x1="600" y1="40" x2="450" y2="290" stroke="#F4F1EA" stroke-width="10" stroke-linecap="butt"/>
+<path d="M448 294 L438 312 L454 320 L444 338" fill="none" stroke="#F08A4B" stroke-width="7" stroke-linejoin="round"/>
+</svg>
+<p style="position:absolute;left:560px;top:60px;width:190px;font-size:24px;font-weight:600;color:#F4F1EA">Alma metálica y revestimiento</p>
+<p style="position:absolute;left:540px;top:290px;width:200px;font-size:24px;font-weight:600;color:#F08A4B">Gas protector</p>
+<p style="position:absolute;left:130px;top:268px;width:200px;font-size:24px;font-weight:600;color:#8FB8D6">Escoria</p>
+<p style="position:absolute;left:170px;top:372px;width:200px;font-size:24px;font-weight:600;color:#F4F1EA">Cordón</p>
+<p style="position:absolute;left:480px;top:372px;width:230px;font-size:24px;font-weight:600;color:#F4F1EA">Charco fundido</p>
+<p style="position:absolute;left:0px;top:480px;width:760px;font-size:24px;color:#B9BDC0">El revestimiento se consume y protege el charco del aire</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="background:#2B3136;border-radius:16px;padding:20px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:600;color:#F08A4B;line-height:1.1">E7018</p>
+<p style="font-size:24px;line-height:1.35">E: electrodo · 70: resistencia mínima a la tracción de 70 ksi (≈ 480 MPa) · 1: todas las posiciones · 18: revestimiento bajo hidrógeno y tipo de corriente.</p>
+</div>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600;color:#F08A4B">Ventajas:</span> equipo simple, portátil y barato; sirve en campo y con viento.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600;color:#F08A4B">Límites:</span> baja productividad, cambio frecuente de electrodo y escoria que se debe retirar.</p>
+<p style="font-size:24px;line-height:1.4;color:#B9BDC0">Los electrodos de bajo hidrógeno se guardan secos, en estufa, para evitar grietas.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">05</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Soldadura por arco</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">MIG/MAG (GMAW)</h2>
+</div>
+<div style="display:flex;gap:44px">
+<div style="position:relative;width:700px;height:520px">
+<svg width="700" height="470" viewBox="0 0 700 470" xmlns="http://www.w3.org/2000/svg" aria-label="Soldadura MIG/MAG: la antorcha alimenta un alambre continuo y expulsa gas protector alrededor del arco">
+<rect x="40" y="350" width="620" height="90" fill="#4A5056"/>
+<polygon points="250,30 450,30 420,200 280,200" fill="#4A5056"/>
+<polygon points="320,200 380,200 360,236 340,236" fill="#B9BDC0"/>
+<line x1="350" y1="10" x2="350" y2="318" stroke="#1E2226" stroke-width="8"/>
+<path d="M270 205 L250 330" fill="none" stroke="#2F6285" stroke-width="5" stroke-dasharray="10 8"/>
+<path d="M430 205 L450 330" fill="none" stroke="#2F6285" stroke-width="5" stroke-dasharray="10 8"/>
+<ellipse cx="350" cy="346" rx="90" ry="16" fill="#F08A4B"/>
+<path d="M350 316 L340 330 L358 338" fill="none" stroke="#F08A4B" stroke-width="7" stroke-linejoin="round"/>
+<path d="M120 346 Q240 340 280 346 L280 358 Q240 362 120 358 Z" fill="#A23F10"/>
+</svg>
+<p style="position:absolute;left:460px;top:50px;width:230px;font-size:24px;font-weight:600">Boquilla de la antorcha</p>
+<p style="position:absolute;left:370px;top:240px;width:220px;font-size:24px;font-weight:600;color:#1E2226">Alambre continuo</p>
+<p style="position:absolute;left:470px;top:290px;width:200px;font-size:24px;font-weight:600;color:#2F6285">Gas protector</p>
+<p style="position:absolute;left:470px;top:376px;width:200px;font-size:24px;font-weight:600;color:#F4F1EA">Charco</p>
+<p style="position:absolute;left:0px;top:480px;width:700px;font-size:24px;color:#4A5056">El alambre avanza sin parar y el gas viene por fuera</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<table style="width:100%;border-collapse:collapse;font-size:24px;line-height:1.3">
+<tr style="background:#1E2226;color:#F4F1EA">
+<td style="width:30%;padding:10px 16px;font-weight:600">Transferencia</td>
+<td style="width:70%;padding:10px 16px;font-weight:600">Uso</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:8px 16px;font-weight:600">Cortocircuito</td>
+<td style="padding:8px 16px">Láminas delgadas, fuera de posición</td>
+</tr>
+<tr>
+<td style="padding:8px 16px;font-weight:600">Globular</td>
+<td style="padding:8px 16px">Poco usada; mucha salpicadura</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:8px 16px;font-weight:600">Spray</td>
+<td style="padding:8px 16px">Espesores gruesos, posición plana</td>
+</tr>
+<tr>
+<td style="padding:8px 16px;font-weight:600">Pulsada</td>
+<td style="padding:8px 16px">Control fino; aluminio y delgados</td>
+</tr>
+</table>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:18px 24px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;font-weight:600;color:#F08A4B">Gas</p>
+<p style="font-size:24px;line-height:1.35">MIG: gas inerte (argón) para aluminio. MAG: gas activo (CO2 o Ar + CO2) para acero.</p>
+</div>
+<p style="font-size:24px;line-height:1.4;color:#4A5056">Alta productividad y fácil de automatizar; el viento arrastra el gas y arruina el cordón.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">06</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Soldadura por arco</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">TIG (GTAW)</h2>
+</div>
+<div style="display:flex;gap:44px">
+<div style="position:relative;width:700px;height:520px">
+<svg width="700" height="470" viewBox="0 0 700 470" xmlns="http://www.w3.org/2000/svg" aria-label="Soldadura TIG: un electrodo de tungsteno no consumible mantiene el arco y la varilla de aporte se agrega aparte, bajo gas argón">
+<rect x="40" y="350" width="620" height="90" fill="#4A5056"/>
+<polygon points="250,30 420,30 400,190 270,190" fill="#4A5056"/>
+<line x1="335" y1="10" x2="335" y2="316" stroke="#F4F1EA" stroke-width="10"/>
+<polygon points="330,316 340,316 335,334" fill="#F4F1EA"/>
+<path d="M262 195 L240 320" fill="none" stroke="#8FB8D6" stroke-width="5" stroke-dasharray="10 8"/>
+<path d="M408 195 L430 320" fill="none" stroke="#8FB8D6" stroke-width="5" stroke-dasharray="10 8"/>
+<line x1="620" y1="140" x2="410" y2="334" stroke="#F08A4B" stroke-width="10" stroke-linecap="round"/>
+<ellipse cx="350" cy="348" rx="84" ry="14" fill="#F08A4B"/>
+<path d="M120 346 Q220 340 266 346 L266 356 Q220 360 120 356 Z" fill="#A23F10"/>
+</svg>
+<p style="position:absolute;left:430px;top:30px;width:260px;font-size:24px;font-weight:600">Electrodo de tungsteno (no se consume)</p>
+<p style="position:absolute;left:480px;top:196px;width:210px;font-size:24px;font-weight:600;color:#F08A4B">Varilla de aporte</p>
+<p style="position:absolute;left:60px;top:230px;width:180px;font-size:24px;font-weight:600;color:#8FB8D6">Gas argón</p>
+<p style="position:absolute;left:450px;top:376px;width:200px;font-size:24px;font-weight:600;color:#F4F1EA">Charco</p>
+<p style="position:absolute;left:0px;top:480px;width:700px;font-size:24px;color:#B9BDC0">La varilla se agrega con la mano libre, según se necesite</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B">Características</p>
+<p style="font-size:26px;line-height:1.35">Arco estable y charco limpio: cordones de la mejor calidad y control preciso del calor.</p>
+<p style="font-size:26px;line-height:1.35">Ideal para láminas delgadas, acero inoxidable, aluminio y titanio.</p>
+<div style="background:#2B3136;border-radius:16px;padding:18px 24px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;font-weight:600;color:#F08A4B">Corriente</p>
+<p style="font-size:24px;line-height:1.35">Acero e inoxidable: directa con electrodo negativo. Aluminio: alterna, que rompe la capa de óxido.</p>
+</div>
+<p style="font-size:24px;line-height:1.4;color:#B9BDC0">Es el más lento y exige más habilidad; no deja escoria y el costo del equipo es alto.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">07</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Soldadura por arco</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Comparativo de los tres procesos</h2>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:25px;line-height:1.3">
+<tr style="background:#1E2226;color:#F4F1EA">
+<td style="width:19%;padding:12px 18px;font-weight:600">Criterio</td>
+<td style="width:27%;padding:12px 18px;font-weight:600">SMAW (revestido)</td>
+<td style="width:27%;padding:12px 18px;font-weight:600">MIG/MAG</td>
+<td style="width:27%;padding:12px 18px;font-weight:600">TIG</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 18px;font-weight:600">Electrodo</td>
+<td style="padding:10px 18px">Varilla revestida, consumible</td>
+<td style="padding:10px 18px">Alambre continuo, consumible</td>
+<td style="padding:10px 18px">Tungsteno, no consumible</td>
+</tr>
+<tr>
+<td style="padding:10px 18px;font-weight:600">Protección</td>
+<td style="padding:10px 18px">Gas y escoria del revestimiento</td>
+<td style="padding:10px 18px">Gas externo (Ar, CO2)</td>
+<td style="padding:10px 18px">Gas inerte externo (Ar)</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 18px;font-weight:600">Productividad</td>
+<td style="padding:10px 18px">Baja a media</td>
+<td style="padding:10px 18px">Alta</td>
+<td style="padding:10px 18px">Baja</td>
+</tr>
+<tr>
+<td style="padding:10px 18px;font-weight:600">Calidad del cordón</td>
+<td style="padding:10px 18px">Buena</td>
+<td style="padding:10px 18px">Buena a muy buena</td>
+<td style="padding:10px 18px">La mejor</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:10px 18px;font-weight:600">Habilidad</td>
+<td style="padding:10px 18px">Media</td>
+<td style="padding:10px 18px">Baja a media</td>
+<td style="padding:10px 18px">Alta</td>
+</tr>
+<tr>
+<td style="padding:10px 18px;font-weight:600">Uso típico</td>
+<td style="padding:10px 18px">Campo, estructuras, reparación</td>
+<td style="padding:10px 18px">Producción en serie, automotriz</td>
+<td style="padding:10px 18px">Delgados, inoxidable, aluminio</td>
+</tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">08</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Calor, metalurgia y defectos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Calor aportado</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#2B3136;border-radius:16px;padding:24px 30px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;color:#B9BDC0">Calor aportado por unidad de longitud</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:600;color:#F08A4B;line-height:1.1">H = η · V · I / v</p>
+<p style="font-size:24px;line-height:1.35;color:#B9BDC0">H en J/mm; V en volts, I en amperes, v en mm/s; η es la eficiencia del arco.</p>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:25px">
+<tr style="background:#F08A4B;color:#1E2226">
+<td style="width:60%;padding:10px 18px;font-weight:600">Proceso</td>
+<td style="width:40%;padding:10px 18px;font-weight:600">η típica</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:9px 18px">SMAW</td>
+<td style="padding:9px 18px">≈ 0.75</td>
+</tr>
+<tr>
+<td style="padding:9px 18px">MIG/MAG</td>
+<td style="padding:9px 18px">≈ 0.8</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:9px 18px">TIG</td>
+<td style="padding:9px 18px">≈ 0.65</td>
+</tr>
+</table>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#2B3136;border-radius:16px;padding:24px 30px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Demasiado calor</p>
+<p style="font-size:25px;line-height:1.4">Zona afectada más ancha, grano grueso, más distorsión y deformación de la pieza.</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:24px 30px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Muy poco calor</p>
+<p style="font-size:25px;line-height:1.4">Enfriamiento rápido: dureza alta, fragilidad y riesgo de grietas; falta de fusión.</p>
+</div>
+<p style="font-size:24px;line-height:1.4;color:#B9BDC0">Valores de η orientativos. El precalentamiento reduce la velocidad de enfriamiento en aceros de mayor carbono.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">09</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Calor, metalurgia y defectos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Zonas de una soldadura</h2>
+</div>
+<div style="display:flex;gap:40px">
+<div style="position:relative;width:780px;height:500px">
+<svg width="780" height="400" viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" aria-label="Sección de una soldadura a tope: el metal de soldadura ocupa la junta, rodeado por la zona afectada por el calor y por el metal base sin alterar">
+<polygon points="20,140 330,140 390,300 20,300" fill="#B9BDC0"/>
+<polygon points="450,140 760,140 760,300 390,300" fill="#B9BDC0"/>
+<polygon points="288,140 330,140 390,300 346,300" fill="#A23F10" fill-opacity="0.65"/>
+<polygon points="450,140 492,140 434,300 390,300" fill="#A23F10" fill-opacity="0.65"/>
+<path d="M330 140 Q390 96 450 140 L390 300 Z" fill="#F08A4B"/>
+<line x1="250" y1="80" x2="310" y2="200" stroke="#1E2226" stroke-width="3"/>
+<line x1="390" y1="60" x2="390" y2="190" stroke="#1E2226" stroke-width="3"/>
+<line x1="540" y1="80" x2="470" y2="200" stroke="#1E2226" stroke-width="3"/>
+</svg>
+<p style="position:absolute;left:100px;top:34px;width:240px;font-size:25px;font-weight:600;color:#A23F10;text-align:right">ZAC</p>
+<p style="position:absolute;left:260px;top:2px;width:260px;font-size:25px;font-weight:600;text-align:center">Metal de soldadura</p>
+<p style="position:absolute;left:520px;top:34px;width:240px;font-size:25px;font-weight:600;color:#A23F10">ZAC</p>
+<p style="position:absolute;left:60px;top:330px;width:240px;font-size:25px;font-weight:600">Metal base</p>
+<p style="position:absolute;left:520px;top:330px;width:240px;font-size:25px;font-weight:600">Metal base</p>
+<p style="position:absolute;left:0px;top:420px;width:780px;font-size:24px;color:#4A5056">Sección transversal de una soldadura a tope en V (esquemática)</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px">
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600;color:#A23F10">Metal de soldadura:</span> se fundió y solidificó; mezcla de metal base y de aporte.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600;color:#A23F10">ZAC:</span> zona afectada por el calor; no se fundió, pero cambió su microestructura y a menudo es el punto más débil.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600;color:#A23F10">Metal base:</span> lejos del cordón, sin cambio.</p>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:18px 24px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;font-weight:600;color:#F08A4B">Carbono equivalente</p>
+<p style="font-size:24px;line-height:1.35">CE = C + Mn/6 + (Cr + Mo + V)/5 + (Ni + Cu)/15</p>
+<p style="font-size:24px;line-height:1.35;color:#B9BDC0">Más CE, peor soldabilidad; sobre ≈ 0.4 a 0.45 % se precalienta.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">10</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Calor, metalurgia y defectos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Defectos de soldadura</h2>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:25px;line-height:1.3">
+<tr style="background:#F08A4B;color:#1E2226">
+<td style="width:22%;padding:12px 18px;font-weight:600">Defecto</td>
+<td style="width:40%;padding:12px 18px;font-weight:600">Causa probable</td>
+<td style="width:38%;padding:12px 18px;font-weight:600">Prevención</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:10px 18px;font-weight:600">Porosidad</td>
+<td style="padding:10px 18px">Gas atrapado: humedad, suciedad o gas de protección insuficiente</td>
+<td style="padding:10px 18px">Limpiar, secar y proteger del viento</td>
+</tr>
+<tr>
+<td style="padding:10px 18px;font-weight:600">Falta de fusión</td>
+<td style="padding:10px 18px">Poco calor o velocidad alta; técnica deficiente</td>
+<td style="padding:10px 18px">Subir corriente y bajar velocidad</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:10px 18px;font-weight:600">Falta de penetración</td>
+<td style="padding:10px 18px">Corriente baja o preparación de junta inadecuada</td>
+<td style="padding:10px 18px">Biselar y dejar abertura de raíz</td>
+</tr>
+<tr>
+<td style="padding:10px 18px;font-weight:600">Socavado</td>
+<td style="padding:10px 18px">Corriente o tensión excesivas; ángulo incorrecto</td>
+<td style="padding:10px 18px">Reducir parámetros y corregir técnica</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:10px 18px;font-weight:600">Inclusión de escoria</td>
+<td style="padding:10px 18px">Limpieza deficiente entre pasadas</td>
+<td style="padding:10px 18px">Picar y cepillar cada pasada</td>
+</tr>
+<tr>
+<td style="padding:10px 18px;font-weight:600">Grietas</td>
+<td style="padding:10px 18px">Enfriamiento rápido, hidrógeno y restricción de la pieza</td>
+<td style="padding:10px 18px">Precalentar y usar electrodo seco</td>
+</tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">11</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Otros procesos de unión</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Soldadura por resistencia</h2>
+</div>
+<div style="display:flex;gap:44px">
+<div style="position:relative;width:620px;height:520px">
+<svg width="620" height="460" viewBox="0 0 620 460" xmlns="http://www.w3.org/2000/svg" aria-label="Soldadura por puntos: dos electrodos aprietan dos láminas y la corriente funde una pepita en el contacto entre ellas">
+<rect x="60" y="215" width="480" height="40" fill="#4A5056"/>
+<rect x="60" y="255" width="480" height="40" fill="#4A5056"/>
+<line x1="60" y1="255" x2="540" y2="255" stroke="#F4F1EA" stroke-width="2"/>
+<polygon points="275,215 335,215 365,70 245,70" fill="#2F6285"/>
+<rect x="245" y="10" width="120" height="60" fill="#2F6285"/>
+<polygon points="275,295 335,295 365,440 245,440" fill="#2F6285"/>
+<ellipse cx="305" cy="255" rx="40" ry="16" fill="#F08A4B"/>
+<line x1="130" y1="60" x2="130" y2="170" stroke="#1E2226" stroke-width="6"/>
+<polygon points="130,190 116,164 144,164" fill="#1E2226"/>
+<line x1="130" y1="420" x2="130" y2="310" stroke="#1E2226" stroke-width="6"/>
+<polygon points="130,290 116,316 144,316" fill="#1E2226"/>
+</svg>
+<p style="position:absolute;left:150px;top:100px;width:60px;font-size:30px;font-weight:600">F</p>
+<p style="position:absolute;left:150px;top:350px;width:60px;font-size:30px;font-weight:600">F</p>
+<p style="position:absolute;left:380px;top:30px;width:230px;font-size:24px;font-weight:600;color:#2F6285">Electrodo de cobre</p>
+<p style="position:absolute;left:350px;top:176px;width:250px;font-size:24px;font-weight:600;color:#A23F10">Pepita fundida</p>
+<p style="position:absolute;left:380px;top:420px;width:230px;font-size:24px;font-weight:600;color:#2F6285">Electrodo de cobre</p>
+<p style="position:absolute;left:0px;top:470px;width:620px;font-size:24px;color:#4A5056">La resistencia es mayor en la interfaz entre láminas</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">Calor generado (efecto Joule)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">H = I² · R · t</p>
+<p style="font-size:24px;line-height:1.35;color:#B9BDC0">H en J; I en A; R en Ω; t en s.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:18px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;font-weight:600;color:#A23F10">Ejemplo</p>
+<p style="font-size:26px;line-height:1.4">I = 10 kA, R = 100 µΩ, t = 0.2 s: H = 10⁸ · 10⁻⁴ · 0.2 = 2 000 J</p>
+</div>
+<p style="font-size:25px;line-height:1.4">Variables: corriente, tiempo y fuerza de los electrodos. No lleva metal de aporte ni gas.</p>
+<p style="font-size:25px;line-height:1.4">Rápida y automatizable: una carrocería automotriz lleva miles de puntos.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">12</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Otros procesos de unión</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Soldadura fuerte y blanda</h2>
+</div>
+<div style="display:flex;gap:44px">
+<div style="position:relative;width:700px;height:420px">
+<svg width="700" height="340" viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" aria-label="Capilaridad: el metal de aporte fundido avanza por la holgura estrecha entre dos piezas desde el borde donde se aplica el calor">
+<rect x="40" y="60" width="620" height="90" fill="#4A5056"/>
+<rect x="40" y="170" width="620" height="90" fill="#4A5056"/>
+<rect x="40" y="150" width="400" height="20" fill="#F08A4B"/>
+<path d="M440 150 L470 160 L440 170 Z" fill="#F08A4B"/>
+<line x1="20" y1="230" x2="20" y2="300" stroke="#F4F1EA" stroke-width="1"/>
+<polygon points="60,10 100,10 80,40" fill="#F08A4B"/>
+</svg>
+<p style="position:absolute;left:70px;top:10px;width:280px;font-size:24px;font-weight:600;color:#F08A4B">Calor aplicado</p>
+<p style="position:absolute;left:120px;top:100px;width:300px;font-size:24px;font-weight:600;color:#F4F1EA">Pieza 1</p>
+<p style="position:absolute;left:120px;top:210px;width:300px;font-size:24px;font-weight:600;color:#F4F1EA">Pieza 2</p>
+<p style="position:absolute;left:480px;top:136px;width:210px;font-size:24px;font-weight:600;color:#F08A4B">Avance por capilaridad</p>
+<p style="position:absolute;left:0px;top:290px;width:700px;font-size:24px;color:#B9BDC0">La holgura es de décimas de milímetro; el aporte es atraído hacia adentro</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px">
+<table style="width:100%;border-collapse:collapse;font-size:24px;line-height:1.3">
+<tr style="background:#F08A4B;color:#1E2226">
+<td style="width:24%;padding:10px 14px;font-weight:600">Criterio</td>
+<td style="width:38%;padding:10px 14px;font-weight:600">Fuerte</td>
+<td style="width:38%;padding:10px 14px;font-weight:600">Blanda</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:9px 14px;font-weight:600">Temperatura</td>
+<td style="padding:9px 14px">Sobre 450 °C</td>
+<td style="padding:9px 14px">Bajo 450 °C</td>
+</tr>
+<tr>
+<td style="padding:9px 14px;font-weight:600">Aporte</td>
+<td style="padding:9px 14px">Plata, bronce, cobre-fósforo</td>
+<td style="padding:9px 14px">Estaño-plata-cobre</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:9px 14px;font-weight:600">Resistencia</td>
+<td style="padding:9px 14px">Alta, estructural</td>
+<td style="padding:9px 14px">Baja, sello o contacto eléctrico</td>
+</tr>
+<tr>
+<td style="padding:9px 14px;font-weight:600">Uso</td>
+<td style="padding:9px 14px">Tuberías de cobre, herramientas</td>
+<td style="padding:9px 14px">Electrónica, plomería</td>
+</tr>
+</table>
+<p style="font-size:24px;line-height:1.4;color:#B9BDC0">Un fundente retira los óxidos para que el aporte moje las superficies. Sin tener que fundir el metal base se unen metales distintos.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">13</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Otros procesos de unión</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Uniones mecánicas</h2>
+</div>
+<div style="display:flex;gap:44px">
+<div style="position:relative;width:620px;height:500px">
+<svg width="620" height="420" viewBox="0 0 620 420" xmlns="http://www.w3.org/2000/svg" aria-label="Unión atornillada: el tornillo y la tuerca aprietan dos placas con una fuerza de sujeción">
+<rect x="90" y="150" width="440" height="50" fill="#B9BDC0"/>
+<rect x="90" y="200" width="440" height="50" fill="#B9BDC0"/>
+<line x1="90" y1="200" x2="530" y2="200" stroke="#4A5056" stroke-width="2"/>
+<rect x="290" y="90" width="40" height="230" fill="#2B3136"/>
+<rect x="255" y="110" width="110" height="40" rx="6" fill="#2B3136"/>
+<rect x="255" y="250" width="110" height="44" rx="6" fill="#4A5056"/>
+<line x1="170" y1="40" x2="170" y2="130" stroke="#A23F10" stroke-width="6"/>
+<polygon points="170,148 156,122 184,122" fill="#A23F10"/>
+<line x1="170" y1="370" x2="170" y2="280" stroke="#A23F10" stroke-width="6"/>
+<polygon points="170,262 156,288 184,288" fill="#A23F10"/>
+</svg>
+<p style="position:absolute;left:190px;top:60px;width:60px;font-size:30px;font-weight:600;color:#A23F10">F</p>
+<p style="position:absolute;left:190px;top:340px;width:60px;font-size:30px;font-weight:600;color:#A23F10">F</p>
+<p style="position:absolute;left:380px;top:114px;width:220px;font-size:24px;font-weight:600">Cabeza</p>
+<p style="position:absolute;left:380px;top:262px;width:220px;font-size:24px;font-weight:600">Tuerca</p>
+<p style="position:absolute;left:380px;top:190px;width:220px;font-size:24px;font-weight:600">Placas unidas</p>
+<p style="position:absolute;left:0px;top:440px;width:620px;font-size:24px;color:#4A5056">El apriete estira el tornillo y comprime las placas: es la precarga</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600;color:#A23F10">Tornillos y tuercas:</span> desmontables; la precarga evita que la unión se afloje.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600;color:#A23F10">Remaches:</span> permanentes, rápidos y sin calor; estructuras ligeras y aeronáutica.</p>
+<p style="font-size:26px;line-height:1.35"><span style="font-weight:600;color:#A23F10">Pasadores y ajustes:</span> posicionan y transmiten carga sin roscas.</p>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:20px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">Par de apriete aproximado</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">T = K · D · F</p>
+<p style="font-size:24px;line-height:1.35;color:#B9BDC0">K ≈ 0.2. Ejemplo: D = 10 mm y F = 20 kN dan T = 0.2 · 0.010 · 20 000 = 40 N·m.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">14</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Otros procesos de unión</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Uniones adhesivas</h2>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:25px;line-height:1.3">
+<tr style="background:#F08A4B;color:#1E2226">
+<td style="width:24%;padding:12px 18px;font-weight:600">Adhesivo</td>
+<td style="width:40%;padding:12px 18px;font-weight:600">Característica</td>
+<td style="width:36%;padding:12px 18px;font-weight:600">Uso típico</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:10px 18px;font-weight:600">Epóxico</td>
+<td style="padding:10px 18px">Alta resistencia; dos componentes</td>
+<td style="padding:10px 18px">Metales y compuestos</td>
+</tr>
+<tr>
+<td style="padding:10px 18px;font-weight:600">Acrílico</td>
+<td style="padding:10px 18px">Curado rápido; tolera superficie poco limpia</td>
+<td style="padding:10px 18px">Paneles y plásticos</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:10px 18px;font-weight:600">Cianoacrilato</td>
+<td style="padding:10px 18px">Instantáneo; frágil</td>
+<td style="padding:10px 18px">Piezas pequeñas</td>
+</tr>
+<tr>
+<td style="padding:10px 18px;font-weight:600">Poliuretano</td>
+<td style="padding:10px 18px">Flexible; absorbe vibración</td>
+<td style="padding:10px 18px">Automotriz y vidrio</td>
+</tr>
+</table>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:20px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Esfuerzo cortante en traslape</p>
+<p style="font-size:26px;line-height:1.35">τ = F / A</p>
+<p style="font-size:24px;line-height:1.35;color:#B9BDC0">F = 2.5 kN y A = 25 × 12.5 mm = 312.5 mm² dan τ = 8 MPa.</p>
+</div>
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:20px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Reglas de diseño</p>
+<p style="font-size:24px;line-height:1.35">Cargar a cortante o compresión, no a pelado; limpiar y preparar la superficie; dar área suficiente.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">15</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Diseño, inspección y seguridad</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Tipos de junta</h2>
+</div>
+<svg width="1664" height="290" viewBox="0 0 1664 290" xmlns="http://www.w3.org/2000/svg" aria-label="Cinco tipos de junta soldada: a tope, en T, traslape, esquina y borde; la soldadura se muestra en naranja">
+<g transform="translate(0,0)">
+<rect x="10" y="130" width="130" height="50" fill="#B9BDC0"/>
+<rect x="150" y="130" width="130" height="50" fill="#B9BDC0"/>
+<rect x="132" y="124" width="26" height="62" rx="8" fill="#F08A4B"/>
+</g>
+<g transform="translate(332,0)">
+<rect x="10" y="190" width="270" height="40" fill="#B9BDC0"/>
+<rect x="125" y="70" width="40" height="120" fill="#B9BDC0"/>
+<polygon points="105,190 125,190 125,168" fill="#F08A4B"/>
+<polygon points="165,190 185,190 165,168" fill="#F08A4B"/>
+</g>
+<g transform="translate(664,0)">
+<rect x="10" y="130" width="170" height="40" fill="#B9BDC0"/>
+<rect x="110" y="170" width="170" height="40" fill="#B9BDC0"/>
+<polygon points="180,170 204,170 180,146" fill="#F08A4B"/>
+<polygon points="110,170 86,170 110,194" fill="#F08A4B"/>
+</g>
+<g transform="translate(996,0)">
+<rect x="10" y="190" width="230" height="40" fill="#B9BDC0"/>
+<rect x="200" y="70" width="40" height="120" fill="#B9BDC0"/>
+<polygon points="240,190 264,190 240,166" fill="#F08A4B"/>
+</g>
+<g transform="translate(1328,0)">
+<rect x="10" y="130" width="260" height="35" fill="#B9BDC0"/>
+<rect x="10" y="165" width="260" height="35" fill="#B9BDC0"/>
+<rect x="266" y="124" width="18" height="82" rx="8" fill="#F08A4B"/>
+</g>
+</svg>
+<div style="display:flex;flex-direction:row">
+<p style="width:332px;font-size:26px;font-weight:600;text-align:center">A tope</p>
+<p style="width:332px;font-size:26px;font-weight:600;text-align:center">En T</p>
+<p style="width:332px;font-size:26px;font-weight:600;text-align:center">Traslape</p>
+<p style="width:332px;font-size:26px;font-weight:600;text-align:center">Esquina</p>
+<p style="width:332px;font-size:26px;font-weight:600;text-align:center">Borde</p>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#E9E4D8;border-radius:16px;padding:18px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#A23F10">Tipos de soldadura</p>
+<p style="font-size:24px;line-height:1.35">Ranura (a tope, con bisel), filete (en T y traslape), tapón y punto.</p>
+</div>
+<div style="flex:1;background:#E9E4D8;border-radius:16px;padding:18px 26px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#A23F10">Preparación</p>
+<p style="font-size:24px;line-height:1.35">En espesores grandes se hace un bisel y una abertura de raíz para lograr penetración completa.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">16</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Diseño, inspección y seguridad</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Inspección de soldaduras</h2>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:25px;line-height:1.3">
+<tr style="background:#F08A4B;color:#1E2226">
+<td style="width:27%;padding:12px 18px;font-weight:600">Método</td>
+<td style="width:40%;padding:12px 18px;font-weight:600">Detecta</td>
+<td style="width:33%;padding:12px 18px;font-weight:600">Limitación</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:10px 18px;font-weight:600">Visual (VT)</td>
+<td style="padding:10px 18px">Forma del cordón, socavado, grietas visibles</td>
+<td style="padding:10px 18px">Solo la superficie</td>
+</tr>
+<tr>
+<td style="padding:10px 18px;font-weight:600">Líquidos penetrantes (PT)</td>
+<td style="padding:10px 18px">Grietas y poros abiertos a la superficie</td>
+<td style="padding:10px 18px">Superficie limpia, no porosa</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:10px 18px;font-weight:600">Partículas magnéticas (MT)</td>
+<td style="padding:10px 18px">Defectos superficiales y cercanos a la superficie</td>
+<td style="padding:10px 18px">Solo materiales ferromagnéticos</td>
+</tr>
+<tr>
+<td style="padding:10px 18px;font-weight:600">Ultrasonido (UT)</td>
+<td style="padding:10px 18px">Defectos internos, sobre todo planos</td>
+<td style="padding:10px 18px">Requiere operador calificado</td>
+</tr>
+<tr style="background:#2B3136">
+<td style="padding:10px 18px;font-weight:600">Radiografía (RT)</td>
+<td style="padding:10px 18px">Porosidad e inclusiones internas</td>
+<td style="padding:10px 18px">Radiación; costosa</td>
+</tr>
+</table>
+<p style="font-size:26px;line-height:1.4;color:#B9BDC0">Los ensayos destructivos (tracción, doblez, dureza, macrografía) califican el procedimiento y al soldador con probetas.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">17</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Diseño, inspección y seguridad</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Seguridad en soldadura</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Radiación del arco</h3>
+<p style="font-size:25px;line-height:1.4">Luz intensa y ultravioleta. Careta con filtro del tono adecuado y ropa de cuero que cubra la piel.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Humos y gases</h3>
+<p style="font-size:25px;line-height:1.4">Inoxidable y galvanizado generan humos tóxicos. Extracción localizada y ventilación siempre.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Descarga eléctrica</h3>
+<p style="font-size:25px;line-height:1.4">Cables sin daño, guantes secos y no tocar partes vivas con humedad o sudor.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Fuego y quemaduras</h3>
+<p style="font-size:25px;line-height:1.4">Retirar materiales combustibles, tener extintor y tratar toda pieza como caliente.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Gases comprimidos</h3>
+<p style="font-size:25px;line-height:1.4">Cilindros asegurados con cadena, con tapa puesta al transportarlos y lejos del calor.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Espacios confinados</h3>
+<p style="font-size:25px;line-height:1.4">Los gases inertes desplazan el oxígeno. Ventilar y no trabajar solo.</p>
+</div>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:18px 30px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Nunca mire el arco sin protección, ni siquiera un instante.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">18</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Diseño, inspección y seguridad</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Resistencia de una soldadura de filete</h2>
+</div>
+<div style="display:flex;gap:44px">
+<div style="position:relative;width:620px;height:460px">
+<svg width="620" height="380" viewBox="0 0 620 380" xmlns="http://www.w3.org/2000/svg" aria-label="Sección de un filete: dos catetos de longitud h y una garganta de 0.707 h medida desde la raíz hasta la hipotenusa">
+<rect x="80" y="240" width="500" height="60" fill="#B9BDC0"/>
+<rect x="220" y="40" width="60" height="200" fill="#B9BDC0"/>
+<polygon points="280,240 460,240 280,60" fill="#F08A4B"/>
+<line x1="280" y1="240" x2="370" y2="150" stroke="#F4F1EA" stroke-width="5" stroke-dasharray="10 8"/>
+<line x1="280" y1="262" x2="460" y2="262" stroke="#F4F1EA" stroke-width="3"/>
+<line x1="280" y1="252" x2="280" y2="272" stroke="#F4F1EA" stroke-width="3"/>
+<line x1="460" y1="252" x2="460" y2="272" stroke="#F4F1EA" stroke-width="3"/>
+</svg>
+<p style="position:absolute;left:340px;top:200px;width:140px;font-size:26px;font-weight:600;color:#F4F1EA">h</p>
+<p style="position:absolute;left:380px;top:110px;width:230px;font-size:25px;font-weight:600;color:#F08A4B">Garganta a = 0.707 h</p>
+<p style="position:absolute;left:0px;top:400px;width:620px;font-size:24px;color:#B9BDC0">Se asume que la falla ocurre por cortante en la garganta</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<div style="background:#2B3136;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">Esfuerzo cortante en la garganta (n cordones de longitud L)</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">τ = F / (0.707 · h · L · n)</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:20px 28px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;font-weight:600;color:#F08A4B">Ejemplo</p>
+<p style="font-size:25px;line-height:1.4">h = 6 mm, L = 100 mm, n = 2 y F = 40 kN: A = 0.707 · 6 · 100 · 2 = 848 mm², por lo que τ ≈ 47 MPa.</p>
+</div>
+<p style="font-size:24px;line-height:1.4;color:#B9BDC0">Admisible según AWS: 0.30 · F_EXX. Con E70 (F_EXX ≈ 480 MPa): ≈ 145 MPa, un factor de seguridad de 3.1 aproximadamente.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">19</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Ejemplos y resumen</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Ejemplo resuelto 1: calor aportado</h2>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#A23F10">Problema</p>
+<p style="font-size:26px;line-height:1.4">Un cordón de 600 mm se hace con MIG/MAG a V = 24 V e I = 200 A, avanzando a 300 mm/min, con η = 0.8. Determine la potencia útil, el calor aportado por milímetro, el tiempo y la energía total, y el efecto de duplicar la velocidad.</p>
+</div>
+<table style="width:100%;border-collapse:collapse;font-size:26px">
+<tr style="background:#1E2226;color:#F4F1EA">
+<td style="width:30%;padding:12px 20px;font-weight:600">Resultado</td>
+<td style="width:44%;padding:12px 20px;font-weight:600">Cálculo</td>
+<td style="width:26%;padding:12px 20px;font-weight:600">Valor</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:9px 20px;font-weight:600">Potencia útil</td>
+<td style="padding:9px 20px">0.8 · 24 · 200</td>
+<td style="padding:9px 20px;font-weight:600">3 840 W</td>
+</tr>
+<tr>
+<td style="padding:9px 20px;font-weight:600">Velocidad</td>
+<td style="padding:9px 20px">300 / 60</td>
+<td style="padding:9px 20px;font-weight:600">5 mm/s</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:9px 20px;font-weight:600">Calor aportado H</td>
+<td style="padding:9px 20px">3 840 / 5</td>
+<td style="padding:9px 20px;font-weight:600">768 J/mm</td>
+</tr>
+<tr>
+<td style="padding:9px 20px;font-weight:600">Tiempo del cordón</td>
+<td style="padding:9px 20px">600 / 5</td>
+<td style="padding:9px 20px;font-weight:600">120 s</td>
+</tr>
+<tr style="background:#E9E4D8">
+<td style="padding:9px 20px;font-weight:600">Energía total</td>
+<td style="padding:9px 20px">768 · 600</td>
+<td style="padding:9px 20px;font-weight:600">461 kJ</td>
+</tr>
+<tr>
+<td style="padding:9px 20px;font-weight:600">Con v = 10 mm/s</td>
+<td style="padding:9px 20px">3 840 / 10</td>
+<td style="padding:9px 20px;font-weight:600">384 J/mm</td>
+</tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">20</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Ejemplos y resumen</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Ejemplo resuelto 2: tiempo de soldadura</h2>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:22px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:26px;font-weight:600;color:#F08A4B">Problema</p>
+<p style="font-size:26px;line-height:1.4">Un cordón de acero de 1.2 m tiene una sección transversal de 30 mm². La tasa de deposición es 3 kg/h y el soldador mantiene el arco encendido el 40 % del tiempo (factor de operación). Densidad del acero: 7.85 g/cm³. Calcule volumen, masa, tiempo de arco y tiempo total.</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#2B3136;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">a) Volumen de metal depositado</p>
+<p style="font-size:26px">30 mm² · 1 200 mm</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:46px;font-weight:600;color:#F08A4B;line-height:1.1">36 000 mm³ = 36 cm³</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">b) Masa depositada</p>
+<p style="font-size:26px">36 cm³ · 7.85 g/cm³</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:46px;font-weight:600;color:#F08A4B;line-height:1.1">283 g = 0.283 kg</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">c) Tiempo con arco encendido</p>
+<p style="font-size:26px">0.283 kg / 3 kg/h = 0.0942 h</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:46px;font-weight:600;color:#F08A4B;line-height:1.1">≈ 5.65 min</p>
+</div>
+<div style="background:#2B3136;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#B9BDC0">d) Tiempo total con factor de operación</p>
+<p style="font-size:26px">5.65 min / 0.40</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:46px;font-weight:600;color:#F08A4B;line-height:1.1">≈ 14.1 min</p>
+</div>
+</div>
+<p style="font-size:26px;line-height:1.4;color:#B9BDC0">El factor de operación pesa tanto como la tasa de deposición: por eso el MIG con alambre y la automatización ganan en producción.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">21</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Ejemplos y resumen</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Lo que debes recordar</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Procesos</h3>
+<p style="font-size:25px;line-height:1.35">Arco (SMAW, MIG/MAG, TIG), resistencia, fuerte y blanda, mecánicas y adhesivas. Cada uno tiene su lugar según material, espesor y volumen.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Calor y metalurgia</h3>
+<p style="font-size:25px;line-height:1.35">El calor aportado controla la ZAC, la dureza y la distorsión. La soldabilidad depende del carbono equivalente.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Calidad</h3>
+<p style="font-size:25px;line-height:1.35">Los defectos tienen causa y remedio. Se inspecciona primero de forma visual y luego con ensayos no destructivos.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:22px 28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Seguridad</h3>
+<p style="font-size:25px;line-height:1.35">Protección contra radiación, humos, electricidad, fuego y gases. Sin excepción en el taller.</p>
+</div>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:22px 30px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;font-weight:600;color:#F08A4B">Fórmulas clave</p>
+<p style="font-size:26px;line-height:1.45">H = η V I / v · H = I² R t · τ = F / (0.707 h L n) · T = K D F · τ = F / A</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Soldadura y unión</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">22</p>
+
+</section>
+</div>
+<div id="bar"><button id="p">◀ Anterior</button><span id="n"></span><button id="nx">Siguiente ▶</button><button id="fs">Pantalla completa</button></div>
+<script>
+var S=[].slice.call(document.querySelectorAll('.slide')),i=0,st=document.getElementById('stage');
+function fit(){var w=innerWidth,h=innerHeight-48,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.marginLeft=(-960*k)+'px'}
+function show(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,j){s.classList.toggle('on',j==i)});document.getElementById('n').textContent=(i+1)+' / '+S.length;document.getElementById('p').disabled=i==0;document.getElementById('nx').disabled=i==S.length-1;try{location.hash='#'+(i+1)}catch(e){}}
+document.getElementById('p').onclick=function(){show(i-1)};document.getElementById('nx').onclick=function(){show(i+1)};
+document.getElementById('fs').onclick=function(){var e=document.documentElement;(e.requestFullscreen||e.webkitRequestFullscreen||function(){}).call(e)};
+document.addEventListener('keydown',function(e){if(e.key=='ArrowRight'||e.key==' '||e.key=='PageDown')show(i+1);if(e.key=='ArrowLeft'||e.key=='PageUp')show(i-1)});
+var x0=null;document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX});document.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));x0=null});
+addEventListener('resize',fit);fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>

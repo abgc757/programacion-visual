@@ -1,0 +1,776 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Procesos Industriales · Moldeo en banco, modelos y fundición</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#1E2226;overflow:hidden;font-family:'IBM Plex Sans',Arial,sans-serif}
+#stage{position:absolute;left:50%;top:0;transform-origin:0 0}
+.slide:not(.on){display:none !important}
+.slide[style*="display:grid"]{} x-shape{display:block}
+table{border-collapse:collapse;width:100%} th,td{padding:14px 20px;border-bottom:1px solid #DDD6C3}
+h1,h2,h3,p,ul,ol{margin:0}
+#bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#14213D;display:flex;align-items:center;justify-content:center;gap:14px;color:#F6F3EA;font-size:15px;z-index:9}
+#bar button{background:#F29A4A;border:0;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;color:#14213D}
+#bar button:disabled{opacity:.4}
+</style></head><body>
+<div id="stage">
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:space-between;gap:40px">
+<div style="display:flex;flex-direction:column;gap:32px">
+<p style="font-size:32px;font-weight:600;color:#F08A4B;letter-spacing:3px;text-transform:uppercase">Procesos de Manufactura · Ingeniería Industrial</p>
+<h1 style="font-family:'Oswald', Arial, sans-serif;font-size:128px;font-weight:600;line-height:1.05">Moldeo en banco, modelos y fundición de acero y aluminio</h1>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<hr style="width:160px;border-top:6px solid #F08A4B">
+<p style="font-size:30px;line-height:1.4;color:#B9BDC0">Al terminar la sesión podrás describir el moldeo en banco, dimensionar un modelo con ángulo de salida y contracción, y comparar la fundición de aluminio con la de acero.</p>
+<p style="font-size:28px;font-weight:600">M. en C. Abraham Gómez Contreras · Semana de fundición y moldeo</p>
+</div>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 1 · Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Panorama de la fundición</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10">01</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Modelo</h3>
+<p style="font-size:28px;color:#4A5056">Réplica de la pieza, con sobremedidas, que forma la cavidad.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10">02</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Molde</h3>
+<p style="font-size:28px;color:#4A5056">Arena compactada alrededor del modelo; se abre y se retira el modelo.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10">03</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Vaciado</h3>
+<p style="font-size:28px;color:#4A5056">El metal líquido entra por la copa y llena la cavidad.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10">04</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Solidificación</h3>
+<p style="font-size:28px;color:#4A5056">El metal se enfría y se contrae; la mazarota lo alimenta.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10">05</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Desmoldeo</h3>
+<p style="font-size:28px;color:#4A5056">Se rompe el molde de arena y se extrae la pieza.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10">06</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Acabado</h3>
+<p style="font-size:28px;color:#4A5056">Se cortan canales y mazarotas, se limpia y, si hace falta, se maquina.</p>
+</div>
+</div>
+<p style="font-size:32px;font-weight:500">Una sola operación produce geometrías complejas en casi cualquier metal.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">02</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 1 · Introducción</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Clasificación de los procesos de moldeo</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;background:#1E2226;color:#F4F1EA;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:500;color:#F08A4B">Molde desechable</h3>
+<p style="font-size:28px;color:#B9BDC0">Se destruye en cada pieza.</p>
+<ul style="font-size:32px;line-height:1.45">
+<li>Arena en verde y arena seca</li>
+<li>Moldeo en cáscara</li>
+<li>Cera perdida</li>
+<li>Espuma perdida (poliestireno)</li>
+</ul>
+<p style="font-size:28px;font-weight:600;background:#F08A4B;color:#1E2226;border-radius:40px;padding:12px 28px;align-self:flex-start">Aquí: moldeo en banco</p>
+</div>
+<div style="flex:1;background:#E9E4D8;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:44px;font-weight:500;color:#2F6285">Molde permanente</h3>
+<p style="font-size:28px;color:#4A5056">Se reutiliza en cientos o miles de piezas.</p>
+<ul style="font-size:32px;line-height:1.45">
+<li>Coquilla por gravedad</li>
+<li>Baja presión</li>
+<li>Inyección a presión</li>
+<li>Centrífuga</li>
+</ul>
+</div>
+</div>
+<p style="font-size:30px;color:#4A5056">Criterio de elección: volumen de producción, tamaño, acabado y costo del herramental.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">03</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 2 · Moldeo en banco</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">¿Qué es el moldeo en banco?</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:34px;line-height:1.4">Técnica manual de moldeo en arena en la que la caja y el modelo se trabajan sobre un banco. Es el proceso típico para piezas pequeñas, prototipos y lotes cortos.</p>
+<ol style="font-size:30px;line-height:1.5">
+<li>Tapa (semicaja superior)</li>
+<li>Base (semicaja inferior)</li>
+<li>Cavidad: huella del modelo</li>
+<li>Bebedero y canal de colada</li>
+<li>Respiradero</li>
+<li>Línea de partición</li>
+</ol>
+</div>
+<div style="position:relative;width:760px;height:560px">
+<svg width="760" height="560" viewBox="0 0 760 560" xmlns="http://www.w3.org/2000/svg" aria-label="Corte de una caja de moldeo con tapa, base, cavidad, bebedero, respiradero y línea de partición">
+<rect x="40" y="40" width="680" height="230" fill="#D8CBB0" stroke="#1E2226" stroke-width="6"/>
+<rect x="40" y="270" width="680" height="230" fill="#C2B190" stroke="#1E2226" stroke-width="6"/>
+<polygon points="250,350 250,200 330,200 330,230 430,230 430,200 510,200 510,350" fill="#F4F1EA" stroke="#1E2226" stroke-width="3"/>
+<rect x="130" y="40" width="30" height="230" fill="#F4F1EA"/>
+<rect x="130" y="270" width="122" height="14" fill="#F4F1EA"/>
+<rect x="455" y="40" width="20" height="162" fill="#F4F1EA"/>
+<line x1="20" y1="270" x2="740" y2="270" stroke="#A23F10" stroke-width="4" stroke-dasharray="14 10"/>
+</svg>
+<p style="position:absolute;left:64px;top:60px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#1E2226;color:#F4F1EA;font-size:28px;font-weight:600">1</p>
+<p style="position:absolute;left:64px;top:430px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#1E2226;color:#F4F1EA;font-size:28px;font-weight:600">2</p>
+<p style="position:absolute;left:358px;top:278px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#1E2226;color:#F4F1EA;font-size:28px;font-weight:600">3</p>
+<p style="position:absolute;left:172px;top:100px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#1E2226;color:#F4F1EA;font-size:28px;font-weight:600">4</p>
+<p style="position:absolute;left:486px;top:100px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#1E2226;color:#F4F1EA;font-size:28px;font-weight:600">5</p>
+<p style="position:absolute;left:640px;top:248px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#1E2226;color:#F4F1EA;font-size:28px;font-weight:600">6</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">04</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 2 · Moldeo en banco</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Herramientas y equipo</h2>
+</div>
+<table style="font-size:28px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:34%;color:#F4F1EA;text-align:left">Herramienta</th><th style="width:66%;color:#F4F1EA;text-align:left">Función</th></tr>
+<tr style="background:#E9E4D8"><td><b>Caja de moldeo</b></td><td>Contiene la arena; tapa y base se alinean con pasadores</td></tr>
+<tr><td><b>Pisón</b></td><td>Compacta la arena alrededor del modelo</td></tr>
+<tr style="background:#E9E4D8"><td><b>Rasero</b></td><td>Nivela el exceso de arena a ras de la caja</td></tr>
+<tr><td><b>Aguja de ventilación</b></td><td>Perfora conductos para la salida de gases</td></tr>
+<tr style="background:#E9E4D8"><td><b>Clavo extractor</b></td><td>Sujeta el modelo para sacarlo sin dañar el molde</td></tr>
+<tr><td><b>Espátulas y cucharillas</b></td><td>Alisan y reparan la cavidad, el bebedero y los canales</td></tr>
+<tr style="background:#E9E4D8"><td><b>Polvo separador</b></td><td>Evita que la tapa y la base se adhieran</td></tr>
+<tr><td><b>Cuchara de colada y crisol</b></td><td>Transportan y vierten el metal fundido</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">05</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Bloque 2 · Moldeo en banco</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Arena de moldeo en verde</h2>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;color:#F08A4B;line-height:1.1">85–90 %</p>
+<h3 style="font-size:32px;font-weight:600">Arena sílica (SiO2)</h3>
+<p style="font-size:26px;color:#B9BDC0">Aporta volumen y resistencia al calor.</p>
+</div>
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;color:#F08A4B;line-height:1.1">5–10 %</p>
+<h3 style="font-size:32px;font-weight:600">Arcilla (bentonita)</h3>
+<p style="font-size:26px;color:#B9BDC0">Aglutinante: da cohesión a los granos.</p>
+</div>
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:6px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;color:#F08A4B;line-height:1.1">2–4 %</p>
+<h3 style="font-size:32px;font-weight:600">Agua</h3>
+<p style="font-size:26px;color:#B9BDC0">Activa la arcilla y da plasticidad.</p>
+</div>
+</div>
+<p style="font-size:28px;font-weight:600;color:#F08A4B">Propiedades que debe cumplir la arena</p>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-size:30px;font-weight:600">Permeabilidad</h3>
+<p style="font-size:26px;color:#B9BDC0">Deja salir los gases del molde.</p>
+</div>
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-size:30px;font-weight:600">Cohesión</h3>
+<p style="font-size:26px;color:#B9BDC0">Mantiene la forma de la cavidad.</p>
+</div>
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-size:30px;font-weight:600">Refractariedad</h3>
+<p style="font-size:26px;color:#B9BDC0">Resiste el calor del metal líquido.</p>
+</div>
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-size:30px;font-weight:600">Deformabilidad</h3>
+<p style="font-size:26px;color:#B9BDC0">Permite que la pieza se contraiga.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">06</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 2 · Moldeo en banco</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Procedimiento paso a paso</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#A23F10;line-height:1.1">01</p>
+<p style="font-size:28px">Base invertida con la mitad del modelo; polvo separador.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#A23F10;line-height:1.1">02</p>
+<p style="font-size:28px">Arena de contacto, llenar y compactar la base; rasar.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#A23F10;line-height:1.1">03</p>
+<p style="font-size:28px">Voltear; segunda mitad del modelo, tapa y modelo de bebedero.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#A23F10;line-height:1.1">04</p>
+<p style="font-size:28px">Llenar y compactar la tapa; ventilar con la aguja.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#A23F10;line-height:1.1">05</p>
+<p style="font-size:28px">Separar cajas y extraer los modelos sin dañar la cavidad.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#A23F10;line-height:1.1">06</p>
+<p style="font-size:28px">Tallar canales y ataques; colocar machos; reparar con espátula.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#A23F10;line-height:1.1">07</p>
+<p style="font-size:28px">Cerrar y asegurar las cajas con pesos o grapas.</p>
+</div>
+<div style="background:#1E2226;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:48px;font-weight:600;color:#F08A4B;line-height:1.1">08</p>
+<p style="font-size:28px;color:#F4F1EA">Colar, solidificar, desmoldear y limpiar.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">07</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 2 · Moldeo en banco</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Ventajas, límites y defectos típicos</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="width:640px;display:flex;flex-direction:column;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#2F6285">Ventajas</h3>
+<ul style="font-size:28px;line-height:1.4">
+<li>Herramental de muy bajo costo</li>
+<li>Casi cualquier aleación y forma</li>
+<li>Ideal para prototipos y lotes cortos</li>
+</ul>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Limitaciones</h3>
+<ul style="font-size:28px;line-height:1.4">
+<li>Acabado superficial rugoso</li>
+<li>Tolerancias dimensionales amplias</li>
+<li>Producción lenta, depende del operario</li>
+</ul>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<p style="font-size:32px;font-weight:600">Defectos típicos</p>
+<table style="font-size:26px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:30%;color:#F4F1EA;text-align:left">Defecto</th><th style="width:70%;color:#F4F1EA;text-align:left">Causa principal</th></tr>
+<tr style="background:#E9E4D8"><td><b>Sopladura</b></td><td>Gas atrapado: arena poco permeable o muy húmeda</td></tr>
+<tr><td><b>Rechupe</b></td><td>Falta de alimentación: mazarota insuficiente</td></tr>
+<tr style="background:#E9E4D8"><td><b>Inclusión de arena</b></td><td>Erosión del molde por la colada o arena frágil</td></tr>
+<tr><td><b>Desplazamiento</b></td><td>Mala alineación entre tapa y base</td></tr>
+<tr style="background:#E9E4D8"><td><b>Cierre frío</b></td><td>Metal frío o dos frentes que no se funden</td></tr>
+</table>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">08</p>
+
+</section>
+<section class="slide" data-section="Modelos" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 3 · Modelos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Función del modelo y materiales</h2>
+</div>
+<p style="font-size:32px;line-height:1.4">El modelo es la réplica de la pieza, con sobremedidas, que deja su huella en la arena.</p>
+<table style="font-size:26px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:22%;color:#F4F1EA;text-align:left">Material</th><th style="width:28%;color:#F4F1EA;text-align:left">Ventaja</th><th style="width:28%;color:#F4F1EA;text-align:left">Limitación</th><th style="width:22%;color:#F4F1EA;text-align:left">Uso típico</th></tr>
+<tr style="background:#E9E4D8"><td><b>Madera</b></td><td>Barata y fácil de trabajar</td><td>Se desgasta y absorbe humedad</td><td>Prototipos y pocas piezas</td></tr>
+<tr><td><b>Metal</b></td><td>Durable y buen acabado</td><td>Costoso y pesado</td><td>Producción en serie</td></tr>
+<tr style="background:#E9E4D8"><td><b>Plástico y resinas</b></td><td>Ligero; admite impresión 3D</td><td>Menor resistencia al desgaste</td><td>Series medias</td></tr>
+<tr><td><b>Cera</b></td><td>Reproduce detalles finos</td><td>Frágil; un solo uso</td><td>Cera perdida</td></tr>
+<tr style="background:#E9E4D8"><td><b>Poliestireno</b></td><td>Se maquina muy rápido</td><td>Se vaporiza al colar</td><td>Espuma perdida</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">09</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 3 · Modelos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Tipos de modelos</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Sólido</h3>
+<p style="font-size:28px;color:#4A5056">Réplica completa de una sola pieza; se saca en una sola caja. Para formas simples.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Partido</h3>
+<p style="font-size:28px;color:#4A5056">Dos mitades alineadas con clavijas: una va en la tapa y otra en la base.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Placa de acoplamiento</h3>
+<p style="font-size:28px;color:#4A5056">Mitades montadas a cada lado de una placa común; para series cortas y medias.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Piezas sueltas</h3>
+<p style="font-size:28px;color:#4A5056">Salientes removibles que se extraen después del cuerpo principal del modelo.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Esqueleto</h3>
+<p style="font-size:28px;color:#4A5056">Armazón de listones que se rellena de arena; para piezas grandes y pocas.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Barrido</h3>
+<p style="font-size:28px;color:#4A5056">Plantilla que gira o se desliza para formar superficies de revolución.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">10</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Bloque 3 · Modelos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Ángulos de salida (conicidad)</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="position:relative;width:760px;height:600px">
+<svg width="760" height="600" viewBox="0 0 760 600" xmlns="http://www.w3.org/2000/svg" aria-label="Corte de un modelo con ángulo de salida dentro de la arena, con la línea de partición, la pared vertical de referencia y la dirección de extracción">
+<rect x="60" y="100" width="640" height="340" fill="#5C5140"/>
+<rect x="60" y="440" width="640" height="110" fill="#4B4235"/>
+<polygon points="250,440 510,440 461,160 299,160" fill="#C9A66B" stroke="#F4F1EA" stroke-width="3"/>
+<line x1="250" y1="440" x2="250" y2="160" stroke="#F4F1EA" stroke-width="3" stroke-dasharray="10 8"/>
+<path d="M250 320 A120 120 0 0 1 270.8 321.8" fill="none" stroke="#F08A4B" stroke-width="5"/>
+<line x1="40" y1="440" x2="720" y2="440" stroke="#F08A4B" stroke-width="4" stroke-dasharray="14 10"/>
+<line x1="380" y1="125" x2="380" y2="50" stroke="#F4F1EA" stroke-width="6"/>
+<polygon points="362,66 380,26 398,66" fill="#F4F1EA"/>
+</svg>
+<p style="position:absolute;left:205px;top:282px;width:40px;font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:600;color:#F08A4B">α</p>
+<p style="position:absolute;left:315px;top:290px;width:130px;font-size:28px;font-weight:600;color:#1E2226;text-align:center">Modelo</p>
+<p style="position:absolute;left:540px;top:220px;width:120px;font-size:28px;color:#E9E4D8">Arena</p>
+<p style="position:absolute;left:80px;top:456px;width:420px;font-size:28px;color:#F4F1EA">Línea de partición</p>
+<p style="position:absolute;left:415px;top:40px;width:340px;font-size:26px;color:#F4F1EA">Dirección de extracción</p>
+<p style="position:absolute;left:60px;top:560px;width:660px;font-size:24px;color:#B9BDC0">Línea punteada clara: pared vertical, sin salida</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:30px;line-height:1.4">Inclinación de las paredes verticales del modelo para extraerlo sin desgarrar la arena.</p>
+<table style="font-size:28px;color:#F4F1EA">
+<tr style="background:#F08A4B"><th style="width:62%;color:#1E2226;text-align:left">Superficie</th><th style="width:38%;color:#1E2226;text-align:left">Ángulo</th></tr>
+<tr style="background:#2B3136"><td>Exterior, modelo de madera</td><td>1° – 2°</td></tr>
+<tr><td>Exterior, modelo metálico</td><td>0.5° – 1.5°</td></tr>
+<tr style="background:#2B3136"><td>Interior y machos</td><td>1.5° – 3°</td></tr>
+</table>
+<div style="background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:600;color:#F08A4B;line-height:1.1">x = h · tan α</p>
+<p style="font-size:26px;color:#B9BDC0">Ejemplo: h = 100 mm y α = 1.5° → x ≈ 2.6 mm por lado</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">11</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 3 · Modelos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Contracciones y sobremedidas</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<p style="font-size:30px;font-weight:600">Contracción lineal de referencia (valor típico)</p>
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:20px"><p style="width:210px;font-size:28px;font-weight:600">Acero</p><div style="width:500px;height:52px;background:#A23F10;border-radius:8px"></div><p style="font-size:28px">≈ 2.0 %</p></div>
+<div style="display:flex;align-items:center;gap:20px"><p style="width:210px;font-size:28px;font-weight:600">Latón</p><div style="width:375px;height:52px;background:#4A5056;border-radius:8px"></div><p style="font-size:28px">≈ 1.5 %</p></div>
+<div style="display:flex;align-items:center;gap:20px"><p style="width:210px;font-size:28px;font-weight:600">Aluminio</p><div style="width:325px;height:52px;background:#2F6285;border-radius:8px"></div><p style="font-size:28px">≈ 1.3 %</p></div>
+<div style="display:flex;align-items:center;gap:20px"><p style="width:210px;font-size:28px;font-weight:600">Hierro gris</p><div style="width:250px;height:52px;background:#8A8F94;border-radius:8px"></div><p style="font-size:28px">≈ 1.0 %</p></div>
+</div>
+<div style="background:#1E2226;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:52px;font-weight:600;color:#F08A4B;line-height:1.1">L modelo = L pieza × (1 + c)</p>
+<p style="font-size:26px;color:#B9BDC0">c = contracción lineal del metal, en fracción (2 % = 0.02)</p>
+</div>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:20px">
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Maquinado (+)</h3>
+<p style="font-size:26px;color:#4A5056">Más material, orientativo 2–6 mm, en caras a maquinar.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Distorsión (±)</h3>
+<p style="font-size:26px;color:#4A5056">Piezas en U o V se deforman: el modelo lleva deformación inversa.</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Golpeteo (−)</h3>
+<p style="font-size:26px;color:#4A5056">Al aflojar el modelo crece la cavidad: el modelo se hace un poco menor.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">12</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 3 · Modelos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Machos y portadas</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Macho</h3>
+<p style="font-size:28px;line-height:1.4">Pieza de arena que forma cavidades interiores o detalles que el modelo no puede moldear.</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Portada (core print)</h3>
+<p style="font-size:28px;line-height:1.4">Saliente del modelo que deja en el molde el asiento donde apoya el macho.</p>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Criterios de diseño</h3>
+<ul style="font-size:28px;line-height:1.4">
+<li>Asientos con ángulo de salida</li>
+<li>Portada larga para sujetar el macho</li>
+<li>Ventilación hacia afuera del molde</li>
+<li>Sillas si el macho flota o se flexiona</li>
+</ul>
+</div>
+<div style="position:relative;width:760px;height:580px">
+<svg width="760" height="520" viewBox="0 0 760 520" xmlns="http://www.w3.org/2000/svg" aria-label="Corte de un molde con un macho horizontal que atraviesa la cavidad y apoya en dos asientos formados por las portadas">
+<rect x="40" y="40" width="680" height="440" fill="#D8CBB0" stroke="#1E2226" stroke-width="6"/>
+<rect x="170" y="160" width="420" height="200" fill="#F4F1EA" stroke="#1E2226" stroke-width="3"/>
+<rect x="110" y="204" width="60" height="112" fill="#F4F1EA" stroke="#1E2226" stroke-width="3"/>
+<rect x="590" y="204" width="60" height="112" fill="#F4F1EA" stroke="#1E2226" stroke-width="3"/>
+<rect x="110" y="210" width="540" height="100" fill="#8B6B4A" stroke="#1E2226" stroke-width="3"/>
+</svg>
+<p style="position:absolute;left:330px;top:238px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#1E2226;color:#F4F1EA;font-size:28px;font-weight:600">1</p>
+<p style="position:absolute;left:118px;top:238px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#1E2226;color:#F4F1EA;font-size:28px;font-weight:600">2</p>
+<p style="position:absolute;left:330px;top:165px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#1E2226;color:#F4F1EA;font-size:28px;font-weight:600">3</p>
+<p style="position:absolute;left:0px;top:536px;width:760px;font-size:26px;color:#4A5056">1 Macho · 2 Portada · 3 Cavidad de la pieza</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">13</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 3 · Modelos</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Reglas de diseño de piezas fundidas</h2>
+</div>
+<p style="font-size:32px;line-height:1.4">Punto caliente: zona masiva que solidifica de último y forma rechupes.</p>
+<table style="font-size:26px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:20%;color:#F4F1EA;text-align:left">Regla</th><th style="width:40%;color:#F4F1EA;text-align:left">Hacer</th><th style="width:40%;color:#F4F1EA;text-align:left">Evitar</th></tr>
+<tr style="background:#E9E4D8"><td><b>Espesor</b></td><td>Uniforme, con transiciones graduales</td><td>Cambios bruscos y secciones masivas</td></tr>
+<tr><td><b>Esquinas</b></td><td>Radios de acuerdo generosos</td><td>Ángulos vivos</td></tr>
+<tr style="background:#E9E4D8"><td><b>Uniones</b></td><td>Uniones en T desfasadas o en L con radio</td><td>Cruces en X que concentran masa</td></tr>
+<tr><td><b>Nervaduras</b></td><td>Delgadas y bajas, con radio en la base</td><td>Nervaduras gruesas: crean puntos calientes</td></tr>
+<tr style="background:#E9E4D8"><td><b>Huecos y salientes</b></td><td>Formas que salen sin machos extra</td><td>Socavados innecesarios</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">14</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Bloque 4 · Sistema de alimentación</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Sistema de colada</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="position:relative;width:880px;height:600px">
+<svg width="880" height="600" viewBox="0 0 880 600" xmlns="http://www.w3.org/2000/svg" aria-label="Corte de un molde con copa de vaciado, bajada, pozo, canal de colada, ataques y cavidad, todos llenos de metal líquido">
+<rect x="40" y="40" width="800" height="520" fill="#5C5140"/>
+<polygon points="90,40 270,40 232,112 128,112" fill="#F08A4B"/>
+<polygon points="145,112 215,112 197,452 163,452" fill="#F08A4B"/>
+<rect x="135" y="444" width="90" height="56" rx="10" fill="#F08A4B"/>
+<rect x="225" y="462" width="535" height="28" fill="#F08A4B"/>
+<rect x="500" y="230" width="280" height="220" fill="#F08A4B"/>
+<rect x="535" y="450" width="22" height="12" fill="#F08A4B"/>
+<rect x="635" y="450" width="22" height="12" fill="#F08A4B"/>
+<rect x="735" y="450" width="22" height="12" fill="#F08A4B"/>
+</svg>
+<p style="position:absolute;left:292px;top:44px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#F4F1EA;color:#1E2226;font-size:28px;font-weight:600">1</p>
+<p style="position:absolute;left:240px;top:250px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#F4F1EA;color:#1E2226;font-size:28px;font-weight:600">2</p>
+<p style="position:absolute;left:64px;top:456px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#F4F1EA;color:#1E2226;font-size:28px;font-weight:600">3</p>
+<p style="position:absolute;left:380px;top:505px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#F4F1EA;color:#1E2226;font-size:28px;font-weight:600">4</p>
+<p style="position:absolute;left:628px;top:396px;width:44px;height:44px;line-height:44px;text-align:center;border-radius:50%;background:#F4F1EA;color:#1E2226;font-size:28px;font-weight:600">5</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<ol style="font-size:30px;line-height:1.45">
+<li>Copa de vaciado: recibe el metal</li>
+<li>Bajada: conduce el metal hacia abajo</li>
+<li>Pozo de la bajada: amortigua el impacto</li>
+<li>Canal de colada: reparte el metal</li>
+<li>Ataques: entradas a la cavidad</li>
+</ol>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#F08A4B">Buenas prácticas</h3>
+<ul style="font-size:26px;line-height:1.45">
+<li>Bajada cónica: evita aspirar aire</li>
+<li>Llenado tranquilo, sin turbulencia</li>
+<li>Trampas para atrapar la escoria</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">15</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 4 · Sistema de alimentación</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Mazarotas y respiraderos</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#A23F10">Mazarota (riser)</h3>
+<ul style="font-size:28px;line-height:1.4">
+<li>Alimenta la pieza mientras se contrae</li>
+<li>Solidifica después que la pieza</li>
+<li>Sobre el punto caliente (zona masiva)</li>
+<li>Forma ideal: esfera; práctica: cilindro</li>
+</ul>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#2F6285">Respiradero (vent)</h3>
+<p style="font-size:28px;line-height:1.4">Evacúa aire y gases del molde; se coloca en puntos altos de la cavidad.</p>
+</div>
+</div>
+<div style="width:760px;background:#1E2226;color:#F4F1EA;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Regla de Chvorinov</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:80px;font-weight:600;line-height:1.1">t = B · (V / A)²</p>
+<p style="font-size:26px;line-height:1.4;color:#B9BDC0">t: tiempo de solidificación · V: volumen · A: área en contacto con el molde · B: constante del molde</p>
+<hr style="width:160px;border-top:4px solid #F08A4B">
+<p style="font-size:32px;font-weight:600">Criterio práctico</p>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:600;color:#F08A4B;line-height:1.1">t mazarota ≥ 1.25 · t pieza</p>
+<p style="font-size:26px;color:#B9BDC0">Equivale a (V/A) mazarota ≥ 1.12 · (V/A) pieza</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">16</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#2F6285;letter-spacing:2px;text-transform:uppercase">Bloque 5 · Aluminio y acero</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Fundición de aluminio</h2>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:4px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:600;color:#2F6285;line-height:1.1">≈ 700 °C</p>
+<p style="font-size:26px;color:#4A5056">Temperatura de vaciado típica (680–760 °C)</p>
+</div>
+<div style="flex:1;background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:4px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:600;color:#2F6285;line-height:1.1">2.7 g/cm³</p>
+<p style="font-size:26px;color:#4A5056">Densidad: un tercio de la del acero</p>
+</div>
+<div style="flex:1;background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:4px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:600;color:#2F6285;line-height:1.1">1.0–1.3 %</p>
+<p style="font-size:26px;color:#4A5056">Contracción lineal de referencia</p>
+</div>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">Aleaciones comunes</h3>
+<ul style="font-size:26px;line-height:1.4">
+<li>Al-Si (p. ej. A356): muy colable, baja contracción</li>
+<li>Al-Cu (p. ej. 206): alta resistencia, riesgo de desgarre</li>
+</ul>
+</div>
+<div style="flex:1;background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">Defecto característico</h3>
+<p style="font-size:26px;line-height:1.4">Porosidad por hidrógeno: el aluminio líquido lo disuelve y lo libera al solidificar. Se controla con desgasificado y fundentes.</p>
+</div>
+<div style="flex:1;background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">Aplicaciones</h3>
+<ul style="font-size:26px;line-height:1.4">
+<li>Culatas y bloques de motor</li>
+<li>Carcasas y tapas</li>
+<li>Poleas y soportes</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">17</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Bloque 5 · Aluminio y acero</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Fundición de acero</h2>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:4px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:600;color:#F08A4B;line-height:1.1">≈ 1,600 °C</p>
+<p style="font-size:26px;color:#B9BDC0">Temperatura de vaciado típica (1,550–1,650 °C)</p>
+</div>
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:4px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:600;color:#F08A4B;line-height:1.1">7.85 g/cm³</p>
+<p style="font-size:26px;color:#B9BDC0">Densidad: casi tres veces la del aluminio</p>
+</div>
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:4px">
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:64px;font-weight:600;color:#F08A4B;line-height:1.1">1.6–2.1 %</p>
+<p style="font-size:26px;color:#B9BDC0">Contracción lineal de referencia</p>
+</div>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">Arena y molde</h3>
+<p style="font-size:26px;line-height:1.4">La cara del molde usa arenas refractarias (zircón, cromita) o recubrimientos para que el metal no penetre ni queme la arena.</p>
+</div>
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">Defectos característicos</h3>
+<ul style="font-size:26px;line-height:1.4">
+<li>Desgarres en caliente por contracción restringida</li>
+<li>Rechupes grandes: mazarotas voluminosas</li>
+<li>Penetración de metal en la arena</li>
+</ul>
+</div>
+<div style="flex:1;background:#2B3136;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">Aplicaciones</h3>
+<ul style="font-size:26px;line-height:1.4">
+<li>Engranes y ejes pesados</li>
+<li>Válvulas y cuerpos de bomba</li>
+<li>Piezas de minería y ferrocarril</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">18</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 5 · Aluminio y acero</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Comparativo: aluminio frente a acero</h2>
+</div>
+<table style="font-size:26px;color:#1E2226">
+<tr style="background:#1E2226"><th style="width:22%;color:#F4F1EA;text-align:left">Característica</th><th style="width:39%;color:#8FB8D6;text-align:left">Aluminio</th><th style="width:39%;color:#F08A4B;text-align:left">Acero</th></tr>
+<tr style="background:#E9E4D8"><td><b>Temperatura de vaciado</b></td><td>≈ 680–760 °C</td><td>≈ 1,550–1,650 °C</td></tr>
+<tr><td><b>Densidad</b></td><td>2.7 g/cm³</td><td>7.85 g/cm³</td></tr>
+<tr style="background:#E9E4D8"><td><b>Contracción lineal</b></td><td>1.0–1.3 %</td><td>1.6–2.1 %</td></tr>
+<tr><td><b>Arena</b></td><td>Arena en verde sílica estándar</td><td>Arenas más refractarias (zircón, cromita) y recubrimientos</td></tr>
+<tr style="background:#E9E4D8"><td><b>Defectos típicos</b></td><td>Porosidad por hidrógeno y películas de óxido</td><td>Desgarres en caliente, rechupes y penetración de metal</td></tr>
+<tr><td><b>Mazarotas</b></td><td>Pequeñas o medianas</td><td>Grandes, con mangas aislantes o exotérmicas</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">19</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#A23F10;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F4F1EA;letter-spacing:2px;text-transform:uppercase">Bloque 5 · Seguridad</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Seguridad en la fundición</h2>
+</div>
+<p style="font-family:'Oswald', Arial, sans-serif;font-size:56px;font-weight:500;line-height:1.15">La humedad y el metal fundido nunca se mezclan.</p>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#7E300D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<x-icon name="Users" style="color:#F4F1EA;width:56px;height:56px"></x-icon>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Protección personal</h3>
+<p style="font-size:26px;line-height:1.4">Careta, guantes, calzado de seguridad y ropa resistente al calor.</p>
+</div>
+<div style="flex:1;background:#7E300D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<x-icon name="Warning" style="color:#F4F1EA;width:56px;height:56px"></x-icon>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Humedad</h3>
+<p style="font-size:26px;line-height:1.4">Moldes, herramientas, lingotes y crisoles secos: el vapor atrapado puede proyectar metal.</p>
+</div>
+<div style="flex:1;background:#7E300D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<x-icon name="Cloud" style="color:#F4F1EA;width:56px;height:56px"></x-icon>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Ventilación</h3>
+<p style="font-size:26px;line-height:1.4">Extracción de humos y gases; nunca fundir en un espacio cerrado.</p>
+</div>
+<div style="flex:1;background:#7E300D;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px">
+<x-icon name="CheckCircle" style="color:#F4F1EA;width:56px;height:56px"></x-icon>
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500">Orden</h3>
+<p style="font-size:26px;line-height:1.4">Ruta libre, crisol sin sobrellenar y nunca agua sobre metal fundido.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#F4F1EA">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#F4F1EA;text-align:right">20</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#F4F1EA;color:#1E2226;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#A23F10;letter-spacing:2px;text-transform:uppercase">Bloque 6 · Cierre</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Ejemplo: dimensionar un modelo</h2>
+</div>
+<div style="display:flex;gap:32px">
+<div style="width:640px;display:flex;flex-direction:column;gap:24px">
+<div style="background:#E9E4D8;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#A23F10">Datos</h3>
+<ul style="font-size:26px;line-height:1.4">
+<li>Prisma de aluminio de 200 × 120 × 60 mm</li>
+<li>c = 1.3 %; maquinado de 3 mm arriba</li>
+<li>Salida de 1.5° en caras laterales</li>
+</ul>
+</div>
+<div style="background:#1E2226;color:#F4F1EA;border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500;color:#F08A4B">Resultado</h3>
+<p style="font-size:26px;line-height:1.4">Cara superior: 202.6 × 121.6 mm</p>
+<p style="font-size:26px;line-height:1.4">En la partición: 205.9 × 124.9 mm</p>
+<p style="font-size:26px;line-height:1.4">Altura del modelo: 63.8 mm</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">1. Maquinado</h3>
+<p style="font-size:26px;line-height:1.4">Altura con sobremedida: h = 60 + 3 = 63 mm</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">2. Contracción (× 1.013)</h3>
+<p style="font-size:26px;line-height:1.4">L = 200 × 1.013 = 202.6 mm · b = 120 × 1.013 = 121.6 mm · h = 63 × 1.013 = 63.8 mm</p>
+</div>
+<div style="background:#E9E4D8;border-radius:16px;padding:24px 32px;display:flex;flex-direction:column;gap:6px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:36px;font-weight:500">3. Ángulo de salida</h3>
+<p style="font-size:26px;line-height:1.4">x = 63.8 × tan 1.5° = 1.67 mm por lado, así que en la partición: 202.6 + 2(1.67) = 205.9 mm y 121.6 + 2(1.67) = 124.9 mm</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#4A5056">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#4A5056;text-align:right">21</p>
+
+</section>
+<section class="slide" style="position:relative;overflow:hidden;box-sizing:border-box;width:1920px;height:1080px;background:#1E2226;color:#F4F1EA;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-size:28px;font-weight:600;color:#F08A4B;letter-spacing:2px;text-transform:uppercase">Bloque 6 · Cierre</p>
+<h2 style="font-family:'Oswald', Arial, sans-serif;font-size:72px;font-weight:600;line-height:1.1">Resumen y preguntas de reflexión</h2>
+</div>
+<div style="display:flex;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#F08A4B">Lo esencial</h3>
+<ul style="font-size:30px;line-height:1.4">
+<li>Moldeo en banco: arena en verde, manual, para piezas pequeñas y lotes cortos</li>
+<li>Modelo = pieza + contracción + maquinado + ángulo de salida</li>
+<li>La colada llena el molde y la mazarota alimenta la pieza; Chvorinov guía su tamaño</li>
+<li>Aluminio: baja temperatura; cuidar hidrógeno y óxidos</li>
+<li>Acero: alta temperatura y contracción; arenas refractarias y mazarotas grandes</li>
+</ul>
+</div>
+<div style="width:640px;background:#2B3136;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:'Oswald', Arial, sans-serif;font-size:40px;font-weight:500;color:#F08A4B">Para reflexionar</h3>
+<ol style="font-size:28px;line-height:1.4">
+<li>¿Qué pasaría si el modelo no tuviera ángulo de salida?</li>
+<li>¿Por qué la mazarota debe solidificar después que la pieza?</li>
+<li>¿Qué cambia en el molde al pasar de aluminio a acero?</li>
+</ol>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1000px;font-size:24px;color:#B9BDC0">Procesos de Manufactura · Fundición y moldeo</p>
+<p style="position:absolute;right:128px;bottom:64px;width:120px;font-size:24px;color:#B9BDC0;text-align:right">22</p>
+
+</section>
+</div>
+<div id="bar"><button id="p">◀ Anterior</button><span id="n"></span><button id="nx">Siguiente ▶</button><button id="fs">Pantalla completa</button></div>
+<script>
+var S=[].slice.call(document.querySelectorAll('.slide')),i=0,st=document.getElementById('stage');
+function fit(){var w=innerWidth,h=innerHeight-48,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.marginLeft=(-960*k)+'px'}
+function show(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,j){s.classList.toggle('on',j==i)});document.getElementById('n').textContent=(i+1)+' / '+S.length;document.getElementById('p').disabled=i==0;document.getElementById('nx').disabled=i==S.length-1;try{location.hash='#'+(i+1)}catch(e){}}
+document.getElementById('p').onclick=function(){show(i-1)};document.getElementById('nx').onclick=function(){show(i+1)};
+document.getElementById('fs').onclick=function(){var e=document.documentElement;(e.requestFullscreen||e.webkitRequestFullscreen||function(){}).call(e)};
+document.addEventListener('keydown',function(e){if(e.key=='ArrowRight'||e.key==' '||e.key=='PageDown')show(i+1);if(e.key=='ArrowLeft'||e.key=='PageUp')show(i-1)});
+var x0=null;document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX});document.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));x0=null});
+addEventListener('resize',fit);fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>
