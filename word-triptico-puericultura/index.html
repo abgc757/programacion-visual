@@ -1,0 +1,77 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Práctica de Word: Tríptico de actividades para niños</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif;background:#eef2f8;color:#1c2536}
+header{background:linear-gradient(135deg,#14325c,#2b579a);color:#fff;padding:26px 16px 22px}.w{max-width:960px;margin:auto;padding:0 14px}
+h1{margin:6px 0 8px;font-size:1.9rem}header p{margin:0;color:#e3ecfa}small{letter-spacing:.06em;color:#cfdcf2}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chip{background:rgba(255,255,255,.16);border-radius:99px;padding:3px 12px;font-size:.88rem}
+.card{background:#fff;border:1px solid #d7dfeb;border-radius:14px;padding:16px 18px;margin:16px 0;box-shadow:0 2px 6px rgba(20,50,92,.06)}
+h2{margin:0 0 8px;color:#14325c;font-size:1.3rem}
+#bar{position:sticky;top:0;z-index:5;background:#14325c;color:#fff;padding:8px 14px}#bar div{height:10px;background:#3b5a8a;border-radius:9px;overflow:hidden;margin-top:4px}#bar i{display:block;height:100%;width:0;background:#e8a317;transition:width .3s}
+.chooser{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}@media(max-width:700px){.chooser{grid-template-columns:1fr 1fr}}
+.chooser button{border:2px solid #c9d5ea;background:#fff;border-radius:12px;padding:10px 4px;font-size:.95rem;cursor:pointer;font-weight:600;color:#14325c}
+.chooser button.on{background:#14325c;color:#fff;border-color:#14325c}.chooser span{display:block;font-size:1.8rem}
+.map{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.map button{min-height:74px;border:2px dashed #2b579a;border-radius:10px;background:#f3f6fb;cursor:pointer;font-weight:600;color:#14325c;font-size:.95rem}
+.map button.on{background:#e8a317;border-style:solid;color:#14325c}.cara{font-weight:700;color:#2b579a;margin-top:10px}
+.copy{background:#fffdf5;border:1px solid #e8a317;border-radius:10px;padding:10px 12px;margin-top:8px;white-space:pre-wrap}
+.btn{background:#2b579a;color:#fff;border:0;border-radius:8px;padding:7px 14px;font-size:.95rem;cursor:pointer;margin-top:6px}.btn.ok{background:#157347}
+.step{display:flex;gap:12px}.num{flex:none;width:42px;height:42px;border-radius:50%;background:#e8a317;color:#14325c;font-weight:800;font-size:1.2rem;display:grid;place-items:center}
+.step label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}.step input{width:24px;height:24px;margin-top:2px;flex:none}
+.step.done{opacity:.6}.k{display:inline-block;background:#e8f0fc;border:1px solid #b9c9e6;border-bottom-width:3px;border-radius:6px;padding:0 7px;font-size:.9rem;font-weight:600}
+.extra{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:700px){.extra{grid-template-columns:1fr}}
+.extra div{background:#fff8e6;border:1px solid #e8a317;border-radius:10px;padding:8px 12px}.extra b{display:block}
+.rub td,.rub th{border:1px solid #c9d5ea;padding:6px 8px;text-align:left}.rub{border-collapse:collapse;width:100%;font-size:.95rem}.rub th{background:#14325c;color:#fff}
+.warn{background:#fdecec;border:1px solid #d9534f;border-radius:10px;padding:8px 12px}
+</style></head><body>
+<div id="bar"><div class="w">Avance: <b id="pt">0%</b><div><i id="pb"></i></div></div></div>
+<header><div class="w"><small>INFORMÁTICA APLICADA · PUERICULTURA · BT_PUERI_3</small><h1>🧸 Examen práctico de Word: Tríptico de actividades para niños</h1><p>Harás un tríptico para familias con actividades para niños. Lo armarás con <b>tablas</b>. La información ya está lista: tú la acomodas con tablas y agregas tus propios datos.</p>
+<div class="chips"><span class="chip">📄 Entrega: archivo .docx</span><span class="chip">📅 Se abre y se entrega HOY</span><span class="chip">🎯 100 puntos</span><span class="chip">🧩 Herramienta clave: TABLAS</span></div></div></header>
+<div class="w">
+<div class="card"><h2>1️⃣ Elige la edad de los niños</h2><div class="chooser" id="ch"></div><p id="hint">Toca una edad para ver tu información.</p></div>
+<div class="card" id="mapcard" style="display:none"><h2>2️⃣ Mapa de tu tríptico</h2><p>Un tríptico tiene 2 caras con 3 paneles cada una. <b>Toca un panel</b> para ver qué tabla va ahí y copiar el texto. Cada texto está separado por <b>Tab</b> (columnas) y salto de línea (filas): pégalo y conviértelo con <b>Insertar &gt; Tabla &gt; Convertir texto en tabla</b>, o escríbelo celda por celda.</p>
+<div class="cara">Cara 1 (exterior)</div><div class="map" id="m1"></div><div class="cara">Cara 2 (interior)</div><div class="map" id="m2"></div>
+<div id="out" class="copy" style="display:none"></div><button class="btn" id="cp" style="display:none">📋 Copiar texto</button></div>
+<div class="card" id="extracard" style="display:none"><h2>3️⃣ Tus datos adicionales (los pones tú)</h2><p>Además de tu <b>nombre completo, grupo y fecha</b> (van en la contraportada), agrega estos <b>4 datos que tú inventas o buscas</b>:</p>
+<div class="extra"><div><b>🌟 Actividad propia</b>Una 6.ª actividad: nombre, materiales y 3 pasos. Va en una fila nueva de la tabla del panel 4.</div><div><b>🏠 Nombre de tu estancia</b>Inventa el nombre de una estancia infantil y ponlo en la portada.</div><div><b>💬 Mensaje para la familia</b>Una frase cariñosa de 1 o 2 líneas en la contraportada.</div><div><b>🖼️ Imagen</b>Un dibujo o foto para niños (Insertar &gt; Imágenes). Escribe de dónde la sacaste.</div></div></div>
+<div class="card"><h2>4️⃣ Pasos en Word <small style="color:#2b579a">(marca cada uno)</small></h2><div id="steps"></div></div>
+<div class="card"><h2>5️⃣ Revisa antes de subir</h2><table class="rub"><tr><th>Qué se evalúa</th><th>Pts</th></tr>
+<tr><td>Hoja horizontal, márgenes estrechos y 3 columnas</td><td>10</td></tr><tr><td>Tablas bien hechas: filas y columnas correctas en los 5 paneles con tabla</td><td>25</td></tr><tr><td>Combinar celdas, sombreado y bordes (en portada y tablas)</td><td>20</td></tr><tr><td>Alineación, ancho de columnas y encabezados de fila en negritas</td><td>10</td></tr><tr><td>Texto completo y correcto en los 6 paneles</td><td>15</td></tr><tr><td>Tus 4 datos adicionales + datos personales</td><td>10</td></tr><tr><td>Imagen con fuente, ortografía revisada y archivo .docx con nombre correcto</td><td>10</td></tr></table>
+<p class="warn">📤 <b>Nombre del archivo:</b> Triptico_Actividades_Apellido.docx · Súbelo en esta actividad del tablero. Solo .docx.<br>Las actividades son un ejercicio escolar: usa siempre materiales seguros y con un adulto presente.</p></div>
+</div>
+<script>
+var D={
+lac:{e:'👶',n:'Lactantes (6 a 12 meses)',
+ haz:['Vigilar siempre al bebé','Usar objetos grandes, lavables y sin bordes','Hablarle y sonreírle mientras juega'],evi:['Objetos pequeños que quepan en la boca','Bolsas de plástico, cuerdas o cordones','Dejarlo solo con juguetes'],
+ act:['Cesta de tesoros','10 minutos','Objetos seguros de distintas texturas (cuchara de madera, tela suave, pelota de tela)','1. Pon al bebé sentado con apoyo.|2. Coloca la cesta frente a él.|3. Deja que toque, mire y lleve los objetos a su boca (limpios y grandes).|4. Nómbralos en voz alta.'],
+ cal:[['Cesta de tesoros','Tiempo boca abajo','Canción con gestos','¿Dónde está? (pañuelo)','Espejo irrompible']],
+ uni:[['Cesta de tesoros','Tacto y curiosidad'],['Tiempo boca abajo','Fuerza de cuello y espalda'],['Canción con gestos','Lenguaje y atención'],['¿Dónde está?','Memoria y sorpresa']],
+ log:['Mira el objeto que le muestro','Toma un objeto con la mano','Sonríe cuando le canto','Disfruta el tiempo boca abajo']},
+mat:{e:'🧸',n:'Maternal (1 a 3 años)',
+ haz:['Acompañar cada juego','Elogiar sus intentos','Guardar los materiales al terminar'],evi:['Pinturas o pegamentos que no digan «no tóxico»','Piezas muy pequeñas','Obligarlo a terminar si se cansa'],
+ act:['Torre de bloques','10 minutos','Bloques grandes de plástico o cartón forrado','1. Siéntate junto al niño.|2. Muéstrale cómo poner un bloque sobre otro.|3. Pídele que haga su torre.|4. Celebren cuando se caiga y vuelvan a empezar.'],
+ cal:[['Torre de bloques','Pintar con dedos','Baile de la estatua','Encajar formas','Cocinita con tazas']],
+ uni:[['Torre de bloques','Coordinación de manos'],['Pintar con dedos','Creatividad'],['Baile de la estatua','Control del cuerpo'],['Encajar formas','Lógica y formas']],
+ log:['Apila 2 o más bloques','Disfruta pintar con los dedos','Se detiene cuando se acaba la música','Encaja una forma en su lugar']},
+pre:{e:'🎨',n:'Preescolar (3 a 5 años)',
+ haz:['Dar instrucciones cortas y claras','Dejar que elija entre dos juegos','Escuchar sus ideas'],evi:['Comparar a un niño con otro','Materiales con puntas o muy pequeños sin supervisión','Interrumpir su juego sin avisar'],
+ act:['Circuito de saltos (rayuela)','15 minutos','Gises o cinta para dibujar casillas en el piso','1. Dibuja 6 casillas con números en el piso.|2. Enseña a saltar con un pie y con dos.|3. Pide que diga el número en cada salto.|4. Cambia el orden para hacerlo más difícil.'],
+ cal:[['Circuito de saltos','Cuento con títeres','Clasificar tapas de colores','Plastilina de letras','Veo, veo']],
+ uni:[['Circuito de saltos','Equilibrio y fuerza'],['Cuento con títeres','Lenguaje e imaginación'],['Clasificar tapas','Colores y orden'],['Veo, veo','Atención y vocabulario']],
+ log:['Salta con los dos pies','Cuenta una historia corta','Agrupa por color','Respeta turnos en el juego']}};
+var DIAS=['Lunes','Martes','Miércoles','Jueves','Viernes'],T='\t';
+var P=[['Panel 1 · Solapa: Consejos (tabla de 2 columnas)','con'],['Panel 2 · Contraportada: Autor (tabla con celdas combinadas)','aut'],['Panel 3 · Portada (tabla de 1 celda sombreada)','por'],['Panel 4 · Actividad del día (tabla de ficha)','act'],['Panel 5 · Calendario semanal (tabla de 5 columnas)','cal'],['Panel 6 · Juego: relaciona y logros (2 tablas)','jue']];
+var cur=null;
+function txt(k){var d=D[cur];if(!d)return'';var a=d.act;
+ if(k=='con'){var r=['Haz'+T+'Evita'];for(var i=0;i<3;i++)r.push(d.haz[i]+T+d.evi[i]);return 'Consejos para el adulto\n'+r.join('\n')}
+ if(k=='aut')return 'Hecho por'+T+'(tu nombre completo)\nGrupo'+T+'BT_PUERI_3 · Informática Aplicada\nFecha'+T+'(de hoy)\nMensaje para la familia'+T+'(el tuyo)\nFuente de la imagen'+T+'(de dónde la sacaste)\n(Combina las celdas del título de esta tabla)';
+ if(k=='por')return 'ACTIVIDADES PARA NIÑOS\n'+d.n+'\n(Nombre de tu estancia infantil)\n(Imagen) \n[Tabla de 1 celda: sombréala y centra el texto]';
+ if(k=='act')return 'Actividad del día\nNombre'+T+a[0]+'\nDuración'+T+a[1]+'\nMateriales'+T+a[2]+'\nPasos'+T+a[3].split('|').join('\n')+'\n(Agrega abajo una fila con tu actividad propia)';
+ if(k=='cal')return DIAS.join(T)+'\n'+d.cal[0].join(T)+'\n(Agrega una fila de “Material” y sombrea el encabezado)';
+ var r=['Juego'+T+'Qué desarrolla'];d.uni.forEach(function(x){r.push(x.join(T))});var l=['Logro'+T+'Sí / En proceso'];d.log.forEach(function(x){l.push('☐ '+x+T+'☐ Sí   ☐ En proceso')});
+ return 'Relaciona\n'+r.join('\n')+'\n\nMi niño ya...\n'+l.join('\n')}
+var ch=document.getElementById('ch');Object.keys(D).forEach(function(k){var b=document.createElement('button');b.innerHTML='<span>'+D[k].e+'</span>'+D[k].n;b.onclick=function(){cur=k;[].forEach.call(ch.children,function(x){x.classList.remove('on')});b.classList.add('on');document.getElementById('mapcard').style.display=document.getElementById('extracard').style.display='block';document.getElementById('hint').textContent='✔ Elegiste '+D[k].n+'. Baja al mapa.';document.getElementById('out').style.display=document.getElementById('cp').style.display='none';[].forEach.call(document.querySelectorAll('.map button'),function(x){x.classList.remove('on')});calc()};ch.appendChild(b)});
+P.forEach(function(p,i){var b=document.createElement('button');b.textContent=p[0];b.onclick=function(){[].forEach.call(document.querySelectorAll('.map button'),function(x){x.classList.remove('on')});b.classList.add('on');var o=document.getElementById('out');o.textContent=txt(p[1]);o.style.display=document.getElementById('cp').style.display='block';document.getElementById('cp').textContent='📋 Copiar texto';document.getElementById('cp').className='btn'};document.getElementById(i<3?'m1':'m2').appendChild(b)});
+document.getElementById('cp').onclick=function(){var t=document.getElementById('out').textContent,b=this;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(function(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()});b.textContent='✔ Copiado: pégalo en Word (Ctrl+V)';b.className='btn ok'};
+var S=['Abre Word, crea un <b>documento en blanco</b> y guárdalo como <b>Triptico_Actividades_Apellido.docx</b>.','<b>Diseño &gt; Orientación &gt; Horizontal</b>. Luego <b>Márgenes &gt; Estrecho</b>.','<b>Columnas &gt; Tres</b>. Pasa al siguiente panel con <span class="k">Ctrl</span>+<span class="k">Shift</span>+<span class="k">Enter</span>.','<b>Portada:</b> <b>Insertar &gt; Tabla</b> de 1 columna y 2 filas. Escribe el título y la edad. En <b>Diseño de tabla</b> pon <b>Sombreado</b> de color y centra el texto.','<b>Panel 4 (ficha):</b> tabla de 2 columnas y 5 filas. Pega los datos. Pon la <b>primera columna en negritas</b> y con sombreado.','<b>Panel 5 (calendario):</b> tabla de 5 columnas y 2 filas. Sombrea la fila de los días y <b>centra</b> el texto (Disposición &gt; Alinear).','<b>Panel 1 (consejos):</b> tabla de 2 columnas. Usa <b>Bordes</b> de color distinto en “Haz” y “Evita”.','<b>Combinar celdas:</b> selecciona las celdas del título de la contraportada y elige <b>Disposición &gt; Combinar celdas</b>.','<b>Ancho de columnas:</b> arrastra el borde o usa <b>Autoajuste &gt; Autoajustar al contenido</b> para que la tabla quepa en su panel.','<b>Panel 6:</b> haz las 2 tablas (relaciona y logros). Agrega tu <b>actividad propia</b> como fila nueva en la tabla del panel 4 (clic derecho &gt; Insertar fila).','Agrega tu <b>imagen</b> (Insertar &gt; Imágenes) y tus <b>datos adicionales y personales</b>. Revisa ortografía con <span class="k">F7</span>.','Mira la <b>Vista de impresión</b>. Guarda (Ctrl+G) y sube tu .docx a la actividad del tablero.'];
+var st=document.getElementById('steps');S.forEach(function(s,i){var d=document.createElement('div');d.className='step';d.style.margin='8px 0';d.innerHTML='<div class="num">'+(i+1)+'</div><label><input type="checkbox"><span>'+s+'</span></label>';d.querySelector('input').onchange=function(){d.classList.toggle('done',this.checked);calc()};st.appendChild(d)});
+function calc(){var c=document.querySelectorAll('#steps input:checked').length,t=S.length+1,v=c+(cur?1:0),p=Math.round(100*v/t);document.getElementById('pt').textContent=p+'%';document.getElementById('pb').style.width=p+'%'}
+</script></body></html>
