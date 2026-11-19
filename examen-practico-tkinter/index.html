@@ -1,0 +1,133 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Examen práctico · Programación Visual · Tkinter</title>
+<style>
+:root{--bg:#f4f7fb;--c:#fff;--t:#1b2a41;--a:#2563eb;--ok:#15803d;--m:#64748b;--b:#d6dfeb}
+@media(prefers-color-scheme:dark){:root{--bg:#0f172a;--c:#1e293b;--t:#e8eef9;--a:#60a5fa;--ok:#4ade80;--m:#94a3b8;--b:#334155}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui,Segoe UI,sans-serif;background:var(--bg);color:var(--t)}
+header{background:linear-gradient(135deg,#1d4ed8,#0ea5e9);color:#fff;padding:22px 16px}
+header h1{margin:0 0 4px;font-size:1.5rem}header p{margin:0;opacity:.95}
+main{max-width:860px;margin:0 auto;padding:16px}
+.bar{position:sticky;top:0;z-index:5;background:var(--c);border-bottom:1px solid var(--b);padding:8px 16px}
+.bar div{max-width:860px;margin:auto;display:flex;gap:12px;align-items:center}
+.track{flex:1;height:12px;background:var(--b);border-radius:9px;overflow:hidden}.fill{height:100%;width:0;background:var(--ok);transition:.3s}
+.card{background:var(--c);border:1px solid var(--b);border-radius:14px;padding:16px;margin:14px 0}
+h2{margin:0 0 8px;font-size:1.2rem}
+.tag{display:inline-block;background:var(--a);color:#fff;border-radius:99px;padding:1px 10px;font-size:.8rem;margin-right:6px}
+pre{background:#0b1220;color:#e2e8f0;padding:12px;border-radius:10px;overflow:auto;font-size:.85rem;margin:8px 0}
+button{background:var(--a);color:#fff;border:0;border-radius:9px;padding:8px 14px;font-size:.95rem;cursor:pointer}
+button.alt{background:transparent;color:var(--a);border:1px solid var(--a)}
+label.s{display:flex;gap:10px;align-items:flex-start;padding:6px 0;cursor:pointer}label.s input{margin-top:6px;transform:scale(1.3)}
+label.s.done span{text-decoration:line-through;color:var(--m)}
+input[type=text]{width:100%;padding:8px;border:1px solid var(--b);border-radius:8px;background:var(--bg);color:var(--t);font-size:1rem}
+.warn{background:#fef3c7;color:#78350f;border-radius:10px;padding:10px 12px}
+table{width:100%;border-collapse:collapse}td,th{border:1px solid var(--b);padding:6px 8px;text-align:left}
+.timer{font-variant-numeric:tabular-nums;font-weight:700}
+</style></head><body>
+<header><h1>🖥️ Examen práctico · Programación Visual</h1><p>BT_COMP_5 · Tkinter · Se entrega HOY · Entregable: un archivo <b>.py</b></p></header>
+<div class="bar"><div><span class="timer" id="clock">⏱ 00:00</span><div class="track"><div class="fill" id="fill"></div></div><b id="pct">0%</b></div></div>
+<main>
+<div class="card"><h2>🚀 Empieza aquí</h2>
+<p>Vas a crear una <b>aplicación de escritorio con Tkinter</b>: «Registro de visitas». Te doy casi todo el código; tú lo copias por partes, lo pruebas y le agregas <b>tus propias mejoras</b>.</p>
+<p><b>Cómo funciona:</b> 1) escribe tus datos · 2) sigue los pasos en orden y marca cada casilla · 3) guarda tu archivo como <code>Apellido_Nombre.py</code> · 4) súbelo a AulaEscolar.</p>
+<div class="warn">Prueba el programa (F5 en IDLE) después de CADA paso. Si falla, no avances: revisa la sangría (espacios) y los paréntesis.</div></div>
+
+<div class="card"><h2>👤 Tus datos</h2>
+<p><input type="text" id="nom" placeholder="Nombre completo"></p>
+<p><input type="text" id="mat" placeholder="Matrícula"></p>
+<button onclick="mk()">Generar mi encabezado</button><pre id="hdr">(aquí aparece tu encabezado; cópialo al inicio de tu archivo)</pre><button class="alt" onclick="cp('hdr')">Copiar encabezado</button></div>
+
+<div class="card"><h2><span class="tag">Paso 1</span>Ventana y título</h2>
+<pre id="p1">import tkinter as tk
+from tkinter import ttk, messagebox
+
+ventana = tk.Tk()
+ventana.title("Registro de visitas")
+ventana.geometry("520x460")
+ventana.resizable(False, False)
+
+tk.Label(ventana, text="Registro de visitas", font=("Arial", 16, "bold")).pack(pady=8)</pre>
+<button onclick="cp('p1')">Copiar código</button>
+<label class="s"><input type="checkbox"><span>Pegué el código y ya se ve la ventana con el título.</span></label></div>
+
+<div class="card"><h2><span class="tag">Paso 2</span>Formulario</h2>
+<p>Pega esto debajo del código anterior.</p>
+<pre id="p2">marco = tk.Frame(ventana)
+marco.pack(pady=5)
+
+tk.Label(marco, text="Nombre:").grid(row=0, column=0, sticky="e", padx=5, pady=4)
+e_nombre = tk.Entry(marco, width=30)
+e_nombre.grid(row=0, column=1)
+
+tk.Label(marco, text="Motivo:").grid(row=1, column=0, sticky="e", padx=5, pady=4)
+c_motivo = ttk.Combobox(marco, values=["Trámite", "Asesoría", "Entrega", "Otro"], state="readonly", width=27)
+c_motivo.grid(row=1, column=1)
+c_motivo.current(0)
+
+v_cita = tk.BooleanVar()
+tk.Checkbutton(marco, text="Tiene cita previa", variable=v_cita).grid(row=2, column=1, sticky="w")</pre>
+<button onclick="cp('p2')">Copiar código</button>
+<label class="s"><input type="checkbox"><span>Veo el campo Nombre, la lista Motivo y la casilla de cita.</span></label></div>
+
+<div class="card"><h2><span class="tag">Paso 3</span>Botón y tabla</h2>
+<pre id="p3">def registrar():
+    nombre = e_nombre.get().strip()
+    if nombre == "":
+        messagebox.showwarning("Falta dato", "Escribe el nombre del visitante")
+        return
+    cita = "Sí" if v_cita.get() else "No"
+    tabla.insert("", "end", values=(nombre, c_motivo.get(), cita))
+    e_nombre.delete(0, tk.END)
+    v_cita.set(False)
+
+tk.Button(ventana, text="Registrar visita", command=registrar).pack(pady=6)
+
+tabla = ttk.Treeview(ventana, columns=("n", "m", "c"), show="headings", height=9)
+tabla.heading("n", text="Nombre")
+tabla.heading("m", text="Motivo")
+tabla.heading("c", text="Cita")
+tabla.column("c", width=60)
+tabla.pack(padx=10, pady=6, fill="x")</pre>
+<button onclick="cp('p3')">Copiar código</button>
+<label class="s"><input type="checkbox"><span>Al presionar el botón, la visita aparece en la tabla; con el nombre vacío sale un aviso.</span></label></div>
+
+<div class="card"><h2><span class="tag">Paso 4</span>Eliminar y cerrar</h2>
+<pre id="p4">def eliminar():
+    sel = tabla.selection()
+    if not sel:
+        messagebox.showinfo("Aviso", "Selecciona una fila")
+        return
+    tabla.delete(sel[0])
+
+tk.Button(ventana, text="Eliminar seleccionada", command=eliminar).pack()
+
+ventana.mainloop()</pre>
+<button onclick="cp('p4')">Copiar código</button>
+<p class="warn"><code>ventana.mainloop()</code> debe ser la ÚLTIMA línea del archivo. Si agregas código después, ponlo antes de esa línea.</p>
+<label class="s"><input type="checkbox"><span>Puedo seleccionar una fila y eliminarla.</span></label></div>
+
+<div class="card"><h2><span class="tag">Paso 5</span>Tus mejoras (obligatorias)</h2>
+<p>Agrega <b>las 3</b> y márcalas. Busca cómo en tu guía de Tkinter.</p>
+<label class="s"><input type="checkbox"><span><b>Mejora 1:</b> un campo nuevo «Teléfono» (Entry) que también se guarde en la tabla (nueva columna).</span></label>
+<label class="s"><input type="checkbox"><span><b>Mejora 2:</b> una etiqueta que diga «Total de visitas: N» y se actualice al registrar y eliminar.</span></label>
+<label class="s"><input type="checkbox"><span><b>Mejora 3:</b> un botón «Limpiar todo» que vacíe la tabla pidiendo confirmación (<code>messagebox.askyesno</code>).</span></label></div>
+
+<div class="card"><h2><span class="tag">Paso 6</span>Entrega</h2>
+<label class="s"><input type="checkbox"><span>Mi archivo inicia con el encabezado (nombre y matrícula) como comentario.</span></label>
+<label class="s"><input type="checkbox"><span>Lo guardé como <code>Apellido_Nombre.py</code> y lo ejecuté una última vez sin errores.</span></label>
+<label class="s"><input type="checkbox"><span>Lo subí a la actividad en AulaEscolar (o lo entregué en USB si el docente lo indica).</span></label></div>
+
+<div class="card"><h2>📋 Rúbrica (100 pts)</h2>
+<table><tr><th>Criterio</th><th>Pts</th></tr>
+<tr><td>Ventana, título y formulario correctos (pasos 1–2)</td><td>20</td></tr>
+<tr><td>Botón registrar con validación y tabla (paso 3)</td><td>25</td></tr>
+<tr><td>Eliminar fila y cierre correcto (paso 4)</td><td>15</td></tr>
+<tr><td>Mejoras 1, 2 y 3 (15 c/u)</td><td>45</td></tr>
+<tr><td>Encabezado con nombre y matrícula</td><td>(requisito: sin él no se califica)</td></tr></table></div>
+</main>
+<script>
+const t0=Date.now();setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000);document.getElementById('clock').textContent='⏱ '+String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},1000);
+function cp(id){const x=document.getElementById(id).textContent;(navigator.clipboard?navigator.clipboard.writeText(x):Promise.reject()).catch(()=>{const r=document.createRange();r.selectNode(document.getElementById(id));getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy')});}
+function mk(){const n=document.getElementById('nom').value||'Nombre',m=document.getElementById('mat').value||'Matrícula';document.getElementById('hdr').textContent='# Examen práctico · Programación Visual · BT_COMP_5\n# Alumno: '+n+'\n# Matrícula: '+m+'\n# Fecha: 19/11/2026\n';}
+const cb=[...document.querySelectorAll('label.s input')];
+cb.forEach(c=>c.addEventListener('change',()=>{c.parentElement.classList.toggle('done',c.checked);const p=Math.round(cb.filter(x=>x.checked).length/cb.length*100);fill.style.width=p+'%';pct.textContent=p+'%'}));
+</script></body></html>
