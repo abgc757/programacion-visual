@@ -1,0 +1,721 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Probabilidad: Fundamentos y Aplicaciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+section {
+  padding: 96px 128px;
+  box-sizing: border-box;
+  background: #EDF4F3;
+  font-family: 'Nunito Sans', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+h1 {
+  font-family: 'Rubik', Arial, sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: #094649;
+  margin: 0 0 8px 0;
+  line-height: 1.15;
+}
+
+h2 {
+  font-family: 'Rubik', Arial, sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: #094649;
+  margin: 0;
+  line-height: 1.2;
+}
+
+h3 {
+  font-family: 'Rubik', Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #094649;
+  margin: 0 0 10px 0;
+  line-height: 1.2;
+}
+
+p {
+  font-size: 26px;
+  color: #1B2430;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.eyebrow {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #3FBF9F;
+  margin: 0 0 20px 0;
+}
+
+.accent-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.stripe {
+  width: 6px;
+  height: 52px;
+  border-radius: 3px;
+  background: #3FBF9F;
+  flex-shrink: 0;
+}
+
+.stripe.coral { background: #F4623A; }
+.stripe.blue  { background: #1C7293; }
+.stripe.white { background: #fff; }
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 32px;
+  box-shadow: 0 2px 16px rgba(9,70,73,0.08);
+}
+
+.card.teal-top  { border-top: 5px solid #3FBF9F; }
+.card.blue-top  { border-top: 5px solid #1C7293; }
+.card.coral-top { border-top: 5px solid #F4623A; }
+.card.muted-top { border-top: 5px solid #5C7E7B; }
+.card.left-teal  { border-left: 5px solid #3FBF9F; }
+.card.left-blue  { border-left: 5px solid #1C7293; }
+.card.left-coral { border-left: 5px solid #F4623A; }
+
+.two-col   { display: grid; grid-template-columns: 1fr 1fr;     gap: 20px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+.formula-box {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 40px 56px;
+  text-align: center;
+}
+
+.note-box {
+  background: #094649;
+  border-radius: 14px;
+  padding: 22px 32px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 24px;
+  border-radius: 24px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.badge.teal  { background: rgba(63,191,159,0.15);  color: #3FBF9F; border: 1px solid rgba(63,191,159,0.4); }
+.badge.blue  { background: rgba(28,114,147,0.15);  color: #1C7293; border: 1px solid rgba(28,114,147,0.4); }
+.badge.coral { background: rgba(244,98,58,0.15);   color: #F4623A; border: 1px solid rgba(244,98,58,0.4); }
+.badge.muted { background: rgba(92,126,123,0.15);  color: #5C7E7B; border: 1px solid rgba(92,126,123,0.4); }
+
+html,body{margin:0;height:100%;background:#10181c;overflow:hidden}
+#stage{position:absolute;left:50%;top:0;transform-origin:0 0}
+section.slide{width:1920px;height:1080px !important;position:relative;overflow:hidden;box-sizing:border-box}
+.slide:not(.on){display:none !important}
+x-shape{display:block}
+#bar{position:fixed;bottom:0;left:0;right:0;height:48px;background:#094649;display:flex;align-items:center;justify-content:center;gap:14px;color:#EDF4F3;font:15px 'Nunito Sans',Arial,sans-serif;z-index:9}
+#bar button{background:#3FBF9F;border:0;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;color:#094649}
+#bar button:disabled{opacity:.4}
+</style></head><body>
+<div id="stage">
+<section class="slide" style="background:linear-gradient(145deg,#094649 0%,#0d5a5e 40%,#1B2430 100%);justify-content:flex-end;padding-bottom:120px;">
+  <p class="eyebrow" style="color:#3FBF9F;">CEUM · Estadística Descriptiva</p>
+  <h1 style="font-size:80px;color:#fff;margin-bottom:12px;">Probabilidad</h1>
+  <h2 style="color:rgba(255,255,255,0.55);margin-bottom:52px;">Fundamentos y Aplicaciones</h2>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:60px;">
+    <span class="badge teal">4 Secciones</span>
+    <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.2);">21 Diapositivas</span>
+    <span class="badge coral">Módulo complementario</span>
+  </div>
+  <p style="color:rgba(255,255,255,0.3);font-size:24px;">M. en C. Abraham Gómez Contreras · CEUM Ingeniería Industrial</p>
+</section>
+<section class="slide">
+  <div class="accent-row">
+    <div class="stripe" style="background:#094649;"></div>
+    <h1>Contenido del Módulo</h1>
+  </div>
+  <div class="two-col">
+    <div class="card teal-top">
+      <span class="badge teal" style="margin-bottom:16px;">Sección 1</span>
+      <h3>Fundamentos</h3>
+      <p style="font-size:24px;color:#5C7E7B;">¿Por qué probabilidad?<br>Experimento aleatorio y espacio muestral<br>Tipos de eventos</p>
+    </div>
+    <div class="card blue-top">
+      <span class="badge blue" style="margin-bottom:16px;">Sección 2</span>
+      <h3>Enfoques</h3>
+      <p style="font-size:24px;color:#5C7E7B;">Enfoque clásico (Laplace)<br>Enfoque frecuentista<br>Enfoque subjetivo</p>
+    </div>
+    <div class="card coral-top">
+      <span class="badge coral" style="margin-bottom:16px;">Sección 3</span>
+      <h3>Reglas de Probabilidad</h3>
+      <p style="font-size:24px;color:#5C7E7B;">Axiomas de Kolmogórov<br>Complemento · Adición · Intersección<br>Probabilidad condicional e independencia</p>
+    </div>
+    <div class="card muted-top">
+      <span class="badge muted" style="margin-bottom:16px;">Sección 4</span>
+      <h3>Aplicaciones</h3>
+      <p style="font-size:24px;color:#5C7E7B;">Diagrama de árbol<br>Teorema de Bayes (introducción)<br>Conexión con estadística descriptiva</p>
+    </div>
+  </div>
+</section>
+<section class="slide">
+  <div class="accent-row">
+    <div class="stripe"></div>
+    <h1>¿Por qué estudiar probabilidad?</h1>
+  </div>
+  <p style="font-size:28px;margin-bottom:36px;color:#5C7E7B;">La estadística descriptiva nos dice <b style="color:#094649;">qué pasó</b>. La probabilidad nos permite decir <b style="color:#094649;">qué puede pasar</b> y con qué certeza.</p>
+  <div class="three-col" style="margin-bottom:36px;">
+    <div class="card left-teal">
+      <h3 style="color:#3FBF9F;">Incertidumbre</h3>
+      <p style="font-size:24px;">No todos los fenómenos son deterministas. La probabilidad cuantifica la incertidumbre de forma rigurosa.</p>
+    </div>
+    <div class="card left-blue">
+      <h3 style="color:#1C7293;">Predicción</h3>
+      <p style="font-size:24px;">Permite estimar la frecuencia esperada de un evento antes de observarlo.</p>
+    </div>
+    <div class="card left-coral">
+      <h3 style="color:#F4623A;">Inferencia</h3>
+      <p style="font-size:24px;">Es la base de la estadística inferencial: generalizar de la muestra a la población.</p>
+    </div>
+  </div>
+  <div class="note-box">
+    <p style="color:#fff;font-size:26px;"><b style="color:#3FBF9F;">Conexión con la Unidad 5:</b> Los percentiles y la puntuación Z que ya conocemos son medidas de posición <i>probabilística</i>. El 95% de los datos cae entre Z = −2 y Z = +2.</p>
+  </div>
+</section>
+<section class="slide">
+  <div class="accent-row">
+    <div class="stripe"></div>
+    <h1>Conceptos Básicos</h1>
+  </div>
+  <div class="three-col">
+    <div class="card teal-top" style="display:flex;flex-direction:column;gap:16px;">
+      <span class="badge teal">Experimento aleatorio</span>
+      <p style="font-size:26px;"><b>Proceso cuyo resultado</b> no puede predecirse con certeza, aunque se conozcan todas las condiciones.</p>
+      <p style="font-size:24px;color:#5C7E7B;"><i>Ejemplos: lanzar un dado, medir la CAS de un conductor.</i></p>
+    </div>
+    <div class="card blue-top" style="display:flex;flex-direction:column;gap:16px;">
+      <span class="badge blue">Espacio muestral Ω</span>
+      <p style="font-size:26px;"><b>Conjunto de todos los resultados posibles</b> del experimento aleatorio.</p>
+      <p style="font-size:24px;color:#5C7E7B;"><i>Dado: Ω = {1, 2, 3, 4, 5, 6}</i></p>
+    </div>
+    <div class="card coral-top" style="display:flex;flex-direction:column;gap:16px;">
+      <span class="badge coral">Evento A</span>
+      <p style="font-size:26px;"><b>Subconjunto del espacio muestral</b> — uno o varios resultados que nos interesan.</p>
+      <p style="font-size:24px;color:#5C7E7B;"><i>A = "sacar par" = {2, 4, 6}</i></p>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px;margin-top:28px;background:#fff;border-radius:14px;padding:24px 32px;box-shadow:0 2px 12px rgba(9,70,73,0.08);">
+    <div style="font-size:48px;font-family:'Rubik',Arial,sans-serif;font-weight:800;color:#3FBF9F;flex-shrink:0;">A ⊆ Ω</div>
+    <p style="font-size:26px;">Todo evento es un subconjunto del espacio muestral. Si ocurre un resultado que pertenece a A, decimos que el <b>evento A ocurrió</b>.</p>
+  </div>
+</section>
+<section class="slide">
+  <div class="accent-row">
+    <div class="stripe"></div>
+    <h1>Espacio Muestral — Ejemplos</h1>
+  </div>
+  <div class="three-col" style="margin-bottom:24px;">
+    <div class="card" style="border-top:5px solid #3FBF9F;">
+      <p class="eyebrow" style="font-size:24px;margin-bottom:12px;">Moneda</p>
+      <p style="font-size:28px;font-weight:700;color:#094649;font-family:'Rubik',Arial,sans-serif;margin-bottom:10px;">Ω = {C, S}</p>
+      <p style="font-size:24px;color:#5C7E7B;">2 resultados equiprobables.<br>|Ω| = 2</p>
+    </div>
+    <div class="card" style="border-top:5px solid #1C7293;">
+      <p class="eyebrow" style="font-size:24px;margin-bottom:12px;">Dado de 6 caras</p>
+      <p style="font-size:28px;font-weight:700;color:#094649;font-family:'Rubik',Arial,sans-serif;margin-bottom:10px;">Ω = {1,2,3,4,5,6}</p>
+      <p style="font-size:24px;color:#5C7E7B;">6 resultados equiprobables.<br>|Ω| = 6</p>
+    </div>
+    <div class="card" style="border-top:5px solid #F4623A;">
+      <p class="eyebrow" style="font-size:24px;margin-bottom:12px;">Retén de alcoholemia</p>
+      <p style="font-size:28px;font-weight:700;color:#094649;font-family:'Rubik',Arial,sans-serif;margin-bottom:10px;">Ω = [0, ∞) g/L</p>
+      <p style="font-size:24px;color:#5C7E7B;">Espacio continuo.<br>Resultados en un intervalo real.</p>
+    </div>
+  </div>
+  <div class="card" style="background:#1B2430;">
+    <div style="display:flex;gap:40px;align-items:center;flex-wrap:wrap;">
+      <div>
+        <p style="font-size:24px;color:#3FBF9F;font-weight:700;margin-bottom:8px;">Espacio discreto</p>
+        <p style="font-size:26px;color:rgba(255,255,255,0.75);">Resultados enumerables: moneda, dado, baraja, número de defectos.</p>
+      </div>
+      <div style="width:2px;height:60px;background:rgba(255,255,255,0.15);flex-shrink:0;"></div>
+      <div>
+        <p style="font-size:24px;color:#F4623A;font-weight:700;margin-bottom:8px;">Espacio continuo</p>
+        <p style="font-size:26px;color:rgba(255,255,255,0.75);">Resultados en un intervalo: temperatura, tiempo, concentración de alcohol.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide">
+  <div class="accent-row">
+    <div class="stripe"></div>
+    <h1>Tipos de Eventos</h1>
+  </div>
+  <div class="two-col">
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card left-teal">
+        <h3 style="color:#3FBF9F;">Evento simple</h3>
+        <p style="font-size:26px;">Un solo resultado del espacio muestral.<br><i style="color:#5C7E7B;">A = {3} al lanzar un dado</i></p>
+      </div>
+      <div class="card left-blue">
+        <h3 style="color:#1C7293;">Evento compuesto</h3>
+        <p style="font-size:26px;">Dos o más resultados del espacio muestral.<br><i style="color:#5C7E7B;">B = {2,4,6} = "sacar número par"</i></p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card left-coral">
+        <h3 style="color:#F4623A;">Evento complemento Aᶜ</h3>
+        <p style="font-size:26px;">Todos los resultados de Ω que <b>no pertenecen</b> a A.<br><i style="color:#5C7E7B;">Si A = {2,4,6} entonces Aᶜ = {1,3,5}</i></p>
+      </div>
+      <div class="card muted-top">
+        <h3 style="color:#5C7E7B;">Mutuamente excluyentes</h3>
+        <p style="font-size:26px;">Dos eventos que <b>no pueden ocurrir simultáneamente</b>: su intersección es vacía (A ∩ B = ∅).<br><i style="color:#5C7E7B;">A = {par} y B = {impar}</i></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" style="background:#1B2430;">
+  <p class="eyebrow" style="color:#3FBF9F;">Sección 2 · Enfoques de la probabilidad</p>
+  <div class="accent-row">
+    <div class="stripe white"></div>
+    <h1 style="color:#fff;">Enfoque Clásico (Laplace)</h1>
+  </div>
+  <div class="formula-box" style="margin-bottom:32px;">
+    <p style="color:rgba(255,255,255,0.5);font-size:24px;margin-bottom:12px;">Fórmula — Pierre-Simon Laplace, 1812</p>
+    <p style="font-size:56px;font-weight:800;color:#fff;font-family:'Rubik',Arial,sans-serif;letter-spacing:1px;">P(A) = |A| / |Ω|</p>
+    <p style="color:rgba(255,255,255,0.5);font-size:26px;margin-top:12px;">casos favorables a A / casos totales posibles</p>
+  </div>
+  <div class="two-col">
+    <div style="background:rgba(255,255,255,0.06);border-radius:14px;padding:24px 28px;border-left:5px solid #3FBF9F;">
+      <h3 style="color:#3FBF9F;margin-bottom:12px;">Ejemplo — dado</h3>
+      <p style="color:rgba(255,255,255,0.75);font-size:26px;">P(par) = |{2,4,6}| / |{1,2,3,4,5,6}| = <b style="color:#fff;">3/6 = 0.5</b></p>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-radius:14px;padding:24px 28px;border-left:5px solid #F4623A;">
+      <h3 style="color:#F4623A;margin-bottom:12px;">Supuesto clave</h3>
+      <p style="color:rgba(255,255,255,0.75);font-size:26px;">Todos los resultados del espacio muestral son <b style="color:#fff;">igualmente posibles (equiprobables)</b>.</p>
+    </div>
+  </div>
+</section>
+<section class="slide" style="background:#EDF4F3;">
+  <p class="eyebrow">Sección 2 · Enfoques de la probabilidad</p>
+  <div class="accent-row">
+    <div class="stripe blue"></div>
+    <h1>Enfoque Frecuentista</h1>
+  </div>
+  <div class="card" style="background:#1B2430;margin-bottom:28px;">
+    <div class="formula-box">
+      <p style="color:rgba(255,255,255,0.5);font-size:24px;margin-bottom:12px;">Definición — Von Mises, 1928</p>
+      <p style="font-size:48px;font-weight:800;color:#fff;font-family:'Rubik',Arial,sans-serif;">P(A) = lím<sub style="font-size:32px;">n→∞</sub> (n<sub style="font-size:28px;">A</sub> / n)</p>
+      <p style="color:rgba(255,255,255,0.5);font-size:26px;margin-top:12px;">frecuencia relativa cuando el experimento se repite indefinidamente</p>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="card left-blue">
+      <h3 style="color:#1C7293;">Ejemplo — retén de alcoholemia</h3>
+      <p style="font-size:26px;">En 80 conductores, 15 superan el límite legal (0.5 g/L).<br>
+        P(CAS &gt; 0.5) ≈ <b>15/80 = 0.1875</b></p>
+      <p style="font-size:24px;color:#5C7E7B;margin-top:10px;">Estimación basada en datos observados.</p>
+    </div>
+    <div class="card left-teal">
+      <h3 style="color:#3FBF9F;">Propiedad clave</h3>
+      <p style="font-size:26px;">A mayor número de repeticiones <b>n</b>, la frecuencia relativa se <b>estabiliza</b> alrededor de un valor fijo.</p>
+      <p style="font-size:24px;color:#5C7E7B;margin-top:10px;">Ley de los grandes números (Bernoulli).</p>
+    </div>
+  </div>
+</section>
+<section class="slide" style="background:#EDF4F3;">
+  <p class="eyebrow">Sección 2 · Enfoques de la probabilidad</p>
+  <div class="accent-row">
+    <div class="stripe coral"></div>
+    <h1>Enfoque Subjetivo</h1>
+  </div>
+  <div class="card" style="margin-bottom:28px;border-left:6px solid #F4623A;">
+    <p style="font-size:28px;color:#1B2430;"><b>Definición:</b> La probabilidad expresa el <b style="color:#F4623A;">grado de creencia personal</b> o nivel de confianza de un individuo en que ocurra un evento, basado en su información disponible.</p>
+  </div>
+  <div class="three-col">
+    <div class="card teal-top">
+      <span class="badge teal" style="margin-bottom:12px;display:inline-block;">Clásico</span>
+      <p style="font-size:26px;">Requiere resultados <b>equiprobables</b>.<br>Juego de azar.</p>
+    </div>
+    <div class="card blue-top">
+      <span class="badge blue" style="margin-bottom:12px;display:inline-block;">Frecuentista</span>
+      <p style="font-size:26px;">Requiere <b>muchas repeticiones</b>.<br>Control de calidad.</p>
+    </div>
+    <div class="card coral-top">
+      <span class="badge coral" style="margin-bottom:12px;display:inline-block;">Subjetivo</span>
+      <p style="font-size:26px;">Válido para <b>eventos únicos</b>.<br>"P(ganar licitación) = 70%"</p>
+    </div>
+  </div>
+  <div class="note-box" style="margin-top:24px;">
+    <p style="color:rgba(255,255,255,0.75);font-size:26px;">Base del <b style="color:#3FBF9F;">teorema de Bayes</b>: actualizar la creencia inicial (probabilidad a priori) con nueva evidencia para obtener la probabilidad a posteriori.</p>
+  </div>
+</section>
+<section class="slide" style="background:#1B2430;">
+  <p class="eyebrow" style="color:#3FBF9F;">Sección 3 · Reglas y operaciones</p>
+  <div class="accent-row">
+    <div class="stripe white"></div>
+    <h1 style="color:#fff;">Axiomas de Kolmogórov</h1>
+  </div>
+  <p style="color:rgba(255,255,255,0.55);font-size:26px;margin-bottom:32px;">Tres axiomas que definen formalmente cualquier función de probabilidad (Andréi Kolmogórov, 1933).</p>
+  <div class="three-col">
+    <div style="background:rgba(63,191,159,0.1);border:1px solid rgba(63,191,159,0.3);border-radius:16px;padding:28px 24px;">
+      <p style="color:#3FBF9F;font-size:24px;font-weight:700;margin-bottom:14px;">AXIOMA I</p>
+      <p style="font-size:48px;font-weight:800;color:#fff;font-family:'Rubik',Arial,sans-serif;margin-bottom:14px;">P(A) ≥ 0</p>
+      <p style="color:rgba(255,255,255,0.65);font-size:26px;">La probabilidad de cualquier evento es <b style="color:#fff;">no negativa</b>.</p>
+    </div>
+    <div style="background:rgba(28,114,147,0.15);border:1px solid rgba(28,114,147,0.4);border-radius:16px;padding:28px 24px;">
+      <p style="color:#1C7293;font-size:24px;font-weight:700;margin-bottom:14px;">AXIOMA II</p>
+      <p style="font-size:48px;font-weight:800;color:#fff;font-family:'Rubik',Arial,sans-serif;margin-bottom:14px;">P(Ω) = 1</p>
+      <p style="color:rgba(255,255,255,0.65);font-size:26px;">La probabilidad del espacio muestral completo es <b style="color:#fff;">1</b> (certeza).</p>
+    </div>
+    <div style="background:rgba(244,98,58,0.1);border:1px solid rgba(244,98,58,0.3);border-radius:16px;padding:28px 24px;">
+      <p style="color:#F4623A;font-size:24px;font-weight:700;margin-bottom:14px;">AXIOMA III</p>
+      <p style="font-size:38px;font-weight:800;color:#fff;font-family:'Rubik',Arial,sans-serif;margin-bottom:14px;">P(A∪B) = P(A)+P(B)</p>
+      <p style="color:rgba(255,255,255,0.65);font-size:26px;">Si A y B son <b style="color:#fff;">mutuamente excluyentes</b> (A∩B = ∅).</p>
+    </div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:22px 32px;margin-top:28px;">
+    <p style="color:rgba(255,255,255,0.65);font-size:26px;">De estos tres axiomas se derivan <b style="color:#fff;">todas las reglas</b> de probabilidad.</p>
+  </div>
+</section>
+<section class="slide" style="background:#EDF4F3;">
+  <p class="eyebrow">Sección 3 · Reglas y operaciones</p>
+  <div class="accent-row">
+    <div class="stripe"></div>
+    <h1>Regla del Complemento</h1>
+  </div>
+  <div class="card" style="background:#1B2430;margin-bottom:32px;">
+    <div class="formula-box">
+      <p style="color:#3FBF9F;font-size:48px;font-weight:800;font-family:'Rubik',Arial,sans-serif;">P(Aᶜ) = 1 − P(A)</p>
+      <p style="color:rgba(255,255,255,0.5);font-size:26px;margin-top:12px;">Se deriva del Axioma II: P(A) + P(Aᶜ) = P(Ω) = 1</p>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="card left-teal">
+      <h3 style="color:#3FBF9F;">Ejemplo</h3>
+      <p style="font-size:26px;">Si P(conductor legal) = 0.8125,<br>entonces P(conductor ilegal) = 1 − 0.8125 = <b>0.1875</b></p>
+    </div>
+    <div class="card left-blue">
+      <h3 style="color:#1C7293;">¿Cuándo usarla?</h3>
+      <p style="font-size:26px;">Cuando es más fácil calcular <b>P(Aᶜ)</b> que P(A) directamente.</p>
+      <p style="font-size:24px;color:#5C7E7B;margin-top:10px;">Ejemplo: P(al menos un éxito) = 1 − P(ningún éxito)</p>
+    </div>
+  </div>
+</section>
+<section class="slide" style="background:#EDF4F3;">
+  <p class="eyebrow">Sección 3 · Reglas y operaciones</p>
+  <div class="accent-row">
+    <div class="stripe blue"></div>
+    <h1>Regla de la Adición</h1>
+  </div>
+  <div class="card" style="background:#1B2430;margin-bottom:28px;">
+    <div class="formula-box">
+      <p style="color:rgba(255,255,255,0.5);font-size:24px;margin-bottom:10px;">Eventos NO mutuamente excluyentes</p>
+      <p style="color:#1C7293;font-size:44px;font-weight:800;font-family:'Rubik',Arial,sans-serif;">P(A∪B) = P(A) + P(B) − P(A∩B)</p>
+      <p style="color:rgba(255,255,255,0.4);font-size:24px;margin-top:10px;">Se resta la intersección para no contarla dos veces</p>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="card left-blue">
+      <h3 style="color:#1C7293;">Ejemplo</h3>
+      <p style="font-size:26px;">
+        A = "CAS &gt; 0.5 g/L" → P(A) = 0.1875<br>
+        B = "conductor de noche" → P(B) = 0.40<br>
+        P(A∩B) = 0.10<br><br>
+        P(A∪B) = 0.1875 + 0.40 − 0.10 = <b>0.4875</b>
+      </p>
+    </div>
+    <div class="card left-coral">
+      <h3 style="color:#F4623A;">Caso especial</h3>
+      <p style="font-size:26px;">Si A y B son <b>mutuamente excluyentes</b>:<br>A∩B = ∅ → P(A∩B) = 0</p>
+      <p style="font-size:28px;color:#094649;font-weight:700;margin-top:10px;font-family:'Rubik',Arial,sans-serif;">P(A∪B) = P(A) + P(B)</p>
+    </div>
+  </div>
+</section>
+<section class="slide" style="background:#EDF4F3;">
+  <p class="eyebrow">Sección 3 · Reglas y operaciones</p>
+  <div class="accent-row">
+    <div class="stripe coral"></div>
+    <h1>Eventos Mutuamente Excluyentes</h1>
+  </div>
+  <div class="card left-coral" style="margin-bottom:28px;">
+    <p style="font-size:28px;">Dos eventos son <b>mutuamente excluyentes</b> si no pueden ocurrir al mismo tiempo: <b style="color:#F4623A;">A ∩ B = ∅</b></p>
+  </div>
+  <div class="two-col">
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card teal-top">
+        <h3 style="color:#3FBF9F;">Regla de adición simplificada</h3>
+        <p style="font-size:34px;font-weight:700;color:#094649;font-family:'Rubik',Arial,sans-serif;margin:12px 0;">P(A∪B) = P(A) + P(B)</p>
+        <p style="font-size:24px;color:#5C7E7B;">Válida SOLO cuando A∩B = ∅</p>
+      </div>
+      <div class="card muted-top">
+        <h3 style="color:#5C7E7B;">Generalización</h3>
+        <p style="font-size:28px;font-weight:700;color:#094649;font-family:'Rubik',Arial,sans-serif;margin:12px 0;">P(A₁∪A₂∪…∪Aₙ) = ΣP(Aᵢ)</p>
+        <p style="font-size:24px;color:#5C7E7B;">Si todos son mutuamente excluyentes entre sí.</p>
+      </div>
+    </div>
+    <div class="card" style="background:#1B2430;padding:36px;">
+      <p style="color:#3FBF9F;font-size:24px;font-weight:700;margin-bottom:16px;">Ejemplo — retén de alcoholemia</p>
+      <p style="color:rgba(255,255,255,0.75);font-size:26px;line-height:1.9;">
+        A₁ = CAS ∈ [0, 0.5): P = 0.8125<br>
+        A₂ = CAS ∈ [0.5, 0.8): P = 0.1125<br>
+        A₃ = CAS ≥ 0.8: P = 0.0750<br><br>
+        <b style="color:#fff;">P(A₁∪A₂∪A₃) = 1.00 ✓</b>
+      </p>
+    </div>
+  </div>
+</section>
+<section class="slide" style="background:#EDF4F3;">
+  <p class="eyebrow">Sección 3 · Reglas y operaciones</p>
+  <div class="accent-row">
+    <div class="stripe"></div>
+    <h1>Probabilidad Condicional</h1>
+  </div>
+  <div class="card" style="background:#1B2430;margin-bottom:28px;">
+    <div class="formula-box">
+      <p style="color:rgba(255,255,255,0.5);font-size:24px;margin-bottom:12px;">"Probabilidad de A dado que ya ocurrió B"</p>
+      <p style="color:#3FBF9F;font-size:52px;font-weight:800;font-family:'Rubik',Arial,sans-serif;">P(A|B) = P(A∩B) / P(B)</p>
+      <p style="color:rgba(255,255,255,0.4);font-size:26px;margin-top:12px;">con P(B) &gt; 0</p>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="card left-teal">
+      <h3 style="color:#3FBF9F;">Ejemplo — retén nocturno</h3>
+      <p style="font-size:26px;">
+        P(ilegal ∩ noche) = 0.10<br>
+        P(noche) = 0.40<br><br>
+        P(ilegal | noche) = 0.10 / 0.40 = <b>0.25</b>
+      </p>
+      <p style="font-size:24px;color:#5C7E7B;margin-top:10px;">De noche, el riesgo sube al 25%.</p>
+    </div>
+    <div class="card left-blue">
+      <h3 style="color:#1C7293;">Interpretación</h3>
+      <p style="font-size:26px;">Al saber que B ocurrió, el espacio muestral se <b>reduce</b> a solo los resultados en B.</p>
+      <p style="font-size:24px;color:#5C7E7B;margin-top:10px;">La condición modifica nuestra evaluación del riesgo.</p>
+    </div>
+  </div>
+</section>
+<section class="slide" style="background:#EDF4F3;">
+  <p class="eyebrow">Sección 3 · Reglas y operaciones</p>
+  <div class="accent-row">
+    <div class="stripe blue"></div>
+    <h1>Independencia de Eventos</h1>
+  </div>
+  <div class="card left-blue" style="margin-bottom:28px;">
+    <p style="font-size:28px;">Dos eventos son <b>independientes</b> si la ocurrencia de uno <b style="color:#1C7293;">no afecta</b> la probabilidad del otro:</p>
+    <p style="font-size:38px;font-weight:800;color:#094649;font-family:'Rubik',Arial,sans-serif;margin-top:14px;">P(A|B) = P(A) &nbsp;&nbsp;&nbsp; ó equivalentemente &nbsp;&nbsp;&nbsp; P(A∩B) = P(A)·P(B)</p>
+  </div>
+  <div class="two-col">
+    <div class="card teal-top">
+      <h3 style="color:#3FBF9F;">Eventos independientes ✓</h3>
+      <p style="font-size:26px;">Lanzar una moneda dos veces:<br>P(cara en 2° | cara en 1°) = P(cara) = 0.5</p>
+      <p style="font-size:24px;color:#5C7E7B;margin-top:10px;">El primer resultado no influye en el segundo.</p>
+    </div>
+    <div class="card coral-top">
+      <h3 style="color:#F4623A;">Eventos dependientes ✗</h3>
+      <p style="font-size:26px;">CAS e "infracción al reglamento":<br>P(infracción | CAS alto) &gt; P(infracción)</p>
+      <p style="font-size:24px;color:#5C7E7B;margin-top:10px;">La condición sí modifica la probabilidad.</p>
+    </div>
+  </div>
+  <div class="note-box" style="margin-top:24px;">
+    <p style="color:rgba(255,255,255,0.75);font-size:26px;"><b style="color:#F4623A;">¡Cuidado!</b> Mutuamente excluyentes ≠ Independientes. Si A∩B = ∅ y P(A)&gt;0, entonces P(A|B) = 0 ≠ P(A) → son <b style="color:#fff;">dependientes</b>.</p>
+  </div>
+</section>
+<section class="slide" style="background:#1B2430;">
+  <p class="eyebrow" style="color:#3FBF9F;">Sección 3 · Reglas y operaciones</p>
+  <div class="accent-row">
+    <div class="stripe white"></div>
+    <h1 style="color:#fff;">Regla de la Multiplicación</h1>
+  </div>
+  <div class="two-col" style="margin-bottom:28px;">
+    <div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:32px;border-top:5px solid #3FBF9F;">
+      <p style="color:#3FBF9F;font-size:24px;font-weight:700;margin-bottom:14px;">GENERAL (dependientes)</p>
+      <p style="font-size:38px;font-weight:800;color:#fff;font-family:'Rubik',Arial,sans-serif;line-height:1.3;">P(A∩B) = P(A) · P(B|A)</p>
+      <p style="color:rgba(255,255,255,0.5);font-size:26px;margin-top:12px;">Se multiplica por la condicional.</p>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:32px;border-top:5px solid #1C7293;">
+      <p style="color:#1C7293;font-size:24px;font-weight:700;margin-bottom:14px;">INDEPENDIENTES</p>
+      <p style="font-size:38px;font-weight:800;color:#fff;font-family:'Rubik',Arial,sans-serif;line-height:1.3;">P(A∩B) = P(A) · P(B)</p>
+      <p style="color:rgba(255,255,255,0.5);font-size:26px;margin-top:12px;">Solo cuando A y B son independientes.</p>
+    </div>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:28px 32px;">
+    <p style="color:#3FBF9F;font-size:24px;font-weight:700;margin-bottom:12px;">Ejemplo — control de calidad en una planta</p>
+    <p style="color:rgba(255,255,255,0.75);font-size:26px;">
+      P(defecto en pieza 1) = 0.03 &nbsp;&nbsp;·&nbsp;&nbsp; P(defecto en pieza 2) = 0.03<br>
+      (piezas independientes)<br><br>
+      P(ambas defectuosas) = 0.03 × 0.03 = <b style="color:#fff;">0.0009 = 0.09%</b>
+    </p>
+  </div>
+</section>
+<section class="slide" style="background:#EDF4F3;">
+  <p class="eyebrow">Sección 4 · Aplicaciones</p>
+  <div class="accent-row">
+    <div class="stripe"></div>
+    <h1>Diagrama de Árbol</h1>
+  </div>
+  <p style="font-size:26px;color:#5C7E7B;margin-bottom:24px;">Herramienta visual para calcular probabilidades en experimentos <b style="color:#094649;">de múltiples etapas</b>. Retén de alcoholemia — turno diurno/nocturno.</p>
+  <div style="display:flex;gap:24px;align-items:flex-start;">
+    <!-- Tree diagram as SVG -->
+    <div style="flex:1;background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 16px rgba(9,70,73,0.08);">
+      <svg viewBox="0 0 540 280" style="width:100%;font-family:'Nunito Sans',Arial,sans-serif;font-size:14px;">
+        <!-- Root -->
+        <circle cx="60" cy="140" r="8" fill="#094649"/>
+        <!-- Branches to Diurno/Nocturno -->
+        <line x1="68" y1="130" x2="175" y2="80" stroke="#094649" stroke-width="2"/>
+        <line x1="68" y1="150" x2="175" y2="200" stroke="#094649" stroke-width="2"/>
+        <text x="105" y="96" fill="#094649" font-weight="700" font-size="15">P=0.60</text>
+        <text x="105" y="178" fill="#094649" font-weight="700" font-size="15">P=0.40</text>
+        <!-- Diurno node -->
+        <rect x="175" y="62" width="100" height="34" rx="8" fill="#3FBF9F"/>
+        <text x="225" y="84" text-anchor="middle" fill="white" font-weight="700" font-size="15">Diurno</text>
+        <!-- Nocturno node -->
+        <rect x="175" y="183" width="100" height="34" rx="8" fill="#1C7293"/>
+        <text x="225" y="205" text-anchor="middle" fill="white" font-weight="700" font-size="15">Nocturno</text>
+        <!-- From Diurno: Legal/Ilegal -->
+        <line x1="275" y1="74" x2="365" y2="45" stroke="#3FBF9F" stroke-width="1.5"/>
+        <line x1="275" y1="84" x2="365" y2="105" stroke="#3FBF9F" stroke-width="1.5"/>
+        <text x="300" y="51" fill="#3FBF9F" font-size="13">0.90</text>
+        <text x="300" y="104" fill="#F4623A" font-size="13">0.10</text>
+        <!-- From Nocturno: Legal/Ilegal -->
+        <line x1="275" y1="193" x2="365" y2="165" stroke="#1C7293" stroke-width="1.5"/>
+        <line x1="275" y1="203" x2="365" y2="235" stroke="#1C7293" stroke-width="1.5"/>
+        <text x="300" y="171" fill="#3FBF9F" font-size="13">0.75</text>
+        <text x="300" y="237" fill="#F4623A" font-size="13">0.25</text>
+        <!-- Leaf labels -->
+        <text x="370" y="49" fill="#094649" font-size="13" font-weight="700">Legal: 0.60×0.90 = 0.54</text>
+        <text x="370" y="109" fill="#F4623A" font-size="13" font-weight="700">Ilegal: 0.60×0.10 = 0.06</text>
+        <text x="370" y="169" fill="#094649" font-size="13" font-weight="700">Legal: 0.40×0.75 = 0.30</text>
+        <text x="370" y="239" fill="#F4623A" font-size="13" font-weight="700">Ilegal: 0.40×0.25 = 0.10</text>
+      </svg>
+    </div>
+    <div style="flex:0 0 220px;display:flex;flex-direction:column;gap:14px;">
+      <div class="card teal-top">
+        <p style="font-size:24px;font-weight:700;color:#3FBF9F;margin-bottom:6px;">P(Legal)</p>
+        <p style="font-size:28px;font-weight:800;color:#094649;font-family:'Rubik',Arial,sans-serif;">0.54 + 0.30 = 0.84</p>
+      </div>
+      <div class="card coral-top">
+        <p style="font-size:24px;font-weight:700;color:#F4623A;margin-bottom:6px;">P(Ilegal)</p>
+        <p style="font-size:28px;font-weight:800;color:#094649;font-family:'Rubik',Arial,sans-serif;">0.06 + 0.10 = 0.16</p>
+      </div>
+      <div class="card muted-top">
+        <p style="font-size:24px;color:#5C7E7B;">Total: 0.84 + 0.16 = <b style="color:#094649;">1.00 ✓</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" style="background:#1B2430;">
+  <p class="eyebrow" style="color:#3FBF9F;">Sección 4 · Aplicaciones</p>
+  <div class="accent-row">
+    <div class="stripe white"></div>
+    <h1 style="color:#fff;">Teorema de Bayes</h1>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:28px 36px;margin-bottom:28px;border-left:5px solid #3FBF9F;">
+    <p style="color:rgba(255,255,255,0.5);font-size:24px;margin-bottom:12px;">"Actualiza la probabilidad a priori con nueva evidencia"</p>
+    <p style="color:#3FBF9F;font-size:40px;font-weight:800;font-family:'Rubik',Arial,sans-serif;line-height:1.4;">P(H|E) = P(E|H) · P(H) / P(E)</p>
+  </div>
+  <div class="three-col">
+    <div style="background:rgba(63,191,159,0.1);border:1px solid rgba(63,191,159,0.3);border-radius:14px;padding:22px 24px;">
+      <p style="color:#3FBF9F;font-size:24px;font-weight:700;margin-bottom:8px;">P(H) — A priori</p>
+      <p style="color:rgba(255,255,255,0.75);font-size:26px;">Creencia <b style="color:#fff;">antes</b> de ver la evidencia.<br>P(ilegal) = 0.16</p>
+    </div>
+    <div style="background:rgba(28,114,147,0.15);border:1px solid rgba(28,114,147,0.4);border-radius:14px;padding:22px 24px;">
+      <p style="color:#1C7293;font-size:24px;font-weight:700;margin-bottom:8px;">P(E|H) — Verosimilitud</p>
+      <p style="color:rgba(255,255,255,0.75);font-size:26px;">Prob. de observar E <b style="color:#fff;">si H es verdad</b>.</p>
+    </div>
+    <div style="background:rgba(244,98,58,0.1);border:1px solid rgba(244,98,58,0.3);border-radius:14px;padding:22px 24px;">
+      <p style="color:#F4623A;font-size:24px;font-weight:700;margin-bottom:8px;">P(H|E) — A posteriori</p>
+      <p style="color:rgba(255,255,255,0.75);font-size:26px;">Creencia <b style="color:#fff;">actualizada</b> con la evidencia E.</p>
+    </div>
+  </div>
+  <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:20px 28px;margin-top:22px;">
+    <p style="color:rgba(255,255,255,0.65);font-size:26px;">Aplicación: si el conductor da positivo en el alcoholímetro, ¿cuál es la probabilidad de que realmente supere el límite legal, considerando la tasa de falsos positivos del instrumento?</p>
+  </div>
+</section>
+<section class="slide" style="background:#EDF4F3;">
+  <p class="eyebrow">Sección 4 · Aplicaciones</p>
+  <div class="accent-row">
+    <div class="stripe"></div>
+    <h1>Conexión con Estadística Descriptiva</h1>
+  </div>
+  <div class="three-col">
+    <div class="card teal-top">
+      <span class="badge teal" style="margin-bottom:12px;display:inline-block;">Frecuencia relativa</span>
+      <p style="font-size:26px;">La frecuencia relativa acumulada <b>estima</b> la probabilidad:</p>
+      <p style="font-size:28px;font-weight:700;color:#094649;font-family:'Rubik',Arial,sans-serif;margin-top:10px;">P(X ≤ xᵢ) ≈ Fᵢ</p>
+    </div>
+    <div class="card blue-top">
+      <span class="badge blue" style="margin-bottom:12px;display:inline-block;">Percentiles</span>
+      <p style="font-size:26px;">El percentil Pₖ define el valor bajo el cual ocurre el <b>k% de los datos</b>:</p>
+      <p style="font-size:28px;font-weight:700;color:#094649;font-family:'Rubik',Arial,sans-serif;margin-top:10px;">P(X ≤ P₇₅) = 0.75</p>
+    </div>
+    <div class="card coral-top">
+      <span class="badge coral" style="margin-bottom:12px;display:inline-block;">Puntuación Z</span>
+      <p style="font-size:26px;">La Z estándar permite calcular probabilidades bajo la distribución normal:</p>
+      <p style="font-size:28px;font-weight:700;color:#094649;font-family:'Rubik',Arial,sans-serif;margin-top:10px;">P(−2 ≤ Z ≤ 2) ≈ 0.954</p>
+    </div>
+  </div>
+  <div class="note-box" style="margin-top:24px;">
+    <p style="color:#fff;font-size:26px;"><b style="color:#3FBF9F;">Continuidad del curso:</b> La estadística descriptiva <b>resume</b> datos observados. La probabilidad <b>modela</b> la incertidumbre. Juntas forman la base de la <b>estadística inferencial</b>: estimación, pruebas de hipótesis y regresión.</p>
+  </div>
+</section>
+<section class="slide" style="background:#EDF4F3;padding:72px 100px;">
+  <p class="eyebrow">Resumen</p>
+  <h1 style="margin-bottom:28px;">Lo que aprendimos hoy</h1>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="card left-teal">
+      <p style="font-size:24px;font-weight:700;color:#3FBF9F;margin-bottom:8px;">S1 — Fundamentos</p>
+      <p style="font-size:26px;">Experimento aleatorio · Espacio muestral Ω · Evento A ⊆ Ω · Tipos: simple, compuesto, complemento, ME</p>
+    </div>
+    <div class="card left-blue">
+      <p style="font-size:24px;font-weight:700;color:#1C7293;margin-bottom:8px;">S2 — Enfoques</p>
+      <p style="font-size:26px;"><b>Clásico</b> P(A) = |A|/|Ω| · <b>Frecuentista</b> límite de fr. relativa · <b>Subjetivo</b> grado de creencia</p>
+    </div>
+    <div class="card left-coral">
+      <p style="font-size:24px;font-weight:700;color:#F4623A;margin-bottom:8px;">S3 — Reglas</p>
+      <p style="font-size:26px;">Axiomas Kolmogórov · Complemento · Adición · Condicional P(A|B) · Independencia · Multiplicación</p>
+    </div>
+    <div class="card" style="border-left:5px solid #5C7E7B;">
+      <p style="font-size:24px;font-weight:700;color:#5C7E7B;margin-bottom:8px;">S4 — Aplicaciones</p>
+      <p style="font-size:26px;">Diagrama de árbol · Teorema de Bayes · Frecuencia relativa ↔ probabilidad · Conexión con Z y percentiles</p>
+    </div>
+  </div>
+  <div style="background:#094649;border-radius:14px;padding:22px 32px;margin-top:20px;">
+    <p style="color:#fff;font-size:26px;text-align:center;"><b style="color:#3FBF9F;">Fórmula maestra:</b> &nbsp; P(A) ≥ 0 &nbsp;·&nbsp; P(Ω) = 1 &nbsp;·&nbsp; P(A∪B) = P(A)+P(B)−P(A∩B) &nbsp;·&nbsp; P(A|B) = P(A∩B)/P(B)</p>
+  </div>
+</section>
+<section class="slide" style="background:linear-gradient(145deg,#094649 0%,#0d5a5e 40%,#1B2430 100%);justify-content:center;align-items:center;text-align:center;">
+  <p class="eyebrow" style="color:#3FBF9F;text-align:center;">CEUM · Estadística Descriptiva · Módulo complementario</p>
+  <h1 style="color:#fff;font-size:72px;margin-bottom:12px;">¡Gracias!</h1>
+  <h2 style="color:rgba(255,255,255,0.55);margin-bottom:52px;">Probabilidad: Fundamentos y Aplicaciones</h2>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:56px;">
+    <span class="badge teal">Clásico · Frecuentista · Subjetivo</span>
+    <span class="badge" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.65);border:1px solid rgba(255,255,255,0.2);">Axiomas de Kolmogórov</span>
+    <span class="badge coral">Reglas · Bayes · Árbol</span>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:32px 48px;max-width:700px;margin:0 auto;">
+    <p style="color:rgba(255,255,255,0.65);font-size:26px;line-height:1.7;">"La probabilidad es la guía de la vida."<br><span style="color:#3FBF9F;font-weight:700;">— Marcus Tullius Cicerón</span></p>
+  </div>
+  <p style="color:rgba(255,255,255,0.3);font-size:24px;margin-top:52px;">M. en C. Abraham Gómez Contreras · CEUM Ingeniería Industrial</p>
+</section>
+</div>
+<div id="bar"><button id="p">◀ Anterior</button><span id="n"></span><button id="nx">Siguiente ▶</button><button id="fs">Pantalla completa</button></div>
+<script>
+var S=[].slice.call(document.querySelectorAll('.slide')),i=0,st=document.getElementById('stage');
+function fit(){var w=innerWidth,h=innerHeight-48,k=Math.min(w/1920,h/1080);st.style.transform='scale('+k+')';st.style.marginLeft=(-960*k)+'px'}
+function show(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,j){s.classList.toggle('on',j==i)});document.getElementById('n').textContent=(i+1)+' / '+S.length;document.getElementById('p').disabled=i==0;document.getElementById('nx').disabled=i==S.length-1;try{location.hash='#'+(i+1)}catch(e){}}
+document.getElementById('p').onclick=function(){show(i-1)};document.getElementById('nx').onclick=function(){show(i+1)};
+document.getElementById('fs').onclick=function(){var e=document.documentElement;(e.requestFullscreen||e.webkitRequestFullscreen||function(){}).call(e)};
+document.addEventListener('keydown',function(e){if(e.key=='ArrowRight'||e.key==' '||e.key=='PageDown')show(i+1);if(e.key=='ArrowLeft'||e.key=='PageUp')show(i-1)});
+var x0=null;document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX});document.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));x0=null});
+addEventListener('resize',fit);fit();show((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>
