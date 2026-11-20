@@ -1,0 +1,112 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Examen parcial práctico: Word</title>
+<style>
+:root{--a:#1f4e79;--v:#2e8b57;--n:#e67e22;--g:#f4f6f8}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 Arial,Helvetica,sans-serif;color:#222;background:var(--g)}
+header{background:var(--a);color:#fff;padding:18px 16px}header h1{margin:0;font-size:22px}header p{margin:4px 0 0;opacity:.9;font-size:14px}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:3px solid var(--a);padding:8px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.bar .t{font:700 22px monospace;color:var(--a)}.bar .p{flex:1;min-width:140px}.pb{height:14px;background:#dde3ea;border-radius:8px;overflow:hidden}.pb i{display:block;height:100%;width:0;background:var(--v);transition:.3s}
+button{cursor:pointer;border:0;border-radius:8px;padding:8px 14px;font-weight:700;background:var(--a);color:#fff}button.c{background:var(--n);padding:5px 10px;font-size:13px}
+main{max-width:900px;margin:auto;padding:14px}.card{background:#fff;border-radius:12px;padding:16px;margin:14px 0;box-shadow:0 1px 4px #0002}
+h2{margin:0 0 6px;color:var(--a);font-size:20px}h2 span{background:var(--a);color:#fff;border-radius:20px;padding:2px 10px;font-size:14px;margin-left:6px}
+.box{background:#eef4fb;border-left:5px solid var(--a);padding:8px 12px;border-radius:6px;margin:8px 0;white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;margin:8px 0;font-size:14px}th,td{border:1px solid #999;padding:5px 8px;text-align:left}th{background:#dde8f3}
+label.ck{display:block;padding:6px 8px;margin:4px 0;background:#f7faf7;border-radius:6px;cursor:pointer}label.ck input{margin-right:8px;transform:scale(1.3)}
+.warn{background:#fff4e5;border-left:5px solid var(--n);padding:8px 12px;border-radius:6px}.pt{float:right;color:#555;font-size:14px}
+</style></head><body>
+<header><h1>Examen parcial práctico de Word · «Feria de talentos del grupo»</h1><p>CECUM · Bachillerato Tecnológico · BT_COMP_1 y BT_MKT_1 · 100 puntos · 90 minutos</p></header>
+<div class="bar"><span class="t" id="t">90:00</span><button id="go">▶ Iniciar reloj</button><div class="p"><div class="pb"><i id="pi"></i></div><small id="pt">0 de 0 pasos</small></div></div>
+<main>
+<div class="card"><h2>¿Qué vas a hacer?</h2><p>Crearás <b>un solo documento de Word</b> con 5 partes. Todo el texto y los datos ya están aquí: usa el botón <b>Copiar</b> y pega sin formato (<b>Ctrl + Shift + V</b>). Lo que se evalúa es <b>el formato y las herramientas</b>.</p>
+<div class="warn"><b>Guarda desde el inicio</b> como <b>Examen_Apellido_Nombre_Grupo.docx</b> (ejemplo: Examen_Lopez_Ana_BT_COMP_1.docx) y presiona <b>Ctrl + G</b> cada vez que avances. Entrega <b>solo ese archivo</b> en AulaEscolar, hoy antes de las 23:59.</div>
+<table><tr><th>Parte</th><th>Tema</th><th>Pts</th></tr><tr><td>1</td><td>Ficha del participante</td><td>15</td></tr><tr><td>2</td><td>Reglas de la feria</td><td>20</td></tr><tr><td>3</td><td>Programa y presupuesto (tablas)</td><td>25</td></tr><tr><td>4</td><td>Mapa de mi stand (formas y SmartArt)</td><td>30</td></tr><tr><td>5</td><td>Entrega</td><td>10</td></tr></table></div>
+
+<div class="card"><h2>Antes de empezar<span>Página</span></h2>
+<label class="ck"><input type="checkbox"> Documento en blanco, guardado con el nombre correcto (<b>Ctrl + G</b>).</label>
+<label class="ck"><input type="checkbox"> Disposición → <b>Tamaño: Carta</b>, <b>Orientación: Vertical</b>, <b>Márgenes: Normal</b>.</label></div>
+
+<div class="card"><h2>Parte 1 · Ficha del participante<span>15 pts</span></h2>
+<p>Escribe este texto (cada línea es un párrafo). Escribe tus datos reales en nombre y grupo.</p>
+<div class="box" id="x1">FICHA DEL PARTICIPANTE
+(Tu nombre completo)
+(Tu grupo)
+Mi talento
+Mi talento es compartir lo que sé con los demás. Me gusta explicar cosas de forma sencilla y ayudar a mis compañeros cuando tienen dudas. En la feria quiero mostrar a mi grupo que aprender también puede ser divertido y que todos tenemos algo valioso que aportar.
+Mis tres objetivos
+Presentar mi stand con claridad
+Trabajar en equipo con respeto
+Cumplir mi horario de participación</div><button class="c" onclick="cp('x1')">Copiar texto</button>
+<p><b>Dale formato:</b></p>
+<label class="ck"><input type="checkbox"> Todo el documento en <b>Arial 12</b> (Ctrl + E para seleccionar todo).</label>
+<label class="ck"><input type="checkbox"> Título: <b>Arial 20, negrita, centrado</b>.</label>
+<label class="ck"><input type="checkbox"> Nombre y grupo: <b>centrados</b>.</label>
+<label class="ck"><input type="checkbox"> Subtítulos «Mi talento» y «Mis tres objetivos»: <b>Arial 14, negrita</b>.</label>
+<label class="ck"><input type="checkbox"> Párrafo de «Mi talento»: <b>justificado</b>.</label>
+<label class="ck"><input type="checkbox"> Los tres objetivos con <b>viñetas</b>.</label></div>
+
+<div class="card"><h2>Parte 2 · Reglas de la feria<span>20 pts</span></h2>
+<p>Debajo de la ficha escribe lo siguiente.</p>
+<div class="box" id="x2">Reglas de la feria
+Para que la feria sea un espacio de respeto y convivencia, todos los participantes nos comprometemos a cumplir las siguientes reglas durante el evento, tanto en nuestro stand como en los pasillos y en el patio. Estas reglas cuidan a las personas, los materiales y el trabajo de cada equipo.
+Llego puntual a mi horario y respeto el turno de los demás.
+Hablo con amabilidad a los visitantes y a mis compañeros.
+Cuido mi stand, los materiales y las instalaciones.
+Escucho con atención las presentaciones de otros equipos.
+Dejo limpio mi lugar al terminar.</div><button class="c" onclick="cp('x2')">Copiar texto</button>
+<label class="ck"><input type="checkbox"> Insertar → <b>Encabezado</b> → En blanco. Escribe: <b>Feria de talentos CECUM</b>. Cierra el encabezado.</label>
+<label class="ck"><input type="checkbox"> Insertar → <b>Número de página</b> → Final de la página → Número sin formato 2 (no lo escribas a mano).</label>
+<label class="ck"><input type="checkbox"> «Reglas de la feria» como subtítulo: <b>Arial 14, negrita</b>.</label>
+<label class="ck"><input type="checkbox"> Las <b>cinco reglas</b> en <b>lista numerada</b>.</label>
+<label class="ck"><input type="checkbox"> El párrafo largo: <b>justificado con interlineado 1.5</b>.</label></div>
+
+<div class="card"><h2>Parte 3 · Programa y presupuesto<span>25 pts</span></h2>
+<p>Inicia en página nueva (<b>Ctrl + Enter</b>). Pon el subtítulo <b>Programa de la feria</b> (Arial 14, negrita) y crea la <b>Tabla A</b> de <b>4 columnas × 7 filas</b>. Las filas 2 y 5 son un solo bloque: <b>combina las 4 celdas</b> de esa fila.</p>
+<table><tr><th>Hora</th><th>Actividad</th><th>Responsable</th><th>Lugar</th></tr>
+<tr><td colspan="4" style="text-align:center"><b>BLOQUE MATUTINO</b> (fila combinada)</td></tr>
+<tr><td>08:00</td><td>Registro de participantes</td><td>Comité</td><td>Entrada</td></tr>
+<tr><td>09:00</td><td>Inauguración</td><td>Dirección</td><td>Patio</td></tr>
+<tr><td colspan="4" style="text-align:center"><b>EXHIBICIÓN Y CIERRE</b> (fila combinada)</td></tr>
+<tr><td>10:30</td><td>Exhibición de stands</td><td>Participantes</td><td>Salones</td></tr>
+<tr><td>12:00</td><td>Premiación</td><td>Jurado</td><td>Patio</td></tr></table>
+<label class="ck"><input type="checkbox"> Tabla A: 4 columnas × 7 filas con los datos de arriba.</label>
+<label class="ck"><input type="checkbox"> <b>Combinar celdas</b> en las filas «BLOQUE MATUTINO» y «EXHIBICIÓN Y CIERRE».</label>
+<label class="ck"><input type="checkbox"> Encabezado (fila 1) con <b>color de sombreado</b> y letra en negrita.</label>
+<p style="margin-top:12px">Debajo, pon el subtítulo <b>Presupuesto de materiales</b> y crea la <b>Tabla B</b> de <b>4 columnas × 7 filas</b>. En la fila TOTAL calcula la suma de los subtotales.</p>
+<table><tr><th>Material</th><th>Cantidad</th><th>Precio unitario</th><th>Subtotal</th></tr>
+<tr><td>Cartulinas</td><td>10</td><td>8</td><td>80</td></tr><tr><td>Marcadores</td><td>6</td><td>15</td><td>90</td></tr><tr><td>Cinta adhesiva</td><td>4</td><td>12</td><td>48</td></tr><tr><td>Impresiones</td><td>20</td><td>2</td><td>40</td></tr><tr><td>Pegamento</td><td>5</td><td>10</td><td>50</td></tr>
+<tr><td colspan="3"><b>TOTAL</b> (combina las 3 primeras celdas)</td><td><b>?</b></td></tr></table>
+<div class="warn">Calcula tú el total y verifícalo: la suma debe coincidir con los subtotales.</div>
+<label class="ck"><input type="checkbox"> Tabla B con los datos y la fila TOTAL con la suma correcta.</label>
+<label class="ck"><input type="checkbox"> Celdas de la fila TOTAL combinadas (las tres primeras).</label>
+<label class="ck"><input type="checkbox"> Números <b>alineados a la derecha</b>, encabezado sombreado y <b>bordes</b> en ambas tablas.</label></div>
+
+<div class="card"><h2>Parte 4 · Mapa de mi stand<span>30 pts</span></h2>
+<p>Inicia en página nueva (<b>Ctrl + Enter</b>) con el subtítulo <b>Mapa de mi stand</b> (Arial 14, negrita). Todo se hace en <b>Insertar</b>. Usa solo Word, sin internet ni imágenes.</p>
+<p><b>A. Formas (Insertar → Formas):</b></p>
+<label class="ck"><input type="checkbox"> Dibuja <b>3 formas</b> distintas con texto: <b>Entrada</b>, <b>Mi stand</b> y <b>Salida</b>.</label>
+<label class="ck"><input type="checkbox"> Cada forma con un <b>color de relleno diferente</b>.</label>
+<label class="ck"><input type="checkbox"> <b>3 flechas</b> que unan Entrada → Mi stand → Salida y una flecha de regreso.</label>
+<label class="ck"><input type="checkbox"> <b>Agrupa</b> todo (selecciona con Ctrl + clic → clic derecho → Agrupar).</label>
+<p><b>B. SmartArt (Insertar → SmartArt):</b></p>
+<label class="ck"><input type="checkbox"> SmartArt tipo <b>Proceso</b> con <b>4 elementos</b>: Planear, Elaborar, Ensayar, Presentar.</label>
+<label class="ck"><input type="checkbox"> SmartArt tipo <b>Ciclo</b> con <b>4 elementos</b>: Presentar, Recibir comentarios, Mejorar, Repetir.</label>
+<label class="ck"><input type="checkbox"> Pon un título corto arriba de cada SmartArt (Arial 12, negrita).</label>
+<div class="warn">Si el SmartArt tiene más de 4 casillas, borra las sobrantes; si tiene menos, usa «Agregar forma».</div></div>
+
+<div class="card"><h2>Parte 5 · Revisa y entrega<span>10 pts</span></h2>
+<label class="ck"><input type="checkbox"> El archivo se llama <b>Examen_Apellido_Nombre_Grupo.docx</b>.</label>
+<label class="ck"><input type="checkbox"> El documento tiene las 4 partes en orden y 3 páginas.</label>
+<label class="ck"><input type="checkbox"> Revisé la ortografía (pestaña Revisar → Ortografía).</label>
+<label class="ck"><input type="checkbox"> Subí el archivo a la actividad en AulaEscolar antes de las 23:59.</label></div>
+
+<div class="card"><h2>Rúbrica</h2><table><tr><th>Parte</th><th>Se revisa</th><th>Pts</th></tr>
+<tr><td>1 Ficha</td><td>Título, datos centrados, subtítulos, justificado, viñetas, Arial 12</td><td>15</td></tr>
+<tr><td>2 Reglas</td><td>Carta/vertical/márgenes, encabezado, número de página, lista numerada, interlineado 1.5</td><td>20</td></tr>
+<tr><td>3 Tablas</td><td>Dos tablas, celdas combinadas, sombreado, bordes, alineación y total correcto</td><td>25</td></tr>
+<tr><td>4 Diagrama</td><td>Formas agrupadas y de colores, 3 flechas, SmartArt Proceso y Ciclo con 4 elementos</td><td>30</td></tr>
+<tr><td>5 Entrega</td><td>Nombre del archivo, orden, ortografía</td><td>10</td></tr></table></div>
+</main>
+<script>
+function cp(id){var t=document.getElementById(id).innerText;if(navigator.clipboard)navigator.clipboard.writeText(t);else{var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}event.target.textContent='✔ Copiado'}
+var C=[].slice.call(document.querySelectorAll('input[type=checkbox]'));function up(){var n=C.filter(function(c){return c.checked}).length;document.getElementById('pi').style.width=(100*n/C.length)+'%';document.getElementById('pt').textContent=n+' de '+C.length+' pasos'}C.forEach(function(c){c.onchange=up});up();
+var s=5400,iv=null;document.getElementById('go').onclick=function(){if(iv)return;this.textContent='⏱ En curso';iv=setInterval(function(){s--;var m=Math.floor(Math.abs(s)/60),x=Math.abs(s)%60;document.getElementById('t').textContent=(s<0?'+':'')+('0'+m).slice(-2)+':'+('0'+x).slice(-2);if(s<0)document.getElementById('t').style.color='#c0392b'},1000)};
+</script></body></html>
