@@ -1,0 +1,122 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Práctica: Combinación de correspondencia en Word</title>
+<style>
+:root{--a:#0b6e6e;--n:#e67e22;--v:#2e8b57;--g:#f2f6f6}
+*{box-sizing:border-box}body{margin:0;font:16px/1.5 Arial,sans-serif;color:#222;background:var(--g)}
+header{background:var(--a);color:#fff;padding:18px 16px}header h1{margin:0;font-size:22px}header p{margin:4px 0 0;font-size:14px;opacity:.92}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:3px solid var(--a);padding:8px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.bar b{color:var(--a)}.pb{height:14px;background:#d9e4e4;border-radius:8px;overflow:hidden;flex:1;min-width:120px}.pb i{display:block;height:100%;width:0;background:var(--v);transition:.3s}
+main{max-width:920px;margin:auto;padding:14px}.card{background:#fff;border-radius:12px;padding:16px;margin:14px 0;box-shadow:0 1px 4px #0002}
+h2{margin:0 0 8px;color:var(--a);font-size:20px}h2 span{background:var(--a);color:#fff;border-radius:20px;padding:2px 10px;font-size:13px;margin-left:6px}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.tl div{background:#eaf5f5;border-radius:10px;padding:10px;border-top:5px solid var(--a)}.tl div.hoy{border-top-color:var(--n);background:#fff4e5}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{border:1px solid #9bb;padding:5px 8px;text-align:left;vertical-align:top}th{background:#d6ecec}
+label.ck{display:block;padding:7px 9px;margin:4px 0;background:#f7fbf7;border-radius:6px;cursor:pointer}label.ck input{margin-right:8px;transform:scale(1.3)}
+pre{background:#eef6f6;border-left:5px solid var(--a);padding:10px;border-radius:6px;white-space:pre-wrap;font:14px/1.45 Consolas,monospace;margin:8px 0}
+button,a.btn{cursor:pointer;border:0;border-radius:8px;padding:8px 14px;font-weight:700;background:var(--a);color:#fff;text-decoration:none;display:inline-block;font-size:15px}button.c{background:var(--n);padding:5px 10px;font-size:13px}
+.warn{background:#fff4e5;border-left:5px solid var(--n);padding:8px 12px;border-radius:6px;margin:8px 0}.ok{background:#e9f7ef;border-left:5px solid var(--v);padding:8px 12px;border-radius:6px;margin:8px 0}
+kbd{background:#222;color:#fff;border-radius:4px;padding:1px 6px;font-size:13px}.ruta{font-weight:700;color:var(--a)}
+</style></head><body>
+<header><h1>Práctica: Itinerarios personalizados con combinación de correspondencia</h1><p>Informática Aplicada I · BT_TUR_3 · Técnico en Turismo · Word + Excel · Entrega: miércoles 2 de diciembre de 2026</p></header>
+<div class="bar"><span>⏰ Faltan <b id="dias">–</b> día(s) para la entrega</span><div class="pb"><i id="pi"></i></div><small id="pt">0 de 0 pasos</small></div>
+<main>
+<div class="card"><h2>¿De qué trata?</h2><p>Eres agente de viajes y tienes <b>10 clientes</b>. En lugar de escribir 10 itinerarios a mano, harás <b>una sola plantilla en Word</b> y Word creará <b>10 itinerarios personalizados</b> usando los datos de un libro de Excel. Esto se llama <b>combinación de correspondencia</b>.</p>
+<div class="tl"><div class="hoy"><b>HOY · mié 25 nov</b><br>Pasos 1 y 2: descargar el Excel y diseñar la plantilla</div><div><b>Vie 27 nov</b><br>Pasos 3 y 4: conectar el Excel e insertar campos</div><div><b>Lun 30 nov</b><br>Pasos 5 y 6: regla, vista previa y combinar</div><div><b>Mié 2 dic</b><br>Paso 7: revisar y entregar</div></div>
+<div class="warn"><b>Importante:</b> no la dejes para el último día. Si hoy no avanzas, el domingo no te alcanza.</div></div>
+
+<div class="card"><h2>Paso 1 <span>HOY</span> Descarga y conoce el Excel</h2>
+<p><a class="btn" href="Clientes_Itinerarios_TUR3.xlsx" download>⬇ Descargar Clientes_Itinerarios_TUR3.xlsx</a></p>
+<div class="warn">Guárdalo en una carpeta tuya (por ejemplo <i>Documentos\Itinerarios</i>) y <b>no lo muevas ni lo renombres</b>: Word perdería la conexión.</div>
+<table><tr><th>Folio</th><th>Cliente</th><th>Destino</th><th>Noches</th><th>Personas</th><th>Requerimiento especial</th></tr><tr><td>IT-001</td><td>Sra. Laura Mendoza Rivas</td><td>Oaxaca de Juárez, Oaxaca</td><td>2</td><td>2</td><td>Ninguno</td></tr><tr><td>IT-002</td><td>Sr. Carlos Vega Ortiz</td><td>Guanajuato, Guanajuato</td><td>2</td><td>1</td><td>Ninguno</td></tr><tr><td>IT-003</td><td>Dra. Patricia Salgado Núñez</td><td>Mérida, Yucatán</td><td>3</td><td>2</td><td>Dieta vegetariana</td></tr><tr><td>IT-004</td><td>Sr. Miguel Ángel Torres Luna</td><td>Puebla de Zaragoza, Puebla</td><td>1</td><td>2</td><td>Ninguno</td></tr><tr><td>IT-005</td><td>Sra. Fernanda Ibáñez Cruz</td><td>Taxco de Alarcón, Guerrero</td><td>2</td><td>3</td><td>Un participante usa silla de ruedas</td></tr><tr><td>IT-006</td><td>Sr. Jorge Aguilar Soto</td><td>Santiago de Querétaro, Querétaro</td><td>1</td><td>2</td><td>Ninguno</td></tr><tr><td>IT-007</td><td>Sra. Daniela Reyes Campos</td><td>Valle de Bravo, Estado de México</td><td>1</td><td>4</td><td>Menú infantil para dos menores</td></tr><tr><td>IT-008</td><td>Lic. Roberto Castillo Vera</td><td>Cuetzalan, Puebla</td><td>2</td><td>2</td><td>Ninguno</td></tr><tr><td>IT-009</td><td>Mtra. Silvia Hernández Pardo</td><td>Tequila, Jalisco</td><td>2</td><td>2</td><td>Intolerancia a la lactosa</td></tr><tr><td>IT-010</td><td>Sr. Andrés Pineda Fuentes</td><td>Veracruz, Veracruz</td><td>2</td><td>2</td><td>Ninguno</td></tr></table>
+<p>Cada <b>columna</b> del Excel (Nombre, Destino, Hotel…) será un <b>campo</b> en Word y cada <b>fila</b> será un itinerario.</p>
+<label class="ck"><input type="checkbox" data-k="1a">Descargué el Excel y lo guardé en una carpeta fija</label>
+<label class="ck"><input type="checkbox" data-k="1b">Abrí el Excel y revisé que hay 10 clientes</label></div>
+
+<div class="card"><h2>Paso 2 <span>HOY</span> Diseña la plantilla en Word</h2>
+<p>Abre un documento en blanco. Escribe esta estructura <b>(todavía sin los campos)</b> y dale formato turístico: título grande, color, tabla, tipografía legible y, si quieres, una imagen del destino.</p>
+<button class="c" onclick="cp('sk')">Copiar estructura</button><pre id="sk">ITINERARIO PERSONALIZADO DE VIAJE
+Folio: «Folio»
+
+Estimado(a) «Tratamiento» «Nombre» «Apellidos»:
+Gracias por elegir nuestra agencia. Este es su itinerario a «Destino».
+
+DATOS DEL VIAJE (tabla de 2 columnas)
+Salida | «Fecha_salida»
+Regreso | «Fecha_regreso»
+Noches | «Noches»
+Personas | «Personas»
+Hotel | «Hotel» (habitación: «Habitacion»)
+Transporte | «Transporte»
+
+PROGRAMA
+Día 1: «Dia1»
+Día 2: «Dia2»
+Día 3: «Dia3»
+
+INVERSIÓN TOTAL: «Total_con_formato»
+
+(aquí va la regla Si...Entonces: nota de requerimiento especial)
+
+Agencia de Viajes ______ · Contacto: ______</pre>
+<div class="ok"><b>Recomendación:</b> la parte de los datos del viaje hazla en una <b>tabla de 2 columnas</b> (<span class="ruta">Insertar › Tabla</span>). Usa estilos de título (<span class="ruta">Inicio › Estilos</span>) y márgenes de 2 cm.</div>
+<label class="ck"><input type="checkbox" data-k="2a">Mi plantilla tiene título, saludo, tabla de datos y programa de 3 días</label>
+<label class="ck"><input type="checkbox" data-k="2b">Le di formato (colores, tipografía, tabla) y cabe en <b>una sola página</b></label>
+<label class="ck"><input type="checkbox" data-k="2c">La guardé como <b>APELLIDOS_NOMBRE_Itinerarios_plantilla.docx</b></label></div>
+
+<div class="card"><h2>Paso 3 <span>vie 27</span> Conecta el Excel con Word</h2>
+<ol><li>Pestaña <span class="ruta">Correspondencia</span> › <span class="ruta">Iniciar combinación de correspondencia</span> › <b>Cartas</b>.</li>
+<li><span class="ruta">Seleccionar destinatarios</span> › <b>Usar una lista existente…</b></li>
+<li>Elige <b>Clientes_Itinerarios_TUR3.xlsx</b> › Abrir.</li>
+<li>Selecciona la hoja <b>Clientes$</b> y marca <b>«La primera fila de datos contiene encabezados de columna»</b> › Aceptar.</li></ol>
+<div class="warn"><b>¿No te deja elegir hoja o sale vacía?</b> Cierra el Excel antes de conectar. Word no puede leerlo si está abierto.</div>
+<label class="ck"><input type="checkbox" data-k="3a">Conecté la hoja Clientes$ y el botón «Editar lista de destinatarios» muestra 10 registros</label></div>
+
+<div class="card"><h2>Paso 4 <span>vie 27</span> Inserta los campos</h2>
+<p>Coloca el cursor donde va el dato y usa <span class="ruta">Correspondencia › Insertar campo combinado</span>. Verás <b>«Nombre»</b>. Inserta los campos de la estructura:</p>
+<table><tr><th>Dónde</th><th>Campo(s)</th></tr><tr><td>Folio</td><td>Folio</td></tr><tr><td>Saludo</td><td>Tratamiento + Nombre + Apellidos</td></tr><tr><td>Destino</td><td>Destino</td></tr><tr><td>Tabla de datos</td><td>Fecha_salida, Fecha_regreso, Noches, Personas, Hotel, Habitacion, Transporte</td></tr><tr><td>Programa</td><td>Dia1, Dia2, Dia3</td></tr><tr><td>Inversión total</td><td><b>Total_con_formato</b> (no uses Total_viaje)</td></tr></table>
+<div class="warn"><b>Cuida los espacios:</b> entre «Nombre» y «Apellidos» escribe un espacio, o saldrá «LauraMendoza».</div>
+<label class="ck"><input type="checkbox" data-k="4a">Inserté todos los campos de la tabla anterior</label>
+<label class="ck"><input type="checkbox" data-k="4b">Hay un espacio entre Tratamiento, Nombre y Apellidos</label></div>
+
+<div class="card"><h2>Paso 5 <span>lun 30</span> Regla Si…Entonces: nota especial</h2>
+<p>Solo algunos clientes tienen un requerimiento especial (dieta, silla de ruedas…). Si es «Ninguno», <b>no debe aparecer nada</b>. Para eso:</p>
+<ol><li>Cursor en la línea de la nota, antes del pie de página.</li>
+<li><span class="ruta">Correspondencia › Reglas › Si…Entonces…Si no</span>.</li>
+<li>Campo: <b>Requerimiento_especial</b> · Comparación: <b>Distinto de</b> · Comparar con: <b>Ninguno</b>.</li>
+<li>Insertar este texto:</li></ol>
+<button class="c" onclick="cp('nota')">Copiar texto</button><pre id="nota">Atención especial registrada: </pre>
+<p>Después del texto copiado, inserta el campo <b>Requerimiento_especial</b> dentro de la misma regla. Deja vacío «Insertar este otro texto».</p>
+<label class="ck"><input type="checkbox" data-k="5a">Hice la regla Si…Entonces y solo aparece la nota cuando el cliente tiene un requerimiento</label></div>
+
+<div class="card"><h2>Paso 6 <span>lun 30</span> Vista previa y combinación final</h2>
+<ol><li><span class="ruta">Vista previa de resultados</span>: usa las flechas ◀ ▶ para recorrer los <b>10 clientes</b>. Revisa que ninguno se salga de la página.</li>
+<li><span class="ruta">Finalizar y combinar › Editar documentos individuales…</span> › <b>Todos</b> › Aceptar.</li>
+<li>Se abre un documento nuevo con <b>10 páginas</b> (una por cliente). Guárdalo como <b>APELLIDOS_NOMBRE_Itinerarios_combinados.docx</b>.</li></ol>
+<div class="ok"><b>Cómo saber si salió bien:</b> la última página es de <b>Andrés Pineda (Veracruz)</b> y la primera de <b>Laura Mendoza (Oaxaca)</b>.</div>
+<label class="ck"><input type="checkbox" data-k="6a">Revisé en vista previa los 10 itinerarios</label>
+<label class="ck"><input type="checkbox" data-k="6b">Generé el documento combinado con exactamente 10 páginas</label></div>
+
+<div class="card"><h2>Paso 7 <span>mié 2 dic</span> Revisa y entrega</h2>
+<p>Antes de subir, comprueba en el archivo <b>combinado</b>:</p>
+<label class="ck"><input type="checkbox" data-k="7a">No se ve ningún «campo» entre «» (solo datos reales)</label>
+<label class="ck"><input type="checkbox" data-k="7b">Cada página tiene su cliente, destino y fechas correctos</label>
+<label class="ck"><input type="checkbox" data-k="7c">El total aparece con $ y MXN (ejemplo: $6,500.00 MXN)</label>
+<label class="ck"><input type="checkbox" data-k="7d">La nota especial sale solo en quienes la necesitan (IT-003, 005, 007 y 009)</label>
+<label class="ck"><input type="checkbox" data-k="7e">Subo a AulaEscolar <b>2 archivos .docx</b>: plantilla y combinado</label>
+<table><tr><th>Se evalúa (10 puntos)</th><th>Puntos</th></tr><tr><td>Plantilla bien diseñada (1 página, tabla, estilos)</td><td>2</td></tr><tr><td>Campos correctos y sin espacios faltantes</td><td>2</td></tr><tr><td>Regla Si…Entonces funcionando</td><td>1.5</td></tr><tr><td>Documento combinado con los 10 itinerarios</td><td>2.5</td></tr><tr><td>Revisión: fechas, $ y sin errores</td><td>1.5</td></tr><tr><td>Entrega a tiempo y nombres de archivo correctos</td><td>0.5</td></tr></table></div>
+
+<div class="card"><h2>Problemas frecuentes</h2>
+<table><tr><th>Me pasa…</th><th>Solución</th></tr>
+<tr><td>El total sale sin $ o con muchos decimales</td><td>Usaste Total_viaje: cambia el campo a <b>Total_con_formato</b>.</td></tr>
+<tr><td>Salen 3 itinerarios por página o se corta uno</td><td>Cada itinerario debe caber en una página: reduce imágenes o espacios.</td></tr>
+<tr><td>Word dice que no encuentra el origen de datos</td><td>Moviste o renombraste el Excel. Vuelve a ponerlo en su carpeta original.</td></tr>
+<tr><td>Aparece «Ninguno» en la nota</td><td>Revisa la regla: debe decir <b>Distinto de</b> «Ninguno».</td></tr>
+<tr><td>Los campos aparecen como texto raro</td><td>Presiona <kbd>Alt</kbd>+<kbd>F9</kbd> para alternar el código de campo.</td></tr></table></div>
+</main>
+<script>
+function cp(id){var t=document.getElementById(id).innerText;if(navigator.clipboard)navigator.clipboard.writeText(t);}
+var ks=[].slice.call(document.querySelectorAll('input[data-k]'));
+function sv(){var o={};ks.forEach(function(c){o[c.dataset.k]=c.checked});try{localStorage.setItem('tur3cc',JSON.stringify(o))}catch(e){};pr()}
+function pr(){var n=ks.filter(function(c){return c.checked}).length;document.getElementById('pi').style.width=(100*n/ks.length)+'%';document.getElementById('pt').textContent=n+' de '+ks.length+' pasos'}
+try{var o=JSON.parse(localStorage.getItem('tur3cc')||'{}');ks.forEach(function(c){c.checked=!!o[c.dataset.k]})}catch(e){}
+ks.forEach(function(c){c.addEventListener('change',sv)});pr();
+var d=Math.ceil((new Date(2026,11,2,23,59)-new Date())/864e5);document.getElementById('dias').textContent=d>0?d:0;
+</script></body></html>
